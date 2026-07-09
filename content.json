@@ -2,7 +2,7 @@
   "updated": "2026-07-09",
   "banner": {
     "active": true,
-    "text": "Q3 Quoting Blitz is LIVE \u2014 standings update every Friday. The June newsletter (May commission) is out now.",
+    "text": "Q3 Quoting Blitz is LIVE — standings update every Friday. The June newsletter (May commission) is out now.",
     "link": "#newsletter"
   },
   "news": [
@@ -10,7 +10,7 @@
       "id": "n1",
       "date": "2026-07-08",
       "tag": "news",
-      "title": "June Newsletter is out \u2014 May commission inside",
+      "title": "June Newsletter is out — May commission inside",
       "body": "The June district newsletter is posted below, including the May commission recap and district recognition.",
       "pinned": true,
       "link": "#newsletter"
@@ -20,7 +20,7 @@
       "date": "2026-07-06",
       "tag": "update",
       "title": "New Retail Program effective July 2026",
-      "body": "The updated Retail Program is live: 36-month bonus structure with monthly bonuses up to 340%. Talk to the district office if you have Prot\u00e9g\u00e9 or new-agent candidates.",
+      "body": "The updated Retail Program is live: 36-month bonus structure with monthly bonuses up to 340%. Talk to the district office if you have Protégé or new-agent candidates.",
       "pinned": false
     },
     {
@@ -36,18 +36,18 @@
   "events": [
     {
       "id": "e1",
-      "date": "2026-07-14",
-      "time": "9:00 AM CT",
-      "title": "District Sales Call (sample \u2014 replace in Admin)",
-      "location": "Teams",
+      "date": "2026-07-30",
+      "time": "1:00 PM CT",
+      "title": "District Meeting",
+      "location": "Hilton Garden Inn - Waco, Texas",
       "link": "",
-      "description": "Monthly all-district call: Q3 blitz standings, product updates, recognition."
+      "description": ""
     },
     {
       "id": "e2",
       "date": "2026-07-23",
       "time": "1:00 PM CT",
-      "title": "Life Boot Camp Workshop (sample \u2014 replace in Admin)",
+      "title": "Life Boot Camp Workshop (sample — replace in Admin)",
       "location": "Waco District Office",
       "link": "",
       "description": "Hands-on session: 5 Steps to the Sale applied to Life. Bring your X-date list."
@@ -56,7 +56,7 @@
       "id": "e3",
       "date": "2026-09-30",
       "time": "",
-      "title": "Q3 ends \u2014 Quoting Blitz final standings",
+      "title": "Q3 ends — Quoting Blitz final standings",
       "location": "",
       "link": "",
       "description": "Last day of the quarter. Final blitz standings and Topper Club pace check."
@@ -67,7 +67,7 @@
       "id": "c1",
       "active": true,
       "title": "Q3 Quoting Blitz",
-      "period": "Jul 1 \u2013 Sep 30, 2026",
+      "period": "Jul 1 – Sep 30, 2026",
       "ends": "2026-09-30",
       "prize": "Monthly prizes + quarterly grand prize",
       "metricLabel": "Quotes (MTD)",
@@ -115,7 +115,7 @@
   "newsletters": [
     {
       "id": "nl1",
-      "title": "June Newsletter \u2014 May Commission",
+      "title": "June Newsletter — May Commission",
       "date": "2026-06-30",
       "file": "files/2026-06-newsletter.pdf"
     }
@@ -123,7 +123,7 @@
   "reports": [
     {
       "id": "r5",
-      "title": "District Matrix \u2014 interactive demo (drop your Excel to replace)",
+      "title": "District Matrix — interactive demo (drop your Excel to replace)",
       "date": "2026-07-09",
       "category": "Production",
       "type": "table",
@@ -132,7 +132,7 @@
     },
     {
       "id": "r1",
-      "title": "District Matrix \u2014 June Production / May Prime",
+      "title": "District Matrix — June Production / May Prime",
       "date": "2026-07-02",
       "category": "Production",
       "file": "files/district-matrix-june-2026.pdf",
@@ -165,7 +165,7 @@
   ],
   "leaderboard": {
     "asOf": "2026-07-02",
-    "note": "Demo data \u2014 import your CSV in Admin \u2192 Scoreboard.",
+    "note": "Demo data — import your CSV in Admin → Scoreboard.",
     "people": [
       {
         "name": "Maria Delgado",
