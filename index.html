@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>District Hub — Farmers Districts 32 &amp; 49</title>
+<style>
+  :root{
+    --navy:#0a2d6e; --navy2:#0d3b8a; --navy-deep:#08245a;
+    --blue:#2563eb; --blue-soft:#3b82f6; --blue-pale:#dbeafe;
+    --red:#d92231; --red-soft:#e23b48; --red-pale:#fde2e4;
+    --gold:#d4a017; --gold-pale:#fdf3d4;
+    --ink:#1f2937; --muted:#6b7280; --line:#e6e8ee;
+    --bg:#f2f4f9; --card:#ffffff;
+    --sh:0 1px 2px rgba(16,24,40,.05);
+    --sh-md:0 6px 18px rgba(16,24,40,.07);
+    --ok:#16a34a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1480px;margin:0 auto;padding:20px;}
+
+  /* ---------- Top bar ---------- */
+  .topbar{background:var(--card);border-radius:16px;padding:14px 22px;display:flex;align-items:center;gap:16px;box-shadow:var(--sh);border:1px solid #eef0f5;flex-wrap:wrap;position:sticky;top:10px;z-index:50;}
+  .logo{display:flex;align-items:center;gap:14px;}
+  .dlogo{height:36px;width:auto;display:block;}
+  .divider{width:1px;height:32px;background:var(--line);}
+  .title h1{margin:0;font-size:20px;color:var(--navy);letter-spacing:-.2px;font-weight:800;}
+  .title p{margin:3px 0 0;font-size:10.5px;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;font-weight:600;}
+  .topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end;}
+  .datebox{color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;}
+  .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;font-weight:600;font-size:13px;cursor:pointer;color:var(--navy);transition:background .15s,border-color .15s;}
+  .btn:hover{background:#f7f9fc;border-color:#d9dce4;}
+  .btn.primary{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:var(--sh);}
+  .btn.primary:hover{background:var(--navy2);}
+  .btn.danger{color:var(--red);border-color:#f3c2c7;}
+  .btn.sm{padding:5px 10px;font-size:12px;border-radius:8px;}
+
+  /* section nav chips */
+  .navchips{display:flex;gap:6px;flex-wrap:wrap;}
+  .navchips a{font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;transition:background .15s;}
+  .navchips a:hover{background:var(--blue-pale);border-color:#c4d7fb;}
+
+  /* ---------- Announcement banner ---------- */
+  .banner{margin-top:14px;background:linear-gradient(90deg,var(--navy),var(--navy2));border-radius:14px;padding:13px 20px;display:flex;align-items:center;gap:12px;color:#fff;box-shadow:var(--sh-md);}
+  .banner .flag{background:var(--red);border-radius:8px;font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 9px;text-transform:uppercase;white-space:nowrap;}
+  .banner p{margin:0;font-size:14px;font-weight:600;line-height:1.4;}
+  .banner a{color:#fde68a;font-weight:700;text-decoration:none;margin-left:auto;white-space:nowrap;font-size:13px;}
+  .banner a:hover{text-decoration:underline;}
+
+  /* ---------- Grid ---------- */
+  .maingrid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;margin-top:16px;align-items:start;}
+  @media(max-width:1080px){.maingrid{grid-template-columns:1fr;}}
+  .leftcol{display:flex;flex-direction:column;gap:16px;min-width:0;}
+  .card{background:var(--card);border-radius:16px;border:1px solid #eef0f5;box-shadow:var(--sh);overflow:hidden;}
+  .card-hd{display:flex;align-items:center;gap:10px;padding:15px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+  .card-hd h2{margin:0;font-size:15px;color:var(--navy);font-weight:800;letter-spacing:.2px;}
+  .card-hd .sub{font-size:12px;color:var(--muted);font-weight:500;}
+  .card-hd .right{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .card-bd{padding:16px 20px;}
+  .accent{width:8px;height:22px;border-radius:4px;background:var(--red);}
+  .accent.blue{background:var(--blue);}
+  .accent.gold{background:var(--gold);}
+
+  /* ---------- Scoreboard ---------- */
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;}
+  .seg button{border:0;background:transparent;padding:7px 13px;font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer;}
+  .seg button.on{background:var(--navy);color:#fff;}
+  .seg.red button.on{background:var(--red);}
+  .switch{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-weight:600;cursor:pointer;user-select:none;}
+  .switch input{accent-color:var(--navy);}
+  .podium{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+  @media(max-width:640px){.podium{grid-template-columns:1fr;}}
+  .pod{border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;background:linear-gradient(180deg,#fff,#fafbfe);}
+  .pod .medal{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:15px;flex:none;}
+  .pod.p1 .medal{background:var(--gold);} .pod.p2 .medal{background:#9ca3af;} .pod.p3 .medal{background:#b45309;}
+  .pod .who{min-width:0;}
+  .pod .who b{display:block;font-size:14px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pod .who span{font-size:11.5px;color:var(--muted);}
+  .pod .val{margin-left:auto;text-align:right;}
+  .pod .val b{font-size:22px;color:var(--navy);}
+  .pod .val span{display:block;font-size:10px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;font-weight:700;}
+  table.board{width:100%;border-collapse:collapse;font-size:13.5px;}
+  table.board th{position:sticky;top:0;background:#fff;text-align:left;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;border-bottom:2px solid var(--line);}
+  table.board td{padding:9px 10px;border-bottom:1px solid #f1f3f8;vertical-align:middle;}
+  table.board tr:last-child td{border-bottom:0;}
+  .boardwrap{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px;}
+  .rank{font-weight:800;color:var(--muted);width:34px;}
+  .avatar{width:30px;height:30px;border-radius:50%;background:var(--blue-pale);color:var(--navy);display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:800;margin-right:9px;flex:none;}
+  .pname{display:flex;align-items:center;min-width:0;}
+  .pname .nm b{display:block;font-size:13.5px;}
+  .pname .nm span{font-size:11px;color:var(--muted);}
+  .dchip{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;}
+  .dchip.d32{background:var(--blue-pale);color:var(--navy);}
+  .dchip.d49{background:var(--red-pale);color:var(--red);}
+  .metric{font-weight:800;color:var(--ink);text-align:right;}
+  .barcell{width:32%;min-width:120px;}
+  .bar{height:8px;border-radius:6px;background:#eef1f7;overflow:hidden;}
+  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--blue),var(--navy2));}
+  .bar.red i{background:linear-gradient(90deg,var(--red-soft),var(--red));}
+  .asof{font-size:11.5px;color:var(--muted);}
+  .empty{padding:26px;text-align:center;color:var(--muted);font-size:13.5px;}
+  .statrow{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+  .stat{flex:1;min-width:170px;border:1px solid var(--line);border-radius:12px;padding:11px 15px;background:linear-gradient(180deg,#fff,#fafbfe);display:flex;align-items:center;gap:12px;}
+  .stat .ic{flex:none;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--blue-pale);}
+  .stat.red .ic{background:var(--red-pale);}
+  .stat .v b{display:block;font-size:22px;color:var(--navy);line-height:1.1;}
+  .stat .v span{font-size:10px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;font-weight:700;}
+  .stat .scope{margin-left:auto;font-size:10.5px;color:var(--muted);text-align:right;line-height:1.4;}
+
+  /* ---------- table report viewer ---------- */
+  .tvOverlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:120;padding:22px;}
+  .tvOverlay.on{display:flex;}
+  .tv{background:#fff;border-radius:16px;max-width:1320px;width:100%;margin:auto;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;}
+  .tv-hd{padding:13px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fff;}
+  .tv-hd .accent{height:20px;}
+  .tv-hd h3{margin:0;font-size:15px;color:var(--navy);font-weight:800;}
+  .tv-hd .sub{font-size:12px;color:var(--muted);font-weight:500;}
+  .tv-hd .right{margin-left:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap;}
+  .tv-hd input{border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-size:12.5px;width:190px;font-family:inherit;}
+  .tv-tabs{display:flex;gap:5px;flex-wrap:wrap;padding:9px 20px 0;background:#fafbfe;border-bottom:1px solid var(--line);}
+  .tv-tabs:empty{display:none;}
+  .tv-tabs button{border:1px solid var(--line);border-bottom:0;background:#fff;border-radius:9px 9px 0 0;padding:7px 14px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;}
+  .tv-tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .tv-bd{overflow:auto;flex:1;}
+  table.datatable{border-collapse:collapse;width:100%;font-size:12.5px;}
+  table.datatable th{position:sticky;top:0;background:var(--navy);color:#fff;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;font-weight:700;padding:9px 12px;text-align:left;white-space:nowrap;z-index:2;}
+  table.datatable td{padding:7px 12px;border-bottom:1px solid #f1f3f8;white-space:nowrap;color:var(--ink);}
+  table.datatable tbody tr:nth-child(even) td{background:#f8fafd;}
+  table.datatable tbody tr:hover td{background:var(--blue-pale);}
+  table.datatable td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
+  .tv-ft{padding:9px 20px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);background:#fafbfe;}
+
+  /* ---------- Right rail ---------- */
+  .rail{display:flex;flex-direction:column;gap:16px;}
+  .newsitem{padding:13px 0;border-bottom:1px solid #f1f3f8;}
+  .newsitem:last-child{border-bottom:0;padding-bottom:2px;}
+  .newsitem .meta{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+  .tag{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:3px 8px;border-radius:999px;}
+  .tag.news{background:var(--blue-pale);color:var(--navy);}
+  .tag.promo{background:var(--red-pale);color:var(--red);}
+  .tag.recognition{background:var(--gold-pale);color:#92600a;}
+  .tag.update{background:#e7f6ec;color:var(--ok);}
+  .newsitem .meta time{font-size:11.5px;color:var(--muted);font-weight:600;}
+  .newsitem h3{margin:0 0 3px;font-size:14px;color:var(--ink);}
+  .newsitem p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.5;}
+  .pin{color:var(--gold);font-size:12px;margin-left:auto;}
+  .eventrow{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #f1f3f8;align-items:flex-start;}
+  .eventrow:last-child{border-bottom:0;}
+  .datebadge{flex:none;width:48px;border:1px solid var(--line);border-radius:10px;text-align:center;overflow:hidden;background:#fff;}
+  .datebadge .m{display:block;background:var(--red);color:#fff;font-size:9.5px;font-weight:800;letter-spacing:1px;padding:2px 0;text-transform:uppercase;}
+  .datebadge .d{display:block;font-size:18px;font-weight:800;color:var(--navy);padding:3px 0 4px;}
+  .eventrow .info b{display:block;font-size:13.5px;}
+  .eventrow .info .where{font-size:11.5px;color:var(--muted);font-weight:600;}
+  .eventrow .info p{margin:3px 0 0;font-size:12px;color:var(--muted);line-height:1.45;}
+
+  /* ---------- Competitions ---------- */
+  .comps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
+  .comp{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;display:flex;flex-direction:column;}
+  .comp .hd{background:linear-gradient(90deg,var(--navy),var(--navy2));color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;}
+  .comp .hd b{font-size:14.5px;}
+  .comp .hd .left{min-width:0;}
+  .comp .hd span{display:block;font-size:11px;opacity:.8;font-weight:600;margin-top:1px;}
+  .comp .days{margin-left:auto;background:rgba(255,255,255,.14);border-radius:9px;padding:5px 10px;text-align:center;flex:none;}
+  .comp .days b{display:block;font-size:16px;}
+  .comp .days span{font-size:9px;letter-spacing:.8px;text-transform:uppercase;opacity:.85;}
+  .comp .bd{padding:13px 16px;font-size:12.5px;color:var(--muted);line-height:1.5;}
+  .comp .prize{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:#92600a;background:var(--gold-pale);border-radius:9px;padding:7px 11px;margin-top:9px;}
+  .standings{margin:6px 16px 14px;border-top:1px dashed var(--line);padding-top:9px;}
+  .standings .srow{display:flex;align-items:center;gap:9px;padding:5px 0;font-size:13px;}
+  .standings .srow .r{width:20px;font-weight:800;color:var(--muted);font-size:12px;}
+  .standings .srow b{color:var(--ink);}
+  .standings .srow .v{margin-left:auto;font-weight:800;color:var(--navy);}
+  .standings .lbl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:2px;}
+
+  /* ---------- Docs (newsletter + reports) ---------- */
+  .docsgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start;}
+  @media(max-width:900px){.docsgrid{grid-template-columns:1fr;}}
+  .latestnl{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:16px;background:linear-gradient(180deg,#fff,#f8faff);}
+  .nlthumb{flex:none;width:64px;height:82px;border-radius:8px;background:linear-gradient(160deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-md);}
+  .latestnl .info b{display:block;font-size:15px;color:var(--ink);}
+  .latestnl .info span{font-size:12px;color:var(--muted);font-weight:600;}
+  .latestnl .open{margin-left:auto;flex:none;}
+  .filelist .frow{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid #f1f3f8;}
+  .filelist .frow:last-child{border-bottom:0;}
+  .fico{flex:none;width:34px;height:34px;border-radius:9px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;}
+  .fico.red{background:var(--red-pale);}
+  .fico.gold{background:var(--gold-pale);}
+  .frow .fi b{display:block;font-size:13.5px;}
+  .frow .fi span{font-size:11.5px;color:var(--muted);}
+  .frow .open{margin-left:auto;flex:none;}
+  .cat{font-size:10.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:13px 0 3px;}
+  .cat:first-child{margin-top:0;}
+  a.filelink{color:var(--navy);font-weight:700;text-decoration:none;font-size:12.5px;border:1px solid var(--line);border-radius:9px;padding:6px 12px;background:#fff;white-space:nowrap;}
+  a.filelink:hover{background:#f7f9fc;}
+
+  footer{margin:26px 0 10px;text-align:center;color:var(--muted);font-size:12px;}
+  footer b{color:var(--navy);}
+
+  /* ---------- Admin drawer ---------- */
+  .adminbar{display:none;margin-top:14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:10px 16px;font-size:13px;color:#9a3412;align-items:center;gap:10px;flex-wrap:wrap;}
+  .adminbar.on{display:flex;}
+  .adminbar b{color:#7c2d12;}
+  .drawer{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:100;}
+  .drawer.on{display:block;}
+  .panel{position:absolute;top:0;right:0;bottom:0;width:min(720px,100%);background:#fff;box-shadow:-12px 0 40px rgba(0,0,0,.2);display:flex;flex-direction:column;}
+  .panel-hd{padding:16px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
+  .panel-hd h2{margin:0;font-size:16px;color:var(--navy);}
+  .panel-hd .x{margin-left:auto;}
+  .ptabs{display:flex;gap:4px;padding:10px 16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap;background:#fafbfe;}
+  .ptabs button{border:1px solid transparent;border-bottom:0;background:transparent;padding:8px 13px;font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer;border-radius:9px 9px 0 0;}
+  .ptabs button.on{background:#fff;color:var(--navy);border-color:var(--line);}
+  .panel-bd{flex:1;overflow:auto;padding:18px 22px;}
+  .panel-ft{padding:13px 22px;border-top:1px solid var(--line);display:flex;gap:9px;align-items:center;background:#fafbfe;flex-wrap:wrap;}
+  .dirty{font-size:12px;font-weight:700;color:#b45309;display:none;}
+  .dirty.on{display:inline;}
+  .pubstat{font-size:12px;font-weight:600;color:var(--muted);margin-left:auto;}
+  fieldset.box{border:1px solid var(--line);border-radius:12px;margin:0 0 16px;padding:13px 15px;}
+  fieldset.box legend{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:0 6px;}
+  .frm{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .frm .full{grid-column:1/-1;}
+  .frm label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:3px;letter-spacing:.3px;}
+  .frm input[type=text],.frm input[type=date],.frm input[type=password],.frm select,.frm textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:13px;font-family:inherit;color:var(--ink);background:#fff;}
+  .frm textarea{min-height:64px;resize:vertical;}
+  .itemrow{display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:11px;margin-bottom:7px;background:#fff;}
+  .itemrow .t{min-width:0;flex:1;}
+  .itemrow .t b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .itemrow .t span{font-size:11.5px;color:var(--muted);}
+  .drop{border:2px dashed #c4d0e4;border-radius:13px;padding:22px;text-align:center;color:var(--muted);font-size:13px;background:#fafbfe;cursor:pointer;transition:border-color .15s,background .15s;}
+  .drop.hover{border-color:var(--blue);background:var(--blue-pale);}
+  .drop b{color:var(--navy);}
+  .stagechip{display:inline-flex;align-items:center;gap:7px;background:#e7f6ec;color:var(--ok);border-radius:999px;font-size:12px;font-weight:700;padding:5px 11px;margin:6px 6px 0 0;}
+  .hint{font-size:11.5px;color:var(--muted);line-height:1.5;margin:7px 0 0;}
+  .hint code{background:#f1f3f8;border-radius:5px;padding:1px 5px;font-size:11px;}
+  table.gridedit{width:100%;border-collapse:collapse;font-size:12.5px;}
+  table.gridedit th{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px;border-bottom:2px solid var(--line);}
+  table.gridedit td{border-bottom:1px solid #f1f3f8;padding:2px;}
+  table.gridedit input{width:100%;border:1px solid transparent;border-radius:6px;padding:6px;font-size:12.5px;background:transparent;}
+  table.gridedit input:focus{border-color:var(--blue);background:#fff;outline:none;}
+  .num{max-width:64px;}
+  .msg{border-radius:10px;padding:9px 13px;font-size:12.5px;font-weight:600;margin-top:9px;display:none;}
+  .msg.ok{display:block;background:#e7f6ec;color:var(--ok);}
+  .msg.err{display:block;background:var(--red-pale);color:var(--red);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ TOP BAR ============ -->
+  <div class="topbar">
+    <div class="logo">
+      <img class="dlogo" alt="District 32 — Waco, TX" src="data:image/png;base64,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">
+      <img class="dlogo" alt="District 49 — Arizona" src="data:image/png;base64,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">
+    </div>
+    <div class="divider"></div>
+    <div class="title">
+      <h1>District Hub</h1>
+      <p>Farmers Insurance · Districts 32 &amp; 49</p>
+    </div>
+    <div class="topbar-right">
+      <nav class="navchips">
+        <a href="#scoreboard">Scoreboard</a>
+        <a href="#competitions">Competitions</a>
+        <a href="#newsletter">Newsletter</a>
+        <a href="#reports">Reports</a>
+        <a href="#events">Events</a>
+      </nav>
+      <div class="divider"></div>
+      <span class="datebox" id="todaybox"></span>
+      <button class="btn" id="btnAdmin" onclick="adminToggle()">🔒 Admin</button>
+    </div>
+  </div>
+
+  <!-- admin mode strip -->
+  <div class="adminbar" id="adminbar">
+    <b>Admin mode</b> — changes preview instantly on this page but are <b>not live</b> until you hit Publish.
+    <span class="dirty" id="dirtyFlag">● Unpublished changes</span>
+    <button class="btn sm primary" style="margin-left:auto" onclick="openPanel()">Open Editor</button>
+    <button class="btn sm" onclick="adminToggle()">Lock</button>
+  </div>
+
+  <!-- ============ BANNER ============ -->
+  <div class="banner" id="banner" style="display:none">
+    <span class="flag">District News</span>
+    <p id="bannerText"></p>
+    <a id="bannerLink" href="#">See more →</a>
+  </div>
+
+  <!-- ============ MAIN GRID ============ -->
+  <div class="maingrid">
+    <div class="leftcol">
+    <!-- Scoreboard -->
+    <div class="card" id="scoreboard">
+      <div class="card-hd">
+        <span class="accent"></span>
+        <h2>Quotes &amp; New Business Scoreboard</h2>
+        <span class="sub asof" id="lbAsOf"></span>
+        <div class="right">
+          <div class="seg" id="segView">
+            <button data-v="producer" class="on">Producers</button>
+            <button data-v="agency">Agencies</button>
+          </div>
+          <div class="seg" id="segDist">
+            <button data-d="all" class="on">Combined</button>
+            <button data-d="32">D32</button>
+            <button data-d="49">D49</button>
+          </div>
+          <div class="seg" id="segPeriod">
+            <button data-p="m" class="on">MTD</button>
+            <button data-p="y">YTD</button>
+          </div>
+          <div class="seg red" id="segMetric">
+            <button data-m="q" class="on">Quotes</button>
+            <button data-m="n">New Biz</button>
+          </div>
+          <label class="switch" id="staffOnlyWrap"><input type="checkbox" id="staffOnly" checked onchange="LB.staffOnly=this.checked;renderBoard()">Staff only</label>
+        </div>
+      </div>
+      <div class="card-bd">
+        <div class="statrow" id="lbTotals"></div>
+        <div class="podium" id="podium"></div>
+        <div class="boardwrap">
+          <table class="board">
+            <thead><tr><th></th><th>Name</th><th>District</th><th style="text-align:right">Quotes</th><th style="text-align:right">New Biz</th><th></th></tr></thead>
+            <tbody id="boardBody"></tbody>
+          </table>
+        </div>
+        <p class="hint" id="lbNote"></p>
+      </div>
+    </div>
+
+    <!-- Competitions -->
+    <div class="card" id="competitions">
+      <div class="card-hd"><span class="accent"></span><h2>Competitions &amp; Promos</h2></div>
+      <div class="card-bd"><div class="comps" id="compList"></div></div>
+    </div>
+    </div><!-- /leftcol -->
+
+    <!-- Right rail -->
+    <div class="rail">
+      <div class="card">
+        <div class="card-hd"><span class="accent blue"></span><h2>What's New</h2></div>
+        <div class="card-bd" id="newsList"></div>
+      </div>
+      <div class="card" id="events">
+        <div class="card-hd"><span class="accent gold"></span><h2>Upcoming Events</h2></div>
+        <div class="card-bd" id="eventList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ NEWSLETTER + REPORTS ============ -->
+  <div class="docsgrid">
+    <div class="card" id="newsletter">
+      <div class="card-hd"><span class="accent blue"></span><h2>District Newsletter</h2></div>
+      <div class="card-bd" id="nlArea"></div>
+    </div>
+    <div class="card" id="reports">
+      <div class="card-hd"><span class="accent gold"></span><h2>Reports Library</h2></div>
+      <div class="card-bd filelist" id="reportList"></div>
+    </div>
+  </div>
+
+  <footer>
+    <b>District Hub</b> · maintained by the district office · last updated <span id="lastUpdated">—</span>
+  </footer>
+</div>
+
+<!-- ============ TABLE REPORT VIEWER ============ -->
+<div class="tvOverlay" id="tvOverlay" onclick="if(event.target===this)closeViewer()">
+  <div class="tv">
+    <div class="tv-hd">
+      <span class="accent"></span>
+      <h3 id="tvTitle"></h3><span class="sub" id="tvSub"></span>
+      <div class="right">
+        <input type="text" id="tvSearch" placeholder="🔎 Filter rows…" oninput="renderViewer()">
+        <button class="btn" onclick="closeViewer()">✕ Close</button>
+      </div>
+    </div>
+    <div class="tv-tabs" id="tvTabs"></div>
+    <div class="tv-bd" id="tvBody"></div>
+    <div class="tv-ft" id="tvFoot"></div>
+  </div>
+</div>
+
+<!-- ============ ADMIN DRAWER ============ -->
+<div class="drawer" id="drawer">
+  <div class="panel">
+    <div class="panel-hd">
+      <h2>Hub Editor</h2>
+      <span class="dirty" id="dirtyFlag2">● Unpublished changes</span>
+      <button class="btn x" onclick="closePanel()">✕ Close</button>
+    </div>
+    <div class="ptabs" id="ptabs">
+      <button data-t="news" class="on" onclick="showTab('news')">News &amp; Banner</button>
+      <button data-t="events" onclick="showTab('events')">Events</button>
+      <button data-t="comps" onclick="showTab('comps')">Competitions</button>
+      <button data-t="nl" onclick="showTab('nl')">Newsletters</button>
+      <button data-t="reports" onclick="showTab('reports')">Reports</button>
+      <button data-t="board" onclick="showTab('board')">Scoreboard</button>
+      <button data-t="publish" onclick="showTab('publish')">Publish ⚙</button>
+    </div>
+    <div class="panel-bd" id="panelBody"></div>
+    <div class="panel-ft">
+      <button class="btn primary" onclick="publishAll()">🚀 Publish to site</button>
+      <button class="btn" onclick="exportBundle()">⬇ Export content.json</button>
+      <button class="btn danger" onclick="discardChanges()">Discard changes</button>
+      <span class="pubstat" id="pubStat"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   DISTRICT HUB v1
+   All page content lives in content.json (one folder with this file).
+   The page fetches it fresh on every load; admins edit it through the
+   built-in editor and publish via the GitHub API — no server needed.
+   ===================================================================== */
+
+const DEFAULT_CONTENT = {
+  "updated": "2026-07-09",
+  "banner": {
+    "active": true,
+    "text": "Q3 Quoting Blitz is LIVE \u2014 standings update every Friday. The June newsletter (May commission) is out now.",
+    "link": "#newsletter"
+  },
+  "news": [
+    {
+      "id": "n1",
+      "date": "2026-07-08",
+      "tag": "news",
+      "title": "June Newsletter is out \u2014 May commission inside",
+      "body": "The June district newsletter is posted below, including the May commission recap and district recognition.",
+      "pinned": true,
+      "link": "#newsletter"
+    },
+    {
+      "id": "n2",
+      "date": "2026-07-06",
+      "tag": "update",
+      "title": "New Retail Program effective July 2026",
+      "body": "The updated Retail Program is live: 36-month bonus structure with monthly bonuses up to 340%. Talk to the district office if you have Prot\u00e9g\u00e9 or new-agent candidates.",
+      "pinned": false
+    },
+    {
+      "id": "n3",
+      "date": "2026-07-02",
+      "tag": "update",
+      "title": "June District Matrix posted",
+      "body": "June production and May Prime results are in the Reports Library. Check your agency's row and bring questions to your next coaching call.",
+      "pinned": false,
+      "link": "#reports"
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "date": "2026-07-14",
+      "time": "9:00 AM CT",
+      "title": "District Sales Call (sample \u2014 replace in Admin)",
+      "location": "Teams",
+      "link": "",
+      "description": "Monthly all-district call: Q3 blitz standings, product updates, recognition."
+    },
+    {
+      "id": "e2",
+      "date": "2026-07-23",
+      "time": "1:00 PM CT",
+      "title": "Life Boot Camp Workshop (sample \u2014 replace in Admin)",
+      "location": "Waco District Office",
+      "link": "",
+      "description": "Hands-on session: 5 Steps to the Sale applied to Life. Bring your X-date list."
+    },
+    {
+      "id": "e3",
+      "date": "2026-09-30",
+      "time": "",
+      "title": "Q3 ends \u2014 Quoting Blitz final standings",
+      "location": "",
+      "link": "",
+      "description": "Last day of the quarter. Final blitz standings and Topper Club pace check."
+    }
+  ],
+  "competitions": [
+    {
+      "id": "c1",
+      "active": true,
+      "title": "Q3 Quoting Blitz",
+      "period": "Jul 1 \u2013 Sep 30, 2026",
+      "ends": "2026-09-30",
+      "prize": "Monthly prizes + quarterly grand prize",
+      "metricLabel": "Quotes (MTD)",
+      "description": "Quarterly competition with monthly prizes. Standings reset each month; quotes pulled from the district tracker.",
+      "standings": [
+        {
+          "name": "Demo Producer A",
+          "value": 148
+        },
+        {
+          "name": "Demo Producer B",
+          "value": 131
+        },
+        {
+          "name": "Demo Producer C",
+          "value": 117
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "active": true,
+      "title": "Life Issued & Paid Challenge",
+      "period": "2026 YTD",
+      "ends": "2026-12-31",
+      "prize": "Recognition at year-end awards",
+      "metricLabel": "Life I&P (YTD)",
+      "description": "Year-long life challenge. YTD Issued & Paid results are posted in the Reports Library.",
+      "standings": [
+        {
+          "name": "Demo Agency 1",
+          "value": 14
+        },
+        {
+          "name": "Demo Agency 2",
+          "value": 11
+        },
+        {
+          "name": "Demo Agency 3",
+          "value": 9
+        }
+      ]
+    }
+  ],
+  "newsletters": [
+    {
+      "id": "nl1",
+      "title": "June Newsletter \u2014 May Commission",
+      "date": "2026-06-30",
+      "file": "files/2026-06-newsletter.pdf"
+    }
+  ],
+  "reports": [
+    {
+      "id": "r5",
+      "title": "District Matrix \u2014 interactive demo (drop your Excel to replace)",
+      "date": "2026-07-09",
+      "category": "Production",
+      "type": "table",
+      "file": "files/demo-matrix.json",
+      "note": "Demo data"
+    },
+    {
+      "id": "r1",
+      "title": "District Matrix \u2014 June Production / May Prime",
+      "date": "2026-07-02",
+      "category": "Production",
+      "file": "files/district-matrix-june-2026.pdf",
+      "note": ""
+    },
+    {
+      "id": "r2",
+      "title": "2026 Producer Report",
+      "date": "2026-07-02",
+      "category": "Production",
+      "file": "files/producer-report-2026-07-02.pdf",
+      "note": "As of 7/2/26"
+    },
+    {
+      "id": "r3",
+      "title": "2026 Quote & Sales Tracker",
+      "date": "2026-06-26",
+      "category": "Trackers",
+      "file": "files/quote-sales-tracker-2026-06-26.pdf",
+      "note": "As of 6/26/26"
+    },
+    {
+      "id": "r4",
+      "title": "YTD Life Results",
+      "date": "2026-07-05",
+      "category": "Life",
+      "file": "files/ytd-life-results-2026-07-05.pdf",
+      "note": "As of 7/5/26"
+    }
+  ],
+  "leaderboard": {
+    "asOf": "2026-07-02",
+    "note": "Demo data \u2014 import your CSV in Admin \u2192 Scoreboard.",
+    "people": [
+      {
+        "name": "Maria Delgado",
+        "agency": "Delgado Agency",
+        "role": "Producer",
+        "district": "32",
+        "owner": false,
+        "qm": 62,
+        "nm": 14,
+        "qy": 396,
+        "ny": 88
+      },
+      {
+        "name": "Sam Whitfield",
+        "agency": "Whitfield Insurance",
+        "role": "Agency",
+        "district": "32",
+        "owner": true,
+        "qm": 55,
+        "nm": 12,
+        "qy": 341,
+        "ny": 76
+      },
+      {
+        "name": "Katie Nguyen",
+        "agency": "Whitfield Insurance",
+        "role": "Producer",
+        "district": "32",
+        "owner": false,
+        "qm": 49,
+        "nm": 11,
+        "qy": 302,
+        "ny": 64
+      },
+      {
+        "name": "Robert Ellis",
+        "agency": "Ellis Family Agency",
+        "role": "Agency",
+        "district": "32",
+        "owner": true,
+        "qm": 44,
+        "nm": 9,
+        "qy": 289,
+        "ny": 59
+      },
+      {
+        "name": "Dana Marsh",
+        "agency": "Ellis Family Agency",
+        "role": "Producer",
+        "district": "32",
+        "owner": false,
+        "qm": 41,
+        "nm": 10,
+        "qy": 265,
+        "ny": 57
+      },
+      {
+        "name": "Luis Camacho",
+        "agency": "Camacho Agency",
+        "role": "Producer",
+        "district": "49",
+        "owner": false,
+        "qm": 58,
+        "nm": 13,
+        "qy": 371,
+        "ny": 81
+      },
+      {
+        "name": "Priya Shah",
+        "agency": "Shah Insurance Group",
+        "role": "Agency",
+        "district": "49",
+        "owner": true,
+        "qm": 47,
+        "nm": 10,
+        "qy": 305,
+        "ny": 66
+      },
+      {
+        "name": "Tom Baker",
+        "agency": "Shah Insurance Group",
+        "role": "Producer",
+        "district": "49",
+        "owner": false,
+        "qm": 39,
+        "nm": 8,
+        "qy": 244,
+        "ny": 51
+      },
+      {
+        "name": "Alicia Fontenot",
+        "agency": "Fontenot Agency",
+        "role": "Producer",
+        "district": "49",
+        "owner": false,
+        "qm": 35,
+        "nm": 9,
+        "qy": 228,
+        "ny": 49
+      },
+      {
+        "name": "Greg Palmer",
+        "agency": "Palmer & Assoc.",
+        "role": "Agency",
+        "district": "49",
+        "owner": true,
+        "qm": 30,
+        "nm": 6,
+        "qy": 197,
+        "ny": 40
+      }
+    ]
+  }
+};
+
+/* =====================================================================
+   PUBLISHING MODE — read this once
+   RECOMMENDED (shared password): deploy the publish helper (worker.js in
+   this folder — SETUP.md Part C walks you through it, ~10 min) and paste
+   its URL below, e.g. "https://district-hub-publish.yourname.workers.dev".
+   Then anyone with the admin password can edit and publish from any
+   computer — no other setup, and the password is checked server-side.
+
+   If PUBLISH_URL is left empty, the hub falls back to per-admin GitHub
+   token setup (Admin → Publish tab) and ADMIN_PASSCODE below guards the
+   editor UI (cosmetically — fallback mode's real key is the token).
+   ===================================================================== */
+const PUBLISH_URL = "";
+const ADMIN_PASSCODE = "d32admin";   // used in fallback mode only
+const PW_KEY = "d32hub_pw";
+let ADMIN_PW = null;
+
+let CONTENT = null;     // what the page renders
+let EDIT = null;        // working copy while in admin mode
+let STAGED = [];        // files waiting to publish: {path, name, base64, blobUrl}
+let adminMode = false;
+let dirty = false;
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s??"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone = o => JSON.parse(JSON.stringify(o));
+const fmtDate = d => { if(!d) return ""; const dt=new Date(d+"T12:00:00"); return isNaN(dt)?d:dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
+const uid = () => 'id'+Math.random().toString(36).slice(2,9);
+
+/* ---------- boot ---------- */
+async function boot(){
+  $('todaybox').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  try{
+    const res = await fetch('content.json?v='+Date.now(), {cache:'no-store'});
+    if(res.ok){ CONTENT = await res.json(); }
+  }catch(e){ /* opened as a local file or offline — use embedded copy */ }
+  if(!CONTENT) CONTENT = clone(DEFAULT_CONTENT);
+  renderAll();
+}
+
+function data(){ return (adminMode && EDIT) ? EDIT : CONTENT; }
+function markDirty(){ dirty=true; $('dirtyFlag').classList.add('on'); $('dirtyFlag2').classList.add('on'); renderAll(); }
+
+function renderAll(){
+  renderBanner(); renderBoard(); renderNews(); renderEvents();
+  renderComps(); renderNewsletter(); renderReports();
+  $('lastUpdated').textContent = fmtDate(data().updated) || "—";
+}
+
+/* ---------- banner ---------- */
+function renderBanner(){
+  const b = data().banner || {};
+  $('banner').style.display = (b.active && b.text) ? 'flex' : 'none';
+  $('bannerText').textContent = b.text || "";
+  const a = $('bannerLink');
+  if(b.link){ a.style.display='inline'; a.href=b.link; } else { a.style.display='none'; }
+}
+
+/* ---------- scoreboard ---------- */
+const LB = { view:'producer', dist:'all', period:'m', metric:'q', staffOnly:true };
+function segWire(id, key, prop){
+  $(id).querySelectorAll('button').forEach(btn=>{
+    btn.onclick = ()=>{ $(id).querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); LB[prop]=btn.dataset[key]; renderBoard(); };
+  });
+}
+segWire('segView','v','view'); segWire('segDist','d','dist'); segWire('segPeriod','p','period'); segWire('segMetric','m','metric');
+
+function boardRows(){
+  const lb = data().leaderboard || {people:[]};
+  let ppl = (lb.people||[]).map(p=>({...p}));
+  if(LB.dist!=='all') ppl = ppl.filter(p=>String(p.district)===LB.dist);
+  const qk = LB.period==='m'?'qm':'qy', nk = LB.period==='m'?'nm':'ny';
+  if(LB.view==='producer'){
+    ppl = ppl.filter(p=>!( LB.staffOnly && p.owner ));
+    return ppl.map(p=>({name:p.name, sub:p.agency||'', district:p.district, q:+p[qk]||0, n:+p[nk]||0}));
+  }
+  // agency view: roll everyone up by agency name
+  const map = {};
+  ppl.forEach(p=>{
+    const key = (p.agency||p.name).trim();
+    if(!map[key]) map[key] = {name:key, sub:'', district:p.district, q:0, n:0, cnt:0};
+    map[key].q += +p[qk]||0; map[key].n += +p[nk]||0; map[key].cnt++;
+  });
+  return Object.values(map).map(a=>({...a, sub: a.cnt>1 ? a.cnt+' producers' : ''}));
+}
+
+function renderBoard(){
+  const lb = data().leaderboard || {};
+  $('lbAsOf').textContent = lb.asOf ? ('as of '+fmtDate(lb.asOf)) : '';
+  $('lbNote').textContent = lb.note || '';
+  /* keep the switch's space reserved so the segmented buttons never shift */
+  $('staffOnlyWrap').style.visibility = LB.view==='producer' ? 'visible' : 'hidden';
+
+  /* district totals — ALWAYS include everyone (owners + staff), only
+     district & period filters apply, so the all-up number never changes
+     when you flip views or the Staff-only switch */
+  const qk = LB.period==='m'?'qm':'qy', nk = LB.period==='m'?'nm':'ny';
+  const everyone = (lb.people||[]).filter(p=> LB.dist==='all' || String(p.district)===LB.dist);
+  const tq = everyone.reduce((s,p)=>s+(+p[qk]||0),0), tn = everyone.reduce((s,p)=>s+(+p[nk]||0),0);
+  const scopeLbl = LB.dist==='all' ? 'Districts 32 + 49' : 'District '+LB.dist;
+  const perLbl = LB.period==='m' ? 'MTD' : 'YTD';
+  $('lbTotals').innerHTML = `
+    <div class="stat">
+      <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2563eb"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
+      <div class="v"><b>${tq.toLocaleString()}</b><span>Total Quotes ${perLbl}</span></div>
+      <div class="scope">${scopeLbl}<br>incl. agency owners</div>
+    </div>
+    <div class="stat red">
+      <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#d92231"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" fill="none" stroke="#d92231" stroke-width="2"/></svg></div>
+      <div class="v"><b>${tn.toLocaleString()}</b><span>Total New Business ${perLbl}</span></div>
+      <div class="scope">${scopeLbl}<br>incl. agency owners</div>
+    </div>`;
+  const rows = boardRows().sort((a,b)=> b[LB.metric]-a[LB.metric] || b[LB.metric==='q'?'n':'q']-a[LB.metric==='q'?'n':'q']);
+  const max = Math.max(1, ...rows.map(r=>r[LB.metric]));
+  const mLbl = LB.metric==='q' ? 'Quotes' : 'New Biz';
+  const pLbl = LB.period==='m' ? 'MTD' : 'YTD';
+
+  $('podium').innerHTML = rows.slice(0,3).map((r,i)=>`
+    <div class="pod p${i+1}">
+      <div class="medal">${i+1}</div>
+      <div class="who"><b>${esc(r.name)}</b><span>${esc(r.sub||'')}</span></div>
+      <div class="val"><b>${r[LB.metric]}</b><span>${mLbl} ${pLbl}</span></div>
+    </div>`).join('') || '<div class="empty">No data yet — import a CSV in Admin → Scoreboard.</div>';
+
+  $('boardBody').innerHTML = rows.map((r,i)=>`
+    <tr>
+      <td class="rank">${i+1}</td>
+      <td><div class="pname"><span class="avatar">${esc(initials(r.name))}</span><span class="nm"><b>${esc(r.name)}</b><span>${esc(r.sub||'')}</span></span></div></td>
+      <td><span class="dchip d${r.district==='49'?'49':'32'}">D${r.district==='49'?'49':'32'}</span></td>
+      <td class="metric">${r.q}</td>
+      <td class="metric">${r.n}</td>
+      <td class="barcell"><div class="bar ${LB.metric==='n'?'red':''}"><i style="width:${Math.round(r[LB.metric]/max*100)}%"></i></div></td>
+    </tr>`).join('') || '<tr><td colspan="6" class="empty">No rows for this filter.</td></tr>';
+}
+function initials(name){ return String(name).split(/\s+/).filter(w=>/[A-Za-z]/.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('')||'?'; }
+
+/* ---------- news ---------- */
+function renderNews(){
+  const items = (data().news||[]).slice().sort((a,b)=> (b.pinned-a.pinned) || (b.date>a.date?1:-1));
+  $('newsList').innerHTML = items.map(n=>{
+    const ext = n.link && !String(n.link).startsWith('#');
+    const title = n.link
+      ? `<a href="${esc(n.link)}" ${ext?'target="_blank" rel="noopener"':''} style="color:var(--navy);text-decoration:none">${esc(n.title)}</a>`
+      : esc(n.title);
+    return `<div class="newsitem">
+      <div class="meta"><span class="tag ${esc(n.tag||'news')}">${esc(n.tag||'news')}</span><time>${fmtDate(n.date)}</time>${n.pinned?'<span class="pin">📌</span>':''}</div>
+      <h3>${title}</h3>
+      <p>${esc(n.body||'')}</p>
+      ${n.link?`<p style="margin-top:5px"><a href="${esc(n.link)}" ${ext?'target="_blank" rel="noopener"':''} style="color:var(--blue);font-weight:700;font-size:12px;text-decoration:none">Read more →</a></p>`:''}
+    </div>`;
+  }).join('') || '<div class="empty">Nothing posted yet.</div>';
+}
+
+/* ---------- events ---------- */
+function renderEvents(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const items = (data().events||[]).filter(e=>{ const d=new Date(e.date+"T23:59:59"); return !isNaN(d) && d>=today; })
+    .sort((a,b)=> a.date>b.date?1:-1).slice(0,6);
+  $('eventList').innerHTML = items.map(e=>{
+    const d = new Date(e.date+"T12:00:00");
+    const mo = isNaN(d)?'':d.toLocaleDateString('en-US',{month:'short'});
+    const dy = isNaN(d)?'':d.getDate();
+    return `<div class="eventrow">
+      <div class="datebadge"><span class="m">${mo}</span><span class="d">${dy}</span></div>
+      <div class="info">
+        <b>${esc(e.title)}</b>
+        <span class="where">${esc([e.time,e.location].filter(Boolean).join(' · '))}</span>
+        ${e.description?`<p>${esc(e.description)}</p>`:''}
+        ${e.link?`<p><a class="filelink" style="padding:3px 9px" href="${esc(e.link)}" target="_blank">Join / details</a></p>`:''}
+      </div>
+    </div>`;
+  }).join('') || '<div class="empty">No upcoming events.</div>';
+}
+
+/* ---------- competitions ---------- */
+function renderComps(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const items = (data().competitions||[]).filter(c=>c.active);
+  $('compList').innerHTML = items.map(c=>{
+    let days='';
+    if(c.ends){ const e=new Date(c.ends+"T23:59:59"); if(!isNaN(e)){ const n=Math.max(0,Math.ceil((e-today)/86400000)); days=`<div class="days"><b>${n}</b><span>days left</span></div>`; } }
+    const st = (c.standings||[]).slice(0,5);
+    return `<div class="comp">
+      <div class="hd"><div class="left"><b>${esc(c.title)}</b><span>${esc(c.period||'')}</span></div>${days}</div>
+      <div class="bd">${esc(c.description||'')}
+        ${c.prize?`<div class="prize">🏆 ${esc(c.prize)}</div>`:''}
+      </div>
+      ${st.length?`<div class="standings"><div class="lbl">Current standings — ${esc(c.metricLabel||'')}</div>
+        ${st.map((s,i)=>`<div class="srow"><span class="r">${i+1}</span><b>${esc(s.name)}</b><span class="v">${esc(String(s.value))}</span></div>`).join('')}
+      </div>`:''}
+    </div>`;
+  }).join('') || '<div class="empty">No active competitions.</div>';
+}
+
+/* ---------- newsletter ---------- */
+function fileHref(f){
+  const st = STAGED.find(s=>s.path===f);
+  return st ? st.blobUrl : f;
+}
+function renderNewsletter(){
+  const list = (data().newsletters||[]).slice().sort((a,b)=> b.date>a.date?1:-1);
+  if(!list.length){ $('nlArea').innerHTML='<div class="empty">No newsletters yet.</div>'; return; }
+  const latest = list[0], rest = list.slice(1);
+  $('nlArea').innerHTML = `
+    <div class="latestnl">
+      <div class="nlthumb"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M6 2h9l5 5v15H6z" opacity=".95"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
+      <div class="info"><b>${esc(latest.title)}</b><span>${fmtDate(latest.date)} · Latest issue</span></div>
+      <a class="btn primary open" href="${esc(fileHref(latest.file))}" target="_blank">Read it →</a>
+    </div>
+    ${rest.length?`<div class="cat" style="margin-top:14px">Past issues</div>
+    <div class="filelist">${rest.map(n=>`
+      <div class="frow">
+        <div class="fico"><svg width="17" height="17" viewBox="0 0 24 24" fill="#2563eb"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
+        <div class="fi"><b>${esc(n.title)}</b><span>${fmtDate(n.date)}</span></div>
+        <a class="filelink open" href="${esc(fileHref(n.file))}" target="_blank">Open</a>
+      </div>`).join('')}</div>`:''}`;
+}
+
+/* ---------- reports ---------- */
+function renderReports(){
+  const items = (data().reports||[]).slice().sort((a,b)=> b.date>a.date?1:-1);
+  if(!items.length){ $('reportList').innerHTML='<div class="empty">No reports posted.</div>'; return; }
+  const cats = {};
+  items.forEach(r=>{ const c=r.category||'Other'; (cats[c]=cats[c]||[]).push(r); });
+  const icoFor = c => c==='Life' ? 'red' : (c==='Trackers' ? 'gold' : '');
+  $('reportList').innerHTML = Object.keys(cats).map(c=>`
+    <div class="cat">${esc(c)}</div>
+    ${cats[c].map(r=>`
+      <div class="frow">
+        <div class="fico ${icoFor(c)}"><svg width="17" height="17" viewBox="0 0 24 24" fill="${c==='Life'?'#d92231':(c==='Trackers'?'#d4a017':'#2563eb')}"><rect x="4" y="11" width="3" height="9"/><rect x="10" y="6" width="3" height="14"/><rect x="16" y="9" width="3" height="11"/></svg></div>
+        <div class="fi"><b>${esc(r.title)}</b><span>${fmtDate(r.date)}${r.note?' · '+esc(r.note):''}</span></div>
+        ${r.type==='table'
+          ? `<a class="filelink open" href="javascript:void(0)" onclick="openViewer('${esc(r.id)}')">📊 View</a>`
+          : `<a class="filelink open" href="${esc(fileHref(r.file||r.link||'#'))}" target="_blank">Open</a>`}
+      </div>`).join('')}`).join('');
+}
+
+/* =====================================================================
+   ADMIN
+   ===================================================================== */
+async function adminToggle(){
+  if(adminMode){
+    if(dirty && !confirm("You have unpublished changes. Lock admin mode anyway? (Changes stay staged in this tab.)")) return;
+    adminMode=false; $('adminbar').classList.remove('on'); $('btnAdmin').textContent='🔒 Admin'; closePanel(); renderAll(); return;
+  }
+  if(PUBLISH_URL){
+    let pw = localStorage.getItem(PW_KEY), prompted = false;
+    if(!pw){
+      pw = prompt("Enter the admin password:");
+      if(pw===null || !pw.trim()) return;
+      pw = pw.trim(); prompted = true;
+    }
+    const btn=$('btnAdmin'); btn.textContent='⏳ Checking…'; btn.disabled=true;
+    const ok = await verifyPw(pw);
+    btn.textContent='🔒 Admin'; btn.disabled=false;
+    if(ok===null){ alert("Can't reach the publish service right now — check your internet connection and try again."); return; }
+    if(!ok){
+      localStorage.removeItem(PW_KEY);
+      alert(prompted ? "Incorrect password." : "Your saved password is no longer valid (it may have been changed). Click Admin to sign in again.");
+      return;
+    }
+    ADMIN_PW = pw; localStorage.setItem(PW_KEY, pw);
+  }else{
+    const p = prompt("Enter the admin passcode:");
+    if(p===null) return;
+    if(p!==ADMIN_PASSCODE){ alert("Incorrect passcode."); return; }
+  }
+  adminMode=true;
+  if(!EDIT) EDIT = clone(CONTENT);
+  $('adminbar').classList.add('on'); $('btnAdmin').textContent='🔓 Admin';
+  renderAll();
+}
+async function verifyPw(pw){
+  try{
+    const r = await fetch(PUBLISH_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'verify', password:pw})});
+    if(r.ok) return true;
+    if(r.status===401) return false;
+    return null;
+  }catch(e){ return null; }
+}
+function signOutDevice(){
+  localStorage.removeItem(PW_KEY); ADMIN_PW=null;
+  adminMode=false; $('adminbar').classList.remove('on'); $('btnAdmin').textContent='🔒 Admin'; closePanel(); renderAll();
+}
+function openPanel(){ $('drawer').classList.add('on'); showTab(currentTab); }
+function closePanel(){ $('drawer').classList.remove('on'); }
+function discardChanges(){
+  if(!confirm("Throw away all unpublished changes?")) return;
+  EDIT = clone(CONTENT); STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
+  dirty=false; $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
+  renderAll(); showTab(currentTab);
+}
+
+/* ---------- generic collection editors ---------- */
+const EDITORS = {
+  news: { list:'news', label:'News item', fields:[
+    {k:'date', label:'Date', t:'date'},
+    {k:'tag', label:'Tag', t:'select', opts:['news','promo','recognition','update']},
+    {k:'title', label:'Headline', full:1},
+    {k:'body', label:'Body', t:'textarea', full:1},
+    {k:'link', label:'Link (URL, or #newsletter / #reports / #competitions to jump on-page)', full:1},
+    {k:'pinned', label:'Pin to top', t:'check'}
+  ], sum:i=>({b:i.title, s:fmtDate(i.date)+' · '+(i.tag||'news')}) },
+  events: { list:'events', label:'Event', fields:[
+    {k:'date', label:'Date', t:'date'},
+    {k:'time', label:'Time (e.g. 9:00 AM CT)'},
+    {k:'title', label:'Title', full:1},
+    {k:'location', label:'Location'},
+    {k:'link', label:'Link (optional)'},
+    {k:'description', label:'Description', t:'textarea', full:1}
+  ], sum:i=>({b:i.title, s:fmtDate(i.date)+(i.location?' · '+i.location:'')}) },
+  comps: { list:'competitions', label:'Competition', fields:[
+    {k:'title', label:'Title'},
+    {k:'period', label:'Period (e.g. Jul 1 – Sep 30)'},
+    {k:'ends', label:'End date', t:'date'},
+    {k:'prize', label:'Prize'},
+    {k:'metricLabel', label:'Standings metric label'},
+    {k:'active', label:'Active (visible on hub)', t:'check'},
+    {k:'description', label:'Description', t:'textarea', full:1},
+    {k:'standings', label:'Standings — one per line: Name, number', t:'standings', full:1}
+  ], sum:i=>({b:i.title, s:(i.period||'')+(i.active?'':' · hidden')}) },
+  nl: { list:'newsletters', label:'Newsletter', fields:[
+    {k:'title', label:'Title'},
+    {k:'date', label:'Issue date', t:'date'}
+  ], sum:i=>({b:i.title, s:fmtDate(i.date)+' · '+(i.file||'')}), upload:{folder:'files/', accept:'.pdf', hint:'Drop the newsletter PDF here (or click to choose). It will be added as the latest issue.'} },
+  reports: { list:'reports', label:'Report', fields:[
+    {k:'title', label:'Title'},
+    {k:'date', label:'Report date', t:'date'},
+    {k:'category', label:'Category', t:'select', opts:['Production','Life','Trackers','Programs','Other']},
+    {k:'note', label:'Note (e.g. As of 7/2/26)'}
+  ], sum:i=>({b:i.title, s:(i.category||'Other')+' · '+fmtDate(i.date)+(i.type==='table'?' · interactive table':'')}), upload:{folder:'files/', accept:'.pdf,.xlsx,.xls,.csv,.png,.jpg', hint:'Drop an Excel/CSV here and it becomes an interactive on-brand table (matrixes, producer reports, life results…). PDFs and images post as openable files. Fill in title & category after it appears.'} }
+};
+
+let currentTab = 'news';
+function showTab(t){
+  currentTab = t;
+  document.querySelectorAll('#ptabs button').forEach(b=>b.classList.toggle('on', b.dataset.t===t));
+  if(t==='publish') return renderPublishTab();
+  if(t==='board') return renderBoardTab();
+  renderCollectionTab(t);
+}
+
+function renderCollectionTab(t){
+  const ed = EDITORS[t];
+  const items = EDIT[ed.list] || (EDIT[ed.list]=[]);
+  let html = '';
+  if(t==='news'){
+    const b = EDIT.banner || (EDIT.banner={active:false,text:'',link:''});
+    html += `<fieldset class="box"><legend>Announcement banner</legend>
+      <div class="frm">
+        <div class="full"><label>Banner text</label><input type="text" id="bnText" value="${esc(b.text)}"></div>
+        <div><label>Link (optional, e.g. #newsletter)</label><input type="text" id="bnLink" value="${esc(b.link||'')}"></div>
+        <div style="display:flex;align-items:end;padding-bottom:6px"><label class="switch"><input type="checkbox" id="bnActive" ${b.active?'checked':''}> Show banner</label></div>
+      </div>
+      <p style="margin:10px 0 0"><button class="btn sm primary" onclick="saveBanner()">Apply banner</button></p>
+    </fieldset>`;
+  }
+  if(ed.upload){
+    html += `<div class="drop" id="dropzone">📄 <b>Drag &amp; drop</b> — ${esc(ed.upload.hint)}<input type="file" id="dropInput" accept="${ed.upload.accept}" style="display:none" multiple></div>
+      <div id="stagedChips">${STAGED.map(s=>`<span class="stagechip">✓ ${esc(s.name)} staged</span>`).join('')}</div>
+      <div style="height:14px"></div>`;
+  }
+  html += `<fieldset class="box"><legend>${esc(ed.label)}s</legend><div id="itemList"></div>
+    <button class="btn sm" onclick="addItem('${t}')">+ Add ${esc(ed.label.toLowerCase())}</button></fieldset>
+    <div id="itemForm"></div>`;
+  $('panelBody').innerHTML = html;
+  drawItemList(t);
+  if(ed.upload) wireDropzone(t);
+}
+
+function drawItemList(t){
+  const ed = EDITORS[t];
+  const items = EDIT[ed.list]||[];
+  $('itemList').innerHTML = items.map((it,i)=>{
+    const s = ed.sum(it);
+    return `<div class="itemrow">
+      <div class="t"><b>${esc(s.b||'(untitled)')}</b><span>${esc(s.s||'')}</span></div>
+      <button class="btn sm" onclick="moveItem('${t}',${i},-1)" ${i===0?'disabled':''}>↑</button>
+      <button class="btn sm" onclick="moveItem('${t}',${i},1)" ${i===items.length-1?'disabled':''}>↓</button>
+      <button class="btn sm" onclick="editItem('${t}',${i})">Edit</button>
+      <button class="btn sm danger" onclick="delItem('${t}',${i})">✕</button>
+    </div>`;
+  }).join('') || '<p class="hint">Nothing here yet.</p>';
+}
+
+function saveBanner(){
+  EDIT.banner = {active:$('bnActive').checked, text:$('bnText').value.trim(), link:$('bnLink').value.trim()};
+  markDirty();
+}
+function moveItem(t,i,dir){
+  const list = EDIT[EDITORS[t].list];
+  const j=i+dir; if(j<0||j>=list.length) return;
+  [list[i],list[j]]=[list[j],list[i]];
+  markDirty(); drawItemList(t);
+}
+function delItem(t,i){
+  const ed=EDITORS[t], list=EDIT[ed.list];
+  if(!confirm(`Delete this ${ed.label.toLowerCase()}?`)) return;
+  list.splice(i,1); markDirty(); drawItemList(t); $('itemForm').innerHTML='';
+}
+function addItem(t){
+  const ed=EDITORS[t], list=EDIT[ed.list];
+  const it={id:uid()};
+  ed.fields.forEach(f=>{ it[f.k] = f.t==='check'?false : f.t==='standings'?[] : ''; });
+  if(t==='comps') it.active=true;
+  list.unshift(it);
+  drawItemList(t); editItem(t,0);
+}
+function editItem(t,i){
+  const ed=EDITORS[t], it=EDIT[ed.list][i];
+  $('itemForm').innerHTML = `<fieldset class="box"><legend>Edit ${esc(ed.label.toLowerCase())}</legend>
+    <div class="frm">
+      ${ed.fields.map(f=>{
+        const v = it[f.k];
+        const wrap = c => `<div class="${f.full?'full':''}"><label>${esc(f.label)}</label>${c}</div>`;
+        if(f.t==='textarea') return wrap(`<textarea data-k="${f.k}">${esc(v)}</textarea>`);
+        if(f.t==='select') return wrap(`<select data-k="${f.k}">${f.opts.map(o=>`<option ${o===v?'selected':''}>${o}</option>`).join('')}</select>`);
+        if(f.t==='check') return `<div style="display:flex;align-items:end;padding-bottom:6px"><label class="switch"><input type="checkbox" data-k="${f.k}" ${v?'checked':''}> ${esc(f.label)}</label></div>`;
+        if(f.t==='standings') return wrap(`<textarea data-k="${f.k}" placeholder="Maria Delgado, 62">${esc((v||[]).map(s=>s.name+', '+s.value).join('\n'))}</textarea>`);
+        return wrap(`<input type="${f.t==='date'?'date':'text'}" data-k="${f.k}" value="${esc(v)}">`);
+      }).join('')}
+    </div>
+    <p style="margin:11px 0 0;display:flex;gap:8px">
+      <button class="btn sm primary" onclick="saveItem('${t}',${i})">Save ${esc(ed.label.toLowerCase())}</button>
+      <button class="btn sm" onclick="$('itemForm').innerHTML=''">Cancel</button>
+    </p></fieldset>`;
+  $('itemForm').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function saveItem(t,i){
+  const ed=EDITORS[t], it=EDIT[ed.list][i];
+  $('itemForm').querySelectorAll('[data-k]').forEach(el=>{
+    const f = ed.fields.find(x=>x.k===el.dataset.k);
+    if(f.t==='check') it[f.k]=el.checked;
+    else if(f.t==='standings') it[f.k]=el.value.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{ const m=l.match(/^(.*?)[,|]\s*([\d.,$%]+)\s*$/); return m?{name:m[1].trim(),value:m[2]}:{name:l,value:''}; });
+    else it[f.k]=el.value.trim();
+  });
+  markDirty(); drawItemList(t); $('itemForm').innerHTML='';
+}
+
+/* ---------- drag & drop uploads ---------- */
+function wireDropzone(t){
+  const dz=$('dropzone'), inp=$('dropInput');
+  dz.onclick=()=>inp.click();
+  inp.onchange=()=>{ [...inp.files].forEach(f=>stageFile(t,f)); inp.value=''; };
+  ['dragover','dragenter'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('hover');}));
+  ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('hover');}));
+  dz.addEventListener('drop',e=>{ [...e.dataTransfer.files].forEach(f=>stageFile(t,f)); });
+}
+function slugify(name){
+  const dot=name.lastIndexOf('.');
+  const base=(dot>0?name.slice(0,dot):name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60)||'file';
+  const ext=dot>0?name.slice(dot).toLowerCase():'';
+  return base+ext;
+}
+function stageFile(t, file){
+  const ext=(file.name.toLowerCase().match(/\.([a-z0-9]+)$/)||[])[1]||'';
+  if(t==='reports' && ['xlsx','xls','csv'].includes(ext)) return stageTableFile(file);
+  const ed=EDITORS[t];
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const b64=reader.result.split(',')[1];
+    let path=ed.upload.folder+slugify(file.name);
+    if(STAGED.some(s=>s.path===path) || JSON.stringify(EDIT).includes('"'+path+'"')) path=ed.upload.folder+Date.now()+'-'+slugify(file.name);
+    STAGED.push({path, name:file.name, base64:b64, blobUrl:URL.createObjectURL(file)});
+    const today=new Date().toISOString().slice(0,10);
+    if(t==='nl') EDIT.newsletters.unshift({id:uid(), title:file.name.replace(/\.[^.]+$/,''), date:today, file:path});
+    if(t==='reports') EDIT.reports.unshift({id:uid(), title:file.name.replace(/\.[^.]+$/,''), date:today, category:'Other', note:'', file:path});
+    markDirty(); renderCollectionTab(t);
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ---------- Excel / CSV → interactive table reports ---------- */
+function loadSheetJS(){
+  /* the reader ships with the site (xlsx.full.min.js in the repo) and only
+     loads when an admin drops a spreadsheet — viewers never download it.
+     CDN is a fallback in case the local copy is missing. */
+  const tryLoad = src => new Promise((res,rej)=>{
+    const s=document.createElement('script');
+    s.src=src; s.onload=()=>res(); s.onerror=()=>{ s.remove(); rej(); };
+    document.head.appendChild(s);
+  });
+  if(window.XLSX) return Promise.resolve();
+  return tryLoad('xlsx.full.min.js')
+    .catch(()=>tryLoad('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'))
+    .catch(()=>{ throw new Error('could not load the spreadsheet reader — check your internet connection and try again'); });
+}
+function trimRows(rows){
+  rows = rows.map(r=>(r||[]).map(c=> typeof c==='string' ? c.trim() : (c==null?'':String(c)) ));
+  while(rows.length && rows[rows.length-1].every(c=>c==='')) rows.pop();
+  while(rows.length && rows[0].every(c=>c==='')) rows.shift();
+  let truncated=false;
+  if(rows.length>3000){ rows=rows.slice(0,3000); truncated=true; }
+  const maxc=Math.min(60, Math.max(1,...rows.map(r=>r.length)));
+  rows=rows.map(r=>{ const a=r.slice(0,maxc); while(a.length<maxc) a.push(''); return a; });
+  return {rows, truncated};
+}
+async function stageTableFile(file){
+  try{
+    let sheets=[];
+    if(/\.csv$/i.test(file.name)){
+      sheets=[{name:'Data', rows:parseCSV(await file.text())}];
+    }else{
+      await loadSheetJS();
+      const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});
+      sheets=wb.SheetNames.map(n=>({name:n, rows:XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,raw:false,defval:''})}));
+    }
+    let anyTrunc=false;
+    sheets=sheets.map(s=>{ const t=trimRows(s.rows); anyTrunc=anyTrunc||t.truncated; return {name:s.name, rows:t.rows}; }).filter(s=>s.rows.length);
+    if(!sheets.length) throw new Error('no data rows found in that file');
+    const title=file.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').trim();
+    const json=JSON.stringify({title, sheets});
+    let path='files/'+slugify(file.name).replace(/\.(xlsx|xls|csv)$/,'')+'.json';
+    if(STAGED.some(s=>s.path===path) || JSON.stringify(EDIT).includes('"'+path+'"')) path='files/'+Date.now()+'-'+slugify(file.name).replace(/\.(xlsx|xls|csv)$/,'')+'.json';
+    STAGED.push({path, name:file.name, base64: btoa(unescape(encodeURIComponent(json))), blobUrl: URL.createObjectURL(new Blob([json],{type:'application/json'}))});
+    EDIT.reports.unshift({id:uid(), title, date:new Date().toISOString().slice(0,10), category:'Other', note:'', type:'table', file:path});
+    markDirty(); renderCollectionTab('reports');
+    if(anyTrunc) alert('Heads up: that sheet was longer than 3,000 rows, so it was trimmed. The hub is built for report-sized tables, not raw data dumps.');
+  }catch(err){
+    alert('Could not read that spreadsheet: '+err.message);
+  }
+}
+
+/* ---------- table viewer ---------- */
+const TV={data:null, sheet:0};
+async function openViewer(rid){
+  const r=(data().reports||[]).find(x=>x.id===rid); if(!r) return;
+  $('tvTitle').textContent=r.title;
+  $('tvSub').textContent=[fmtDate(r.date), r.note].filter(Boolean).join(' · ');
+  $('tvTabs').innerHTML=''; $('tvFoot').textContent='';
+  $('tvBody').innerHTML='<div class="empty">Loading…</div>';
+  $('tvSearch').value='';
+  $('tvOverlay').classList.add('on'); document.body.style.overflow='hidden';
+  try{
+    const res=await fetch(fileHref(r.file),{cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    TV.data=await res.json(); TV.sheet=0;
+    renderViewer();
+  }catch(e){
+    $('tvBody').innerHTML='<div class="empty">Could not load this report.</div>';
+  }
+}
+function renderViewer(){
+  const d=TV.data; if(!d) return;
+  $('tvTabs').innerHTML = d.sheets.length>1
+    ? d.sheets.map((s,i)=>`<button class="${i===TV.sheet?'on':''}" onclick="TV.sheet=${i};renderViewer()">${esc(s.name)}</button>`).join('') : '';
+  const rows=d.sheets[TV.sheet].rows;
+  const head=rows[0]||[];
+  const filter=$('tvSearch').value.toLowerCase().trim();
+  const body=rows.slice(1).filter(r=> !filter || r.some(c=>String(c).toLowerCase().includes(filter)));
+  const isNum=v=>/^\(?\s*[-+]?[$]?[\d,]+(\.\d+)?\s*[%)]?\s*$/.test(String(v)) && /\d/.test(String(v));
+  $('tvBody').innerHTML=`<table class="datatable">
+    <thead><tr>${head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead>
+    <tbody>${body.map(r=>`<tr>${r.map(c=>`<td class="${isNum(c)?'num':''}">${esc(c)}</td>`).join('')}</tr>`).join('') || `<tr><td colspan="${head.length||1}"><div class="empty">No matching rows.</div></td></tr>`}</tbody>
+  </table>`;
+  $('tvFoot').textContent=`${body.length} row${body.length===1?'':'s'}${filter?' matching "'+$('tvSearch').value+'"':''} · ${d.sheets[TV.sheet].name}`;
+}
+function closeViewer(){ $('tvOverlay').classList.remove('on'); document.body.style.overflow=''; TV.data=null; }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && $('tvOverlay').classList.contains('on')) closeViewer(); });
+
+/* ---------- scoreboard tab ---------- */
+function renderBoardTab(){
+  const lb = EDIT.leaderboard || (EDIT.leaderboard={asOf:'',note:'',people:[]});
+  $('panelBody').innerHTML = `
+    <fieldset class="box"><legend>Data source</legend>
+      <div class="frm">
+        <div><label>Data as of</label><input type="date" id="lbDate" value="${esc(lb.asOf||'')}"></div>
+        <div><label>Footnote shown under the board</label><input type="text" id="lbNoteIn" value="${esc(lb.note||'')}"></div>
+      </div>
+      <p style="margin:11px 0 0;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sm primary" onclick="importCSVClick()">📥 Import CSV</button>
+        <button class="btn sm" onclick="downloadTemplate()">⬇ Blank CSV template</button>
+        <button class="btn sm" onclick="applyBoardMeta()">Apply date/footnote</button>
+        <input type="file" id="csvInput" accept=".csv" style="display:none">
+      </p>
+      <p class="hint">CSV columns (header names matter, order doesn't): <code>Name, Agency, Role, District, Owner, Quotes MTD, NB MTD, Quotes YTD, NB YTD</code>. Role is <code>Producer</code> or <code>Agency</code>; Owner is <code>Y</code> for agency owners' personal rows. Importing replaces the whole board.</p>
+      <div class="msg" id="csvMsg"></div>
+    </fieldset>
+    <fieldset class="box"><legend>Quick edits (${lb.people.length} people)</legend>
+      <div style="max-height:340px;overflow:auto">
+      <table class="gridedit"><thead><tr><th>Name</th><th>Agency</th><th>Role</th><th>Dist</th><th>Own</th><th>Q&nbsp;MTD</th><th>NB&nbsp;MTD</th><th>Q&nbsp;YTD</th><th>NB&nbsp;YTD</th><th></th></tr></thead>
+      <tbody>${lb.people.map((p,i)=>`
+        <tr>
+          <td><input data-i="${i}" data-k="name" value="${esc(p.name)}"></td>
+          <td><input data-i="${i}" data-k="agency" value="${esc(p.agency||'')}"></td>
+          <td><input data-i="${i}" data-k="role" value="${esc(p.role||'Producer')}" style="max-width:80px"></td>
+          <td><input data-i="${i}" data-k="district" value="${esc(p.district||'32')}" class="num" style="max-width:46px"></td>
+          <td style="text-align:center"><input type="checkbox" data-i="${i}" data-k="owner" ${p.owner?'checked':''}></td>
+          <td><input data-i="${i}" data-k="qm" value="${p.qm??0}" class="num"></td>
+          <td><input data-i="${i}" data-k="nm" value="${p.nm??0}" class="num"></td>
+          <td><input data-i="${i}" data-k="qy" value="${p.qy??0}" class="num"></td>
+          <td><input data-i="${i}" data-k="ny" value="${p.ny??0}" class="num"></td>
+          <td><button class="btn sm danger" onclick="delPerson(${i})">✕</button></td>
+        </tr>`).join('')}</tbody></table>
+      </div>
+      <p style="margin:10px 0 0;display:flex;gap:8px">
+        <button class="btn sm" onclick="addPerson()">+ Add person</button>
+        <button class="btn sm primary" onclick="saveGrid()">Save table edits</button>
+      </p>
+    </fieldset>`;
+  $('csvInput').onchange = e => { const f=e.target.files[0]; if(f) importCSV(f); e.target.value=''; };
+}
+function applyBoardMeta(){ EDIT.leaderboard.asOf=$('lbDate').value; EDIT.leaderboard.note=$('lbNoteIn').value.trim(); markDirty(); }
+function addPerson(){ EDIT.leaderboard.people.push({name:'',agency:'',role:'Producer',district:'32',owner:false,qm:0,nm:0,qy:0,ny:0}); renderBoardTab(); }
+function delPerson(i){ EDIT.leaderboard.people.splice(i,1); markDirty(); renderBoardTab(); }
+function saveGrid(){
+  document.querySelectorAll('table.gridedit [data-i]').forEach(el=>{
+    const p=EDIT.leaderboard.people[+el.dataset.i]; if(!p) return;
+    const k=el.dataset.k;
+    if(k==='owner') p[k]=el.checked;
+    else if(['qm','nm','qy','ny'].includes(k)) p[k]=+String(el.value).replace(/[^0-9.-]/g,'')||0;
+    else if(k==='district') p[k]=/49/.test(el.value)?'49':'32';
+    else p[k]=el.value.trim();
+  });
+  EDIT.leaderboard.people = EDIT.leaderboard.people.filter(p=>p.name);
+  markDirty(); renderBoardTab();
+}
+function importCSVClick(){ $('csvInput').click(); }
+function downloadTemplate(){
+  const csv="Name,Agency,Role,District,Owner,Quotes MTD,NB MTD,Quotes YTD,NB YTD\nJane Smith,Smith Agency,Producer,32,N,42,9,260,55\nJohn Smith,Smith Agency,Agency,32,Y,20,4,130,26\n";
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='scoreboard-template.csv'; a.click();
+}
+function parseCSV(text){
+  const rows=[]; let row=[], cur='', inQ=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(inQ){ if(c==='"'){ if(text[i+1]==='"'){cur+='"';i++;} else inQ=false; } else cur+=c; }
+    else if(c==='"') inQ=true;
+    else if(c===','){ row.push(cur); cur=''; }
+    else if(c==='\n'||c==='\r'){ if(c==='\r'&&text[i+1]==='\n') i++; row.push(cur); cur=''; if(row.some(x=>x.trim()!=='')) rows.push(row); row=[]; }
+    else cur+=c;
+  }
+  if(cur!==''||row.length){ row.push(cur); if(row.some(x=>x.trim()!=='')) rows.push(row); }
+  return rows;
+}
+function importCSV(file){
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const rows=parseCSV(reader.result);
+      if(rows.length<2) throw new Error("No data rows found.");
+      const hd=rows[0].map(h=>h.toLowerCase().trim());
+      const col=names=>{ for(const n of names){ const i=hd.findIndex(h=>h.includes(n)); if(i>=0) return i; } return -1; };
+      const ci={name:col(['name']),agency:col(['agency']),role:col(['role']),district:col(['district','dist']),owner:col(['owner']),
+        qm:col(['quotes mtd','q mtd','quotes month']),nm:col(['nb mtd','new business mtd','n mtd']),
+        qy:col(['quotes ytd','q ytd']),ny:col(['nb ytd','new business ytd','n ytd'])};
+      if(ci.name<0) throw new Error('Could not find a "Name" column.');
+      const num=v=>+String(v??'').replace(/[^0-9.-]/g,'')||0;
+      const people=rows.slice(1).map(r=>({
+        name:(r[ci.name]||'').trim(),
+        agency:ci.agency>=0?(r[ci.agency]||'').trim():'',
+        role:ci.role>=0&&/agen/i.test(r[ci.role]||'')?'Agency':'Producer',
+        district:ci.district>=0&&/49/.test(r[ci.district]||'')?'49':'32',
+        owner:ci.owner>=0?/^\s*(y|yes|true|1)/i.test(r[ci.owner]||''):false,
+        qm:ci.qm>=0?num(r[ci.qm]):0, nm:ci.nm>=0?num(r[ci.nm]):0,
+        qy:ci.qy>=0?num(r[ci.qy]):0, ny:ci.ny>=0?num(r[ci.ny]):0
+      })).filter(p=>p.name);
+      if(!people.length) throw new Error("No usable rows.");
+      EDIT.leaderboard.people=people;
+      markDirty(); renderBoardTab();
+      const m=$('csvMsg'); m.className='msg ok'; m.textContent=`Imported ${people.length} people. Preview updated — hit Publish when ready.`;
+    }catch(err){
+      const m=$('csvMsg'); m.className='msg err'; m.textContent='Import failed: '+err.message;
+    }
+  };
+  reader.readAsText(file);
+}
+
+/* ---------- publish tab + GitHub API ---------- */
+const GH_KEY='d32hub_gh';
+function ghCfg(){ try{ return JSON.parse(localStorage.getItem(GH_KEY))||{}; }catch(e){ return {}; } }
+function renderPublishTab(){
+  if(PUBLISH_URL){
+    $('panelBody').innerHTML = `
+      <fieldset class="box"><legend>Publishing — nothing to set up</legend>
+        <p class="hint" style="margin:0">This hub publishes through the district's shared publish service. You signed in with the admin password, and it's remembered on this device — just make your changes and hit <b>🚀 Publish to site</b>.</p>
+        <p style="margin:11px 0 0"><button class="btn sm" onclick="signOutDevice()">Sign out on this device</button></p>
+      </fieldset>
+      <fieldset class="box"><legend>What will publish</legend>
+        <p class="hint" style="margin:0">${dirty?'Content changes':'No content changes yet'}${STAGED.length?` + ${STAGED.length} new file(s): ${STAGED.map(s=>'<code>'+esc(s.path)+'</code>').join(', ')}`:''}.</p>
+      </fieldset>
+      <fieldset class="box"><legend>Good to know</legend>
+        <p class="hint" style="margin:0">Changes stage in <b>this browser</b> until you publish — if two admins edit at the same time, the last publish wins, so don't update simultaneously. If the password ever changes (done in Cloudflare by the hub owner), everyone just signs in again with the new one.</p>
+      </fieldset>`;
+    return;
+  }
+  const c=ghCfg();
+  $('panelBody').innerHTML = `
+    <fieldset class="box"><legend>Where this site lives (one-time setup)</legend>
+      <div class="frm">
+        <div><label>GitHub username / org</label><input type="text" id="ghOwner" value="${esc(c.owner||'')}" placeholder="e.g. conreyguy"></div>
+        <div><label>Repository</label><input type="text" id="ghRepo" value="${esc(c.repo||'')}" placeholder="e.g. district-hub"></div>
+        <div><label>Branch</label><input type="text" id="ghBranch" value="${esc(c.branch||'main')}"></div>
+        <div><label>Fine-grained token (Contents: read/write)</label><input type="password" id="ghToken" value="${esc(c.token||'')}" placeholder="github_pat_..."></div>
+      </div>
+      <p style="margin:11px 0 0"><button class="btn sm primary" onclick="saveGh()">Save settings (this browser only)</button></p>
+      <p class="hint">The token is stored only in <b>your</b> browser — it never appears in the published site. See SETUP.md for how to create it in about 3 minutes.</p>
+      <div class="msg" id="ghMsg"></div>
+    </fieldset>
+    <fieldset class="box"><legend>What will publish</legend>
+      <p class="hint" style="margin:0">${dirty?'Content changes to <code>content.json</code>':'No content changes yet'}${STAGED.length?` + ${STAGED.length} new file(s): ${STAGED.map(s=>'<code>'+esc(s.path)+'</code>').join(', ')}`:''}.</p>
+    </fieldset>
+    <fieldset class="box"><legend>No-GitHub fallback</legend>
+      <p class="hint" style="margin:0">If you ever need to update the site by hand: click <b>Export content.json</b> (bottom bar), then upload that file — plus anything you dropped in — to the repo on github.com (Add file → Upload files). Same result, just manual.</p>
+    </fieldset>`;
+}
+function saveGh(){
+  localStorage.setItem(GH_KEY, JSON.stringify({owner:$('ghOwner').value.trim(), repo:$('ghRepo').value.trim(), branch:$('ghBranch').value.trim()||'main', token:$('ghToken').value.trim()}));
+  const m=$('ghMsg'); m.className='msg ok'; m.textContent='Saved.';
+}
+async function ghPut(cfg, path, base64, message){
+  const url=`https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
+  const headers={Authorization:'Bearer '+cfg.token, Accept:'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28'};
+  let sha;
+  const get=await fetch(url+'?ref='+cfg.branch,{headers});
+  if(get.ok){ sha=(await get.json()).sha; }
+  const res=await fetch(url,{method:'PUT',headers,body:JSON.stringify({message,branch:cfg.branch,content:base64,...(sha?{sha}:{})})});
+  if(!res.ok){ const e=await res.json().catch(()=>({})); throw new Error(path+': '+(e.message||res.status)); }
+}
+async function publishAll(){
+  if(!dirty && !STAGED.length){ $('pubStat').textContent='Nothing to publish.'; return; }
+  if(PUBLISH_URL) return publishViaHelper();
+  const cfg=ghCfg();
+  if(!cfg.owner||!cfg.repo||!cfg.token){ showTab('publish'); const m=$('ghMsg'); m.className='msg err'; m.textContent='Fill in the GitHub settings above first.'; return; }
+  const stat=$('pubStat');
+  try{
+    let n=0, total=STAGED.length+1;
+    for(const s of STAGED){ n++; stat.textContent=`Publishing ${n}/${total}: ${s.name}…`; await ghPut(cfg, s.path, s.base64, 'Hub: add '+s.name); }
+    stat.textContent=`Publishing ${total}/${total}: content.json…`;
+    EDIT.updated=new Date().toISOString().slice(0,10);
+    const json=JSON.stringify(EDIT,null,2);
+    await ghPut(cfg, 'content.json', btoa(unescape(encodeURIComponent(json))), 'Hub: update content');
+    CONTENT=clone(EDIT);
+    STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
+    dirty=false; $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
+    renderAll();
+    stat.textContent='✅ Published! Live for everyone within a minute or two.';
+  }catch(err){
+    stat.textContent='❌ '+err.message;
+  }
+}
+async function publishViaHelper(){
+  const stat=$('pubStat');
+  if(!ADMIN_PW){ stat.textContent='Sign in again (click Admin) before publishing.'; return; }
+  try{
+    stat.textContent='Publishing… (larger PDFs can take a moment)';
+    EDIT.updated=new Date().toISOString().slice(0,10);
+    const files=[
+      ...STAGED.map(s=>({path:s.path, base64:s.base64})),
+      {path:'content.json', base64: btoa(unescape(encodeURIComponent(JSON.stringify(EDIT,null,2))))}
+    ];
+    const r=await fetch(PUBLISH_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'publish', password:ADMIN_PW, message:'Hub update via admin panel', files})});
+    const res=await r.json().catch(()=>({}));
+    if(r.status===401){ localStorage.removeItem(PW_KEY); ADMIN_PW=null; throw new Error('Password no longer valid — click Admin to sign in again.'); }
+    if(!r.ok || !res.ok) throw new Error(res.error || ('HTTP '+r.status));
+    CONTENT=clone(EDIT);
+    STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
+    dirty=false; $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
+    renderAll();
+    stat.textContent='✅ Published! Live for everyone within a minute or two.';
+  }catch(err){
+    stat.textContent='❌ '+err.message;
+  }
+}
+function exportBundle(){
+  EDIT.updated=new Date().toISOString().slice(0,10);
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(EDIT,null,2)],{type:'application/json'}));
+  a.download='content.json'; a.click();
+  if(STAGED.length) alert('Also upload these staged files to the repo '+STAGED.map(s=>s.path).join(', '));
+}
+
+boot();
+</script>
+</body>
+</html>
