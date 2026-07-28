@@ -2,8 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>District Hub — Farmers Districts 32 &amp; 49</title>
+<meta name="description" content="News, events, competitions, newsletters, reports and the production scoreboard for Farmers Insurance Districts 32 and 49.">
+<meta name="theme-color" content="#0a2d6e">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:title" content="District Hub — Farmers Districts 32 &amp; 49">
+<meta property="og:description" content="News, events, competitions, newsletters, reports and the production scoreboard.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a2d6e'/%3E%3Crect x='14' y='32' width='8' height='18' rx='2' fill='%23ffffff'/%3E%3Crect x='28' y='22' width='8' height='28' rx='2' fill='%23ffffff'/%3E%3Crect x='42' y='14' width='8' height='36' rx='2' fill='%23d92231'/%3E%3C/svg%3E">
 <style>
   :root{
     --navy:#0a2d6e; --navy2:#0d3b8a; --navy-deep:#08245a;
@@ -230,7 +237,9 @@
   .drop{border:2px dashed #c4d0e4;border-radius:13px;padding:22px;text-align:center;color:var(--muted);font-size:13px;background:#fafbfe;cursor:pointer;transition:border-color .15s,background .15s;}
   .drop.hover{border-color:var(--blue);background:var(--blue-pale);}
   .drop b{color:var(--navy);}
-  .stagechip{display:inline-flex;align-items:center;gap:7px;background:#e7f6ec;color:var(--ok);border-radius:999px;font-size:12px;font-weight:700;padding:5px 11px;margin:6px 6px 0 0;}
+  .stagechip{display:inline-flex;align-items:center;gap:7px;background:#e7f6ec;color:var(--ok);border-radius:999px;font-size:12px;font-weight:700;padding:5px 6px 5px 11px;margin:6px 6px 0 0;}
+  .chipx{border:0;background:rgba(22,163,74,.14);color:var(--ok);border-radius:50%;width:18px;height:18px;line-height:1;font-size:10px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;font-family:inherit;}
+  .chipx:hover{background:var(--red-pale);color:var(--red);}
   .hint{font-size:11.5px;color:var(--muted);line-height:1.5;margin:7px 0 0;}
   .hint code{background:#f1f3f8;border-radius:5px;padding:1px 5px;font-size:11px;}
   table.gridedit{width:100%;border-collapse:collapse;font-size:12.5px;}
@@ -242,9 +251,140 @@
   .msg{border-radius:10px;padding:9px 13px;font-size:12.5px;font-weight:600;margin-top:9px;display:none;}
   .msg.ok{display:block;background:#e7f6ec;color:var(--ok);}
   .msg.err{display:block;background:var(--red-pale);color:var(--red);}
+
+  /* ==================================================================
+     SCOREBOARD FILTER BAR
+     Pulled out of the card header so five controls never fight the
+     title for horizontal space. Labelled groups instead of a wall
+     of anonymous buttons.
+     ================================================================== */
+  .filterbar{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;padding:12px 20px;background:#fafbfe;border-bottom:1px solid var(--line);}
+  .fgroup{display:flex;flex-direction:column;gap:5px;}
+  .flabel{font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:800;padding-left:2px;line-height:1;}
+  #staffOnlyWrap .switch{height:33px;padding:0 2px;}
+
+  /* ---------- search inputs ---------- */
+  .searchbox{border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-size:12.5px;font-family:inherit;color:var(--ink);background:#fff;width:180px;max-width:100%;}
+  .searchbox:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.12);}
+
+  /* ---------- reports archive ---------- */
+  .yearhd{display:flex;align-items:center;gap:9px;width:100%;background:transparent;border:0;border-top:1px solid var(--line);margin-top:10px;padding:12px 0 4px;cursor:pointer;font-family:inherit;color:var(--navy);font-weight:800;font-size:11.5px;letter-spacing:.8px;text-transform:uppercase;text-align:left;}
+  .yearhd:hover{color:var(--blue);}
+  .yearhd .chev{font-size:9px;color:var(--muted);transition:transform .15s;display:inline-block;}
+  .yearhd[aria-expanded="true"] .chev{transform:rotate(90deg);}
+  .yearhd .count{margin-left:auto;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:0;text-transform:none;}
+  .yearhd.static{cursor:default;border-top:0;margin-top:0;padding-top:0;}
+  .yearhd.static:hover{color:var(--navy);}
+  .yearbody[hidden]{display:none;}
+  .yearbody .cat:first-child{margin-top:10px;}
+  /* the View action on interactive reports is a real button, not a fake link */
+  button.filelink{cursor:pointer;font-family:inherit;}
+
+  /* ---------- load failure notice ---------- */
+  .loadfail{margin-top:14px;background:var(--red-pale);border:1px solid #f3c2c7;border-radius:14px;padding:14px 18px;color:#8b1620;font-size:13.5px;line-height:1.5;display:none;}
+  .loadfail.on{display:block;}
+  .loadfail b{display:block;font-size:14px;margin-bottom:3px;color:#7a1119;}
+
+  /* ---------- accessibility / focus ---------- */
+  :focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:6px;}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;padding:10px 16px;border-radius:0 0 10px 0;z-index:200;font-weight:700;font-size:13px;text-decoration:none;}
+  .skip:focus{left:0;}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;} html{scroll-behavior:auto;}}
+
+  /* ==================================================================
+     RESPONSIVE
+     Field agents open this on phones between appointments. Every
+     breakpoint below was checked against a rendered screenshot.
+     ================================================================== */
+
+  /* --- laptops: drop the decorative date, tighten the top bar --- */
+  @media(max-width:1180px){
+    .datebox{display:none;}
+    .topbar-right .divider{display:none;}
+  }
+
+  /* --- tablets: bar column is the least informative, shed it first --- */
+  @media(max-width:860px){
+    table.board .c-bar,table.board .barcell{display:none;}
+    .wrap{padding:16px;}
+    .maingrid,.docsgrid{gap:14px;}
+  }
+
+  /* --- phones / small tablets --- */
+  @media(max-width:760px){
+    /* a sticky header this tall would eat a third of the screen */
+    .topbar{position:static;padding:12px 14px;gap:10px;border-radius:14px;}
+    .dlogo{height:28px;}
+    .title h1{font-size:17px;}
+    .title p{font-size:9.5px;letter-spacing:1px;}
+    .topbar-right{margin-left:0;width:100%;justify-content:space-between;gap:8px;}
+    /* nav chips get their own swipeable row rather than wrapping to three lines */
+    .navchips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;order:2;width:100%;padding-bottom:2px;}
+    .navchips::-webkit-scrollbar{display:none;}
+    .navchips a{flex:none;}
+    #btnAdmin{order:1;margin-left:auto;}
+
+    .wrap{padding:12px;}
+    .card{border-radius:14px;}
+    .card-hd{padding:13px 15px;}
+    .card-bd{padding:14px 15px;}
+    .card-hd h2{font-size:14px;}
+
+    /* filters stay visible (not hidden behind a disclosure) but compact */
+    .filterbar{gap:12px 14px;padding:11px 15px;}
+    .seg button{padding:6px 10px;font-size:12px;}
+    .flabel{font-size:9px;}
+
+    .banner{padding:12px 15px;border-radius:12px;flex-wrap:wrap;}
+    .banner p{font-size:13px;}
+    .banner a{margin-left:0;}
+
+    .stat{padding:10px 12px;min-width:0;}
+    .stat .scope{display:none;}
+    .boardwrap{max-height:none;}
+    table.board{font-size:13px;}
+    table.board th,table.board td{padding:8px 7px;}
+    .avatar{width:26px;height:26px;font-size:10.5px;margin-right:7px;}
+
+    .comps{grid-template-columns:1fr;}
+    .latestnl{flex-wrap:wrap;padding:14px;gap:13px;}
+    .latestnl .open{margin-left:0;width:100%;text-align:center;}
+    .nlthumb{width:52px;height:66px;}
+    .frow .fi{min-width:0;}
+    .frow .fi b{overflow-wrap:anywhere;}
+
+    .searchbox{width:150px;}
+
+    /* table viewer takes the whole screen on a phone */
+    .tvOverlay{padding:0;}
+    .tv{border-radius:0;max-height:100vh;height:100%;}
+    .tv-hd{padding:11px 14px;}
+    .tv-hd .right{width:100%;margin-left:0;}
+    .tv-hd input{flex:1;width:auto;}
+
+    /* admin editor */
+    .frm{grid-template-columns:1fr;}
+    .panel-hd,.panel-bd,.panel-ft{padding-left:15px;padding-right:15px;}
+    .ptabs{padding-left:10px;padding-right:10px;}
+    .adminbar{padding:10px 13px;font-size:12.5px;}
+  }
+
+  /* --- narrow phones --- */
+  @media(max-width:430px){
+    .podium{gap:9px;}
+    .pod{padding:11px 12px;}
+    .pod .val b{font-size:19px;}
+    .card-hd .right{width:100%;}
+    .searchbox{width:100%;}
+    table.board .c-dist,table.board td:nth-child(3){display:none;}
+    .filterbar{gap:10px 12px;}
+    .seg button{padding:6px 9px;font-size:11.5px;}
+    a.filelink{padding:5px 10px;font-size:12px;}
+  }
 </style>
 </head>
 <body>
+<a class="skip" href="#scoreboard">Skip to scoreboard</a>
 <div class="wrap">
 
   <!-- ============ TOP BAR ============ -->
@@ -287,6 +427,12 @@
     <a id="bannerLink" href="#">See more →</a>
   </div>
 
+  <!-- shown only when content.json can't be loaded — never silently fake data -->
+  <div class="loadfail" id="loadFail" role="alert">
+    <b>This page couldn't load the district's live content.</b>
+    <span id="loadFailMsg"></span> Everything below may be blank or out of date. Refresh in a moment, and let the district office know if it keeps happening.
+  </div>
+
   <!-- ============ MAIN GRID ============ -->
   <div class="maingrid">
     <div class="leftcol">
@@ -296,25 +442,40 @@
         <span class="accent"></span>
         <h2>Quotes &amp; New Business Scoreboard</h2>
         <span class="sub asof" id="lbAsOf"></span>
-        <div class="right">
+      </div>
+      <div class="filterbar">
+        <div class="fgroup">
+          <span class="flabel">View</span>
           <div class="seg" id="segView">
             <button data-v="producer" class="on">Producers</button>
             <button data-v="agency">Agencies</button>
           </div>
+        </div>
+        <div class="fgroup">
+          <span class="flabel">District</span>
           <div class="seg" id="segDist">
             <button data-d="all" class="on">Combined</button>
             <button data-d="32">D32</button>
             <button data-d="49">D49</button>
           </div>
+        </div>
+        <div class="fgroup">
+          <span class="flabel">Period</span>
           <div class="seg" id="segPeriod">
             <button data-p="m" class="on">MTD</button>
             <button data-p="y">YTD</button>
           </div>
+        </div>
+        <div class="fgroup">
+          <span class="flabel">Rank by</span>
           <div class="seg red" id="segMetric">
             <button data-m="q" class="on">Quotes</button>
             <button data-m="n">New Biz</button>
           </div>
-          <label class="switch" id="staffOnlyWrap"><input type="checkbox" id="staffOnly" checked onchange="LB.staffOnly=this.checked;renderBoard()">Staff only</label>
+        </div>
+        <div class="fgroup" id="staffOnlyWrap">
+          <span class="flabel" aria-hidden="true">&nbsp;</span>
+          <label class="switch"><input type="checkbox" id="staffOnly" checked onchange="LB.staffOnly=this.checked;renderBoard()">Staff only</label>
         </div>
       </div>
       <div class="card-bd">
@@ -322,7 +483,7 @@
         <div class="podium" id="podium"></div>
         <div class="boardwrap">
           <table class="board">
-            <thead><tr><th></th><th>Name</th><th>District</th><th style="text-align:right">Quotes</th><th style="text-align:right">New Biz</th><th></th></tr></thead>
+            <thead><tr><th class="c-rank"></th><th>Name</th><th class="c-dist">District</th><th style="text-align:right">Quotes</th><th style="text-align:right">New Biz</th><th class="c-bar"></th></tr></thead>
             <tbody id="boardBody"></tbody>
           </table>
         </div>
@@ -357,7 +518,12 @@
       <div class="card-bd" id="nlArea"></div>
     </div>
     <div class="card" id="reports">
-      <div class="card-hd"><span class="accent gold"></span><h2>Reports Library</h2></div>
+      <div class="card-hd">
+        <span class="accent gold"></span><h2>Reports Library</h2>
+        <div class="right">
+          <input type="search" class="searchbox" id="repSearch" placeholder="Filter reports…" aria-label="Filter reports">
+        </div>
+      </div>
       <div class="card-bd filelist" id="reportList"></div>
     </div>
   </div>
@@ -419,287 +585,13 @@
    built-in editor and publish via the GitHub API — no server needed.
    ===================================================================== */
 
-const DEFAULT_CONTENT = {
-  "updated": "2026-07-09",
-  "banner": {
-    "active": true,
-    "text": "Q3 Quoting Blitz is LIVE \u2014 standings update every Friday. The June newsletter (May commission) is out now.",
-    "link": "#newsletter"
-  },
-  "news": [
-    {
-      "id": "n1",
-      "date": "2026-07-08",
-      "tag": "news",
-      "title": "June Newsletter is out \u2014 May commission inside",
-      "body": "The June district newsletter is posted below, including the May commission recap and district recognition.",
-      "pinned": true,
-      "link": "#newsletter"
-    },
-    {
-      "id": "n2",
-      "date": "2026-07-06",
-      "tag": "update",
-      "title": "New Retail Program effective July 2026",
-      "body": "The updated Retail Program is live: 36-month bonus structure with monthly bonuses up to 340%. Talk to the district office if you have Prot\u00e9g\u00e9 or new-agent candidates.",
-      "pinned": false
-    },
-    {
-      "id": "n3",
-      "date": "2026-07-02",
-      "tag": "update",
-      "title": "June District Matrix posted",
-      "body": "June production and May Prime results are in the Reports Library. Check your agency's row and bring questions to your next coaching call.",
-      "pinned": false,
-      "link": "#reports"
-    }
-  ],
-  "events": [
-    {
-      "id": "e1",
-      "date": "2026-07-14",
-      "time": "9:00 AM CT",
-      "title": "District Sales Call (sample \u2014 replace in Admin)",
-      "location": "Teams",
-      "link": "",
-      "description": "Monthly all-district call: Q3 blitz standings, product updates, recognition."
-    },
-    {
-      "id": "e2",
-      "date": "2026-07-23",
-      "time": "1:00 PM CT",
-      "title": "Life Boot Camp Workshop (sample \u2014 replace in Admin)",
-      "location": "Waco District Office",
-      "link": "",
-      "description": "Hands-on session: 5 Steps to the Sale applied to Life. Bring your X-date list."
-    },
-    {
-      "id": "e3",
-      "date": "2026-09-30",
-      "time": "",
-      "title": "Q3 ends \u2014 Quoting Blitz final standings",
-      "location": "",
-      "link": "",
-      "description": "Last day of the quarter. Final blitz standings and Topper Club pace check."
-    }
-  ],
-  "competitions": [
-    {
-      "id": "c1",
-      "active": true,
-      "title": "Q3 Quoting Blitz",
-      "period": "Jul 1 \u2013 Sep 30, 2026",
-      "ends": "2026-09-30",
-      "prize": "Monthly prizes + quarterly grand prize",
-      "metricLabel": "Quotes (MTD)",
-      "description": "Quarterly competition with monthly prizes. Standings reset each month; quotes pulled from the district tracker.",
-      "standings": [
-        {
-          "name": "Demo Producer A",
-          "value": 148
-        },
-        {
-          "name": "Demo Producer B",
-          "value": 131
-        },
-        {
-          "name": "Demo Producer C",
-          "value": 117
-        }
-      ]
-    },
-    {
-      "id": "c2",
-      "active": true,
-      "title": "Life Issued & Paid Challenge",
-      "period": "2026 YTD",
-      "ends": "2026-12-31",
-      "prize": "Recognition at year-end awards",
-      "metricLabel": "Life I&P (YTD)",
-      "description": "Year-long life challenge. YTD Issued & Paid results are posted in the Reports Library.",
-      "standings": [
-        {
-          "name": "Demo Agency 1",
-          "value": 14
-        },
-        {
-          "name": "Demo Agency 2",
-          "value": 11
-        },
-        {
-          "name": "Demo Agency 3",
-          "value": 9
-        }
-      ]
-    }
-  ],
-  "newsletters": [
-    {
-      "id": "nl1",
-      "title": "June Newsletter \u2014 May Commission",
-      "date": "2026-06-30",
-      "file": "files/2026-06-newsletter.pdf"
-    }
-  ],
-  "reports": [
-    {
-      "id": "r5",
-      "title": "District Matrix \u2014 interactive demo (drop your Excel to replace)",
-      "date": "2026-07-09",
-      "category": "Production",
-      "type": "table",
-      "file": "files/demo-matrix.json",
-      "note": "Demo data"
-    },
-    {
-      "id": "r1",
-      "title": "District Matrix \u2014 June Production / May Prime",
-      "date": "2026-07-02",
-      "category": "Production",
-      "file": "files/district-matrix-june-2026.pdf",
-      "note": ""
-    },
-    {
-      "id": "r2",
-      "title": "2026 Producer Report",
-      "date": "2026-07-02",
-      "category": "Production",
-      "file": "files/producer-report-2026-07-02.pdf",
-      "note": "As of 7/2/26"
-    },
-    {
-      "id": "r3",
-      "title": "2026 Quote & Sales Tracker",
-      "date": "2026-06-26",
-      "category": "Trackers",
-      "file": "files/quote-sales-tracker-2026-06-26.pdf",
-      "note": "As of 6/26/26"
-    },
-    {
-      "id": "r4",
-      "title": "YTD Life Results",
-      "date": "2026-07-05",
-      "category": "Life",
-      "file": "files/ytd-life-results-2026-07-05.pdf",
-      "note": "As of 7/5/26"
-    }
-  ],
-  "leaderboard": {
-    "asOf": "2026-07-02",
-    "note": "Demo data \u2014 import your CSV in Admin \u2192 Scoreboard.",
-    "people": [
-      {
-        "name": "Maria Delgado",
-        "agency": "Delgado Agency",
-        "role": "Producer",
-        "district": "32",
-        "owner": false,
-        "qm": 62,
-        "nm": 14,
-        "qy": 396,
-        "ny": 88
-      },
-      {
-        "name": "Sam Whitfield",
-        "agency": "Whitfield Insurance",
-        "role": "Agency",
-        "district": "32",
-        "owner": true,
-        "qm": 55,
-        "nm": 12,
-        "qy": 341,
-        "ny": 76
-      },
-      {
-        "name": "Katie Nguyen",
-        "agency": "Whitfield Insurance",
-        "role": "Producer",
-        "district": "32",
-        "owner": false,
-        "qm": 49,
-        "nm": 11,
-        "qy": 302,
-        "ny": 64
-      },
-      {
-        "name": "Robert Ellis",
-        "agency": "Ellis Family Agency",
-        "role": "Agency",
-        "district": "32",
-        "owner": true,
-        "qm": 44,
-        "nm": 9,
-        "qy": 289,
-        "ny": 59
-      },
-      {
-        "name": "Dana Marsh",
-        "agency": "Ellis Family Agency",
-        "role": "Producer",
-        "district": "32",
-        "owner": false,
-        "qm": 41,
-        "nm": 10,
-        "qy": 265,
-        "ny": 57
-      },
-      {
-        "name": "Luis Camacho",
-        "agency": "Camacho Agency",
-        "role": "Producer",
-        "district": "49",
-        "owner": false,
-        "qm": 58,
-        "nm": 13,
-        "qy": 371,
-        "ny": 81
-      },
-      {
-        "name": "Priya Shah",
-        "agency": "Shah Insurance Group",
-        "role": "Agency",
-        "district": "49",
-        "owner": true,
-        "qm": 47,
-        "nm": 10,
-        "qy": 305,
-        "ny": 66
-      },
-      {
-        "name": "Tom Baker",
-        "agency": "Shah Insurance Group",
-        "role": "Producer",
-        "district": "49",
-        "owner": false,
-        "qm": 39,
-        "nm": 8,
-        "qy": 244,
-        "ny": 51
-      },
-      {
-        "name": "Alicia Fontenot",
-        "agency": "Fontenot Agency",
-        "role": "Producer",
-        "district": "49",
-        "owner": false,
-        "qm": 35,
-        "nm": 9,
-        "qy": 228,
-        "ny": 49
-      },
-      {
-        "name": "Greg Palmer",
-        "agency": "Palmer & Assoc.",
-        "role": "Agency",
-        "district": "49",
-        "owner": true,
-        "qm": 30,
-        "nm": 6,
-        "qy": 197,
-        "ny": 40
-      }
-    ]
-  }
+/* Empty skeleton only. The live page ALWAYS renders content.json; if that
+   fetch fails we show an explicit error rather than quietly falling back to
+   stale or demo data, which would show real agents fabricated numbers. */
+const EMPTY_CONTENT = {
+  updated: "", banner: {active:false, text:"", link:""},
+  news: [], events: [], competitions: [], newsletters: [], reports: [],
+  leaderboard: {asOf:"", note:"", people:[]}
 };
 
 /* =====================================================================
@@ -711,11 +603,11 @@ const DEFAULT_CONTENT = {
    computer — no other setup, and the password is checked server-side.
 
    If PUBLISH_URL is left empty, the hub falls back to per-admin GitHub
-   token setup (Admin → Publish tab) and ADMIN_PASSCODE below guards the
-   editor UI (cosmetically — fallback mode's real key is the token).
+   token setup (Admin → Publish tab). In that mode the editor opens with no
+   password at all — the GitHub token each admin enters is the real key, so
+   there is deliberately no passcode sitting in this public source file.
    ===================================================================== */
 const PUBLISH_URL = "https://district-hub-publish.conrey-bparks3.workers.dev/";
-const ADMIN_PASSCODE = "d32admin";   // used in fallback mode only
 const PW_KEY = "d32hub_pw";
 let ADMIN_PW = null;
 
@@ -730,15 +622,40 @@ const esc = s => String(s??"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;'
 const clone = o => JSON.parse(JSON.stringify(o));
 const fmtDate = d => { if(!d) return ""; const dt=new Date(d+"T12:00:00"); return isNaN(dt)?d:dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
 const uid = () => 'id'+Math.random().toString(36).slice(2,9);
+/* Only ever emit link schemes a browser should follow from this page.
+   Blocks javascript: and data: URLs sneaking in through an edited
+   content.json. Returns '' for anything unrecognised, and callers treat
+   an empty string as "no link". */
+function safeUrl(u){
+  const s = String(u??'').trim();
+  if(!s) return '';
+  if(/^(#|\/|\.\/|\.\.\/)/.test(s)) return s;            // on-page + relative
+  if(/^(https?:|mailto:|tel:)/i.test(s)) return s;       // explicit safe schemes
+  if(/^[a-z][a-z0-9+.-]*:/i.test(s)) return '';          // any other scheme — drop it
+  return s;                                              // bare path like files/x.pdf
+}
 
 /* ---------- boot ---------- */
 async function boot(){
   $('todaybox').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  let failure = '';
   try{
     const res = await fetch('content.json?v='+Date.now(), {cache:'no-store'});
-    if(res.ok){ CONTENT = await res.json(); }
-  }catch(e){ /* opened as a local file or offline — use embedded copy */ }
-  if(!CONTENT) CONTENT = clone(DEFAULT_CONTENT);
+    if(!res.ok) failure = 'The content file returned an error (HTTP '+res.status+').';
+    else{
+      try{ CONTENT = await res.json(); }
+      catch(e){ failure = 'The content file is present but unreadable.'; }
+    }
+  }catch(e){
+    failure = 'The content file could not be reached — you may be offline, or this page was opened directly from a folder instead of the web address.';
+  }
+  if(!CONTENT){
+    /* Never fall back to sample data: showing real agents invented names and
+       numbers is worse than showing nothing. Say what went wrong instead. */
+    CONTENT = clone(EMPTY_CONTENT);
+    $('loadFailMsg').textContent = failure;
+    $('loadFail').classList.add('on');
+  }
   renderAll();
 }
 
@@ -756,8 +673,8 @@ function renderBanner(){
   const b = data().banner || {};
   $('banner').style.display = (b.active && b.text) ? 'flex' : 'none';
   $('bannerText').textContent = b.text || "";
-  const a = $('bannerLink');
-  if(b.link){ a.style.display='inline'; a.href=b.link; } else { a.style.display='none'; }
+  const a = $('bannerLink'), href = safeUrl(b.link);
+  if(href){ a.style.display='inline'; a.href=href; } else { a.style.display='none'; }
 }
 
 /* ---------- scoreboard ---------- */
@@ -840,17 +757,23 @@ function initials(name){ return String(name).split(/\s+/).filter(w=>/[A-Za-z]/.t
 
 /* ---------- news ---------- */
 function renderNews(){
-  const items = (data().news||[]).slice().sort((a,b)=> (b.pinned-a.pinned) || (b.date>a.date?1:-1));
+  /* Coerce pinned to 0/1 first: subtracting an undefined pinned flag yields
+     NaN, which silently drops the item back into plain date order. */
+  const rank = v => v ? 1 : 0;
+  const items = (data().news||[]).slice()
+    .sort((a,b)=> (rank(b.pinned)-rank(a.pinned)) || String(b.date||'').localeCompare(String(a.date||'')));
   $('newsList').innerHTML = items.map(n=>{
-    const ext = n.link && !String(n.link).startsWith('#');
-    const title = n.link
-      ? `<a href="${esc(n.link)}" ${ext?'target="_blank" rel="noopener"':''} style="color:var(--navy);text-decoration:none">${esc(n.title)}</a>`
+    const href = safeUrl(n.link);
+    const ext = href && !href.startsWith('#');
+    const title = href
+      ? `<a href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''} style="color:var(--navy);text-decoration:none">${esc(n.title)}</a>`
       : esc(n.title);
+    const tag = /^(news|promo|recognition|update)$/.test(n.tag||'') ? n.tag : 'news';
     return `<div class="newsitem">
-      <div class="meta"><span class="tag ${esc(n.tag||'news')}">${esc(n.tag||'news')}</span><time>${fmtDate(n.date)}</time>${n.pinned?'<span class="pin">📌</span>':''}</div>
+      <div class="meta"><span class="tag ${tag}">${tag}</span><time>${fmtDate(n.date)}</time>${n.pinned?'<span class="pin" title="Pinned">📌</span>':''}</div>
       <h3>${title}</h3>
       <p>${esc(n.body||'')}</p>
-      ${n.link?`<p style="margin-top:5px"><a href="${esc(n.link)}" ${ext?'target="_blank" rel="noopener"':''} style="color:var(--blue);font-weight:700;font-size:12px;text-decoration:none">Read more →</a></p>`:''}
+      ${href?`<p style="margin-top:5px"><a href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''} style="color:var(--blue);font-weight:700;font-size:12px;text-decoration:none">Read more →</a></p>`:''}
     </div>`;
   }).join('') || '<div class="empty">Nothing posted yet.</div>';
 }
@@ -859,7 +782,7 @@ function renderNews(){
 function renderEvents(){
   const today = new Date(); today.setHours(0,0,0,0);
   const items = (data().events||[]).filter(e=>{ const d=new Date(e.date+"T23:59:59"); return !isNaN(d) && d>=today; })
-    .sort((a,b)=> a.date>b.date?1:-1).slice(0,6);
+    .sort((a,b)=> String(a.date||'').localeCompare(String(b.date||''))).slice(0,6);
   $('eventList').innerHTML = items.map(e=>{
     const d = new Date(e.date+"T12:00:00");
     const mo = isNaN(d)?'':d.toLocaleDateString('en-US',{month:'short'});
@@ -870,7 +793,7 @@ function renderEvents(){
         <b>${esc(e.title)}</b>
         <span class="where">${esc([e.time,e.location].filter(Boolean).join(' · '))}</span>
         ${e.description?`<p>${esc(e.description)}</p>`:''}
-        ${e.link?`<p><a class="filelink" style="padding:3px 9px" href="${esc(e.link)}" target="_blank">Join / details</a></p>`:''}
+        ${safeUrl(e.link)?`<p><a class="filelink" style="padding:3px 9px;display:inline-block;margin-top:5px" href="${esc(safeUrl(e.link))}" target="_blank" rel="noopener">Join / details</a></p>`:''}
       </div>
     </div>`;
   }).join('') || '<div class="empty">No upcoming events.</div>';
@@ -902,7 +825,7 @@ function fileHref(f){
   return st ? st.blobUrl : f;
 }
 function renderNewsletter(){
-  const list = (data().newsletters||[]).slice().sort((a,b)=> b.date>a.date?1:-1);
+  const list = (data().newsletters||[]).slice().sort((a,b)=> String(b.date||'').localeCompare(String(a.date||'')));
   if(!list.length){ $('nlArea').innerHTML='<div class="empty">No newsletters yet.</div>'; return; }
   const latest = list[0], rest = list.slice(1);
   $('nlArea').innerHTML = `
@@ -920,23 +843,68 @@ function renderNewsletter(){
       </div>`).join('')}</div>`:''}`;
 }
 
-/* ---------- reports ---------- */
-function renderReports(){
-  const items = (data().reports||[]).slice().sort((a,b)=> b.date>a.date?1:-1);
-  if(!items.length){ $('reportList').innerHTML='<div class="empty">No reports posted.</div>'; return; }
+/* ---------- reports ----------
+   Grouped newest-year-first. The current year shows expanded with its
+   categories in a fixed order; earlier years collapse into an archive so
+   the library is still usable after three years of monthly reports. */
+const CAT_ORDER = ['Production','Life','Trackers','Programs','Other'];
+const CAT_STYLE = {Life:{cls:'red',fill:'#d92231'}, Trackers:{cls:'gold',fill:'#d4a017'}};
+let repFilter = '';
+const openYears = new Set();
+
+function reportRow(r){
+  const cat = r.category||'Other';
+  const st = CAT_STYLE[cat] || {cls:'',fill:'#2563eb'};
+  const action = r.type==='table'
+    ? `<button class="filelink open" type="button" data-view="${esc(r.id)}">📊 View</button>`
+    : `<a class="filelink open" href="${esc(safeUrl(fileHref(r.file||r.link||'')) || '#')}" target="_blank" rel="noopener">Open</a>`;
+  return `<div class="frow">
+    <div class="fico ${st.cls}"><svg width="17" height="17" viewBox="0 0 24 24" fill="${st.fill}" aria-hidden="true"><rect x="4" y="11" width="3" height="9"/><rect x="10" y="6" width="3" height="14"/><rect x="16" y="9" width="3" height="11"/></svg></div>
+    <div class="fi"><b>${esc(r.title)}</b><span>${fmtDate(r.date)}${r.note?' · '+esc(r.note):''}</span></div>
+    ${action}
+  </div>`;
+}
+function byCategory(list){
   const cats = {};
-  items.forEach(r=>{ const c=r.category||'Other'; (cats[c]=cats[c]||[]).push(r); });
-  const icoFor = c => c==='Life' ? 'red' : (c==='Trackers' ? 'gold' : '');
-  $('reportList').innerHTML = Object.keys(cats).map(c=>`
-    <div class="cat">${esc(c)}</div>
-    ${cats[c].map(r=>`
-      <div class="frow">
-        <div class="fico ${icoFor(c)}"><svg width="17" height="17" viewBox="0 0 24 24" fill="${c==='Life'?'#d92231':(c==='Trackers'?'#d4a017':'#2563eb')}"><rect x="4" y="11" width="3" height="9"/><rect x="10" y="6" width="3" height="14"/><rect x="16" y="9" width="3" height="11"/></svg></div>
-        <div class="fi"><b>${esc(r.title)}</b><span>${fmtDate(r.date)}${r.note?' · '+esc(r.note):''}</span></div>
-        ${r.type==='table'
-          ? `<a class="filelink open" href="javascript:void(0)" onclick="openViewer('${esc(r.id)}')">📊 View</a>`
-          : `<a class="filelink open" href="${esc(fileHref(r.file||r.link||'#'))}" target="_blank">Open</a>`}
-      </div>`).join('')}`).join('');
+  list.forEach(r=>{ const c=r.category||'Other'; (cats[c]=cats[c]||[]).push(r); });
+  return Object.keys(cats)
+    .sort((a,b)=>{
+      const ia=CAT_ORDER.indexOf(a), ib=CAT_ORDER.indexOf(b);
+      return (ia<0?99:ia)-(ib<0?99:ib) || a.localeCompare(b);
+    })
+    .map(c=>`<div class="cat">${esc(c)}</div>${cats[c].map(reportRow).join('')}`).join('');
+}
+function renderReports(){
+  const all = (data().reports||[]).slice()
+    .sort((a,b)=> String(b.date||'').localeCompare(String(a.date||'')));
+  const box = $('reportList');
+  if(!all.length){ box.innerHTML='<div class="empty">No reports posted yet.</div>'; return; }
+
+  const q = repFilter.toLowerCase();
+  const items = q
+    ? all.filter(r=> [r.title,r.category,r.note,r.date].filter(Boolean).join(' ').toLowerCase().includes(q))
+    : all;
+  if(!items.length){ box.innerHTML=`<div class="empty">No reports match “${esc(repFilter)}”.</div>`; return; }
+
+  /* while filtering, skip the year chrome entirely — the user is hunting
+     for one document, not browsing */
+  if(q){ box.innerHTML = byCategory(items); return; }
+
+  const years = {};
+  items.forEach(r=>{ const y=(String(r.date||'').slice(0,4))||'Undated'; (years[y]=years[y]||[]).push(r); });
+  const keys = Object.keys(years).sort((a,b)=> b.localeCompare(a));
+
+  /* one year of reports needs no year chrome at all */
+  if(keys.length===1){ box.innerHTML = byCategory(years[keys[0]]); return; }
+
+  box.innerHTML = keys.map((y,i)=>{
+    if(i===0) return `<div class="yearhd static">${esc(y)}<span class="count">${years[y].length} report${years[y].length===1?'':'s'}</span></div>${byCategory(years[y])}`;
+    const open = openYears.has(y);
+    return `<button class="yearhd" type="button" data-year="${esc(y)}" aria-expanded="${open}" aria-controls="yr-${esc(y)}">
+        <span class="chev">▶</span>${esc(y)} archive<span class="count">${years[y].length} report${years[y].length===1?'':'s'}</span>
+      </button>
+      <div class="yearbody" id="yr-${esc(y)}" ${open?'':'hidden'}>${byCategory(years[y])}</div>`;
+  }).join('');
 }
 
 /* =====================================================================
@@ -964,11 +932,11 @@ async function adminToggle(){
       return;
     }
     ADMIN_PW = pw; localStorage.setItem(PW_KEY, pw);
-  }else{
-    const p = prompt("Enter the admin passcode:");
-    if(p===null) return;
-    if(p!==ADMIN_PASSCODE){ alert("Incorrect passcode."); return; }
   }
+  /* Fallback mode (no PUBLISH_URL) opens the editor without a passcode on
+     purpose: any passcode checked in this file would be readable by anyone
+     viewing source, so it would protect nothing. Nothing can be published
+     until the admin supplies their own GitHub token in the Publish tab. */
   adminMode=true;
   if(!EDIT) EDIT = clone(CONTENT);
   $('adminbar').classList.add('on'); $('btnAdmin').textContent='🔓 Admin';
@@ -1061,7 +1029,7 @@ function renderCollectionTab(t){
   }
   if(ed.upload){
     html += `<div class="drop" id="dropzone">📄 <b>Drag &amp; drop</b> — ${esc(ed.upload.hint)}<input type="file" id="dropInput" accept="${ed.upload.accept}" style="display:none" multiple></div>
-      <div id="stagedChips">${STAGED.map(s=>`<span class="stagechip">✓ ${esc(s.name)} staged</span>`).join('')}</div>
+      <div id="stagedChips">${STAGED.map(s=>`<span class="stagechip">✓ ${esc(s.name)} staged<button type="button" class="chipx" title="Remove before publishing" aria-label="Remove ${esc(s.name)}" data-unstage="${esc(s.path)}">✕</button></span>`).join('')}</div>
       <div style="height:14px"></div>`;
   }
   html += `<fieldset class="box"><legend>${esc(ed.label)}s</legend><div id="itemList"></div>
@@ -1150,6 +1118,23 @@ function wireDropzone(t){
   ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('hover');}));
   dz.addEventListener('drop',e=>{ [...e.dataTransfer.files].forEach(f=>stageFile(t,f)); });
 }
+/* Drop a staged file before it is published, and remove whatever list entry
+   was auto-created for it. Previously the only way out of a mis-drop was
+   Discard changes, which threw away every other unpublished edit too. */
+function unstageFile(path){
+  const i = STAGED.findIndex(s=>s.path===path);
+  if(i<0) return;
+  URL.revokeObjectURL(STAGED[i].blobUrl);
+  STAGED.splice(i,1);
+  ['newsletters','reports'].forEach(list=>{
+    if(Array.isArray(EDIT[list])) EDIT[list] = EDIT[list].filter(it=>it.file!==path);
+  });
+  markDirty(); renderCollectionTab(currentTab);
+}
+$('panelBody').addEventListener('click', e=>{
+  const b = e.target.closest('[data-unstage]');
+  if(b) unstageFile(b.dataset.unstage);
+});
 function slugify(name){
   const dot=name.lastIndexOf('.');
   const base=(dot>0?name.slice(0,dot):name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60)||'file';
@@ -1261,6 +1246,25 @@ function renderViewer(){
 }
 function closeViewer(){ $('tvOverlay').classList.remove('on'); document.body.style.overflow=''; TV.data=null; }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape' && $('tvOverlay').classList.contains('on')) closeViewer(); });
+
+/* ---------- reports library wiring ----------
+   Delegated so report ids never get interpolated into inline handlers. */
+$('reportList').addEventListener('click', e=>{
+  const view = e.target.closest('[data-view]');
+  if(view){ openViewer(view.dataset.view); return; }
+  const yr = e.target.closest('[data-year]');
+  if(yr){
+    const y = yr.dataset.year;
+    if(openYears.has(y)) openYears.delete(y); else openYears.add(y);
+    renderReports();
+  }
+});
+let repDebounce;
+$('repSearch').addEventListener('input', e=>{
+  clearTimeout(repDebounce);
+  const v = e.target.value;
+  repDebounce = setTimeout(()=>{ repFilter = v.trim(); renderReports(); }, 120);
+});
 
 /* ---------- scoreboard tab ---------- */
 function renderBoardTab(){
