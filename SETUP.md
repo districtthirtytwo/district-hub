@@ -52,27 +52,38 @@ Done. The helper only accepts writes to `content.json` and `files/` — even som
 
 ---
 
-## Part D — Weekly use (this is all your coworker needs to know)
+## Part D — Using the hub week to week
 
-1. Open the hub → **🔒 Admin** → type the admin password (first time on a device only) → **Open Editor**.
-2. Do any of:
-   - **News & Banner** — post announcements, change the banner strip
-   - **Events** — add calls, workshops, deadlines (past events drop off automatically)
-   - **Competitions** — update standings (one line per person: `Name, number`), start/end contests
-   - **Newsletters** — drag the new PDF onto the drop zone; it becomes the featured issue
-   - **Reports** — drag files onto the drop zone. **Excel/CSV files (matrixes, producer reports, life results, quote trackers) become interactive on-brand tables** — viewers get sheet tabs, a search box, and sorted columns styled like the rest of the hub. PDFs and images post as openable files. After the drop, click Edit to set the title and category.
-   - **Resources** — drag in PDFs agents should be able to download any time (playbooks, program one-pagers, forms). Set the title and category after the drop.
-3. Everything previews live on the page as you work.
-4. **🚀 Publish to site** — live for everyone within a minute or two.
+This is everything an admin needs. Nothing here requires any technical knowledge.
 
-**The scoreboard is not in this list on purpose.** It feeds itself from the two district Quote & Sales Google Sheets and needs no publishing at all — change the sheet and the hub picks it up. The Admin → Scoreboard tab is read-only and just shows what's currently loaded plus a Refresh button.
+**Getting in.** Open the hub, click **🔒 Admin** at the top right, type the password. You only do this once per computer — it remembers you. Then click **Open Editor**.
 
-**Reading the scoreboard.** "Daily" means the **last complete business day**, not today — the export snapshots each morning, so its newest date has no production on it yet (data pulled Monday shows Friday). Agency owners' own production rows are detected automatically and hidden from the producer board while "Staff only" is on; the two totals at the top always include them. Click any row, or any of the top-three cards, for that person's day-by-day and week-by-week trend — and for an agency, the producer breakdown underneath.
+**The golden rule:** nothing you do is visible to anyone until you click **🚀 Publish to site**. Edit freely; the page in the background updates as you type so you can see exactly what everyone will get.
 
-**Adding an admin:** send them the hub URL and the password. Nothing to install, no accounts to create.
-**Removing an admin / changing the password:** Cloudflare → your worker → Settings → edit the `ADMIN_PASSWORD` secret. Old password stops working everywhere immediately; current admins just sign in again with the new one.
+**Posting a newsletter, report, or resource.** Go to the right tab, drag the file onto the dashed box (or click it to browse). The file is checked before it is accepted — if it is the wrong type or too big you get a plain-English message telling you what to do. Once it lands, the title box opens automatically so you can give it a proper name instead of the filename. Fill that in, then Publish.
 
----
+> There is deliberately no "+ Add" button on these three tabs. An entry without a file would be a dead link on the live site, so dropping the file *is* how you add one.
+
+**Posting news or an event.** News & Banner or Events tab → **+ Add** → fill in the fields → **Save** → **Publish**. If you click Add by mistake, click **Cancel** and nothing is left behind.
+
+**Updating a competition.** Competitions tab → Edit. Standings go one per line as `Name, score` — the score can be a number or a placing, so both `Maria Delgado, 62` and `Maria Delgado, 1st` work. Untick **Active** to take a competition off the page without deleting it. When a competition's end date passes it automatically switches to showing **Final standings** with an ENDED badge, so you do not have to remember to change anything.
+
+**The scoreboard.** You never touch it. It reads the two district Quote & Sales Google Sheets every time someone opens the page. Change the sheet, the hub follows. The Admin → Scoreboard tab is read-only and just tells you what is currently loaded.
+
+### If something goes wrong
+
+| What you see | What it means | What to do |
+|---|---|---|
+| "You have unpublished changes from…" when you sign in | You edited last time but never published. Your work was saved in this browser. | **OK** keeps it. **Cancel** throws it away. Files you had dropped in need re-adding. |
+| A red ⚠ **No file attached** on an entry | That entry will be a dead link on the live site. | Delete it and add it again by dropping the file. |
+| "Couldn't load the numbers" on the scoreboard | The hub cannot reach one or both Google Sheets. | Check the sheets are still **published to the web as CSV**. The board shows nothing rather than showing numbers that might be wrong. |
+| "District 49 numbers could not be loaded" | One sheet worked, the other didn't. | Combined totals are switched off automatically so you never see a half-complete total. Fix the sheet link. |
+| A warning that one district's sheet is behind | The two sheets were last updated on different days. | Use the D32 / D49 buttons rather than Combined until both refresh. |
+| ❌ and a message after Publish | The publish did not finish. | The message says whether any files got through. Press Publish again — it is safe to retry. |
+| Your browser warns you about leaving the page | You have unpublished work. | Stay and Publish, or leave and pick it up next time. |
+
+**Adding an admin:** send them the hub address and the password. Nothing to install.
+**Changing the password:** Cloudflare → your worker → Settings → edit `ADMIN_PASSWORD`. Everyone signs in again with the new one.
 
 ## Part E — Rolling it out
 

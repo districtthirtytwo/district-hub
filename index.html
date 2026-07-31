@@ -24,7 +24,8 @@
     --ok:#16a34a;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;scroll-padding-top:96px;}
+  @media(max-width:760px){html{scroll-padding-top:12px;}}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
   .wrap{max-width:1480px;margin:0 auto;padding:20px;}
 
@@ -174,6 +175,10 @@
   .comp .days b{display:block;font-size:16px;}
   .comp .days span{font-size:9px;letter-spacing:.8px;text-transform:uppercase;opacity:.85;}
   .comp .bd{padding:13px 16px;font-size:12.5px;color:var(--muted);line-height:1.5;}
+  .comp .ctext{white-space:pre-line;}
+  .comp.isended .hd{background:linear-gradient(90deg,#4b5563,#6b7280);}
+  .comp .days.ended b{font-size:15px;}
+  .newsitem p,.eventrow .info p{white-space:pre-line;}
   .comp .prize{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:#92600a;background:var(--gold-pale);border-radius:9px;padding:7px 11px;margin-top:9px;}
   .standings{margin:6px 16px 14px;border-top:1px dashed var(--line);padding-top:9px;}
   .standings .srow{display:flex;align-items:center;gap:9px;padding:5px 0;font-size:13px;}
@@ -241,6 +246,9 @@
   .stagechip{display:inline-flex;align-items:center;gap:7px;background:#e7f6ec;color:var(--ok);border-radius:999px;font-size:12px;font-weight:700;padding:5px 6px 5px 11px;margin:6px 6px 0 0;}
   .chipx{border:0;background:rgba(22,163,74,.14);color:var(--ok);border-radius:50%;width:18px;height:18px;line-height:1;font-size:10px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;font-family:inherit;}
   .chipx:hover{background:var(--red-pale);color:var(--red);}
+  .itemrow.broken{border-color:#f3c2c7;background:#fffafa;}
+  .nofile{color:var(--red);font-weight:700;}
+  .pinflag{font-size:8.5px;font-weight:800;background:var(--gold-pale);color:#8a6a0e;border-radius:5px;padding:1px 5px;margin-left:6px;letter-spacing:.4px;vertical-align:1px;}
   .hint{font-size:11.5px;color:var(--muted);line-height:1.5;margin:7px 0 0;}
   .hint code{background:#f1f3f8;border-radius:5px;padding:1px 5px;font-size:11px;}
   table.gridedit{width:100%;border-collapse:collapse;font-size:12.5px;}
@@ -303,6 +311,16 @@
   .folio .fcal{font-size:12px;font-weight:700;color:#7a5a05;white-space:nowrap;text-decoration:underline;text-decoration-color:rgba(122,90,5,.35);text-underline-offset:3px;}
   .folio .fcal:hover{color:var(--navy);text-decoration-color:var(--navy);}
 
+  /* ---------- board search + warnings ---------- */
+  .searchbox.sm{width:130px;padding:6px 10px;font-size:12.5px;}
+  .boardnote{margin:0 20px;padding:9px 13px;border-radius:10px;font-size:12.5px;font-weight:600;line-height:1.45;}
+  .boardnote.warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;}
+  .boardnote.err{background:var(--red-pale);border:1px solid #f3c2c7;color:#8b1620;}
+  .thper{font-size:9px;letter-spacing:.5px;color:#9aa3b2;font-weight:700;}
+  .boardstate{padding:34px 20px;text-align:center;color:var(--muted);font-size:13.5px;line-height:1.6;}
+  .boardstate b{display:block;color:var(--ink);font-size:14px;margin-bottom:3px;}
+  .hidnote{font-size:11.5px;color:var(--muted);margin-top:9px;}
+
   /* ---------- live data status ---------- */
   .livepill{font-size:11.5px;font-weight:700;color:var(--ok);white-space:nowrap;display:none;align-items:center;gap:5px;}
   .livepill.on{display:inline-flex;}
@@ -310,7 +328,9 @@
   .livepill.busy{color:var(--muted);}
   table.board tr.click{cursor:pointer;}
   table.board tr.click:hover td{background:#f4f7fc;}
-  .rowchev{color:#b6bfd0;font-size:14px;font-weight:800;}
+  .rowchev{color:#b6bfd0;font-size:15px;font-weight:800;margin-left:8px;vertical-align:middle;}
+  .barcell{display:flex;align-items:center;gap:0;}
+  .barcell .bar{flex:1;}
   .pod.click{cursor:pointer;}
   .pod.click:hover{border-color:#c4d7fb;background:linear-gradient(180deg,#fff,#f4f8ff);}
   .ownflag{font-size:8.5px;font-weight:800;background:var(--gold-pale);color:#8a6a0e;border-radius:5px;padding:1px 5px;margin-left:6px;letter-spacing:.4px;vertical-align:1px;}
@@ -398,6 +418,7 @@
     .title h1{font-size:17px;}
     .title p{font-size:9.5px;letter-spacing:1px;}
     .topbar-right{margin-left:0;width:100%;justify-content:space-between;gap:8px;}
+    #btnAdmin{font-size:12px;padding:6px 11px;opacity:.75;}
     /* nav chips get their own swipeable row rather than wrapping to three lines */
     .navchips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;order:2;width:100%;padding-bottom:2px;}
     .navchips::-webkit-scrollbar{display:none;}
@@ -508,6 +529,7 @@
         <a href="#competitions">Competitions</a>
         <a href="#newsletter">Newsletter</a>
         <a href="#reports">Reports</a>
+        <a href="#resources">Resources</a>
         <a href="#events">Events</a>
       </nav>
       <div class="divider"></div>
@@ -596,15 +618,20 @@
         </div>
         <div class="fgroup" id="staffOnlyWrap">
           <span class="flabel" aria-hidden="true">&nbsp;</span>
-          <label class="switch"><input type="checkbox" id="staffOnly" checked onchange="LB.staffOnly=this.checked;renderBoard()">Staff only</label>
+          <label class="switch" title="Hides agency owners' own production so the list is just staff producers. The totals above always include everyone."><input type="checkbox" id="staffOnly" checked onchange="LB.staffOnly=this.checked;renderBoard()">Staff only</label>
+        </div>
+        <div class="fgroup" id="boardFindWrap">
+          <span class="flabel">Find</span>
+          <input type="search" class="searchbox sm" id="boardSearch" placeholder="Your name…" aria-label="Find a producer or agency">
         </div>
       </div>
+      <div class="boardnote" id="boardWarn" style="display:none"></div>
       <div class="card-bd">
         <div class="statrow" id="lbTotals"></div>
         <div class="podium" id="podium"></div>
         <div class="boardwrap">
           <table class="board">
-            <thead><tr><th class="c-rank"></th><th>Name</th><th class="c-dist">District</th><th style="text-align:right">Quotes</th><th style="text-align:right">New Biz</th><th class="c-bar"></th></tr></thead>
+            <thead><tr><th class="c-rank"></th><th>Name</th><th class="c-dist">District</th><th style="text-align:right">Quotes <span class="thper" id="thQ"></span></th><th style="text-align:right">New Biz <span class="thper" id="thN"></span></th><th class="c-bar"></th></tr></thead>
             <tbody id="boardBody"></tbody>
           </table>
         </div>
@@ -613,7 +640,7 @@
     </div>
 
     <!-- ============ DRILL-DOWN (producer / agency deep dive) ============ -->
-    <div class="modal drill" id="drillModal">
+    <div class="modal drill" id="drillModal" role="dialog" aria-modal="true" aria-labelledby="drillName">
       <div class="sheet">
         <div class="drill-hd">
           <button class="btn sm" id="drillBackBtn" type="button" style="display:none">← Back</button>
@@ -694,13 +721,13 @@
 </div>
 
 <!-- ============ TABLE REPORT VIEWER ============ -->
-<div class="tvOverlay" id="tvOverlay" onclick="if(event.target===this)closeViewer()">
+<div class="tvOverlay" id="tvOverlay" role="dialog" aria-modal="true" aria-labelledby="tvTitle" onclick="if(event.target===this)closeViewer()">
   <div class="tv">
     <div class="tv-hd">
       <span class="accent"></span>
       <h3 id="tvTitle"></h3><span class="sub" id="tvSub"></span>
       <div class="right">
-        <input type="text" id="tvSearch" placeholder="🔎 Filter rows…" oninput="renderViewer()">
+        <input type="search" id="tvSearch" placeholder="🔎 Filter rows…">
         <button class="btn" onclick="closeViewer()">✕ Close</button>
       </div>
     </div>
@@ -731,7 +758,7 @@
     <div class="panel-bd" id="panelBody"></div>
     <div class="panel-ft">
       <button class="btn primary" onclick="publishAll()">🚀 Publish to site</button>
-      <button class="btn" onclick="exportBundle()">⬇ Export content.json</button>
+      <button class="btn" id="btnExport" onclick="exportBundle()">⬇ Save a backup copy</button>
       <button class="btn danger" onclick="discardChanges()">Discard changes</button>
       <span class="pubstat" id="pubStat"></span>
     </div>
@@ -791,6 +818,7 @@ function safeUrl(u){
   if(!s) return '';
   if(/^(#|\/|\.\/|\.\.\/)/.test(s)) return s;            // on-page + relative
   if(/^(https?:|mailto:|tel:)/i.test(s)) return s;       // explicit safe schemes
+  if(/^blob:/i.test(s)) return s;                        // staged-file preview before publish
   if(/^[a-z][a-z0-9+.-]*:/i.test(s)) return '';          // any other scheme — drop it
   return s;                                              // bare path like files/x.pdf
 }
@@ -821,12 +849,54 @@ async function boot(){
 }
 
 function data(){ return (adminMode && EDIT) ? EDIT : CONTENT; }
-function markDirty(){ dirty=true; $('dirtyFlag').classList.add('on'); $('dirtyFlag2').classList.add('on'); renderAll(); }
+function markDirty(){ dirty=true; $('dirtyFlag').classList.add('on'); $('dirtyFlag2').classList.add('on'); saveDraft(); renderAll(); }
+
+/* =====================================================================
+   DRAFT PROTECTION
+   Unpublished edits used to live only in memory: closing the tab, a
+   crash, or a stray refresh threw away the whole session with no
+   warning. Text edits are now kept in this browser and offered back on
+   the next visit. Uploaded files can't be stored (they're far too big
+   for browser storage), so the warning says so explicitly.
+   ===================================================================== */
+const DRAFT_KEY='d32hub_draft_v1';
+let draftTimer=null;
+function saveDraft(){
+  clearTimeout(draftTimer);
+  draftTimer=setTimeout(()=>{
+    if(!EDIT) return;
+    safeLocal(()=>localStorage.setItem(DRAFT_KEY, JSON.stringify({at:Date.now(), content:EDIT})));
+  }, 400);
+}
+function clearDraft(){ clearTimeout(draftTimer); safeLocal(()=>localStorage.removeItem(DRAFT_KEY)); }
+function offerDraftRestore(){
+  const d=safeLocal(()=>JSON.parse(localStorage.getItem(DRAFT_KEY)), null);
+  if(!d || !d.content) return;
+  const when=new Date(d.at||Date.now());
+  const ok=confirm('You have unpublished changes from '+when.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+
+    ' that were never published.\n\nOK — carry on editing them.\nCancel — throw them away and start from what is live now.\n\n'+
+    '(Any files you had dropped in will need to be added again.)');
+  if(ok){ EDIT=d.content; dirty=true; $('dirtyFlag').classList.add('on'); $('dirtyFlag2').classList.add('on'); renderAll(); }
+  else clearDraft();
+}
+window.addEventListener('beforeunload', e=>{
+  if(dirty || STAGED.length){ e.preventDefault(); e.returnValue=''; return ''; }
+});
 
 function renderAll(){
-  renderBanner(); renderBoard(); renderNews(); renderEvents();
-  renderComps(); renderNewsletter(); renderReports(); renderResources(); renderFolio();
-  $('lastUpdated').textContent = fmtDate(data().updated) || "—";
+  /* Each section is isolated: a single malformed entry in content.json
+     used to throw and silently leave every section after it blank. */
+  let failed=[];
+  [['banner',renderBanner],['scoreboard',renderBoard],['news',renderNews],['events',renderEvents],
+   ['competitions',renderComps],['newsletter',renderNewsletter],['reports',renderReports],
+   ['resources',renderResources],['folio',renderFolio]].forEach(([name,fn])=>{
+    try{ fn(); }catch(e){ failed.push(name); console.error('District Hub: '+name+' failed to render', e); }
+  });
+  if(failed.length){
+    $('loadFailMsg').textContent='These sections could not be displayed: '+failed.join(', ')+'.';
+    $('loadFail').classList.add('on');
+  }
+  try{ $('lastUpdated').textContent = fmtDate(data().updated) || "—"; }catch(e){}
 }
 
 /* =====================================================================
@@ -906,6 +976,7 @@ let PEOPLE = [];              // every producer + agency across both districts
 let dataAsOf = null;          // newest date present in the export
 let dailyAsOf = null;         // last complete business day (what "Daily" means)
 let liveLoading = false;
+let staleDistrict = null;   // {d, asOf} when one sheet is lagging the other
 
 /* ---- small helpers (shared with the parser) ---- */
 function initials(name){ return String(name).split(/\s+/).filter(w=>/[A-Za-z]/.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('')||'?'; }
@@ -924,7 +995,15 @@ function sameOwner(agentRaw, prodName){
 function toDate(v){
   if(v instanceof Date && !isNaN(v)) return v;
   if(typeof v==='number') return new Date(Math.round((v-25569)*86400*1000));
-  const t=Date.parse(v); return isNaN(t)?null:new Date(t);
+  const s=String(v??'').trim();
+  if(!s) return null;
+  /* Date.parse treats a bare YYYY-MM-DD as UTC, which lands on the
+     PREVIOUS day everywhere west of Greenwich — every number and every
+     chart label would shift by a day if the sheet column is ever
+     reformatted to ISO. Parse it as a local date instead. */
+  const iso=/^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+  if(iso) return new Date(+iso[1], +iso[2]-1, +iso[3]);
+  const t=Date.parse(s); return isNaN(t)?null:new Date(t);
 }
 function parseNum(v){ const x=+String(v??'').replace(/[$,\s]/g,''); return isFinite(x)?x:0; }
 function dayKeyOf(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
@@ -963,74 +1042,111 @@ function detectDistrict(rows){
   }
   return -1;
 }
+/* Returns {people, dataAsOf, dailyAsOf, undated} — never mutates globals,
+   so a district that fails partway can't leave its dates behind. Throws
+   with a plain-language reason rather than returning partial numbers:
+   showing a confidently wrong scoreboard is worse than showing none. */
 function parseDistrictExport(rows){
   const hr=detectDistrict(rows);
-  if(hr<0) return null;
+  if(hr<0) throw new Error('could not find the header row (expected Producer, Calendar Day and NB Cnt / QUOTE columns)');
   const header=rows[hr].map(c=>String(c||''));
-  const roleOf=h=>{ const s=h.toLowerCase();
-    if(/quote/.test(s)) return 'quote';
-    if(/nb.?cnt|nb count|new business/.test(s)) return 'nb';
-    if(/code.*agent|agent name/.test(s)) return 'agent';
+  /* Date is tested BEFORE quote: a column named "Quote Date" would
+     otherwise be classified as a quote count and silently disable all
+     date logic, turning MTD into all-time. */
+  const roleOf=h=>{ const s=h.toLowerCase().trim();
+    if(/calendar day|^date$|^day$|date$/.test(s)) return 'date';
+    if(/quote.*(cnt|count)|^quotes?$/.test(s)) return 'quote';
+    if(/nb.?(cnt|count)|^nb$|new business/.test(s)) return 'nb';
+    if(/code.*agent|agent name|^agent$|^agency$/.test(s)) return 'agent';
     if(/producer/.test(s)) return 'producer';
-    if(/calendar day|^date$|^day$/.test(s)) return 'date';
     return null; };
   const cols=header.map((h,i)=>({i,role:roleOf(h)}));
   const agentCols=cols.filter(c=>c.role==='agent').map(c=>c.i);
   const prodCols =cols.filter(c=>c.role==='producer').map(c=>c.i);
   const dateCols =cols.filter(c=>c.role==='date').map(c=>c.i);
   const countCols=cols.filter(c=>c.role==='nb'||c.role==='quote');
-  if(!countCols.length || !prodCols.length) return null;
+  /* Every dimension is required. Previously only producer + a count were
+     checked, so renaming "Calendar Day" or "Code - Agent Name" in the
+     sheet produced a full-looking board with zeroed or all-time numbers
+     and no error anywhere. */
+  const missing=[];
+  if(!prodCols.length) missing.push('Producer');
+  if(!agentCols.length) missing.push('Code - Agent Name');
+  if(!dateCols.length) missing.push('Calendar Day');
+  if(!countCols.some(c=>c.role==='nb')) missing.push('NB Cnt');
+  if(!countCols.some(c=>c.role==='quote')) missing.push('QUOTE_Cnt_All');
+  if(missing.length) throw new Error('the sheet is missing these columns (or they were renamed): '+missing.join(', '));
+
   const nearestLeft=(arr,idx)=>{ let best=-1; arr.forEach(x=>{ if(x<idx&&x>best) best=x; }); return best; };
   const blocks=countCols.map(cc=>({metric:cc.role==='nb'?'n':'q',count:cc.i,
     agent:nearestLeft(agentCols,cc.i),prod:nearestLeft(prodCols,cc.i),date:nearestLeft(dateCols,cc.i)}));
-  const recs=[];
-  const isTotalRow = row => row.some(c=>/(^|\s)(grand\s+|sub\s*)?totals?(\s|:|$)/i.test(String(c||'')));
+
+  /* Only a label cell that IS a total marker disqualifies its own block.
+     The old version tested every cell in the row, so a subtotal in the
+     NB block deleted the live quote data sitting beside it, and an
+     agency legitimately named "Total Care Insurance" vanished. */
+  const isTotalCell = v => /^\s*(grand\s+|sub\s*)?totals?\s*:?\s*$/i.test(String(v||''));
+
+  const recs=[]; let undated=0;
   const lastProd={}, lastAgent={}, lastDate={};
   for(let r=hr+1;r<rows.length;r++){
     const row=rows[r]; if(!row||!row.some(c=>String(c).trim()!=='')) continue;
-    if(isTotalRow(row)) continue;
     blocks.forEach((b,bi)=>{
-      let prod=b.prod>=0?String(row[b.prod]||'').trim():'';
-      let agent=b.agent>=0?String(row[b.agent]||'').trim():'';
+      const rawProd=b.prod>=0?String(row[b.prod]||'').trim():'';
+      const rawAgent=b.agent>=0?String(row[b.agent]||'').trim():'';
+      if(isTotalCell(rawProd)||isTotalCell(rawAgent)) return;
+      let prod=rawProd, agent=rawAgent;
       let d=b.date>=0?toDate(row[b.date]):null;
-      if(prod) lastProd[bi]=prod; else if(b.prod>=0) prod=lastProd[bi]||'';
-      if(agent) lastAgent[bi]=agent; else if(b.agent>=0) agent=lastAgent[bi]||'';
+      /* Merged cells export as a value on the first row and blanks
+         below, so blanks inherit. But a NEW agency must reset the
+         producer carry-down, or an agency-level row with a blank
+         producer inherits the last producer from the PREVIOUS agency
+         and is credited to someone who never wrote it. */
+      if(agent){ if(agent!==lastAgent[bi]){ lastProd[bi]=''; lastDate[bi]=null; } lastAgent[bi]=agent; }
+      else if(b.agent>=0) agent=lastAgent[bi]||'';
+      if(prod){ if(prod!==lastProd[bi]) lastDate[bi]=null; lastProd[bi]=prod; }
+      else if(b.prod>=0) prod=lastProd[bi]||'';
       if(d) lastDate[bi]=d; else if(b.date>=0) d=lastDate[bi]||null;
       if(!prod && !agent) return;
-      recs.push({metric:b.metric,prod,agent,date:d,count:parseNum(row[b.count])});
+      const count=parseNum(row[b.count]);
+      if(!d && count) undated++;
+      recs.push({metric:b.metric,prod,agent,date:d,count});
     });
   }
-  if(!recs.length) return null;
+  if(!recs.length) throw new Error('no data rows were found under the header');
+
   const times=recs.map(x=>x.date).filter(Boolean).map(d=>d.getTime());
-  const maxD=times.length?new Date(Math.max(...times)):null;
-  if(maxD && (!dataAsOf || maxD>dataAsOf)) dataAsOf=maxD;
-  /* The export snapshots in the morning, so its newest date has no
-     production logged yet. cutoff = the last complete calendar day.
-     Daily anchors to the last business day on or before the cutoff, so
-     data pulled Monday shows Friday's numbers. */
-  let cutoff=null, anchor=null;
-  if(maxD){
-    const c=new Date(maxD); c.setHours(0,0,0,0); c.setDate(c.getDate()-1); cutoff=c;
-    const a=new Date(c);
-    while(a.getDay()===0||a.getDay()===6) a.setDate(a.getDate()-1);
-    anchor=a;
-  }
-  if(anchor && (!dailyAsOf || anchor>dailyAsOf)) dailyAsOf=anchor;
-  const cutoffEnd=cutoff?cutoff.getTime()+86400000-1:null;
-  const weekStart=cutoff?cutoff.getTime()-6*86400000:null;
-  const anchorKey=anchor?anchor.toDateString():null;
+  if(!times.length) throw new Error('no readable dates in the Calendar Day column');
+  const maxD=new Date(Math.max(...times));
+  /* The export snapshots in the morning, so its newest date has nothing
+     logged yet. cutoff = the last complete calendar day and is what the
+     page reports as "data through" — reporting maxD claimed a date that
+     contributed nothing to any total. */
+  const cutoff=new Date(maxD); cutoff.setHours(0,0,0,0); cutoff.setDate(cutoff.getDate()-1);
+  const anchor=new Date(cutoff);
+  while(anchor.getDay()===0||anchor.getDay()===6) anchor.setDate(anchor.getDate()-1);
+  const cutoffEnd=cutoff.getTime()+86400000-1;
+  /* Step by calendar days, not fixed milliseconds — the fall DST day is
+     25 hours long and turned "last 7 days" into 6. */
+  const wsD=new Date(cutoff); wsD.setDate(wsD.getDate()-6); wsD.setHours(0,0,0,0);
+  const weekStart=wsD.getTime();
+  const anchorKey=anchor.toDateString();
+  /* Month and year come from the CUTOFF, not the weekday-adjusted
+     anchor. Anchoring them to `anchor` meant that on the first days of a
+     month the tile labelled MTD showed the PREVIOUS month's total. */
   function periodsFor(d){
-    if(!cutoff||!d) return ['monthly','ytd'];
+    if(!d) return [];              // undated rows are counted nowhere rather than dumped into MTD and YTD
     const out=[], t=d.getTime();
     if(t>cutoffEnd) return out;
-    if(d.getFullYear()===anchor.getFullYear()) out.push('ytd');
-    if(d.getFullYear()===anchor.getFullYear() && d.getMonth()===anchor.getMonth()) out.push('monthly');
+    if(d.getFullYear()===cutoff.getFullYear()) out.push('ytd');
+    if(d.getFullYear()===cutoff.getFullYear() && d.getMonth()===cutoff.getMonth()) out.push('monthly');
     if(t>=weekStart) out.push('weekly');
     if(d.toDateString()===anchorKey) out.push('daily');
     return out;
   }
+
   const producers={}, agencies={};
-  const get=(map,name,role)=>{ if(!map[name]) map[name]={name,role,q:blankPeriods(),n:blankPeriods()}; return map[name]; };
+  const get=(map,key,name,role)=>{ if(!map[key]) map[key]={name,role,q:blankPeriods(),n:blankPeriods()}; return map[key]; };
   const addHist=(person,rec,hk)=>{
     if(!hk||!rec.count) return;
     person.hist=person.hist||{};
@@ -1039,80 +1155,141 @@ function parseDistrictExport(rows){
   };
   recs.forEach(rec=>{
     const prs=periodsFor(rec.date);
-    const hk=(rec.date && cutoffEnd!==null && rec.date.getTime()<=cutoffEnd) ? dayKeyOf(rec.date) : null;
+    const hk=(rec.date && rec.date.getTime()<=cutoffEnd) ? dayKeyOf(rec.date) : null;
+    const agencyName=rec.agent?cleanAgent(rec.agent):'';
     if(rec.prod){
-      const p=get(producers,rec.prod,'Producer');
-      if(rec.agent && !p.agency) p.agency=cleanAgent(rec.agent);
+      /* Keyed on agency + producer. Keying on the producer name alone
+         merged anyone who writes at two agencies into a single row whose
+         numbers were the sum of both, attributed entirely to whichever
+         agency happened to appear first in the file. */
+      const key=normName(agencyName)+'||'+normName(rec.prod);
+      const p=get(producers,key,titleCase(rec.prod.replace(/\s+/g,' ')),'Producer');
+      if(agencyName && !p.agency) p.agency=agencyName;
       if(rec.agent && sameOwner(rec.agent, rec.prod)) p.owner=true;
       prs.forEach(pr=>{ p[rec.metric][pr].actual+=rec.count; });
       addHist(p,rec,hk);
     }
     if(rec.agent){
-      const a=get(agencies,cleanAgent(rec.agent),'Agency');
+      const a=get(agencies,normName(agencyName),agencyName,'Agency');
       prs.forEach(pr=>{ a[rec.metric][pr].actual+=rec.count; });
       addHist(a,rec,hk);
     }
   });
-  return [...Object.values(producers), ...Object.values(agencies)];
+  return {people:[...Object.values(producers), ...Object.values(agencies)],
+          dataAsOf:cutoff, dailyAsOf:anchor, undated};
 }
 
 /* ---- fetch + cache -------------------------------------------------
    Both exports together are several megabytes, which is a lot to make
    an agent download on a phone before the page is usable. So: render
-   whatever is cached immediately, then refresh in the background. */
+   whatever is cached immediately, then refresh in the background.
+   Cached numbers are never labelled "Live" — they say when they were
+   saved, and past CACHE_HARD_EXPIRY they are dropped rather than shown
+   as if current. */
+const LIVE_TIMEOUT_MS = 25000;
+const CACHE_HARD_EXPIRY_MS = 24*60*60*1000;
+let liveError = '';          // set when a district could not be loaded
+let missingDistrict = null;  // '32' | '49' when only one side loaded
+
 function setLive(msg, kind){
   const el=$('liveStatus');
+  if(!msg){ el.className='livepill'; el.textContent=''; return; }
   el.className='livepill on'+(kind?' '+kind:'');
-  el.textContent=msg||'';
-  if(!msg) el.className='livepill';
+  el.textContent=msg;
+}
+function safeLocal(fn, fallback){
+  try{ return fn(); }catch(e){ return fallback; }   // private browsing / storage disabled
 }
 function readCache(){
-  try{
+  return safeLocal(()=>{
     const c=JSON.parse(localStorage.getItem(LIVE_CACHE_KEY));
     if(!c||!Array.isArray(c.people)||!c.people.length) return null;
+    if(Date.now()-(c.at||0) > CACHE_HARD_EXPIRY_MS) return null;   // too old to show at all
     return c;
-  }catch(e){ return null; }
+  }, null);
 }
 function writeCache(){
-  try{
-    localStorage.setItem(LIVE_CACHE_KEY, JSON.stringify({
-      people:PEOPLE, at:Date.now(),
-      dataAsOf:dataAsOf?dataAsOf.getTime():null,
-      dailyAsOf:dailyAsOf?dailyAsOf.getTime():null
-    }));
-  }catch(e){ /* quota — the page still works, it just refetches next visit */ }
+  safeLocal(()=>localStorage.setItem(LIVE_CACHE_KEY, JSON.stringify({
+    people:PEOPLE, at:Date.now(),
+    dataAsOf:dataAsOf?dataAsOf.getTime():null,
+    dailyAsOf:dailyAsOf?dailyAsOf.getTime():null
+  })), null);
 }
 async function fetchDistrict(url, district){
-  const res=await fetch(url,{cache:'no-store'});
-  if(!res.ok) throw new Error('District '+district+' sheet returned HTTP '+res.status);
+  const ctl = typeof AbortController!=='undefined' ? new AbortController() : null;
+  const timer = ctl ? setTimeout(()=>ctl.abort(), LIVE_TIMEOUT_MS) : null;
+  let res;
+  try{
+    res = await fetch(url,{cache:'no-store', signal:ctl?ctl.signal:undefined});
+  }catch(e){
+    throw new Error('District '+district+': '+(e && e.name==='AbortError'
+      ? 'the sheet took too long to respond' : "couldn't reach the sheet"));
+  }finally{ if(timer) clearTimeout(timer); }
+  if(!res.ok) throw new Error('District '+district+': the sheet link returned HTTP '+res.status+' (is it still published to the web?)');
   const text=await res.text();
-  if(/<html|<!doctype/i.test(text.slice(0,200))) throw new Error('District '+district+' link returned a web page, not CSV');
-  const people=parseDistrictExport(parseCSV(text));
-  if(!people||!people.length) throw new Error('District '+district+' sheet had no usable rows');
-  people.forEach(p=>{ p.district=district; });
-  return people;
+  if(/<html|<!doctype/i.test(text.slice(0,200)))
+    throw new Error('District '+district+": that link returns a web page, not a CSV. Re-share it with File → Share → Publish to web → CSV.");
+  let out;
+  try{ out=parseDistrictExport(parseCSV(text)); }
+  catch(e){ throw new Error('District '+district+': '+e.message); }
+  out.people.forEach(p=>{ p.district=district; });
+  return out;
 }
 async function loadLive(opts){
   opts=opts||{};
-  if(liveLoading) return;
+  if(liveLoading){ if(opts.alert) alert('A refresh is already running — give it a few seconds.'); return; }
   liveLoading=true;
-  setLive('⟳ Loading live data…','busy');
-  const prevData=dataAsOf, prevDaily=dailyAsOf;
-  dataAsOf=null; dailyAsOf=null;
+  setLive('↻ Loading live data…','busy');
+  renderBoard();                       // show the loading state instead of "no data"
   try{
-    const [a,b]=await Promise.all([
+    const settled = await Promise.allSettled([
       fetchDistrict(SHEET_CSV_URL_32,'32'),
       fetchDistrict(SHEET_CSV_URL_49,'49')
     ]);
-    PEOPLE=a.concat(b);
+    const ok = settled.filter(s=>s.status==='fulfilled').map(s=>s.value);
+    const failures = settled.filter(s=>s.status==='rejected').map(s=>s.reason.message||String(s.reason));
+    if(!ok.length) throw new Error(failures.join('\n'));
+
+    /* One district failing must not throw away the other, but a
+       "Combined" total that is quietly missing a whole district is
+       exactly the kind of wrong number this page must not show — so
+       force the view to the district that did load and say so. */
+    missingDistrict = ok.length===1 ? (ok[0].people[0].district==='32' ? '49' : '32') : null;
+    liveError = failures.join(' · ');
+
+    PEOPLE = ok.flatMap(o=>o.people);
+    dataAsOf  = new Date(Math.max(...ok.map(o=>o.dataAsOf.getTime())));
+    dailyAsOf = new Date(Math.max(...ok.map(o=>o.dailyAsOf.getTime())));
+    /* If the two sheets are stamped different days, combining them ranks
+       people against each other on different periods. Flag it rather
+       than presenting the mix as one number. */
+    staleDistrict = null;
+    if(ok.length===2){
+      const gap=Math.abs(ok[0].dataAsOf-ok[1].dataAsOf)/86400000;
+      if(gap>=2){
+        const behind = ok[0].dataAsOf<ok[1].dataAsOf ? ok[0] : ok[1];
+        staleDistrict = {d:behind.people[0].district, asOf:behind.dataAsOf};
+      }
+    }
+    if(missingDistrict && LB.dist==='all'){
+      LB.dist = missingDistrict==='49' ? '32' : '49';
+      const seg=$('segDist');
+      seg.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b.dataset.d===LB.dist));
+    }
     writeCache();
     closeDrill();
     renderBoard();
-    setLive('● Live · '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}));
+    setLive(missingDistrict
+      ? 'D'+missingDistrict+' unavailable'
+      : '● Live · '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),
+      missingDistrict?'err':'');
+    if(opts.alert && failures.length) alert('Some numbers could not be refreshed:\n\n'+failures.join('\n\n'));
   }catch(e){
-    dataAsOf=prevData; dailyAsOf=prevDaily;
-    setLive(PEOPLE.length ? 'Showing last saved numbers' : "Couldn't load live data",'err');
-    if(opts.alert) alert("Couldn't refresh from the district sheets.\n\n"+(e.message||e)+"\n\nThe sheets must stay published to the web as CSV.");
+    liveError = e.message||String(e);
+    liveLoading = false;               // before the re-render, or the board still says "Loading…"
+    setLive(PEOPLE.length ? 'Saved copy · refresh failed' : "Couldn't load the numbers",'err');
+    renderBoard();                     // so the board explains itself rather than reading "no data"
+    if(opts.alert) alert("Couldn't refresh from the district sheets.\n\n"+liveError+"\n\nBoth sheets must stay published to the web as CSV.");
   }finally{
     liveLoading=false;
   }
@@ -1124,18 +1301,21 @@ function bootLive(){
     dataAsOf=c.dataAsOf?new Date(c.dataAsOf):null;
     dailyAsOf=c.dailyAsOf?new Date(c.dailyAsOf):null;
     renderBoard();
-    setLive('● Saved copy · refreshing…','busy');
-    if(Date.now()-(c.at||0) < LIVE_MAX_AGE_MS){ setLive('● Live · saved '+new Date(c.at).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})); return; }
+    setLive('Saved copy · checking for newer…','busy');
   }
-  loadLive();
+  loadLive();                          // always refresh; the cache is a head start, not a substitute
 }
 $('btnRefresh').addEventListener('click',()=>loadLive({alert:true}));
 
 /* ---- board ---- */
 function segWire(id, key, prop){
-  $(id).querySelectorAll('button').forEach(btn=>{
-    btn.onclick = ()=>{ $(id).querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); LB[prop]=btn.dataset[key]; renderBoard(); };
+  const grp=$(id);
+  grp.setAttribute('role','group');
+  const sync=()=>grp.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed', b.classList.contains('on')?'true':'false'));
+  grp.querySelectorAll('button').forEach(btn=>{
+    btn.onclick = ()=>{ grp.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); LB[prop]=btn.dataset[key]; sync(); renderBoard(); };
   });
+  sync();
 }
 segWire('segView','v','view'); segWire('segDist','d','dist'); segWire('segPeriod','p','period'); segWire('segMetric','m','metric');
 
@@ -1155,62 +1335,106 @@ function periodLabel(){
   if(LB.period==='weekly') return 'Last 7 days';
   return LB.period==='monthly' ? 'MTD' : 'YTD';
 }
+let boardFilter='';
 function boardRows(){
+  const q=boardFilter.toLowerCase();
   return PEOPLE.map((p,i)=>({p,i})).filter(x=>inScope(x.p)).map(({p,i})=>({
     idx:i, name:p.name, district:normDistrict(p.district), owner:!!p.owner,
     sub: isProducer(p.role) ? (p.agency||'') : (()=>{ const n=agencyProducers(p).length; return n?n+' producer'+(n===1?'':'s'):''; })(),
     q:+p.q[LB.period].actual||0, n:+p.n[LB.period].actual||0
-  }));
+  })).filter(r=> !q || (r.name+' '+r.sub).toLowerCase().includes(q));
+}
+function boardState(){
+  /* One place decides what the board says when it has nothing to show,
+     so a failed load never reads as "nobody produced anything". */
+  if(!PEOPLE.length && liveLoading) return {b:'Loading the district numbers…', p:'The two district sheets are a few megabytes, so the first load takes a moment.'};
+  if(!PEOPLE.length && liveError) return {b:"Couldn't load the numbers", p:'Rather than show numbers that might be wrong, the board stays empty until it can reach the district sheets. Try ↻ Refresh, or tell the district office.'};
+  if(!PEOPLE.length) return {b:'No numbers loaded yet', p:'Press ↻ Refresh to pull from the district sheets.'};
+  if(boardFilter) return {b:'Nobody matches “'+boardFilter+'”', p:'Check the spelling, or clear the Find box to see everyone.'};
+  return {b:'Nothing to show for this view', p:'Try a different District or Period.'};
 }
 function renderBoard(){
   $('lbAsOf').textContent = dataAsOf ? ('data through '+dataAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})) : '';
   $('staffOnlyWrap').style.visibility = LB.view==='producer' ? 'visible' : 'hidden';
+  const perLbl = periodLabel();
+  $('thQ').textContent = perLbl.toUpperCase();
+  $('thN').textContent = perLbl.toUpperCase();
 
-  /* totals always count everyone in scope (owners included) so the
-     all-up number never moves when you flip views or Staff only */
+  /* warnings the viewer needs before they trust the numbers */
+  const warn=$('boardWarn');
+  if(missingDistrict){
+    warn.className='boardnote err'; warn.style.display='block';
+    warn.textContent='District '+missingDistrict+' numbers could not be loaded, so Combined totals are switched off — you are seeing District '+(missingDistrict==='49'?'32':'49')+' only.';
+  }else if(staleDistrict){
+    warn.className='boardnote warn'; warn.style.display='block';
+    warn.textContent='District '+staleDistrict.d+"'s sheet was last updated "+staleDistrict.asOf.toLocaleDateString('en-US',{month:'short',day:'numeric'})+', so Combined numbers mix two different dates. Use the D32 and D49 buttons for a like-for-like comparison.';
+  }else{ warn.style.display='none'; }
+
   const everyone = PEOPLE.filter(p=> !isProducer(p.role) && (LB.dist==='all'||normDistrict(p.district)===LB.dist));
   const tq=everyone.reduce((s,p)=>s+(+p.q[LB.period].actual||0),0);
   const tn=everyone.reduce((s,p)=>s+(+p.n[LB.period].actual||0),0);
   const scopeLbl = LB.dist==='all' ? 'Districts 32 + 49' : 'District '+LB.dist;
-  const perLbl = periodLabel();
   $('lbTotals').innerHTML = `
     <div class="stat">
       <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2563eb"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
       <div class="v"><b>${tq.toLocaleString()}</b><span>Total Quotes · ${esc(perLbl)}</span></div>
-      <div class="scope">${scopeLbl}<br>all agencies</div>
+      <div class="scope">${scopeLbl}<br>every agency</div>
     </div>
     <div class="stat red">
       <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#d92231"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" fill="none" stroke="#d92231" stroke-width="2"/></svg></div>
       <div class="v"><b>${tn.toLocaleString()}</b><span>Total New Business · ${esc(perLbl)}</span></div>
-      <div class="scope">${scopeLbl}<br>all agencies</div>
+      <div class="scope">${scopeLbl}<br>every agency</div>
     </div>`;
 
   const rows = boardRows().sort((a,b)=> b[LB.metric]-a[LB.metric] || b[LB.metric==='q'?'n':'q']-a[LB.metric==='q'?'n':'q']);
   const max = Math.max(1, ...rows.map(r=>r[LB.metric]));
   const mLbl = LB.metric==='q' ? 'Quotes' : 'New Biz';
 
-  $('podium').innerHTML = rows.slice(0,3).map((r,i)=>`
-    <div class="pod p${i+1} click" data-idx="${r.idx}" title="See ${esc(r.name)}'s trend">
-      <div class="medal">${i+1}</div>
-      <div class="who"><b>${esc(r.name)}</b><span>${esc(r.sub||'')}</span></div>
-      <div class="val"><b>${r[LB.metric]}</b><span>${mLbl} ${esc(perLbl)}</span></div>
-    </div>`).join('') || `<div class="empty">${liveLoading?'Loading live numbers…':'No data for this view yet.'}</div>`;
+  if(!rows.length){
+    const st=boardState();
+    $('podium').innerHTML=`<div class="boardstate" style="grid-column:1/-1"><b>${esc(st.b)}</b>${esc(st.p)}</div>`;
+    $('boardBody').innerHTML=`<tr><td colspan="6"></td></tr>`;
+  }else{
+    $('podium').innerHTML = rows.slice(0,3).map((r,i)=>`
+      <div class="pod p${i+1} click" data-idx="${r.idx}" title="See ${esc(r.name)}'s trend">
+        <div class="medal">${i+1}</div>
+        <div class="who"><b>${esc(r.name)}</b><span>${esc(r.sub||'')}</span></div>
+        <div class="val"><b>${r[LB.metric].toLocaleString()}</b><span>${mLbl} ${esc(perLbl)}</span></div>
+      </div>`).join('');
+    $('boardBody').innerHTML = rows.map((r,i)=>`
+      <tr class="click" data-idx="${r.idx}" tabindex="0" role="button" aria-label="${esc(r.name)} — open trend history">
+        <td class="rank">${i+1}</td>
+        <td><div class="pname"><span class="avatar">${esc(initials(r.name))}</span><span class="nm"><b>${esc(r.name)}${r.owner?'<span class="ownflag">OWNER</span>':''}</b><span>${esc(r.sub||'')}</span></span></div></td>
+        <td><span class="dchip d${r.district==='49'?'49':'32'}">D${r.district==='49'?'49':'32'}</span></td>
+        <td class="metric">${r.q.toLocaleString()}</td>
+        <td class="metric">${r.n.toLocaleString()}</td>
+        <td class="barcell"><div class="bar ${LB.metric==='n'?'red':''}"><i style="width:${Math.round(r[LB.metric]/max*100)}%"></i></div><span class="rowchev" aria-hidden="true">›</span></td>
+      </tr>`).join('');
+  }
 
-  $('boardBody').innerHTML = rows.map((r,i)=>`
-    <tr class="click" data-idx="${r.idx}" title="Click for trend history">
-      <td class="rank">${i+1}</td>
-      <td><div class="pname"><span class="avatar">${esc(initials(r.name))}</span><span class="nm"><b>${esc(r.name)}${r.owner?'<span class="ownflag">OWNER</span>':''}</b><span>${esc(r.sub||'')}</span></span></div></td>
-      <td><span class="dchip d${r.district==='49'?'49':'32'}">D${r.district==='49'?'49':'32'}</span></td>
-      <td class="metric">${r.q}</td>
-      <td class="metric">${r.n}</td>
-      <td class="barcell"><div class="bar ${LB.metric==='n'?'red':''}"><i style="width:${Math.round(r[LB.metric]/max*100)}%"></i></div></td>
-    </tr>`).join('') || `<tr><td colspan="6" class="empty">${liveLoading?'Loading live numbers…':'No rows for this filter.'}</td></tr>`;
-
-  $('lbNote').textContent = dailyAsOf
-    ? 'Live from the district quote & sales sheets. “Daily” is the last complete business day ('+dailyAsOf.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+'). Click any row for that person’s trend.'
-    : 'Live from the district quote & sales sheets. Click any row for trend history.';
+  /* say plainly what the list is showing and what it is leaving out */
+  const bits=[];
+  if(dailyAsOf) bits.push('Live from the district quote &amp; sales sheets. “Daily” is the last complete business day ('+dailyAsOf.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+').');
+  else bits.push('Live from the district quote &amp; sales sheets.');
+  bits.push('Tap any row to see that person’s trend.');
+  if(LB.view==='producer' && LB.staffOnly){
+    const hidden = PEOPLE.filter(p=>isProducer(p.role)&&p.owner&&(LB.dist==='all'||normDistrict(p.district)===LB.dist)).length;
+    if(hidden) bits.push('<b>Staff only</b> is on, so '+hidden+' agency owner'+(hidden===1?'’s':'s’')+' own production '+(hidden===1?'is':'are')+' hidden from this list — untick it to include them. The totals above always count everyone.');
+  }
+  $('lbNote').innerHTML = bits.join(' ');
 }
+let boardDebounce;
+$('boardSearch').addEventListener('input', e=>{
+  clearTimeout(boardDebounce);
+  const v=e.target.value;
+  boardDebounce=setTimeout(()=>{ boardFilter=v.trim(); renderBoard(); },120);
+});
 $('boardBody').addEventListener('click',e=>{ const tr=e.target.closest('tr.click'); if(tr) openDrill(+tr.dataset.idx); });
+$('boardBody').addEventListener('keydown',e=>{
+  if(e.key!=='Enter' && e.key!==' ') return;
+  const tr=e.target.closest('tr.click'); if(!tr) return;
+  e.preventDefault(); openDrill(+tr.dataset.idx);
+});
 $('podium').addEventListener('click',e=>{ const el=e.target.closest('.pod.click'); if(el) openDrill(+el.dataset.idx); });
 
 /* =====================================================================
@@ -1367,9 +1591,11 @@ function renderDrillChart(p){
       tip.style.top =(sr.top-hr.top+Math.min(y(d.q),y(d.n))*sr.height/H)+'px';
       tip.style.display='block';
     };
+    const hide=()=>{ tip.style.display='none'; };
     r.addEventListener('mouseenter',show);
+    r.addEventListener('mouseleave',hide);
     r.addEventListener('touchstart',show,{passive:true});
-    r.addEventListener('mouseleave',()=>{ tip.style.display='none'; });
+    r.addEventListener('touchend',()=>setTimeout(hide,2200),{passive:true});
   });
 }
 function renderDrillProds(p){
@@ -1440,19 +1666,30 @@ function renderComps(){
   const today = new Date(); today.setHours(0,0,0,0);
   const items = (data().competitions||[]).filter(c=>c.active);
   $('compList').innerHTML = items.map(c=>{
-    let days='';
-    if(c.ends){ const e=new Date(c.ends+"T23:59:59"); if(!isNaN(e)){ const n=Math.max(0,Math.ceil((e-today)/86400000)); days=`<div class="days"><b>${n}</b><span>days left</span></div>`; } }
+    let days='', ended=false;
+    if(c.ends){
+      const e=new Date(c.ends+"T23:59:59");
+      if(!isNaN(e)){
+        const n=Math.ceil((e-today)/86400000);
+        ended = n<0;
+        /* an expired contest used to sit on "0 days left" forever, which
+           reads as "closing today" every day after it finished */
+        days = ended ? `<div class="days ended"><b>✓</b><span>ended</span></div>`
+             : `<div class="days"><b>${n===0?'Today':n}</b><span>${n===0?'last day':'day'+(n===1?'':'s')+' left'}</span></div>`;
+      }
+    }
     const st = (c.standings||[]).slice(0,5);
-    return `<div class="comp">
+    const lbl = (ended?'Final':'Current')+' standings'+(c.metricLabel?' — '+esc(c.metricLabel):'');
+    return `<div class="comp${ended?' isended':''}">
       <div class="hd"><div class="left"><b>${esc(c.title)}</b><span>${esc(c.period||'')}</span></div>${days}</div>
-      <div class="bd">${esc(c.description||'')}
+      <div class="bd"><div class="ctext">${esc(c.description||'')}</div>
         ${c.prize?`<div class="prize">🏆 ${esc(c.prize)}</div>`:''}
       </div>
-      ${st.length?`<div class="standings"><div class="lbl">Current standings — ${esc(c.metricLabel||'')}</div>
+      ${st.length?`<div class="standings"><div class="lbl">${lbl}</div>
         ${st.map((s,i)=>`<div class="srow"><span class="r">${i+1}</span><b>${esc(s.name)}</b><span class="v">${esc(String(s.value))}</span></div>`).join('')}
       </div>`:''}
     </div>`;
-  }).join('') || '<div class="empty">No active competitions.</div>';
+  }).join('') || '<div class="empty">No competitions running right now.</div>';
 }
 
 /* ---------- newsletter ---------- */
@@ -1464,18 +1701,20 @@ function renderNewsletter(){
   const list = (data().newsletters||[]).slice().sort((a,b)=> String(b.date||'').localeCompare(String(a.date||'')));
   if(!list.length){ $('nlArea').innerHTML='<div class="empty">No newsletters yet.</div>'; return; }
   const latest = list[0], rest = list.slice(1);
+  const latestHref = safeUrl(fileHref(latest.file||''));
   $('nlArea').innerHTML = `
     <div class="latestnl">
       <div class="nlthumb"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M6 2h9l5 5v15H6z" opacity=".95"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
       <div class="info"><b>${esc(latest.title)}</b><span>${fmtDate(latest.date)} · Latest issue</span></div>
-      <a class="btn primary open" href="${esc(fileHref(latest.file))}" target="_blank">Read it →</a>
+      ${latestHref?`<a class="btn primary open" href="${esc(latestHref)}" target="_blank" rel="noopener">Read it →</a>`
+                  :`<span class="btn open" style="pointer-events:none;opacity:.55">File missing</span>`}
     </div>
     ${rest.length?`<div class="cat" style="margin-top:14px">Past issues</div>
     <div class="filelist">${rest.map(n=>`
       <div class="frow">
         <div class="fico"><svg width="17" height="17" viewBox="0 0 24 24" fill="#2563eb"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
         <div class="fi"><b>${esc(n.title)}</b><span>${fmtDate(n.date)}</span></div>
-        <a class="filelink open" href="${esc(fileHref(n.file))}" target="_blank">Open</a>
+        <a class="filelink open" href="${esc(safeUrl(fileHref(n.file||''))||'#')}" target="_blank" rel="noopener">Open</a>
       </div>`).join('')}</div>`:''}`;
 }
 
@@ -1552,7 +1791,7 @@ async function adminToggle(){
     adminMode=false; $('adminbar').classList.remove('on'); $('btnAdmin').textContent='🔒 Admin'; closePanel(); renderAll(); return;
   }
   if(PUBLISH_URL){
-    let pw = localStorage.getItem(PW_KEY), prompted = false;
+    let pw = safeLocal(()=>localStorage.getItem(PW_KEY), null), prompted = false;
     if(!pw){
       pw = prompt("Enter the admin password:");
       if(pw===null || !pw.trim()) return;
@@ -1563,18 +1802,18 @@ async function adminToggle(){
     btn.textContent='🔒 Admin'; btn.disabled=false;
     if(ok===null){ alert("Can't reach the publish service right now — check your internet connection and try again."); return; }
     if(!ok){
-      localStorage.removeItem(PW_KEY);
+      safeLocal(()=>localStorage.removeItem(PW_KEY));
       alert(prompted ? "Incorrect password." : "Your saved password is no longer valid (it may have been changed). Click Admin to sign in again.");
       return;
     }
-    ADMIN_PW = pw; localStorage.setItem(PW_KEY, pw);
+    ADMIN_PW = pw; safeLocal(()=>localStorage.setItem(PW_KEY, pw));
   }
   /* Fallback mode (no PUBLISH_URL) opens the editor without a passcode on
      purpose: any passcode checked in this file would be readable by anyone
      viewing source, so it would protect nothing. Nothing can be published
      until the admin supplies their own GitHub token in the Publish tab. */
   adminMode=true;
-  if(!EDIT) EDIT = clone(CONTENT);
+  if(!EDIT){ EDIT = clone(CONTENT); offerDraftRestore(); }
   $('adminbar').classList.add('on'); $('btnAdmin').textContent='🔓 Admin';
   renderAll();
 }
@@ -1587,7 +1826,8 @@ async function verifyPw(pw){
   }catch(e){ return null; }
 }
 function signOutDevice(){
-  localStorage.removeItem(PW_KEY); ADMIN_PW=null;
+  if(!confirm("Sign out on this computer?\n\nYou'll need the admin password again to make edits here"+(dirty||STAGED.length?", and anything you haven't published will be lost.":"."))) return;
+  safeLocal(()=>localStorage.removeItem(PW_KEY)); ADMIN_PW=null;
   adminMode=false; $('adminbar').classList.remove('on'); $('btnAdmin').textContent='🔒 Admin'; closePanel(); renderAll();
 }
 function openPanel(){ $('drawer').classList.add('on'); showTab(currentTab); }
@@ -1595,7 +1835,7 @@ function closePanel(){ $('drawer').classList.remove('on'); }
 function discardChanges(){
   if(!confirm("Throw away all unpublished changes?")) return;
   EDIT = clone(CONTENT); STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
-  dirty=false; $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
+  clearDraft(); openEdit=null; dirty=false; $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
   renderAll(); showTab(currentTab);
 }
 
@@ -1671,11 +1911,13 @@ function renderCollectionTab(t){
   }
   if(ed.upload){
     html += `<div class="drop" id="dropzone">📄 <b>Drag &amp; drop</b> — ${esc(ed.upload.hint)}<input type="file" id="dropInput" accept="${ed.upload.accept}" style="display:none" multiple></div>
-      <div id="stagedChips">${STAGED.map(s=>`<span class="stagechip">✓ ${esc(s.name)} staged<button type="button" class="chipx" title="Remove before publishing" aria-label="Remove ${esc(s.name)}" data-unstage="${esc(s.path)}">✕</button></span>`).join('')}</div>
+      <div id="stagedChips">${STAGED.filter(s=>(EDIT[ed.list]||[]).some(it=>it.file===s.path)).map(s=>`<span class="stagechip">✓ ${esc(s.name)} ready to publish<button type="button" class="chipx" title="Remove this file and its ${esc(ed.label.toLowerCase())} entry" aria-label="Remove ${esc(s.name)}" data-unstage="${esc(s.path)}">✕</button></span>`).join('')}</div>
       <div style="height:14px"></div>`;
   }
   html += `<fieldset class="box"><legend>${esc(ed.label)}s</legend><div id="itemList"></div>
-    <button class="btn sm" onclick="addItem('${t}')">+ Add ${esc(ed.label.toLowerCase())}</button></fieldset>
+    ${ed.upload
+      ? `<p class="hint" style="margin:6px 0 0">To add a ${esc(ed.label.toLowerCase())}, drop the file in the box above — that's the only way to get a working link.</p>`
+      : `<button class="btn sm" onclick="addItem('${t}')">+ Add ${esc(ed.label.toLowerCase())}</button>`}</fieldset>
     <div id="itemForm"></div>`;
   $('panelBody').innerHTML = html;
   drawItemList(t);
@@ -1687,10 +1929,12 @@ function drawItemList(t){
   const items = EDIT[ed.list]||[];
   $('itemList').innerHTML = items.map((it,i)=>{
     const s = ed.sum(it);
-    return `<div class="itemrow">
-      <div class="t"><b>${esc(s.b||'(untitled)')}</b><span>${esc(s.s||'')}</span></div>
-      <button class="btn sm" onclick="moveItem('${t}',${i},-1)" ${i===0?'disabled':''}>↑</button>
-      <button class="btn sm" onclick="moveItem('${t}',${i},1)" ${i===items.length-1?'disabled':''}>↓</button>
+    const ordered = t==='comps';   // every other list is sorted by date or pin on the page, so arrows would do nothing
+    const noFile = ed.upload && !it.file && !it.link;
+    return `<div class="itemrow${noFile?' broken':''}">
+      <div class="t"><b>${esc(s.b||'(untitled)')}${it.pinned?' <span class="pinflag">PINNED</span>':''}</b><span>${noFile?'<span class="nofile">⚠ No file attached — this link won\'t work</span>':esc(s.s||'')}</span></div>
+      ${ordered?`<button class="btn sm" onclick="moveItem('${t}',${i},-1)" ${i===0?'disabled':''}>↑</button>
+      <button class="btn sm" onclick="moveItem('${t}',${i},1)" ${i===items.length-1?'disabled':''}>↓</button>`:''}
       <button class="btn sm" onclick="editItem('${t}',${i})">Edit</button>
       <button class="btn sm danger" onclick="delItem('${t}',${i})">✕</button>
     </div>`;
@@ -1705,23 +1949,34 @@ function moveItem(t,i,dir){
   const list = EDIT[EDITORS[t].list];
   const j=i+dir; if(j<0||j>=list.length) return;
   [list[i],list[j]]=[list[j],list[i]];
+  $('itemForm').innerHTML='';   // the open form was bound to the old position
   markDirty(); drawItemList(t);
 }
 function delItem(t,i){
   const ed=EDITORS[t], list=EDIT[ed.list];
-  if(!confirm(`Delete this ${ed.label.toLowerCase()}?`)) return;
+  const title=(ed.sum(list[i]).b||'(untitled)');
+  if(!confirm(`Delete the ${ed.label.toLowerCase()} "${title}"?\n\nThis can't be undone once you publish.`)) return;
   list.splice(i,1); markDirty(); drawItemList(t); $('itemForm').innerHTML='';
 }
 function addItem(t){
   const ed=EDITORS[t], list=EDIT[ed.list];
-  const it={id:uid()};
+  const it={id:uid(), _new:true};
   ed.fields.forEach(f=>{ it[f.k] = f.t==='check'?false : f.t==='standings'?[] : ''; });
   if(t==='comps') it.active=true;
   list.unshift(it);
   drawItemList(t); editItem(t,0);
 }
+/* Cancel on a never-saved item removes it, so clicking Add by mistake
+   doesn't leave an empty card that publishes to the live page. */
+function cancelEdit(t,i){
+  const list=EDIT[EDITORS[t].list], it=list[i];
+  if(it && it._new){ list.splice(i,1); drawItemList(t); }
+  openEdit=null; $('itemForm').innerHTML='';
+}
+let openEdit=null;   // {t,i} of the edit form currently on screen
 function editItem(t,i){
   const ed=EDITORS[t], it=EDIT[ed.list][i];
+  openEdit={t,i};
   $('itemForm').innerHTML = `<fieldset class="box"><legend>Edit ${esc(ed.label.toLowerCase())}</legend>
     <div class="frm">
       ${ed.fields.map(f=>{
@@ -1736,7 +1991,7 @@ function editItem(t,i){
     </div>
     <p style="margin:11px 0 0;display:flex;gap:8px">
       <button class="btn sm primary" onclick="saveItem('${t}',${i})">Save ${esc(ed.label.toLowerCase())}</button>
-      <button class="btn sm" onclick="$('itemForm').innerHTML=''">Cancel</button>
+      <button class="btn sm" onclick="cancelEdit('${t}',${i})">Cancel</button>
     </p></fieldset>`;
   $('itemForm').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
@@ -1745,10 +2000,37 @@ function saveItem(t,i){
   $('itemForm').querySelectorAll('[data-k]').forEach(el=>{
     const f = ed.fields.find(x=>x.k===el.dataset.k);
     if(f.t==='check') it[f.k]=el.checked;
-    else if(f.t==='standings') it[f.k]=el.value.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{ const m=l.match(/^(.*?)[,|]\s*([\d.,$%]+)\s*$/); return m?{name:m[1].trim(),value:m[2]}:{name:l,value:''}; });
+    else if(f.t==='standings'){
+      /* Accept comma, pipe, tab or dash, and ANY trailing value — the old
+         pattern demanded a number, so "Maria Delgado, 1st" silently
+         became one long name with a blank score. */
+      const bad=[];
+      it[f.k]=el.value.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{
+        const m=l.match(/^(.*\S)\s*(?:[,|\t]|\s[-–—]\s)\s*(\S.*)$/);
+        if(!m){ bad.push(l); return {name:l, value:''}; }
+        return {name:m[1].trim(), value:m[2].trim()};
+      });
+      if(bad.length) alert('These lines had no score, so they were saved with a blank one:\n\n'+bad.slice(0,5).join('\n')+'\n\nUse "Name, score" — for example "Maria Delgado, 62" or "Maria Delgado, 1st".');
+    }
     else it[f.k]=el.value.trim();
   });
+  delete it._new;
+  openEdit=null;
   markDirty(); drawItemList(t); $('itemForm').innerHTML='';
+}
+
+/* Commit anything typed but not yet "saved" before publishing. Without
+   this, an admin who fills in a form and goes straight for the big blue
+   Publish button loses that text and is told the publish succeeded. */
+function flushOpenForm(){
+  if($('bnText') && EDIT.banner){
+    const t=$('bnText').value.trim(), l=$('bnLink').value.trim(), a=$('bnActive').checked;
+    if(t!==(EDIT.banner.text||'') || l!==(EDIT.banner.link||'') || a!==!!EDIT.banner.active) saveBanner();
+  }
+  if(openEdit && $('itemForm') && $('itemForm').querySelector('[data-k]')){
+    const {t,i}=openEdit;
+    if(EDIT[EDITORS[t].list] && EDIT[EDITORS[t].list][i]) saveItem(t,i);
+  }
 }
 
 /* ---------- drag & drop uploads ---------- */
@@ -1766,6 +2048,8 @@ function wireDropzone(t){
 function unstageFile(path){
   const i = STAGED.findIndex(s=>s.path===path);
   if(i<0) return;
+  if(!confirm(`Remove "${STAGED[i].name}" and the entry that goes with it?`)) return;
+  const form=$('itemForm'); if(form) form.innerHTML='';
   URL.revokeObjectURL(STAGED[i].blobUrl);
   STAGED.splice(i,1);
   ['newsletters','reports','resources'].forEach(list=>{
@@ -1777,27 +2061,53 @@ $('panelBody').addEventListener('click', e=>{
   const b = e.target.closest('[data-unstage]');
   if(b) unstageFile(b.dataset.unstage);
 });
+/* "2026-07_D32_newsletter_FINAL_v2.pdf" -> "2026 07 D32 Newsletter FINAL V2"
+   so the public title is never a raw filename. */
+function prettyTitle(name){
+  return name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim()
+    .replace(/\b\w/g, c=>c.toUpperCase()) || 'Untitled';
+}
 function slugify(name){
   const dot=name.lastIndexOf('.');
   const base=(dot>0?name.slice(0,dot):name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60)||'file';
   const ext=dot>0?name.slice(dot).toLowerCase():'';
   return base+ext;
 }
+const MAX_UPLOAD_MB = 20;
 function stageFile(t, file){
-  const ext=(file.name.toLowerCase().match(/\.([a-z0-9]+)$/)||[])[1]||'';
-  if(t==='reports' && ['xlsx','xls','csv'].includes(ext)) return stageTableFile(file);
   const ed=EDITORS[t];
+  const ext=(file.name.toLowerCase().match(/\.([a-z0-9]+)$/)||[])[1]||'';
+  /* Dropped files bypass the file picker's accept filter entirely, so
+     everything is checked here in plain language before it can be
+     published as a broken link. */
+  if(!file.size && !file.type){
+    alert('That looks like a folder. Drop the individual files instead.');
+    return;
+  }
+  const allowed=(ed.upload.accept||'').split(',').map(x=>x.trim().replace(/^\./,'').toLowerCase()).filter(Boolean);
+  if(allowed.length && !allowed.includes(ext)){
+    alert(`"${file.name}" is a .${ext||'?'} file.\n\nThis section takes: ${allowed.map(a=>'.'+a).join(', ')}.\n\nIf it's a Word or Pages document, save it as a PDF first.`);
+    return;
+  }
+  if(file.size > MAX_UPLOAD_MB*1024*1024){
+    alert(`"${file.name}" is ${(file.size/1048576).toFixed(1)} MB.\n\nThe limit is ${MAX_UPLOAD_MB} MB, and anything over about 3 MB is slow for agents on their phones.\n\nCompress the PDF and try again.`);
+    return;
+  }
+  if(t==='reports' && ['xlsx','xls','csv'].includes(ext)) return stageTableFile(file);
   const reader=new FileReader();
+  reader.onerror=()=>alert(`Couldn't read "${file.name}". If it's on a shared or network drive, copy it to your desktop first and try again.`);
   reader.onload=()=>{
     const b64=reader.result.split(',')[1];
     let path=ed.upload.folder+slugify(file.name);
     if(STAGED.some(s=>s.path===path) || JSON.stringify(EDIT).includes('"'+path+'"')) path=ed.upload.folder+Date.now()+'-'+slugify(file.name);
     STAGED.push({path, name:file.name, base64:b64, blobUrl:URL.createObjectURL(file)});
     const today=new Date().toISOString().slice(0,10);
-    if(t==='nl') EDIT.newsletters.unshift({id:uid(), title:file.name.replace(/\.[^.]+$/,''), date:today, file:path});
-    if(t==='reports') EDIT.reports.unshift({id:uid(), title:file.name.replace(/\.[^.]+$/,''), date:today, category:'Other', note:'', file:path});
-    if(t==='resources') EDIT.resources.unshift({id:uid(), title:file.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' '), date:today, category:'Other', note:'', file:path});
+    const nice=prettyTitle(file.name);
+    if(t==='nl') EDIT.newsletters.unshift({id:uid(), title:nice, date:today, file:path});
+    if(t==='reports') EDIT.reports.unshift({id:uid(), title:nice, date:today, category:'Other', note:'', file:path});
+    if(t==='resources') EDIT.resources.unshift({id:uid(), title:nice, date:today, category:'Other', note:'', file:path});
     markDirty(); renderCollectionTab(t);
+    editItem(t,0);   // put the title/category form on screen instead of hoping they notice
   };
   reader.readAsDataURL(file);
 }
@@ -1866,7 +2176,9 @@ async function openViewer(rid){
   try{
     const res=await fetch(fileHref(r.file),{cache:'no-store'});
     if(!res.ok) throw new Error('HTTP '+res.status);
-    TV.data=await res.json(); TV.sheet=0;
+    const d=await res.json();
+    if(!d || !Array.isArray(d.sheets) || !d.sheets.length) throw new Error('unexpected file shape');
+    TV.data=d; TV.sheet=0;
     renderViewer();
   }catch(e){
     $('tvBody').innerHTML='<div class="empty">Could not load this report.</div>';
@@ -1876,7 +2188,16 @@ function renderViewer(){
   const d=TV.data; if(!d) return;
   $('tvTabs').innerHTML = d.sheets.length>1
     ? d.sheets.map((s,i)=>`<button class="${i===TV.sheet?'on':''}" onclick="TV.sheet=${i};renderViewer()">${esc(s.name)}</button>`).join('') : '';
-  const rows=d.sheets[TV.sheet].rows;
+  const all=d.sheets[TV.sheet].rows;
+  /* These exports carry a title and blank rows above the real header, so
+     row 0 is often not the headings — find the first row that looks like
+     one (mostly non-empty, mostly non-numeric). */
+  let hi=0;
+  for(let i=0;i<Math.min(all.length,15);i++){
+    const r=all[i]||[], filled=r.filter(c=>String(c).trim()!=='');
+    if(filled.length>=Math.max(2,Math.ceil(r.length*0.5)) && filled.filter(c=>/^-?[\d.,$%]+$/.test(String(c).trim())).length<=filled.length/2){ hi=i; break; }
+  }
+  const rows=all.slice(hi);
   const head=rows[0]||[];
   const filter=$('tvSearch').value.toLowerCase().trim();
   const body=rows.slice(1).filter(r=> !filter || r.some(c=>String(c).toLowerCase().includes(filter)));
@@ -1888,7 +2209,20 @@ function renderViewer(){
   $('tvFoot').textContent=`${body.length} row${body.length===1?'':'s'}${filter?' matching "'+$('tvSearch').value+'"':''} · ${d.sheets[TV.sheet].name}`;
 }
 function closeViewer(){ $('tvOverlay').classList.remove('on'); document.body.style.overflow=''; TV.data=null; }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape' && $('tvOverlay').classList.contains('on')) closeViewer(); });
+let tvDebounce;
+$('tvSearch').addEventListener('input',()=>{ clearTimeout(tvDebounce); tvDebounce=setTimeout(renderViewer,140); });
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape') return;
+  if($('tvOverlay').classList.contains('on')) closeViewer();
+  else if($('drillModal').classList.contains('open')) closeDrill();
+});
+/* the chart is drawn at a different aspect below 560px, so a rotate
+   needs a redraw or the plot stays squashed */
+let rotTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(rotTimer);
+  rotTimer=setTimeout(()=>{ const p=drillPerson(); if(p && $('drillModal').classList.contains('open')) renderDrillChart(p); },200);
+});
 
 /* ---------- district resources ----------
    Same shape as the reports library but for evergreen documents —
@@ -2014,8 +2348,21 @@ async function ghPut(cfg, path, base64, message){
   const res=await fetch(url,{method:'PUT',headers,body:JSON.stringify({message,branch:cfg.branch,content:base64,...(sha?{sha}:{})})});
   if(!res.ok){ const e=await res.json().catch(()=>({})); throw new Error(path+': '+(e.message||res.status)); }
 }
+function brokenItems(){
+  const out=[];
+  ['nl','reports','resources'].forEach(t=>{
+    const ed=EDITORS[t];
+    (EDIT[ed.list]||[]).forEach(it=>{ if(!it.file && !it.link) out.push(ed.label+': '+(it.title||'(untitled)')); });
+  });
+  return out;
+}
 async function publishAll(){
-  if(!dirty && !STAGED.length){ $('pubStat').textContent='Nothing to publish.'; return; }
+  flushOpenForm();
+  if(!dirty && !STAGED.length){ $('pubStat').textContent='Nothing has changed yet — make an edit first.'; return; }
+  const broken=brokenItems();
+  if(broken.length && !confirm('These items have no file attached, so their link will not work on the site:\n\n'+broken.join('\n')+'\n\nPublish anyway?')) return;
+  const n=STAGED.length;
+  if(!confirm('Publish to the live site?\n\n'+(n?n+' new file'+(n===1?'':'s')+' and the ':'The ')+'page content will go live for everyone within a minute or two.')) return;
   if(PUBLISH_URL) return publishViaHelper();
   const cfg=ghCfg();
   if(!cfg.owner||!cfg.repo||!cfg.token){ showTab('publish'); const m=$('ghMsg'); m.className='msg err'; m.textContent='Fill in the GitHub settings above first.'; return; }
@@ -2029,7 +2376,7 @@ async function publishAll(){
     await ghPut(cfg, 'content.json', btoa(unescape(encodeURIComponent(json))), 'Hub: update content');
     CONTENT=clone(EDIT);
     STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
-    dirty=false; $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
+    dirty=false; clearDraft(); $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
     renderAll();
     stat.textContent='✅ Published! Live for everyone within a minute or two.';
   }catch(err){
@@ -2050,14 +2397,16 @@ async function publishViaHelper(){
       body:JSON.stringify({action:'publish', password:ADMIN_PW, message:'Hub update via admin panel', files})});
     const res=await r.json().catch(()=>({}));
     if(r.status===401){ localStorage.removeItem(PW_KEY); ADMIN_PW=null; throw new Error('Password no longer valid — click Admin to sign in again.'); }
-    if(!r.ok || !res.ok) throw new Error(res.error || ('HTTP '+r.status));
+    if(!r.ok || !res.ok){ const er=new Error(res.error || ('HTTP '+r.status)); er.published=res.published; throw er; }
     CONTENT=clone(EDIT);
     STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
-    dirty=false; $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
+    dirty=false; clearDraft(); $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
     renderAll();
     stat.textContent='✅ Published! Live for everyone within a minute or two.';
   }catch(err){
-    stat.textContent='❌ '+err.message;
+    /* say which files did make it, so a retry isn't a mystery */
+    const partial = err.published && err.published.length;
+    stat.textContent='❌ '+err.message + (partial?' — some files uploaded but the page content did not. Press Publish again to finish.':'');
   }
 }
 function exportBundle(){

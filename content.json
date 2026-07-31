@@ -78,11 +78,11 @@
       "id": "c-producercup",
       "active": true,
       "title": "Producer Cup — Q2 winners",
-      "period": "Q2 2026",
-      "ends": "2026-09-30",
+      "period": "Q2 2026 · Apr 1 – Jun 30",
+      "ends": "2026-06-30",
       "prize": "Quarterly recognition",
       "metricLabel": "Q2 final placing",
-      "description": "Congratulations to the Q2 Producer Cup top five. Q3 standings run through September 30.",
+      "description": "Congratulations to the Q2 Producer Cup top five. Q3 standings will be posted after the quarter closes on September 30.",
       "standings": [
         {
           "name": "McKenzie Scruggs — Jeff Pechacek Agency",
