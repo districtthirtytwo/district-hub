@@ -166,5 +166,14 @@
       "note": ""
     }
   ],
-  "resources": []
+  "resources": [
+    {
+      "id": "res-folio",
+      "title": "2026 Folio Close Date Calendar",
+      "category": "Programs",
+      "note": "Every close date for the year, one page",
+      "date": "2026-07-31",
+      "file": "files/folio-close-calendar-2026.pdf"
+    }
+  ]
 }

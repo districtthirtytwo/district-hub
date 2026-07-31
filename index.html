@@ -286,6 +286,23 @@
   .loadfail.on{display:block;}
   .loadfail b{display:block;font-size:14px;margin-bottom:3px;color:#7a1119;}
 
+  /* ---------- folio close strip ----------
+     Deliberately gold rather than navy so it reads as a deadline, not
+     as another news banner. */
+  .folio{margin-top:14px;background:linear-gradient(90deg,#fffaf0,#fff5e0);border:1px solid #f0d99b;border-left:5px solid var(--gold);border-radius:14px;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:var(--sh);}
+  .folio .fflag{background:var(--gold);color:#fff;border-radius:8px;font-size:10.5px;font-weight:800;letter-spacing:1px;padding:4px 9px;text-transform:uppercase;white-space:nowrap;}
+  .folio .fmain{min-width:0;}
+  .folio .fmain b{display:block;font-size:15px;color:#7a5a05;font-weight:800;line-height:1.25;}
+  .folio .fmain span{display:block;font-size:11.5px;color:#9a7a2a;font-weight:600;margin-top:1px;}
+  .folio .fcount{margin-left:auto;background:#fff;border:1px solid #f0d99b;border-radius:10px;padding:5px 13px;text-align:center;flex:none;}
+  .folio .fcount b{display:block;font-size:18px;color:#7a5a05;font-weight:800;line-height:1.1;}
+  .folio .fcount span{font-size:9px;letter-spacing:.9px;text-transform:uppercase;color:#9a7a2a;font-weight:800;}
+  .folio .fcount.today{background:var(--red);border-color:var(--red);}
+  .folio .fcount.today b,.folio .fcount.today span{color:#fff;}
+  .folio .fcount.soon{background:#fdf3d4;}
+  .folio .fcal{font-size:12px;font-weight:700;color:#7a5a05;white-space:nowrap;text-decoration:underline;text-decoration-color:rgba(122,90,5,.35);text-underline-offset:3px;}
+  .folio .fcal:hover{color:var(--navy);text-decoration-color:var(--navy);}
+
   /* ---------- live data status ---------- */
   .livepill{font-size:11.5px;font-weight:700;color:var(--ok);white-space:nowrap;display:none;align-items:center;gap:5px;}
   .livepill.on{display:inline-flex;}
@@ -402,6 +419,15 @@
     .banner p{font-size:13px;}
     .banner a{margin-left:0;}
 
+    /* folio: flag and countdown share the top line, details underneath */
+    .folio{padding:11px 14px;gap:8px 12px;border-radius:12px;}
+    .folio .fflag{order:1;}
+    .folio .fcount{order:2;margin-left:auto;padding:3px 11px;}
+    .folio .fcount b{font-size:15px;}
+    .folio .fmain{order:3;flex:1 1 100%;}
+    .folio .fmain b{font-size:14px;}
+    .folio .fcal{order:4;flex:1 1 100%;}
+
     .stat{padding:10px 12px;min-width:0;}
     .stat .scope{display:none;}
     .boardwrap{max-height:none;}
@@ -503,6 +529,17 @@
     <span class="flag">District News</span>
     <p id="bannerText"></p>
     <a id="bannerLink" href="#">See more →</a>
+  </div>
+
+  <!-- ============ FOLIO CLOSE ============ -->
+  <div class="folio" id="folioStrip" style="display:none">
+    <span class="fflag">Folio Close</span>
+    <div class="fmain">
+      <b id="folioDate"></b>
+      <span id="folioNext"></span>
+    </div>
+    <div class="fcount" id="folioCount"></div>
+    <a class="fcal" id="folioCal" href="#resources">Full 2026 calendar →</a>
   </div>
 
   <!-- shown only when content.json can't be loaded — never silently fake data -->
@@ -788,9 +825,59 @@ function markDirty(){ dirty=true; $('dirtyFlag').classList.add('on'); $('dirtyFl
 
 function renderAll(){
   renderBanner(); renderBoard(); renderNews(); renderEvents();
-  renderComps(); renderNewsletter(); renderReports(); renderResources();
+  renderComps(); renderNewsletter(); renderReports(); renderResources(); renderFolio();
   $('lastUpdated').textContent = fmtDate(data().updated) || "—";
 }
+
+/* =====================================================================
+   FOLIO CLOSE
+   Published annual calendar, so the dates are known in advance and hard-
+   coded rather than fetched. The strip always shows the NEXT close: on
+   the close date itself it reads "closes today", and it rolls to the
+   following month the day after. Add the next year's list here when
+   Farmers publishes it — the strip tells you when it runs out instead
+   of silently disappearing.
+   ===================================================================== */
+const FOLIO_CLOSE = [
+  '2026-01-20','2026-02-18','2026-03-18','2026-04-17','2026-05-19','2026-06-18',
+  '2026-07-17','2026-08-19','2026-09-18','2026-10-19','2026-11-17','2026-12-17'
+];
+function midnight(d){ const x=new Date(d); x.setHours(0,0,0,0); return x; }
+function folioDates(){ return FOLIO_CLOSE.map(s=>midnight(new Date(s+'T12:00:00'))).sort((a,b)=>a-b); }
+function nextFolioClose(today){
+  const t=midnight(today||new Date());
+  return folioDates().find(d=>d.getTime()>=t.getTime()) || null;   // >= so the close day itself still counts
+}
+function renderFolio(today){
+  const strip=$('folioStrip');
+  const now=midnight(today||new Date());
+  const next=nextFolioClose(now);
+  if(!next){
+    /* ran off the end of the published calendar — say so rather than
+       showing nothing, which would look like there is no deadline */
+    strip.style.display='flex';
+    $('folioDate').textContent='2027 calendar not posted yet';
+    $('folioNext').textContent='The '+FOLIO_CLOSE[FOLIO_CLOSE.length-1].slice(0,4)+' folio calendar has run out — ask the district office for next year’s dates.';
+    $('folioCount').className='fcount';
+    $('folioCount').innerHTML='<b>—</b><span>days</span>';
+    return;
+  }
+  strip.style.display='flex';
+  const days=Math.round((next-now)/86400000);
+  $('folioDate').textContent = next.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  const after = folioDates().find(d=>d.getTime()>next.getTime());
+  $('folioNext').textContent = days===0
+    ? 'Folio closes today — get business submitted.'
+    : (after ? 'Next close after this one: '+after.toLocaleDateString('en-US',{month:'long',day:'numeric'}) : 'Last published close of the year.');
+  const c=$('folioCount');
+  c.className='fcount'+(days===0?' today':(days<=5?' soon':''));
+  c.innerHTML = days===0 ? '<b>TODAY</b><span>closes</span>'
+    : `<b>${days}</b><span>day${days===1?'':'s'} left</span>`;
+}
+/* Re-check on a timer and whenever the tab regains focus, so a page left
+   open overnight rolls over on its own instead of showing a stale date. */
+setInterval(()=>renderFolio(), 10*60*1000);
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) renderFolio(); });
 
 /* ---------- banner ---------- */
 function renderBanner(){
