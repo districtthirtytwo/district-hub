@@ -87,7 +87,8 @@
   .pod .who span{font-size:11.5px;color:var(--muted);}
   .pod .val{margin-left:auto;text-align:right;}
   .pod .val b{font-size:22px;color:var(--navy);}
-  .pod .val span{display:block;font-size:10px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;font-weight:700;}
+  .pod .val span{display:block;font-size:10px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;font-weight:700;white-space:nowrap;}
+  .pod .val{flex:none;}
   table.board{width:100%;border-collapse:collapse;font-size:13.5px;}
   table.board th{position:sticky;top:0;background:#fff;text-align:left;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;border-bottom:2px solid var(--line);}
   table.board td{padding:9px 10px;border-bottom:1px solid #f1f3f8;vertical-align:middle;}
@@ -285,6 +286,68 @@
   .loadfail.on{display:block;}
   .loadfail b{display:block;font-size:14px;margin-bottom:3px;color:#7a1119;}
 
+  /* ---------- live data status ---------- */
+  .livepill{font-size:11.5px;font-weight:700;color:var(--ok);white-space:nowrap;display:none;align-items:center;gap:5px;}
+  .livepill.on{display:inline-flex;}
+  .livepill.err{color:var(--red);}
+  .livepill.busy{color:var(--muted);}
+  table.board tr.click{cursor:pointer;}
+  table.board tr.click:hover td{background:#f4f7fc;}
+  .rowchev{color:#b6bfd0;font-size:14px;font-weight:800;}
+  .pod.click{cursor:pointer;}
+  .pod.click:hover{border-color:#c4d7fb;background:linear-gradient(180deg,#fff,#f4f8ff);}
+  .ownflag{font-size:8.5px;font-weight:800;background:var(--gold-pale);color:#8a6a0e;border-radius:5px;padding:1px 5px;margin-left:6px;letter-spacing:.4px;vertical-align:1px;}
+
+  /* ---------- drill-down modal (ported from the performance tracker) ---------- */
+  .modal{position:fixed;inset:0;background:rgba(8,20,45,.5);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;z-index:130;overflow:auto;}
+  .modal.open{display:flex;}
+  .modal .sheet{background:#fff;border-radius:18px;max-width:880px;width:100%;padding:22px;box-shadow:0 24px 70px rgba(8,20,45,.32);}
+  .drill-hd{display:flex;align-items:center;gap:13px;margin-bottom:4px;flex-wrap:wrap;}
+  .drill-hd .av{width:46px;height:46px;border-radius:50%;background:#e8eefc;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:var(--navy);flex:none;}
+  .drill-hd h2{margin:0;font-size:20px;color:var(--navy);}
+  .drill-hd .sub{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px;}
+  .drill-hd .xbtn{margin-left:auto;}
+  .chiprow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 4px;}
+  .chip{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center;}
+  .chip .cl{font-size:9.5px;font-weight:800;letter-spacing:.8px;color:var(--muted);text-transform:uppercase;}
+  .chip .cv{display:flex;justify-content:center;gap:16px;margin-top:6px;}
+  .chip .cv b{font-size:19px;font-weight:800;}
+  .chip .cv .cq{color:var(--blue);} .chip .cv .cn{color:var(--red);}
+  .chip .cv small{display:block;font-size:8.5px;font-weight:700;color:var(--muted);letter-spacing:.5px;}
+  .trendcard{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:14px;}
+  .trend-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px;}
+  .trend-top h3{margin:0;font-size:11.5px;color:var(--navy);letter-spacing:.8px;text-transform:uppercase;}
+  .perseg{display:inline-flex;background:#f1f5f9;border-radius:9px;padding:3px;}
+  .perseg button{border:0;background:transparent;padding:6px 14px;border-radius:7px;font-weight:700;color:var(--muted);cursor:pointer;font-size:12.5px;font-family:inherit;}
+  .perseg button.active{background:var(--navy);color:#fff;}
+  .trend-top .legend{display:flex;gap:14px;margin-left:auto;font-size:12px;color:var(--ink);font-weight:600;align-items:center;}
+  .legend .sw{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--blue);margin-right:5px;vertical-align:-1px;}
+  .legend .swn{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red);margin-right:5px;vertical-align:-1px;}
+  .chartwrap{position:relative;}
+  .chartwrap svg{display:block;width:100%;height:auto;}
+  .chartwrap rect.hov{fill:transparent;}
+  .chartwrap rect.hov:hover{fill:rgba(37,99,235,.07);}
+  .ctip{position:absolute;pointer-events:none;background:var(--navy);color:#fff;font-size:12px;border-radius:8px;padding:7px 10px;box-shadow:0 6px 16px rgba(8,20,45,.25);display:none;white-space:nowrap;z-index:5;transform:translate(-50%,-112%);}
+  .ctip .tq{color:#9ec2ff;font-weight:800;} .ctip .tn{color:#ffb3ba;font-weight:800;}
+  .trend-empty{padding:28px 10px;text-align:center;color:var(--muted);font-size:13px;line-height:1.5;}
+  .prodlist{margin-top:16px;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .prodlist .pl-hd{background:#f8fafc;padding:10px 16px;font-size:11.5px;font-weight:800;letter-spacing:.6px;color:var(--navy);}
+  .prodlist .pl-hd span{color:var(--muted);font-weight:600;letter-spacing:.3px;text-transform:none;}
+  .plcols{display:grid;grid-template-columns:1fr 74px 74px 16px;gap:8px;padding:8px 14px 4px;font-size:9px;font-weight:800;letter-spacing:.6px;color:var(--muted);}
+  .plcols div:nth-child(2),.plcols div:nth-child(3){text-align:center;}
+  .plrow{display:grid;grid-template-columns:1fr 74px 74px 16px;gap:8px;align-items:center;padding:9px 14px;border-top:1px solid var(--line);cursor:pointer;transition:background .12s;}
+  .plrow:hover{background:#f4f7fc;}
+  .plrow .who2{display:flex;align-items:center;gap:10px;min-width:0;}
+  .plrow .av2{width:30px;height:30px;border-radius:50%;background:#e8eefc;color:var(--navy);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;}
+  .plrow .nm2{font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .plrow .pv{text-align:center;font-weight:800;font-size:14px;border-radius:7px;padding:4px 0;}
+  .plrow .pv.q{background:var(--blue-pale);color:var(--blue);}
+  .plrow .pv.n{background:var(--red-pale);color:var(--red);}
+  .plrow .chev2{color:#b6bfd0;font-size:13px;}
+
+  /* left column of the docs grid stacks newsletter above resources */
+  .doccol{display:flex;flex-direction:column;gap:16px;min-width:0;}
+
   /* ---------- accessibility / focus ---------- */
   :focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:6px;}
   .skip{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;padding:10px 16px;border-radius:0 0 10px 0;z-index:200;font-weight:700;font-size:13px;text-decoration:none;}
@@ -361,6 +424,21 @@
     .tv-hd{padding:11px 14px;}
     .tv-hd .right{width:100%;margin-left:0;}
     .tv-hd input{flex:1;width:auto;}
+
+    /* drill-down goes full-bleed on phones */
+    .modal{padding:0;}
+    .modal .sheet{border-radius:0;min-height:100vh;padding:16px;}
+    .chiprow{grid-template-columns:repeat(2,1fr);}
+    .drill-hd{flex-wrap:nowrap;gap:10px;}
+    .drill-hd > div:not(.av){min-width:0;}
+    .drill-hd h2{font-size:16px;overflow:hidden;text-overflow:ellipsis;}
+    .drill-hd .av{width:38px;height:38px;font-size:13px;}
+    .drill-hd .xbtn{flex:none;align-self:flex-start;}
+    .drill-hd .sub{font-size:11px;}
+    .trendcard{padding:12px;}
+    .trend-top .legend{margin-left:0;width:100%;font-size:11.5px;}
+    .plcols,.plrow{grid-template-columns:1fr 58px 58px 14px;}
+    .doccol{gap:14px;}
 
     /* admin editor */
     .frm{grid-template-columns:1fr;}
@@ -442,6 +520,10 @@
         <span class="accent"></span>
         <h2>Quotes &amp; New Business Scoreboard</h2>
         <span class="sub asof" id="lbAsOf"></span>
+        <div class="right">
+          <span class="livepill" id="liveStatus"></span>
+          <button class="btn sm" id="btnRefresh" type="button" title="Pull the latest numbers from the district sheets">↻ Refresh</button>
+        </div>
       </div>
       <div class="filterbar">
         <div class="fgroup">
@@ -462,8 +544,10 @@
         <div class="fgroup">
           <span class="flabel">Period</span>
           <div class="seg" id="segPeriod">
-            <button data-p="m" class="on">MTD</button>
-            <button data-p="y">YTD</button>
+            <button data-p="daily">Daily</button>
+            <button data-p="weekly">Weekly</button>
+            <button data-p="monthly" class="on">MTD</button>
+            <button data-p="ytd">YTD</button>
           </div>
         </div>
         <div class="fgroup">
@@ -491,6 +575,34 @@
       </div>
     </div>
 
+    <!-- ============ DRILL-DOWN (producer / agency deep dive) ============ -->
+    <div class="modal drill" id="drillModal">
+      <div class="sheet">
+        <div class="drill-hd">
+          <button class="btn sm" id="drillBackBtn" type="button" style="display:none">← Back</button>
+          <div class="av" id="drillAv"></div>
+          <div>
+            <h2 id="drillName"></h2>
+            <div class="sub" id="drillSub"></div>
+          </div>
+          <button class="btn sm xbtn" type="button" id="drillClose">✕ Close</button>
+        </div>
+        <div class="chiprow" id="drillChips"></div>
+        <div class="trendcard">
+          <div class="trend-top">
+            <h3>Trend</h3>
+            <div class="perseg" id="drillSeg">
+              <button data-v="daily" type="button">Daily</button>
+              <button data-v="weekly" type="button" class="active">Weekly</button>
+            </div>
+            <div class="legend"><span><span class="sw"></span>Quotes</span><span><span class="swn"></span>New Business</span></div>
+          </div>
+          <div class="chartwrap" id="drillChart"></div>
+        </div>
+        <div id="drillProds"></div>
+      </div>
+    </div>
+
     <!-- Competitions -->
     <div class="card" id="competitions">
       <div class="card-hd"><span class="accent"></span><h2>Competitions &amp; Promos</h2></div>
@@ -511,11 +623,22 @@
     </div>
   </div>
 
-  <!-- ============ NEWSLETTER + REPORTS ============ -->
+  <!-- ============ NEWSLETTER + RESOURCES + REPORTS ============ -->
   <div class="docsgrid">
-    <div class="card" id="newsletter">
-      <div class="card-hd"><span class="accent blue"></span><h2>District Newsletter</h2></div>
-      <div class="card-bd" id="nlArea"></div>
+    <div class="doccol">
+      <div class="card" id="newsletter">
+        <div class="card-hd"><span class="accent blue"></span><h2>District Newsletter</h2></div>
+        <div class="card-bd" id="nlArea"></div>
+      </div>
+      <div class="card" id="resources">
+        <div class="card-hd">
+          <span class="accent"></span><h2>District Resources</h2>
+          <div class="right">
+            <input type="search" class="searchbox" id="resSearch" placeholder="Filter resources…" aria-label="Filter resources">
+          </div>
+        </div>
+        <div class="card-bd filelist" id="resourceList"></div>
+      </div>
     </div>
     <div class="card" id="reports">
       <div class="card-hd">
@@ -529,7 +652,7 @@
   </div>
 
   <footer>
-    <b>District Hub</b> · maintained by the district office · last updated <span id="lastUpdated">—</span>
+    <b>District Hub</b> · created and maintained by Conrey Guy · last updated <span id="lastUpdated">—</span>
   </footer>
 </div>
 
@@ -564,6 +687,7 @@
       <button data-t="comps" onclick="showTab('comps')">Competitions</button>
       <button data-t="nl" onclick="showTab('nl')">Newsletters</button>
       <button data-t="reports" onclick="showTab('reports')">Reports</button>
+      <button data-t="resources" onclick="showTab('resources')">Resources</button>
       <button data-t="board" onclick="showTab('board')">Scoreboard</button>
       <button data-t="publish" onclick="showTab('publish')">Publish ⚙</button>
     </div>
@@ -590,8 +714,7 @@
    stale or demo data, which would show real agents fabricated numbers. */
 const EMPTY_CONTENT = {
   updated: "", banner: {active:false, text:"", link:""},
-  news: [], events: [], competitions: [], newsletters: [], reports: [],
-  leaderboard: {asOf:"", note:"", people:[]}
+  news: [], events: [], competitions: [], newsletters: [], reports: [], resources: []
 };
 
 /* =====================================================================
@@ -657,6 +780,7 @@ async function boot(){
     $('loadFail').classList.add('on');
   }
   renderAll();
+  bootLive();
 }
 
 function data(){ return (adminMode && EDIT) ? EDIT : CONTENT; }
@@ -664,7 +788,7 @@ function markDirty(){ dirty=true; $('dirtyFlag').classList.add('on'); $('dirtyFl
 
 function renderAll(){
   renderBanner(); renderBoard(); renderNews(); renderEvents();
-  renderComps(); renderNewsletter(); renderReports();
+  renderComps(); renderNewsletter(); renderReports(); renderResources();
   $('lastUpdated').textContent = fmtDate(data().updated) || "—";
 }
 
@@ -677,8 +801,250 @@ function renderBanner(){
   if(href){ a.style.display='inline'; a.href=href; } else { a.style.display='none'; }
 }
 
-/* ---------- scoreboard ---------- */
-const LB = { view:'producer', dist:'all', period:'m', metric:'q', staffOnly:true };
+/* =====================================================================
+   SCOREBOARD — live from the district Google Sheets
+   The board keeps its position and controls, but the numbers are no
+   longer hand-fed: both districts' published CSV exports are parsed in
+   the browser on every visit. Rows are clickable for a per-person
+   drill-down with day-by-day and week-by-week trends.
+   ===================================================================== */
+const SHEET_CSV_URL_32 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_FOf8EcLIkjobzgh26E0Dcg7CSa2MsETwKvCzQF5oKiRvVUm-zpeExB8w1nipKZjnQjCIZpQMf1QP/pub?gid=0&single=true&output=csv";
+const SHEET_CSV_URL_49 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_FOf8EcLIkjobzgh26E0Dcg7CSa2MsETwKvCzQF5oKiRvVUm-zpeExB8w1nipKZjnQjCIZpQMf1QP/pub?gid=1994705473&single=true&output=csv";
+const LIVE_CACHE_KEY = 'd32hub_live_v1';
+const LIVE_MAX_AGE_MS = 30*60*1000;   // serve cache instantly, refresh in the background past this
+
+const PERIODS = ['daily','weekly','monthly','ytd'];
+const LB = { view:'producer', dist:'all', period:'monthly', metric:'q', staffOnly:true };
+let PEOPLE = [];              // every producer + agency across both districts
+let dataAsOf = null;          // newest date present in the export
+let dailyAsOf = null;         // last complete business day (what "Daily" means)
+let liveLoading = false;
+
+/* ---- small helpers (shared with the parser) ---- */
+function initials(name){ return String(name).split(/\s+/).filter(w=>/[A-Za-z]/.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('')||'?'; }
+function isProducer(role){ return /produc/i.test(String(role||'')); }
+function normDistrict(d){ const s=String(d||'').replace(/[^0-9]/g,''); return s.indexOf('49')>=0?'49':'32'; }
+function nameTokens(str){ return String(str||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().split(' ').filter(w=>w&&!/^(insurance|agency|agcy|ins|inc|llc)$/.test(w)); }
+function normName(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+function titleCase(s){ return String(s).toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()); }
+function cleanAgent(s){ s=String(s); const parts=s.split(/\s+-\s+/); const name=(parts.length>1?parts.slice(1).join(' - '):s).trim(); return titleCase(name)||s.trim(); }
+function sameOwner(agentRaw, prodName){
+  const A=nameTokens(cleanAgent(agentRaw)), P=nameTokens(prodName);
+  if(!A.length||!P.length) return false;
+  const sa=new Set(A), sp=new Set(P);
+  return P.every(w=>sa.has(w)) || A.every(w=>sp.has(w));
+}
+function toDate(v){
+  if(v instanceof Date && !isNaN(v)) return v;
+  if(typeof v==='number') return new Date(Math.round((v-25569)*86400*1000));
+  const t=Date.parse(v); return isNaN(t)?null:new Date(t);
+}
+function parseNum(v){ const x=+String(v??'').replace(/[$,\s]/g,''); return isFinite(x)?x:0; }
+function dayKeyOf(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function blankPeriods(){ return {daily:{actual:0},weekly:{actual:0},monthly:{actual:0},ytd:{actual:0}}; }
+/* Shared by the sheet loader and by CSV files dropped into Reports.
+   Keeps blank rows: the district export uses merged cells, and dropping
+   the blanks would break the carry-down of names and dates. */
+function parseCSV(text){
+  const rows=[]; let row=[], cur='', q=false;
+  text=String(text).replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(q){
+      if(c==='"'){ if(text[i+1]==='"'){ cur+='"'; i++; } else q=false; }
+      else cur+=c;
+    }else{
+      if(c==='"') q=true;
+      else if(c===','){ row.push(cur); cur=''; }
+      else if(c==='\n'){ row.push(cur); rows.push(row); row=[]; cur=''; }
+      else cur+=c;
+    }
+  }
+  if(cur!==''||row.length){ row.push(cur); rows.push(row); }
+  return rows.filter(r=>r.length);
+}
+
+/* ---- parse one district's daily export -----------------------------
+   Column layout: DM | Code - Agent Name | Producer | Calendar Day |
+   NB Cnt, repeated side by side for the quote block. Google exports
+   merged cells as a value on the first row with blanks beneath, so
+   blank name/date cells inherit the last value seen in that column. */
+function detectDistrict(rows){
+  for(let i=0;i<Math.min(rows.length,20);i++){
+    const j=(rows[i]||[]).map(c=>String(c||'').toLowerCase()).join('|');
+    if(/producer/.test(j) && /(nb.?cnt|quote)/.test(j) && /(calendar day|agent)/.test(j)) return i;
+  }
+  return -1;
+}
+function parseDistrictExport(rows){
+  const hr=detectDistrict(rows);
+  if(hr<0) return null;
+  const header=rows[hr].map(c=>String(c||''));
+  const roleOf=h=>{ const s=h.toLowerCase();
+    if(/quote/.test(s)) return 'quote';
+    if(/nb.?cnt|nb count|new business/.test(s)) return 'nb';
+    if(/code.*agent|agent name/.test(s)) return 'agent';
+    if(/producer/.test(s)) return 'producer';
+    if(/calendar day|^date$|^day$/.test(s)) return 'date';
+    return null; };
+  const cols=header.map((h,i)=>({i,role:roleOf(h)}));
+  const agentCols=cols.filter(c=>c.role==='agent').map(c=>c.i);
+  const prodCols =cols.filter(c=>c.role==='producer').map(c=>c.i);
+  const dateCols =cols.filter(c=>c.role==='date').map(c=>c.i);
+  const countCols=cols.filter(c=>c.role==='nb'||c.role==='quote');
+  if(!countCols.length || !prodCols.length) return null;
+  const nearestLeft=(arr,idx)=>{ let best=-1; arr.forEach(x=>{ if(x<idx&&x>best) best=x; }); return best; };
+  const blocks=countCols.map(cc=>({metric:cc.role==='nb'?'n':'q',count:cc.i,
+    agent:nearestLeft(agentCols,cc.i),prod:nearestLeft(prodCols,cc.i),date:nearestLeft(dateCols,cc.i)}));
+  const recs=[];
+  const isTotalRow = row => row.some(c=>/(^|\s)(grand\s+|sub\s*)?totals?(\s|:|$)/i.test(String(c||'')));
+  const lastProd={}, lastAgent={}, lastDate={};
+  for(let r=hr+1;r<rows.length;r++){
+    const row=rows[r]; if(!row||!row.some(c=>String(c).trim()!=='')) continue;
+    if(isTotalRow(row)) continue;
+    blocks.forEach((b,bi)=>{
+      let prod=b.prod>=0?String(row[b.prod]||'').trim():'';
+      let agent=b.agent>=0?String(row[b.agent]||'').trim():'';
+      let d=b.date>=0?toDate(row[b.date]):null;
+      if(prod) lastProd[bi]=prod; else if(b.prod>=0) prod=lastProd[bi]||'';
+      if(agent) lastAgent[bi]=agent; else if(b.agent>=0) agent=lastAgent[bi]||'';
+      if(d) lastDate[bi]=d; else if(b.date>=0) d=lastDate[bi]||null;
+      if(!prod && !agent) return;
+      recs.push({metric:b.metric,prod,agent,date:d,count:parseNum(row[b.count])});
+    });
+  }
+  if(!recs.length) return null;
+  const times=recs.map(x=>x.date).filter(Boolean).map(d=>d.getTime());
+  const maxD=times.length?new Date(Math.max(...times)):null;
+  if(maxD && (!dataAsOf || maxD>dataAsOf)) dataAsOf=maxD;
+  /* The export snapshots in the morning, so its newest date has no
+     production logged yet. cutoff = the last complete calendar day.
+     Daily anchors to the last business day on or before the cutoff, so
+     data pulled Monday shows Friday's numbers. */
+  let cutoff=null, anchor=null;
+  if(maxD){
+    const c=new Date(maxD); c.setHours(0,0,0,0); c.setDate(c.getDate()-1); cutoff=c;
+    const a=new Date(c);
+    while(a.getDay()===0||a.getDay()===6) a.setDate(a.getDate()-1);
+    anchor=a;
+  }
+  if(anchor && (!dailyAsOf || anchor>dailyAsOf)) dailyAsOf=anchor;
+  const cutoffEnd=cutoff?cutoff.getTime()+86400000-1:null;
+  const weekStart=cutoff?cutoff.getTime()-6*86400000:null;
+  const anchorKey=anchor?anchor.toDateString():null;
+  function periodsFor(d){
+    if(!cutoff||!d) return ['monthly','ytd'];
+    const out=[], t=d.getTime();
+    if(t>cutoffEnd) return out;
+    if(d.getFullYear()===anchor.getFullYear()) out.push('ytd');
+    if(d.getFullYear()===anchor.getFullYear() && d.getMonth()===anchor.getMonth()) out.push('monthly');
+    if(t>=weekStart) out.push('weekly');
+    if(d.toDateString()===anchorKey) out.push('daily');
+    return out;
+  }
+  const producers={}, agencies={};
+  const get=(map,name,role)=>{ if(!map[name]) map[name]={name,role,q:blankPeriods(),n:blankPeriods()}; return map[name]; };
+  const addHist=(person,rec,hk)=>{
+    if(!hk||!rec.count) return;
+    person.hist=person.hist||{};
+    const h=person.hist[hk]=person.hist[hk]||{q:0,n:0};
+    h[rec.metric]+=rec.count;
+  };
+  recs.forEach(rec=>{
+    const prs=periodsFor(rec.date);
+    const hk=(rec.date && cutoffEnd!==null && rec.date.getTime()<=cutoffEnd) ? dayKeyOf(rec.date) : null;
+    if(rec.prod){
+      const p=get(producers,rec.prod,'Producer');
+      if(rec.agent && !p.agency) p.agency=cleanAgent(rec.agent);
+      if(rec.agent && sameOwner(rec.agent, rec.prod)) p.owner=true;
+      prs.forEach(pr=>{ p[rec.metric][pr].actual+=rec.count; });
+      addHist(p,rec,hk);
+    }
+    if(rec.agent){
+      const a=get(agencies,cleanAgent(rec.agent),'Agency');
+      prs.forEach(pr=>{ a[rec.metric][pr].actual+=rec.count; });
+      addHist(a,rec,hk);
+    }
+  });
+  return [...Object.values(producers), ...Object.values(agencies)];
+}
+
+/* ---- fetch + cache -------------------------------------------------
+   Both exports together are several megabytes, which is a lot to make
+   an agent download on a phone before the page is usable. So: render
+   whatever is cached immediately, then refresh in the background. */
+function setLive(msg, kind){
+  const el=$('liveStatus');
+  el.className='livepill on'+(kind?' '+kind:'');
+  el.textContent=msg||'';
+  if(!msg) el.className='livepill';
+}
+function readCache(){
+  try{
+    const c=JSON.parse(localStorage.getItem(LIVE_CACHE_KEY));
+    if(!c||!Array.isArray(c.people)||!c.people.length) return null;
+    return c;
+  }catch(e){ return null; }
+}
+function writeCache(){
+  try{
+    localStorage.setItem(LIVE_CACHE_KEY, JSON.stringify({
+      people:PEOPLE, at:Date.now(),
+      dataAsOf:dataAsOf?dataAsOf.getTime():null,
+      dailyAsOf:dailyAsOf?dailyAsOf.getTime():null
+    }));
+  }catch(e){ /* quota — the page still works, it just refetches next visit */ }
+}
+async function fetchDistrict(url, district){
+  const res=await fetch(url,{cache:'no-store'});
+  if(!res.ok) throw new Error('District '+district+' sheet returned HTTP '+res.status);
+  const text=await res.text();
+  if(/<html|<!doctype/i.test(text.slice(0,200))) throw new Error('District '+district+' link returned a web page, not CSV');
+  const people=parseDistrictExport(parseCSV(text));
+  if(!people||!people.length) throw new Error('District '+district+' sheet had no usable rows');
+  people.forEach(p=>{ p.district=district; });
+  return people;
+}
+async function loadLive(opts){
+  opts=opts||{};
+  if(liveLoading) return;
+  liveLoading=true;
+  setLive('⟳ Loading live data…','busy');
+  const prevData=dataAsOf, prevDaily=dailyAsOf;
+  dataAsOf=null; dailyAsOf=null;
+  try{
+    const [a,b]=await Promise.all([
+      fetchDistrict(SHEET_CSV_URL_32,'32'),
+      fetchDistrict(SHEET_CSV_URL_49,'49')
+    ]);
+    PEOPLE=a.concat(b);
+    writeCache();
+    closeDrill();
+    renderBoard();
+    setLive('● Live · '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}));
+  }catch(e){
+    dataAsOf=prevData; dailyAsOf=prevDaily;
+    setLive(PEOPLE.length ? 'Showing last saved numbers' : "Couldn't load live data",'err');
+    if(opts.alert) alert("Couldn't refresh from the district sheets.\n\n"+(e.message||e)+"\n\nThe sheets must stay published to the web as CSV.");
+  }finally{
+    liveLoading=false;
+  }
+}
+function bootLive(){
+  const c=readCache();
+  if(c){
+    PEOPLE=c.people;
+    dataAsOf=c.dataAsOf?new Date(c.dataAsOf):null;
+    dailyAsOf=c.dailyAsOf?new Date(c.dailyAsOf):null;
+    renderBoard();
+    setLive('● Saved copy · refreshing…','busy');
+    if(Date.now()-(c.at||0) < LIVE_MAX_AGE_MS){ setLive('● Live · saved '+new Date(c.at).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})); return; }
+  }
+  loadLive();
+}
+$('btnRefresh').addEventListener('click',()=>loadLive({alert:true}));
+
+/* ---- board ---- */
 function segWire(id, key, prop){
   $(id).querySelectorAll('button').forEach(btn=>{
     btn.onclick = ()=>{ $(id).querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); LB[prop]=btn.dataset[key]; renderBoard(); };
@@ -686,74 +1052,257 @@ function segWire(id, key, prop){
 }
 segWire('segView','v','view'); segWire('segDist','d','dist'); segWire('segPeriod','p','period'); segWire('segMetric','m','metric');
 
-function boardRows(){
-  const lb = data().leaderboard || {people:[]};
-  let ppl = (lb.people||[]).map(p=>({...p}));
-  if(LB.dist!=='all') ppl = ppl.filter(p=>String(p.district)===LB.dist);
-  const qk = LB.period==='m'?'qm':'qy', nk = LB.period==='m'?'nm':'ny';
-  if(LB.view==='producer'){
-    ppl = ppl.filter(p=>!( LB.staffOnly && p.owner ));
-    return ppl.map(p=>({name:p.name, sub:p.agency||'', district:p.district, q:+p[qk]||0, n:+p[nk]||0}));
-  }
-  // agency view: roll everyone up by agency name
-  const map = {};
-  ppl.forEach(p=>{
-    const key = (p.agency||p.name).trim();
-    if(!map[key]) map[key] = {name:key, sub:'', district:p.district, q:0, n:0, cnt:0};
-    map[key].q += +p[qk]||0; map[key].n += +p[nk]||0; map[key].cnt++;
-  });
-  return Object.values(map).map(a=>({...a, sub: a.cnt>1 ? a.cnt+' producers' : ''}));
+function inScope(p){
+  if(LB.dist!=='all' && normDistrict(p.district)!==LB.dist) return false;
+  const wantProducer = LB.view==='producer';
+  if(isProducer(p.role)!==wantProducer) return false;
+  if(wantProducer && LB.staffOnly && p.owner) return false;
+  return true;
 }
-
+function agencyProducers(a){
+  return PEOPLE.map((p,i)=>({p,i}))
+    .filter(x=> isProducer(x.p.role) && normDistrict(x.p.district)===normDistrict(a.district) && x.p.agency && normName(x.p.agency)===normName(a.name));
+}
+function periodLabel(){
+  if(LB.period==='daily') return dailyAsOf ? dailyAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric'}) : 'Daily';
+  if(LB.period==='weekly') return 'Last 7 days';
+  return LB.period==='monthly' ? 'MTD' : 'YTD';
+}
+function boardRows(){
+  return PEOPLE.map((p,i)=>({p,i})).filter(x=>inScope(x.p)).map(({p,i})=>({
+    idx:i, name:p.name, district:normDistrict(p.district), owner:!!p.owner,
+    sub: isProducer(p.role) ? (p.agency||'') : (()=>{ const n=agencyProducers(p).length; return n?n+' producer'+(n===1?'':'s'):''; })(),
+    q:+p.q[LB.period].actual||0, n:+p.n[LB.period].actual||0
+  }));
+}
 function renderBoard(){
-  const lb = data().leaderboard || {};
-  $('lbAsOf').textContent = lb.asOf ? ('as of '+fmtDate(lb.asOf)) : '';
-  $('lbNote').textContent = lb.note || '';
-  /* keep the switch's space reserved so the segmented buttons never shift */
+  $('lbAsOf').textContent = dataAsOf ? ('data through '+dataAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})) : '';
   $('staffOnlyWrap').style.visibility = LB.view==='producer' ? 'visible' : 'hidden';
 
-  /* district totals — ALWAYS include everyone (owners + staff), only
-     district & period filters apply, so the all-up number never changes
-     when you flip views or the Staff-only switch */
-  const qk = LB.period==='m'?'qm':'qy', nk = LB.period==='m'?'nm':'ny';
-  const everyone = (lb.people||[]).filter(p=> LB.dist==='all' || String(p.district)===LB.dist);
-  const tq = everyone.reduce((s,p)=>s+(+p[qk]||0),0), tn = everyone.reduce((s,p)=>s+(+p[nk]||0),0);
+  /* totals always count everyone in scope (owners included) so the
+     all-up number never moves when you flip views or Staff only */
+  const everyone = PEOPLE.filter(p=> !isProducer(p.role) && (LB.dist==='all'||normDistrict(p.district)===LB.dist));
+  const tq=everyone.reduce((s,p)=>s+(+p.q[LB.period].actual||0),0);
+  const tn=everyone.reduce((s,p)=>s+(+p.n[LB.period].actual||0),0);
   const scopeLbl = LB.dist==='all' ? 'Districts 32 + 49' : 'District '+LB.dist;
-  const perLbl = LB.period==='m' ? 'MTD' : 'YTD';
+  const perLbl = periodLabel();
   $('lbTotals').innerHTML = `
     <div class="stat">
       <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2563eb"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
-      <div class="v"><b>${tq.toLocaleString()}</b><span>Total Quotes ${perLbl}</span></div>
-      <div class="scope">${scopeLbl}<br>incl. agency owners</div>
+      <div class="v"><b>${tq.toLocaleString()}</b><span>Total Quotes · ${esc(perLbl)}</span></div>
+      <div class="scope">${scopeLbl}<br>all agencies</div>
     </div>
     <div class="stat red">
       <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#d92231"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" fill="none" stroke="#d92231" stroke-width="2"/></svg></div>
-      <div class="v"><b>${tn.toLocaleString()}</b><span>Total New Business ${perLbl}</span></div>
-      <div class="scope">${scopeLbl}<br>incl. agency owners</div>
+      <div class="v"><b>${tn.toLocaleString()}</b><span>Total New Business · ${esc(perLbl)}</span></div>
+      <div class="scope">${scopeLbl}<br>all agencies</div>
     </div>`;
+
   const rows = boardRows().sort((a,b)=> b[LB.metric]-a[LB.metric] || b[LB.metric==='q'?'n':'q']-a[LB.metric==='q'?'n':'q']);
   const max = Math.max(1, ...rows.map(r=>r[LB.metric]));
   const mLbl = LB.metric==='q' ? 'Quotes' : 'New Biz';
-  const pLbl = LB.period==='m' ? 'MTD' : 'YTD';
 
   $('podium').innerHTML = rows.slice(0,3).map((r,i)=>`
-    <div class="pod p${i+1}">
+    <div class="pod p${i+1} click" data-idx="${r.idx}" title="See ${esc(r.name)}'s trend">
       <div class="medal">${i+1}</div>
       <div class="who"><b>${esc(r.name)}</b><span>${esc(r.sub||'')}</span></div>
-      <div class="val"><b>${r[LB.metric]}</b><span>${mLbl} ${pLbl}</span></div>
-    </div>`).join('') || '<div class="empty">No data yet — import a CSV in Admin → Scoreboard.</div>';
+      <div class="val"><b>${r[LB.metric]}</b><span>${mLbl} ${esc(perLbl)}</span></div>
+    </div>`).join('') || `<div class="empty">${liveLoading?'Loading live numbers…':'No data for this view yet.'}</div>`;
 
   $('boardBody').innerHTML = rows.map((r,i)=>`
-    <tr>
+    <tr class="click" data-idx="${r.idx}" title="Click for trend history">
       <td class="rank">${i+1}</td>
-      <td><div class="pname"><span class="avatar">${esc(initials(r.name))}</span><span class="nm"><b>${esc(r.name)}</b><span>${esc(r.sub||'')}</span></span></div></td>
+      <td><div class="pname"><span class="avatar">${esc(initials(r.name))}</span><span class="nm"><b>${esc(r.name)}${r.owner?'<span class="ownflag">OWNER</span>':''}</b><span>${esc(r.sub||'')}</span></span></div></td>
       <td><span class="dchip d${r.district==='49'?'49':'32'}">D${r.district==='49'?'49':'32'}</span></td>
       <td class="metric">${r.q}</td>
       <td class="metric">${r.n}</td>
       <td class="barcell"><div class="bar ${LB.metric==='n'?'red':''}"><i style="width:${Math.round(r[LB.metric]/max*100)}%"></i></div></td>
-    </tr>`).join('') || '<tr><td colspan="6" class="empty">No rows for this filter.</td></tr>';
+    </tr>`).join('') || `<tr><td colspan="6" class="empty">${liveLoading?'Loading live numbers…':'No rows for this filter.'}</td></tr>`;
+
+  $('lbNote').textContent = dailyAsOf
+    ? 'Live from the district quote & sales sheets. “Daily” is the last complete business day ('+dailyAsOf.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+'). Click any row for that person’s trend.'
+    : 'Live from the district quote & sales sheets. Click any row for trend history.';
 }
-function initials(name){ return String(name).split(/\s+/).filter(w=>/[A-Za-z]/.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('')||'?'; }
+$('boardBody').addEventListener('click',e=>{ const tr=e.target.closest('tr.click'); if(tr) openDrill(+tr.dataset.idx); });
+$('podium').addEventListener('click',e=>{ const el=e.target.closest('.pod.click'); if(el) openDrill(+el.dataset.idx); });
+
+/* =====================================================================
+   DRILL-DOWN — per-person history and trends
+   ===================================================================== */
+let drillStack=[], drillView='weekly';
+function openDrill(idx){ if(!PEOPLE[idx]) return; drillStack=[idx]; renderDrill(); $('drillModal').classList.add('open'); document.body.style.overflow='hidden'; }
+function drillInto(idx){ drillStack.push(idx); renderDrill(); }
+function drillBack(){ if(drillStack.length>1){ drillStack.pop(); renderDrill(); } }
+function closeDrill(){ $('drillModal').classList.remove('open'); document.body.style.overflow=''; drillStack=[]; }
+function drillPerson(){ return PEOPLE[drillStack[drillStack.length-1]]; }
+$('drillClose').addEventListener('click',closeDrill);
+$('drillBackBtn').addEventListener('click',drillBack);
+$('drillModal').addEventListener('click',e=>{ if(e.target.id==='drillModal') closeDrill(); });
+$('drillSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  drillView=b.dataset.v; syncDrillSeg();
+  const p=drillPerson(); if(p) renderDrillChart(p);
+});
+function syncDrillSeg(){ [...$('drillSeg').children].forEach(x=>x.classList.toggle('active',x.dataset.v===drillView)); }
+
+function renderDrill(){
+  const p=drillPerson(); if(!p) return;
+  const isP=isProducer(p.role);
+  $('drillBackBtn').style.display = drillStack.length>1 ? '' : 'none';
+  $('drillAv').textContent = initials(p.name);
+  $('drillName').textContent = p.name;
+  const bits=[isP?'Producer':'Agency'];
+  if(isP && p.agency) bits.push(p.agency);
+  if(isP && p.owner) bits.push('Agency owner');
+  bits.push('District '+normDistrict(p.district));
+  $('drillSub').textContent = bits.join(' · ');
+  const dLbl=dailyAsOf ? dailyAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase() : 'LAST DAY';
+  const chips=[['daily',dLbl],['weekly','LAST 7 DAYS'],['monthly','THIS MONTH'],['ytd','YTD']];
+  $('drillChips').innerHTML = chips.map(([pr,lab])=>
+    `<div class="chip"><div class="cl">${lab}</div><div class="cv"><b class="cq">${+p.q[pr].actual||0}<small>QUOTES</small></b><b class="cn">${+p.n[pr].actual||0}<small>NEW BIZ</small></b></div></div>`).join('');
+  syncDrillSeg();
+  renderDrillChart(p);
+  renderDrillProds(p);
+}
+function histAnchor(p){
+  if(dailyAsOf instanceof Date && !isNaN(dailyAsOf)) return new Date(dailyAsOf);
+  const ks=Object.keys(p.hist||{}).sort();
+  return ks.length ? new Date(ks[ks.length-1]+'T00:00:00') : null;
+}
+function earliestHistKey(){
+  let min=null;
+  PEOPLE.forEach(p=>{ Object.keys(p.hist||{}).forEach(k=>{ if(min===null||k<min) min=k; }); });
+  return min;
+}
+function dailySeries(p,nDays){
+  const a=histAnchor(p); if(!a) return [];
+  const minK=earliestHistKey();
+  const out=[]; const d=new Date(a); d.setHours(0,0,0,0);
+  let guard=0;
+  while(out.length<nDays && guard++<nDays*4){
+    if(d.getDay()!==0 && d.getDay()!==6){
+      const k=dayKeyOf(d);
+      if(minK && k<minK) break;
+      const h=(p.hist||{})[k]||{};
+      out.unshift({label:d.toLocaleDateString('en-US',{month:'numeric',day:'numeric'}),
+                   full:d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}),
+                   q:+h.q||0, n:+h.n||0});
+    }
+    d.setDate(d.getDate()-1);
+  }
+  return out;
+}
+function weekStartOf(d){ const x=new Date(d); x.setHours(0,0,0,0); const dow=(x.getDay()+6)%7; x.setDate(x.getDate()-dow); return x; }
+function weeklySeries(p,nWeeks){
+  const a=histAnchor(p); if(!a) return [];
+  const buckets={};
+  Object.keys(p.hist||{}).forEach(k=>{
+    const wk=dayKeyOf(weekStartOf(new Date(k+'T00:00:00')));
+    const b=buckets[wk]=buckets[wk]||{q:0,n:0};
+    const v=p.hist[k]; b.q+=+v.q||0; b.n+=+v.n||0;
+  });
+  const minK=earliestHistKey();
+  const minWk=minK?dayKeyOf(weekStartOf(new Date(minK+'T00:00:00'))):null;
+  const ws=weekStartOf(a);
+  const out=[];
+  for(let i=nWeeks-1;i>=0;i--){
+    const w=new Date(ws); w.setDate(w.getDate()-7*i);
+    const k=dayKeyOf(w);
+    if(minWk && k<minWk) continue;
+    const b=buckets[k]||{q:0,n:0};
+    const we=new Date(w); we.setDate(we.getDate()+4);
+    const partial = i===0 && a.getTime()<we.getTime();
+    out.push({label:w.toLocaleDateString('en-US',{month:'numeric',day:'numeric'}),
+              full:'Week of '+w.toLocaleDateString('en-US',{month:'short',day:'numeric'})+'–'+we.toLocaleDateString('en-US',{month:'short',day:'numeric'})+(partial?' (in progress)':''),
+              q:b.q, n:b.n, partial});
+  }
+  return out;
+}
+function axisScale(maxData){
+  maxData=Math.max(1,maxData);
+  for(let e=0;e<7;e++){
+    const p=Math.pow(10,e);
+    for(const c of [1,2,5]){
+      const st=c*p, n=Math.ceil(maxData/st);
+      if(n<=5) return {max:st*Math.max(2,n), ticks:Array.from({length:Math.max(2,n)+1},(_,i)=>st*i)};
+    }
+  }
+  return {max:maxData,ticks:[0,maxData]};
+}
+function renderDrillChart(p){
+  const host=$('drillChart');
+  if(!(p.hist && Object.keys(p.hist).length)){
+    host.innerHTML = `<div class="trend-empty">No day-by-day history for this ${isProducer(p.role)?'producer':'agency'} yet.</div>`;
+    return;
+  }
+  const narrow = window.innerWidth < 560;
+  const s = drillView==='daily' ? dailySeries(p, narrow?10:15) : weeklySeries(p, narrow?7:10);
+  if(!s.length){ host.innerHTML = `<div class="trend-empty">Not enough dated history to chart yet.</div>`; return; }
+  /* a phone-width chart needs a taller aspect or the plot collapses to a
+     sliver once the SVG scales down to the screen */
+  const W = narrow?380:680, H = narrow?260:228;
+  const padL=36,padR=10,padT=12,padB=26;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const sc=axisScale(Math.max(...s.map(x=>Math.max(x.q,x.n))));
+  const maxV=sc.max;
+  const y=v=>padT+plotH*(1-v/maxV);
+  const step=plotW/s.length;
+  const cx=i=>padL+step*(i+0.5);
+  const barW=Math.max(6,Math.min(26,step*0.55));
+  let g='';
+  sc.ticks.forEach(t=>{ g+=`<line x1="${padL}" y1="${y(t)}" x2="${W-padR}" y2="${y(t)}" stroke="#eef1f6" stroke-width="1"/>`
+    +`<text x="${padL-7}" y="${y(t)+3.5}" text-anchor="end" font-size="10" fill="#9aa3b2">${t}</text>`; });
+  let bars='';
+  s.forEach((d,i)=>{
+    if(d.q<=0) return;
+    const x0=cx(i)-barW/2, y0=y(d.q), y1=y(0), r=Math.min(4,barW/2,y1-y0);
+    bars+=`<path d="M${x0},${y1} L${x0},${y0+r} Q${x0},${y0} ${x0+r},${y0} L${x0+barW-r},${y0} Q${x0+barW},${y0} ${x0+barW},${y0+r} L${x0+barW},${y1} Z" fill="#2563eb"${d.partial?' fill-opacity=".45"':''}/>`;
+  });
+  const pts=s.map((d,i)=>`${cx(i)},${y(d.n)}`).join(' ');
+  let line = s.length>1 ? `<polyline points="${pts}" fill="none" stroke="#d92231" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>` : '';
+  s.forEach((d,i)=>{ line+=`<circle cx="${cx(i)}" cy="${y(d.n)}" r="3.5" fill="#d92231" stroke="#fff" stroke-width="2"/>`; });
+  const every=Math.ceil(s.length/8);
+  let xl='';
+  s.forEach((d,i)=>{ if((s.length-1-i)%every===0) xl+=`<text x="${cx(i)}" y="${H-8}" text-anchor="middle" font-size="10" fill="#9aa3b2">${d.label}</text>`; });
+  let hov='';
+  s.forEach((d,i)=>{ hov+=`<rect class="hov" data-i="${i}" x="${padL+step*i}" y="${padT}" width="${step}" height="${plotH}" rx="6"/>`; });
+  host.innerHTML =
+    `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(p.name)} ${drillView} trend">`+
+    `<line x1="${padL}" y1="${y(0)}" x2="${W-padR}" y2="${y(0)}" stroke="#d7dbe4" stroke-width="1"/>`+
+    g+bars+line+xl+hov+`</svg><div class="ctip" id="drillTip"></div>`;
+  const svg=host.querySelector('svg'), tip=host.querySelector('#drillTip');
+  host.querySelectorAll('rect.hov').forEach(r=>{
+    const show=()=>{
+      const i=+r.dataset.i, d=s[i];
+      tip.innerHTML=`${esc(d.full)}<br><span class="tq">${d.q}</span> quotes · <span class="tn">${d.n}</span> new business`;
+      const sr=svg.getBoundingClientRect(), hr=host.getBoundingClientRect();
+      tip.style.left=(sr.left-hr.left+cx(i)*sr.width/W)+'px';
+      tip.style.top =(sr.top-hr.top+Math.min(y(d.q),y(d.n))*sr.height/H)+'px';
+      tip.style.display='block';
+    };
+    r.addEventListener('mouseenter',show);
+    r.addEventListener('touchstart',show,{passive:true});
+    r.addEventListener('mouseleave',()=>{ tip.style.display='none'; });
+  });
+}
+function renderDrillProds(p){
+  const host=$('drillProds');
+  if(isProducer(p.role)){ host.innerHTML=''; return; }
+  const kids=agencyProducers(p);
+  if(!kids.length){ host.innerHTML=''; return; }
+  const perLbl=periodLabel();
+  const rows=kids.map(x=>({i:x.i,p:x.p,q:+x.p.q[LB.period].actual||0,n:+x.p.n[LB.period].actual||0}))
+    .sort((a,b)=> LB.metric==='q' ? (b.q-a.q || b.n-a.n) : (b.n-a.n || b.q-a.q));
+  host.innerHTML = `<div class="prodlist">
+    <div class="pl-hd">PRODUCERS <span>· ${esc(perLbl)} — click one to see their trend</span></div>
+    <div class="plcols"><div></div><div>QUOTES</div><div>NEW BIZ</div><div></div></div>
+    ${rows.map(r=>`<div class="plrow" data-pi="${r.i}">
+      <div class="who2"><div class="av2">${esc(initials(r.p.name))}</div><div class="nm2">${esc(r.p.name)}${r.p.owner?'<span class="ownflag">OWNER</span>':''}</div></div>
+      <div class="pv q">${r.q}</div><div class="pv n">${r.n}</div><div class="chev2">›</div>
+    </div>`).join('')}
+  </div>`;
+  host.querySelectorAll('.plrow').forEach(el=>el.addEventListener('click',()=>drillInto(+el.dataset.pi)));
+}
 
 /* ---------- news ---------- */
 function renderNews(){
@@ -1000,7 +1549,13 @@ const EDITORS = {
     {k:'date', label:'Report date', t:'date'},
     {k:'category', label:'Category', t:'select', opts:['Production','Life','Trackers','Programs','Other']},
     {k:'note', label:'Note (e.g. As of 7/2/26)'}
-  ], sum:i=>({b:i.title, s:(i.category||'Other')+' · '+fmtDate(i.date)+(i.type==='table'?' · interactive table':'')}), upload:{folder:'files/', accept:'.pdf,.xlsx,.xls,.csv,.png,.jpg', hint:'Drop an Excel/CSV here and it becomes an interactive on-brand table (matrixes, producer reports, life results…). PDFs and images post as openable files. Fill in title & category after it appears.'} }
+  ], sum:i=>({b:i.title, s:(i.category||'Other')+' · '+fmtDate(i.date)+(i.type==='table'?' · interactive table':'')}), upload:{folder:'files/', accept:'.pdf,.xlsx,.xls,.csv,.png,.jpg', hint:'Drop an Excel/CSV here and it becomes an interactive on-brand table (matrixes, producer reports, life results…). PDFs and images post as openable files. Fill in title & category after it appears.'} },
+  resources: { list:'resources', label:'Resource', fields:[
+    {k:'title', label:'Title'},
+    {k:'category', label:'Category', t:'select', opts:['Recruiting','Training','Programs','Forms','Other']},
+    {k:'note', label:'Short description'},
+    {k:'date', label:'Date added', t:'date'}
+  ], sum:i=>({b:i.title, s:(i.category||'Other')+(i.note?' · '+i.note:'')}), upload:{folder:'files/', accept:'.pdf,.docx,.xlsx,.pptx,.png,.jpg', hint:'Drop any PDF or document agents should be able to download — playbooks, program one-pagers, forms. Set the title and category after it appears.'} }
 };
 
 let currentTab = 'news';
@@ -1126,7 +1681,7 @@ function unstageFile(path){
   if(i<0) return;
   URL.revokeObjectURL(STAGED[i].blobUrl);
   STAGED.splice(i,1);
-  ['newsletters','reports'].forEach(list=>{
+  ['newsletters','reports','resources'].forEach(list=>{
     if(Array.isArray(EDIT[list])) EDIT[list] = EDIT[list].filter(it=>it.file!==path);
   });
   markDirty(); renderCollectionTab(currentTab);
@@ -1154,6 +1709,7 @@ function stageFile(t, file){
     const today=new Date().toISOString().slice(0,10);
     if(t==='nl') EDIT.newsletters.unshift({id:uid(), title:file.name.replace(/\.[^.]+$/,''), date:today, file:path});
     if(t==='reports') EDIT.reports.unshift({id:uid(), title:file.name.replace(/\.[^.]+$/,''), date:today, category:'Other', note:'', file:path});
+    if(t==='resources') EDIT.resources.unshift({id:uid(), title:file.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' '), date:today, category:'Other', note:'', file:path});
     markDirty(); renderCollectionTab(t);
   };
   reader.readAsDataURL(file);
@@ -1247,6 +1803,43 @@ function renderViewer(){
 function closeViewer(){ $('tvOverlay').classList.remove('on'); document.body.style.overflow=''; TV.data=null; }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape' && $('tvOverlay').classList.contains('on')) closeViewer(); });
 
+/* ---------- district resources ----------
+   Same shape as the reports library but for evergreen documents —
+   playbooks, program one-pagers, forms. No year archiving: these are
+   reference material, not dated snapshots. */
+const RES_ORDER = ['Recruiting','Training','Programs','Forms','Other'];
+let resFilter = '';
+function renderResources(){
+  const all = (data().resources||[]).slice()
+    .sort((a,b)=> String(b.date||'').localeCompare(String(a.date||'')));
+  const box = $('resourceList');
+  if(!all.length){ box.innerHTML='<div class="empty">No resources posted yet.</div>'; return; }
+  const q = resFilter.toLowerCase();
+  const items = q
+    ? all.filter(r=> [r.title,r.category,r.note].filter(Boolean).join(' ').toLowerCase().includes(q))
+    : all;
+  if(!items.length){ box.innerHTML=`<div class="empty">No resources match &ldquo;${esc(resFilter)}&rdquo;.</div>`; return; }
+  const cats={};
+  items.forEach(r=>{ const c=r.category||'Other'; (cats[c]=cats[c]||[]).push(r); });
+  box.innerHTML = Object.keys(cats)
+    .sort((a,b)=>{ const ia=RES_ORDER.indexOf(a), ib=RES_ORDER.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib) || a.localeCompare(b); })
+    .map(c=>`<div class="cat">${esc(c)}</div>${cats[c].map(resourceRow).join('')}`).join('');
+}
+function resourceRow(r){
+  const meta = [r.note, fmtDate(r.date)].filter(Boolean).map(esc).join(' · ');
+  return `<div class="frow">
+    <div class="fico"><svg width="17" height="17" viewBox="0 0 24 24" fill="#0a2d6e" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
+    <div class="fi"><b>${esc(r.title)}</b><span>${meta}</span></div>
+    <a class="filelink open" href="${esc(safeUrl(fileHref(r.file||r.link||'')) || '#')}" target="_blank" rel="noopener" download>Download</a>
+  </div>`;
+}
+let resDebounce;
+$('resSearch').addEventListener('input', e=>{
+  clearTimeout(resDebounce);
+  const v=e.target.value;
+  resDebounce=setTimeout(()=>{ resFilter=v.trim(); renderResources(); },120);
+});
+
 /* ---------- reports library wiring ----------
    Delegated so report ids never get interpolated into inline handlers. */
 $('reportList').addEventListener('click', e=>{
@@ -1267,111 +1860,20 @@ $('repSearch').addEventListener('input', e=>{
 });
 
 /* ---------- scoreboard tab ---------- */
+/* ---------- scoreboard tab (read-only: the board is sheet-driven now) ---------- */
 function renderBoardTab(){
-  const lb = EDIT.leaderboard || (EDIT.leaderboard={asOf:'',note:'',people:[]});
+  const when = dataAsOf ? dataAsOf.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}) : 'not loaded yet';
+  const prods = PEOPLE.filter(p=>isProducer(p.role)).length;
+  const ags = PEOPLE.filter(p=>!isProducer(p.role)).length;
   $('panelBody').innerHTML = `
-    <fieldset class="box"><legend>Data source</legend>
-      <div class="frm">
-        <div><label>Data as of</label><input type="date" id="lbDate" value="${esc(lb.asOf||'')}"></div>
-        <div><label>Footnote shown under the board</label><input type="text" id="lbNoteIn" value="${esc(lb.note||'')}"></div>
-      </div>
-      <p style="margin:11px 0 0;display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn sm primary" onclick="importCSVClick()">📥 Import CSV</button>
-        <button class="btn sm" onclick="downloadTemplate()">⬇ Blank CSV template</button>
-        <button class="btn sm" onclick="applyBoardMeta()">Apply date/footnote</button>
-        <input type="file" id="csvInput" accept=".csv" style="display:none">
-      </p>
-      <p class="hint">CSV columns (header names matter, order doesn't): <code>Name, Agency, Role, District, Owner, Quotes MTD, NB MTD, Quotes YTD, NB YTD</code>. Role is <code>Producer</code> or <code>Agency</code>; Owner is <code>Y</code> for agency owners' personal rows. Importing replaces the whole board.</p>
-      <div class="msg" id="csvMsg"></div>
+    <fieldset class="box"><legend>Where the scoreboard gets its numbers</legend>
+      <p class="hint" style="margin:0">The scoreboard is fed <b>live from the two district Quote &amp; Sales Google Sheets</b> &#8212; nothing here to edit and nothing to publish. To change what the board shows, change the sheet; the hub picks it up on the next visit, or when someone hits <b>&#8635; Refresh</b>.</p>
+      <p class="hint">Currently loaded: <b>${prods}</b> producers and <b>${ags}</b> agencies across both districts, with data through <b>${esc(when)}</b>.</p>
+      <p style="margin:11px 0 0"><button class="btn sm primary" type="button" onclick="loadLive({alert:true})">&#8635; Refresh from the sheets now</button></p>
     </fieldset>
-    <fieldset class="box"><legend>Quick edits (${lb.people.length} people)</legend>
-      <div style="max-height:340px;overflow:auto">
-      <table class="gridedit"><thead><tr><th>Name</th><th>Agency</th><th>Role</th><th>Dist</th><th>Own</th><th>Q&nbsp;MTD</th><th>NB&nbsp;MTD</th><th>Q&nbsp;YTD</th><th>NB&nbsp;YTD</th><th></th></tr></thead>
-      <tbody>${lb.people.map((p,i)=>`
-        <tr>
-          <td><input data-i="${i}" data-k="name" value="${esc(p.name)}"></td>
-          <td><input data-i="${i}" data-k="agency" value="${esc(p.agency||'')}"></td>
-          <td><input data-i="${i}" data-k="role" value="${esc(p.role||'Producer')}" style="max-width:80px"></td>
-          <td><input data-i="${i}" data-k="district" value="${esc(p.district||'32')}" class="num" style="max-width:46px"></td>
-          <td style="text-align:center"><input type="checkbox" data-i="${i}" data-k="owner" ${p.owner?'checked':''}></td>
-          <td><input data-i="${i}" data-k="qm" value="${p.qm??0}" class="num"></td>
-          <td><input data-i="${i}" data-k="nm" value="${p.nm??0}" class="num"></td>
-          <td><input data-i="${i}" data-k="qy" value="${p.qy??0}" class="num"></td>
-          <td><input data-i="${i}" data-k="ny" value="${p.ny??0}" class="num"></td>
-          <td><button class="btn sm danger" onclick="delPerson(${i})">✕</button></td>
-        </tr>`).join('')}</tbody></table>
-      </div>
-      <p style="margin:10px 0 0;display:flex;gap:8px">
-        <button class="btn sm" onclick="addPerson()">+ Add person</button>
-        <button class="btn sm primary" onclick="saveGrid()">Save table edits</button>
-      </p>
+    <fieldset class="box"><legend>Good to know</legend>
+      <p class="hint" style="margin:0">&#8220;Daily&#8221; means the <b>last complete business day</b>, not today &#8212; the export snapshots each morning, so its newest date has no production logged yet. Agency owners&#8217; personal production rows are detected automatically (producer name matches the agency name) and hidden from the producer board while <b>Staff only</b> is on. The totals at the top always include them.</p>
     </fieldset>`;
-  $('csvInput').onchange = e => { const f=e.target.files[0]; if(f) importCSV(f); e.target.value=''; };
-}
-function applyBoardMeta(){ EDIT.leaderboard.asOf=$('lbDate').value; EDIT.leaderboard.note=$('lbNoteIn').value.trim(); markDirty(); }
-function addPerson(){ EDIT.leaderboard.people.push({name:'',agency:'',role:'Producer',district:'32',owner:false,qm:0,nm:0,qy:0,ny:0}); renderBoardTab(); }
-function delPerson(i){ EDIT.leaderboard.people.splice(i,1); markDirty(); renderBoardTab(); }
-function saveGrid(){
-  document.querySelectorAll('table.gridedit [data-i]').forEach(el=>{
-    const p=EDIT.leaderboard.people[+el.dataset.i]; if(!p) return;
-    const k=el.dataset.k;
-    if(k==='owner') p[k]=el.checked;
-    else if(['qm','nm','qy','ny'].includes(k)) p[k]=+String(el.value).replace(/[^0-9.-]/g,'')||0;
-    else if(k==='district') p[k]=/49/.test(el.value)?'49':'32';
-    else p[k]=el.value.trim();
-  });
-  EDIT.leaderboard.people = EDIT.leaderboard.people.filter(p=>p.name);
-  markDirty(); renderBoardTab();
-}
-function importCSVClick(){ $('csvInput').click(); }
-function downloadTemplate(){
-  const csv="Name,Agency,Role,District,Owner,Quotes MTD,NB MTD,Quotes YTD,NB YTD\nJane Smith,Smith Agency,Producer,32,N,42,9,260,55\nJohn Smith,Smith Agency,Agency,32,Y,20,4,130,26\n";
-  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='scoreboard-template.csv'; a.click();
-}
-function parseCSV(text){
-  const rows=[]; let row=[], cur='', inQ=false;
-  for(let i=0;i<text.length;i++){
-    const c=text[i];
-    if(inQ){ if(c==='"'){ if(text[i+1]==='"'){cur+='"';i++;} else inQ=false; } else cur+=c; }
-    else if(c==='"') inQ=true;
-    else if(c===','){ row.push(cur); cur=''; }
-    else if(c==='\n'||c==='\r'){ if(c==='\r'&&text[i+1]==='\n') i++; row.push(cur); cur=''; if(row.some(x=>x.trim()!=='')) rows.push(row); row=[]; }
-    else cur+=c;
-  }
-  if(cur!==''||row.length){ row.push(cur); if(row.some(x=>x.trim()!=='')) rows.push(row); }
-  return rows;
-}
-function importCSV(file){
-  const reader=new FileReader();
-  reader.onload=()=>{
-    try{
-      const rows=parseCSV(reader.result);
-      if(rows.length<2) throw new Error("No data rows found.");
-      const hd=rows[0].map(h=>h.toLowerCase().trim());
-      const col=names=>{ for(const n of names){ const i=hd.findIndex(h=>h.includes(n)); if(i>=0) return i; } return -1; };
-      const ci={name:col(['name']),agency:col(['agency']),role:col(['role']),district:col(['district','dist']),owner:col(['owner']),
-        qm:col(['quotes mtd','q mtd','quotes month']),nm:col(['nb mtd','new business mtd','n mtd']),
-        qy:col(['quotes ytd','q ytd']),ny:col(['nb ytd','new business ytd','n ytd'])};
-      if(ci.name<0) throw new Error('Could not find a "Name" column.');
-      const num=v=>+String(v??'').replace(/[^0-9.-]/g,'')||0;
-      const people=rows.slice(1).map(r=>({
-        name:(r[ci.name]||'').trim(),
-        agency:ci.agency>=0?(r[ci.agency]||'').trim():'',
-        role:ci.role>=0&&/agen/i.test(r[ci.role]||'')?'Agency':'Producer',
-        district:ci.district>=0&&/49/.test(r[ci.district]||'')?'49':'32',
-        owner:ci.owner>=0?/^\s*(y|yes|true|1)/i.test(r[ci.owner]||''):false,
-        qm:ci.qm>=0?num(r[ci.qm]):0, nm:ci.nm>=0?num(r[ci.nm]):0,
-        qy:ci.qy>=0?num(r[ci.qy]):0, ny:ci.ny>=0?num(r[ci.ny]):0
-      })).filter(p=>p.name);
-      if(!people.length) throw new Error("No usable rows.");
-      EDIT.leaderboard.people=people;
-      markDirty(); renderBoardTab();
-      const m=$('csvMsg'); m.className='msg ok'; m.textContent=`Imported ${people.length} people. Preview updated — hit Publish when ready.`;
-    }catch(err){
-      const m=$('csvMsg'); m.className='msg err'; m.textContent='Import failed: '+err.message;
-    }
-  };
-  reader.readAsText(file);
 }
 
 /* ---------- publish tab + GitHub API ---------- */

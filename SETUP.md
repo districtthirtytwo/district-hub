@@ -61,13 +61,13 @@ Done. The helper only accepts writes to `content.json` and `files/` — even som
    - **Competitions** — update standings (one line per person: `Name, number`), start/end contests
    - **Newsletters** — drag the new PDF onto the drop zone; it becomes the featured issue
    - **Reports** — drag files onto the drop zone. **Excel/CSV files (matrixes, producer reports, life results, quote trackers) become interactive on-brand tables** — viewers get sheet tabs, a search box, and sorted columns styled like the rest of the hub. PDFs and images post as openable files. After the drop, click Edit to set the title and category.
-   - **Scoreboard** — **Import CSV** (replaces the board) or fix numbers in the Quick Edits table; set the "Data as of" date
+   - **Resources** — drag in PDFs agents should be able to download any time (playbooks, program one-pagers, forms). Set the title and category after the drop.
 3. Everything previews live on the page as you work.
 4. **🚀 Publish to site** — live for everyone within a minute or two.
 
-**Scoreboard CSV columns** (grab one via "Blank CSV template"):
-`Name, Agency, Role, District, Owner, Quotes MTD, NB MTD, Quotes YTD, NB YTD`
-Role is `Producer` or `Agency`; Owner = `Y` marks an agency owner's own row (hidden when "Staff only" is on, same as your old tracker).
+**The scoreboard is not in this list on purpose.** It feeds itself from the two district Quote & Sales Google Sheets and needs no publishing at all — change the sheet and the hub picks it up. The Admin → Scoreboard tab is read-only and just shows what's currently loaded plus a Refresh button.
+
+**Reading the scoreboard.** "Daily" means the **last complete business day**, not today — the export snapshots each morning, so its newest date has no production on it yet (data pulled Monday shows Friday). Agency owners' own production rows are detected automatically and hidden from the producer board while "Staff only" is on; the two totals at the top always include them. Click any row, or any of the top-three cards, for that person's day-by-day and week-by-week trend — and for an agency, the producer breakdown underneath.
 
 **Adding an admin:** send them the hub URL and the password. Nothing to install, no accounts to create.
 **Removing an admin / changing the password:** Cloudflare → your worker → Settings → edit the `ADMIN_PASSWORD` secret. Old password stops working everywhere immediately; current admins just sign in again with the new one.
@@ -86,6 +86,7 @@ Send everyone the URL with one line of instructions:
 ## Straight talk — things to decide with eyes open
 
 1. **The site is public.** Free GitHub Pages means anyone with the URL can *view* it — including production numbers and names. It's unlisted, but not locked. If the district wants viewing restricted too, the upgrade paths are a private repo on GitHub Pro (~$4/mo) or a free Cloudflare Access gate in front. Make this call before wide rollout.
-2. **The scoreboard is hand-fed now.** Numbers move only when someone imports a CSV or edits the table. If that gets tedious, the old Google Sheet auto-feed can be added back as an optional source without changing anything else.
+2. **The scoreboard depends on the sheets staying published.** It reads both districts' *Publish to web → CSV* links. If someone un-publishes a sheet or changes its structure, the board shows the last saved copy and a red status instead of silently going wrong — but it will be stale until the link is fixed.
 3. **One publisher at a time.** Edits stage in each admin's browser until published; if two people edit simultaneously, the last publish wins. With two admins, a simple "I'm updating the hub" text avoids it entirely.
-4. **If the helper is ever down** (or you haven't set it up yet), the editor still works — use **⬇ Export content.json** and upload the file to the repo by hand (Add file → Upload files). Same result, just manual.
+4. **Taking a document down isn't possible yet.** Removing a report or resource from the list hides it from the page, but the file stays in the repo at its original web address and stays in the history. Don't post anything you might need to fully retract.
+5. **If the helper is ever down** (or you haven't set it up yet), the editor still works — use **⬇ Export content.json** and upload the file to the repo by hand (Add file → Upload files). Same result, just manual.
