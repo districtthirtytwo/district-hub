@@ -34,6 +34,9 @@ The helper needs one key to write updates to the repo. Your coworker never sees 
 
 ## Part C — Deploy the publish helper (~10 min, once)
 
+> **Already have a helper running? It needs a one-time update.** Cloudflare → your worker → **Edit code** → select everything → paste the whole of `worker.js` from this repo → **Deploy**. That takes about a minute and adds three things: the ability to take documents down, a guard so two admins can't overwrite each other, and a limit on password guessing. Until you do this, everything else keeps working — the hub will just tell you it can't remove files.
+
+
 This is the piece that turns "GitHub setup per admin" into "just a password."
 
 1. Create a free account at **cloudflare.com** (no domain or payment needed).
@@ -45,6 +48,7 @@ This is the piece that turns "GitHub setup per admin" into "just a password."
    - Variable `REPO_OWNER` — your GitHub username
    - Variable `REPO_NAME` — `district-hub`
    - Variable `BRANCH` — `main`
+   - Variable `ALLOWED_ORIGIN` — the exact address of your hub, e.g. `https://districtthirtytwo.github.io` (optional, but it stops other websites calling your helper)
 5. Copy the worker's URL (looks like `https://district-hub-publish.yourname.workers.dev`).
 6. Open `index.html` in a text editor, find `const PUBLISH_URL = "";` near the top of the script, and paste the URL between the quotes. Re-upload `index.html` to the repo (Add file → Upload files → drag → Commit).
 
@@ -81,6 +85,9 @@ This is everything an admin needs. Nothing here requires any technical knowledge
 | A warning that one district's sheet is behind | The two sheets were last updated on different days. | Use the D32 / D49 buttons rather than Combined until both refresh. |
 | ❌ and a message after Publish | The publish did not finish. | The message says whether any files got through. Press Publish again — it is safe to retry. |
 | Your browser warns you about leaving the page | You have unpublished work. | Stay and Publish, or leave and pick it up next time. |
+| "Someone else published while you were editing" | Another admin published after you started. **Nothing was overwritten** — your publish was refused, not theirs. | Reload the hub, redo your change, publish again. |
+| "this hub's publish helper is an older version that cannot remove files" | The worker in Cloudflare predates the update in Part C. | Your content still published. Do the Part C update, then delete the item again. |
+| "Too many wrong passwords" | Someone entered the wrong password repeatedly. | Wait about ten minutes. |
 
 **Adding an admin:** send them the hub address and the password. Nothing to install.
 **Changing the password:** Cloudflare → your worker → Settings → edit `ADMIN_PASSWORD`. Everyone signs in again with the new one.
@@ -99,5 +106,7 @@ Send everyone the URL with one line of instructions:
 1. **The site is public.** Free GitHub Pages means anyone with the URL can *view* it — including production numbers and names. It's unlisted, but not locked. If the district wants viewing restricted too, the upgrade paths are a private repo on GitHub Pro (~$4/mo) or a free Cloudflare Access gate in front. Make this call before wide rollout.
 2. **The scoreboard depends on the sheets staying published.** It reads both districts' *Publish to web → CSV* links. If someone un-publishes a sheet or changes its structure, the board shows the last saved copy and a red status instead of silently going wrong — but it will be stale until the link is fixed.
 3. **One publisher at a time.** Edits stage in each admin's browser until published; if two people edit simultaneously, the last publish wins. With two admins, a simple "I'm updating the hub" text avoids it entirely.
-4. **Taking a document down isn't possible yet.** Removing a report or resource from the list hides it from the page, but the file stays in the repo at its original web address and stays in the history. Don't post anything you might need to fully retract.
+4. **Taking a document down.** Deleting a report, newsletter or resource now asks whether to remove the file itself as well. Say yes and the file is deleted from the site — anyone with the old link gets "not found". The page is always updated *before* the file is removed, so nobody can land on a link to a file that has already gone.
+
+   One limit worth understanding: the file is removed from the live site, but it remains in the repository's history, which is public. Anyone who knew to go looking through past versions could still retrieve it. That is fine for "we posted the wrong version, pull it" — the everyday case. It is **not** a remedy for genuinely confidential material accidentally published. If that ever happens, treat it as a disclosure: tell the district office immediately, don't rely on deletion alone.
 5. **If the helper is ever down** (or you haven't set it up yet), the editor still works — use **⬇ Export content.json** and upload the file to the repo by hand (Add file → Upload files). Same result, just manual.

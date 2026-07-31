@@ -801,6 +801,8 @@ let ADMIN_PW = null;
 let CONTENT = null;     // what the page renders
 let EDIT = null;        // working copy while in admin mode
 let STAGED = [];        // files waiting to publish: {path, name, base64, blobUrl}
+let PENDING_DELETE = [];// files to remove from the site on the next publish
+let BASE_REV = null;    // which revision of content.json this session started from
 let adminMode = false;
 let dirty = false;
 
@@ -837,6 +839,13 @@ async function boot(){
   }catch(e){
     failure = 'The content file could not be reached — you may be offline, or this page was opened directly from a folder instead of the web address.';
   }
+  /* GitHub Pages can serve a slightly stale content.json for a minute
+     after a publish. If the copy we just fetched is older than the last
+     revision THIS browser published, trust ours — otherwise the admin
+     gets told "someone else published" when that someone was them. */
+  const fetchedRev = CONTENT ? (CONTENT.rev||null) : null;
+  const mine = safeLocal(()=>localStorage.getItem(LAST_REV_KEY), null);
+  BASE_REV = (mine && fetchedRev !== mine) ? mine : fetchedRev;
   if(!CONTENT){
     /* Never fall back to sample data: showing real agents invented names and
        numbers is worse than showing nothing. Say what went wrong instead. */
@@ -860,6 +869,7 @@ function markDirty(){ dirty=true; $('dirtyFlag').classList.add('on'); $('dirtyFl
    for browser storage), so the warning says so explicitly.
    ===================================================================== */
 const DRAFT_KEY='d32hub_draft_v1';
+const LAST_REV_KEY='d32hub_lastrev';
 let draftTimer=null;
 function saveDraft(){
   clearTimeout(draftTimer);
@@ -880,7 +890,7 @@ function offerDraftRestore(){
   else clearDraft();
 }
 window.addEventListener('beforeunload', e=>{
-  if(dirty || STAGED.length){ e.preventDefault(); e.returnValue=''; return ''; }
+  if(dirty || STAGED.length || PENDING_DELETE.length){ e.preventDefault(); e.returnValue=''; return ''; }
 });
 
 function renderAll(){
@@ -1835,7 +1845,7 @@ function closePanel(){ $('drawer').classList.remove('on'); }
 function discardChanges(){
   if(!confirm("Throw away all unpublished changes?")) return;
   EDIT = clone(CONTENT); STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
-  clearDraft(); openEdit=null; dirty=false; $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
+  PENDING_DELETE=[]; clearDraft(); openEdit=null; dirty=false; $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
   renderAll(); showTab(currentTab);
 }
 
@@ -1953,10 +1963,22 @@ function moveItem(t,i,dir){
   markDirty(); drawItemList(t);
 }
 function delItem(t,i){
-  const ed=EDITORS[t], list=EDIT[ed.list];
-  const title=(ed.sum(list[i]).b||'(untitled)');
+  const ed=EDITORS[t], list=EDIT[ed.list], it=list[i];
+  const title=(ed.sum(it).b||'(untitled)');
   if(!confirm(`Delete the ${ed.label.toLowerCase()} "${title}"?\n\nThis can't be undone once you publish.`)) return;
-  list.splice(i,1); markDirty(); drawItemList(t); $('itemForm').innerHTML='';
+  /* Removing the entry only hides it from the page — the file itself
+     stays at its web address unless we explicitly take it down. */
+  const file=it.file;
+  if(file){
+    const staged=STAGED.findIndex(x=>x.path===file);
+    if(staged>=0){
+      URL.revokeObjectURL(STAGED[staged].blobUrl); STAGED.splice(staged,1);   // never published, nothing to remove
+    }else if(!PENDING_DELETE.includes(file)){
+      const alsoFile=confirm(`Also take the file itself off the site?\n\nOK — anyone with the old link gets "not found".\nCancel — the entry disappears from the page but the file stays reachable at its address.`);
+      if(alsoFile) PENDING_DELETE.push(file);
+    }
+  }
+  list.splice(i,1); openEdit=null; markDirty(); drawItemList(t); $('itemForm').innerHTML='';
 }
 function addItem(t){
   const ed=EDITORS[t], list=EDIT[ed.list];
@@ -2308,7 +2330,8 @@ function renderPublishTab(){
         <p style="margin:11px 0 0"><button class="btn sm" onclick="signOutDevice()">Sign out on this device</button></p>
       </fieldset>
       <fieldset class="box"><legend>What will publish</legend>
-        <p class="hint" style="margin:0">${dirty?'Content changes':'No content changes yet'}${STAGED.length?` + ${STAGED.length} new file(s): ${STAGED.map(s=>'<code>'+esc(s.path)+'</code>').join(', ')}`:''}.</p>
+        <p class="hint" style="margin:0">${dirty?'Content changes':'No content changes yet'}${STAGED.length?` + ${STAGED.length} new file(s): ${STAGED.map(s=>'<code>'+esc(s.name)+'</code>').join(', ')}`:''}.</p>
+        ${PENDING_DELETE.length?`<p class="hint" style="color:var(--red);font-weight:700">${PENDING_DELETE.length} file(s) will be taken off the site: ${PENDING_DELETE.map(p=>'<code>'+esc(p.replace('files/',''))+'</code>').join(', ')}</p>`:''}
       </fieldset>
       <fieldset class="box"><legend>Good to know</legend>
         <p class="hint" style="margin:0">Changes stage in <b>this browser</b> until you publish — if two admins edit at the same time, the last publish wins, so don't update simultaneously. If the password ever changes (done in Cloudflare by the hub owner), everyone just signs in again with the new one.</p>
@@ -2358,7 +2381,7 @@ function brokenItems(){
 }
 async function publishAll(){
   flushOpenForm();
-  if(!dirty && !STAGED.length){ $('pubStat').textContent='Nothing has changed yet — make an edit first.'; return; }
+  if(!dirty && !STAGED.length && !PENDING_DELETE.length){ $('pubStat').textContent='Nothing has changed yet — make an edit first.'; return; }
   const broken=brokenItems();
   if(broken.length && !confirm('These items have no file attached, so their link will not work on the site:\n\n'+broken.join('\n')+'\n\nPublish anyway?')) return;
   const n=STAGED.length;
@@ -2389,15 +2412,36 @@ async function publishViaHelper(){
   try{
     stat.textContent='Publishing… (larger PDFs can take a moment)';
     EDIT.updated=new Date().toISOString().slice(0,10);
+    EDIT.rev = 'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
     const files=[
       ...STAGED.map(s=>({path:s.path, base64:s.base64})),
       {path:'content.json', base64: btoa(unescape(encodeURIComponent(JSON.stringify(EDIT,null,2))))}
     ];
     const r=await fetch(PUBLISH_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'publish', password:ADMIN_PW, message:'Hub update via admin panel', files})});
+      body:JSON.stringify({action:'publish', password:ADMIN_PW, baseRev:BASE_REV, message:'Hub update via admin panel', files})});
     const res=await r.json().catch(()=>({}));
-    if(r.status===401){ localStorage.removeItem(PW_KEY); ADMIN_PW=null; throw new Error('Password no longer valid — click Admin to sign in again.'); }
+    if(r.status===401){ safeLocal(()=>localStorage.removeItem(PW_KEY)); ADMIN_PW=null; throw new Error('Password no longer valid — click Admin to sign in again.'); }
+    if(r.status===429) throw new Error(res.error||'Too many attempts — wait a few minutes.');
+    if(r.status===409 || res.conflict) throw new Error((res.error||'Someone else published while you were editing.')+' Nothing was overwritten.');
     if(!r.ok || !res.ok){ const er=new Error(res.error || ('HTTP '+r.status)); er.published=res.published; throw er; }
+    BASE_REV = EDIT.rev;
+    safeLocal(()=>localStorage.setItem(LAST_REV_KEY, EDIT.rev));
+
+    /* Files come down AFTER the page stops referencing them, so nobody
+       can ever hit a link to a file that is already gone. */
+    if(PENDING_DELETE.length){
+      stat.textContent='Taking removed files off the site…';
+      const dr=await fetch(PUBLISH_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({action:'delete', password:ADMIN_PW, message:'Hub: remove file', paths:PENDING_DELETE})});
+      const dres=await dr.json().catch(()=>({}));
+      if(dr.ok && dres.ok){ PENDING_DELETE=[]; }
+      else if(dr.status===400){
+        /* the deployed helper predates delete support */
+        alert('Your changes published, but this hub\'s publish helper is an older version that cannot remove files.\n\nThe entries are gone from the page, but the files are still reachable at their old addresses. Ask whoever set up the hub to paste the latest worker.js into Cloudflare — SETUP.md Part C.');
+      }else{
+        alert('Your changes published, but the files could not be removed:\n\n'+(dres.error||('HTTP '+dr.status))+'\n\nThe entries are off the page; try Publish again to retry the removal.');
+      }
+    }
     CONTENT=clone(EDIT);
     STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
     dirty=false; clearDraft(); $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
