@@ -1,11 +1,20 @@
 {
-  "updated": "2026-07-31",
+  "updated": "2026-08-06",
   "banner": {
     "active": true,
     "text": "Jamaica qualification is live all year — $45K life premium and 20 I&P. Q2 Producer Cup winners are posted below.",
     "link": "#competitions"
   },
   "news": [
+    {
+      "id": "n5",
+      "date": "2026-08-06",
+      "tag": "update",
+      "title": "July District Matrix is posted",
+      "body": "The District Performance Matrix through August folio is up in Reports, now as a sortable table you can search by name. Ranked on Personal Lines, Life, Business and Prime Score. June's edition stays available underneath it.",
+      "pinned": true,
+      "link": "#reports"
+    },
     {
       "id": "n1",
       "date": "2026-07-31",
@@ -134,6 +143,15 @@
   ],
   "reports": [
     {
+      "id": "r-matrix-jul26",
+      "title": "District Matrix — July Production / June Prime",
+      "date": "2026-08-04",
+      "category": "Production",
+      "file": "files/district-matrix-july-2026.json",
+      "type": "table",
+      "note": "June Prime Score; all other lines as of August folio"
+    },
+    {
       "id": "r-qst",
       "title": "2026 Quote & Sales Tracker",
       "date": "2026-07-10",
@@ -176,5 +194,5 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r19fb9b1faa2vc7a1"
+  "rev": "r19fd7e49da0leq04"
 }
