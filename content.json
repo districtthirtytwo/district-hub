@@ -7,12 +7,30 @@
   },
   "news": [
     {
+      "id": "n7",
+      "date": "2026-08-11",
+      "tag": "update",
+      "title": "August Producer Report and YTD Life results are posted",
+      "body": "Producer Report as of 8/7 and Life results as of 8/9 are both in Reports. Walt Beayrd leads POY year-to-date, Breanna Ashley leads the current quarter. On life, the district is at 210 I&P and $247,011 against the Jamaica bar of 20 I&P and $45,000.",
+      "pinned": false,
+      "link": "#reports"
+    },
+    {
+      "id": "n6",
+      "date": "2026-08-11",
+      "tag": "update",
+      "title": "July District Matrix \u2014 ranks corrected",
+      "body": "The matrix now ranks on Weighted Score rather than the raw sum of the eight placings, which is what the stated weights always intended. Eleven of the 27 agents move by one to three places; the eight underlying category ranks are unchanged. If you looked at the matrix before today, check your line again.",
+      "pinned": true,
+      "link": "#reports"
+    },
+    {
       "id": "n5",
       "date": "2026-08-06",
       "tag": "update",
       "title": "July District Matrix is posted",
       "body": "The District Performance Matrix through August folio is up in Reports, now as a sortable table you can search by name. Ranked on Personal Lines, Life, Business and Prime Score. June's edition stays available underneath it.",
-      "pinned": true,
+      "pinned": false,
       "link": "#reports"
     },
     {
@@ -119,11 +137,11 @@
       "id": "c-summer",
       "active": true,
       "title": "Summer Surprise",
-      "period": "Details coming",
+      "period": "On hold",
       "ends": "",
       "prize": "To be announced",
       "metricLabel": "",
-      "description": "Details and qualification for the Summer Surprise promo are coming from the district office. Watch this space.",
+      "description": "The district office is holding the Summer Surprise promo until the quotes and NB tracker data is reporting correctly. They expect to resume shortly and will confirm here once it restarts. Nothing to do in the meantime \u2014 qualification will be announced with the restart.",
       "standings": []
     }
   ],
@@ -143,13 +161,29 @@
   ],
   "reports": [
     {
+      "id": "r-life-0809",
+      "title": "YTD Life Results",
+      "date": "2026-08-09",
+      "category": "Life",
+      "file": "files/ytd-life-results-2026-08-09.pdf",
+      "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 210 I&P / $247,011"
+    },
+    {
+      "id": "r-prod-0807",
+      "title": "2026 Producer Report",
+      "date": "2026-08-07",
+      "category": "Production",
+      "file": "files/producer-report-2026-08-07.pdf",
+      "note": "PL NB premium by producer \u2014 Q1/Q2/Q3 and POY year-to-date"
+    },
+    {
       "id": "r-matrix-jul26",
       "title": "District Matrix \u2014 July Production / June Prime",
       "date": "2026-08-04",
       "category": "Production",
       "file": "files/district-matrix-july-2026.json",
       "type": "table",
-      "note": "June Prime Score; all other lines as of August folio"
+      "note": "June Prime Score; all other lines as of August folio. Ranks corrected 8/11."
     },
     {
       "id": "r-qst",
@@ -202,5 +236,5 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r6cded779a92058dexp1y"
+  "rev": "r909d6b92a9ce69d4ujp8"
 }
