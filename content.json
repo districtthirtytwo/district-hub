@@ -2,7 +2,7 @@
   "updated": "2026-08-06",
   "banner": {
     "active": true,
-    "text": "Jamaica qualification is live all year — $45K life premium and 20 I&P. Q2 Producer Cup winners are posted below.",
+    "text": "Jamaica qualification is live all year \u2014 $45K life premium and 20 I&P. Q2 Producer Cup winners are posted below.",
     "link": "#competitions"
   },
   "news": [
@@ -19,7 +19,7 @@
       "id": "n1",
       "date": "2026-07-31",
       "tag": "news",
-      "title": "July Newsletter is out — June commission inside",
+      "title": "July Newsletter is out \u2014 June commission inside",
       "body": "The July district newsletter is posted below, with June commission and every leaderboard: Life, Auto, Fire, Specialty, Folio, Business and New Business Commission.",
       "pinned": true,
       "link": "#newsletter"
@@ -38,7 +38,7 @@
       "date": "2026-07-24",
       "tag": "update",
       "title": "Scoreboard is now live from the district sheets",
-      "body": "Quotes and new business update straight from the D32 and D49 tracking sheets — no more waiting on a posted snapshot. Click any producer or agency for their day-by-day and week-by-week trend.",
+      "body": "Quotes and new business update straight from the D32 and D49 tracking sheets \u2014 no more waiting on a posted snapshot. Click any producer or agency for their day-by-day and week-by-week trend.",
       "pinned": false,
       "link": "#scoreboard"
     },
@@ -47,7 +47,7 @@
       "date": "2026-07-06",
       "tag": "update",
       "title": "New Retail Program effective July 2026",
-      "body": "The updated Retail Program is live: 36-month bonus structure with monthly bonuses up to 340%. Talk to the district office if you have Protégé or new-agent candidates.",
+      "body": "The updated Retail Program is live: 36-month bonus structure with monthly bonuses up to 340%. Talk to the district office if you have Prot\u00e9g\u00e9 or new-agent candidates.",
       "pinned": false
     }
   ],
@@ -56,7 +56,7 @@
       "id": "e1",
       "date": "2026-09-30",
       "time": "",
-      "title": "Q3 ends — quarter close",
+      "title": "Q3 ends \u2014 quarter close",
       "location": "",
       "link": "",
       "description": "Last day of the quarter. Q3 Producer Cup standings final and Topper Club pace check."
@@ -75,8 +75,8 @@
     {
       "id": "c-jamaica",
       "active": true,
-      "title": "Jamaica — 2026 Annual Life Promo",
-      "period": "Jan 1 – Dec 31, 2026",
+      "title": "Jamaica \u2014 2026 Annual Life Promo",
+      "period": "Jan 1 \u2013 Dec 31, 2026",
       "ends": "2026-12-31",
       "prize": "4 nights all-inclusive, agent + guest",
       "metricLabel": "Qualification",
@@ -86,31 +86,31 @@
     {
       "id": "c-producercup",
       "active": true,
-      "title": "Producer Cup — Q2 winners",
-      "period": "Q2 2026 · Apr 1 – Jun 30",
+      "title": "Producer Cup \u2014 Q2 winners",
+      "period": "Q2 2026 \u00b7 Apr 1 \u2013 Jun 30",
       "ends": "2026-06-30",
       "prize": "Quarterly recognition",
       "metricLabel": "Q2 final placing",
       "description": "Congratulations to the Q2 Producer Cup top five. Q3 standings will be posted after the quarter closes on September 30.",
       "standings": [
         {
-          "name": "McKenzie Scruggs — Jeff Pechacek Agency",
+          "name": "McKenzie Scruggs \u2014 Jeff Pechacek Agency",
           "value": "1st"
         },
         {
-          "name": "Walt Beayrd — Steven Tindell Agency",
+          "name": "Walt Beayrd \u2014 Steven Tindell Agency",
           "value": "2nd"
         },
         {
-          "name": "Marcus Hudson — Caleb Milne Agency",
+          "name": "Marcus Hudson \u2014 Caleb Milne Agency",
           "value": "3rd"
         },
         {
-          "name": "Lauren Geier — David Dickerson Agency",
+          "name": "Lauren Geier \u2014 David Dickerson Agency",
           "value": "4th"
         },
         {
-          "name": "Breanna Ashley — Chris Gutierrez Agency",
+          "name": "Breanna Ashley \u2014 Chris Gutierrez Agency",
           "value": "5th"
         }
       ]
@@ -130,13 +130,13 @@
   "newsletters": [
     {
       "id": "nl2",
-      "title": "July Newsletter — June Commission",
+      "title": "July Newsletter \u2014 June Commission",
       "date": "2026-07-31",
       "file": "files/2026-07-newsletter.pdf"
     },
     {
       "id": "nl1",
-      "title": "June Newsletter — May Commission",
+      "title": "June Newsletter \u2014 May Commission",
       "date": "2026-06-30",
       "file": "files/2026-06-newsletter.pdf"
     }
@@ -144,7 +144,7 @@
   "reports": [
     {
       "id": "r-matrix-jul26",
-      "title": "District Matrix — July Production / June Prime",
+      "title": "District Matrix \u2014 July Production / June Prime",
       "date": "2026-08-04",
       "category": "Production",
       "file": "files/district-matrix-july-2026.json",
@@ -177,7 +177,7 @@
     },
     {
       "id": "r-matrix",
-      "title": "District Matrix — June Production / May Prime",
+      "title": "District Matrix \u2014 June Production / May Prime",
       "date": "2026-07-02",
       "category": "Production",
       "file": "files/district-matrix-june-2026.pdf",
@@ -194,5 +194,5 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r19fd7e49da0leq04"
+  "rev": "rc25b7126a6fa5eb8jmys"
 }
