@@ -1,548 +1,755 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>District Hub — Farmers Districts 32 &amp; 49</title>
 <meta name="description" content="News, events, competitions, newsletters, reports and the production scoreboard for Farmers Insurance Districts 32 and 49.">
-<meta name="theme-color" content="#0a2d6e">
-<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#12306a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a1120" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
 <meta property="og:type" content="website">
 <meta property="og:title" content="District Hub — Farmers Districts 32 &amp; 49">
 <meta property="og:description" content="News, events, competitions, newsletters, reports and the production scoreboard.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a2d6e'/%3E%3Crect x='14' y='32' width='8' height='18' rx='2' fill='%23ffffff'/%3E%3Crect x='28' y='22' width='8' height='28' rx='2' fill='%23ffffff'/%3E%3Crect x='42' y='14' width='8' height='36' rx='2' fill='%23d92231'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312306a'/%3E%3Crect x='14' y='32' width='8' height='18' rx='2' fill='%23ffffff'/%3E%3Crect x='28' y='22' width='8' height='28' rx='2' fill='%23ffffff'/%3E%3Crect x='42' y='14' width='8' height='36' rx='2' fill='%23d92231'/%3E%3C/svg%3E">
+<script>
+(function(){
+  try{
+    var t=localStorage.getItem('d32hub_theme');
+    if(t==='dark'||t==='light') document.documentElement.setAttribute('data-theme',t);
+    else document.documentElement.removeAttribute('data-theme');
+  }catch(e){ document.documentElement.removeAttribute('data-theme'); }
+})();
+</script>
 <style>
+  /* ===================================================================
+     DISTRICT HUB — visual system
+     Tokens, type scale and card language are lifted from the NB
+     Accelerator Quote Plan (files/nb-accelerator-quote-plan.html) so the
+     hub and the tools it links to read as one product. Anything the hub
+     needs on top of that set (gold, tag colours, chart ink) is defined
+     here in BOTH modes — never as a bare hex, or dark mode breaks.
+     =================================================================== */
   :root{
-    --navy:#0a2d6e; --navy2:#0d3b8a; --navy-deep:#08245a;
-    --blue:#2563eb; --blue-soft:#3b82f6; --blue-pale:#dbeafe;
-    --red:#d92231; --red-soft:#e23b48; --red-pale:#fde2e4;
-    --gold:#d4a017; --gold-pale:#fdf3d4;
-    --ink:#1f2937; --muted:#6b7280; --line:#e6e8ee;
-    --bg:#f2f4f9; --card:#ffffff;
-    --sh:0 1px 2px rgba(16,24,40,.05);
-    --sh-md:0 6px 18px rgba(16,24,40,.07);
-    --ok:#16a34a;
+    color-scheme: light;
+    --navy:#12306a; --navy-2:#0e2652; --navy-3:#0a1c3f;
+    --on-navy:#ffffff; --on-navy-soft:#c9dcf7;
+    --on-navy-blue:#89b7ff; --on-navy-red:#ff8a91;
+    --surface-1:#ffffff; --surface-2:#f7f9fc; --plane:#eef3fa;
+    --text-primary:#0d1117; --text-secondary:#4c535f; --muted:#737b88;
+    --grid:#e4e9f0; --axis:#c1cad8; --border:rgba(18,48,106,0.13);
+    --s1:#2a529c; --ord-1:#719def; --ord-2:#466fbc; --ord-3:#1c428b;
+    --s2:#d60028; --str-1:#ff4750; --str-2:#cb001d;
+    --inert:#c6cfdd;
+    --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b;
+    --gold:#b07d09; --gold-ink:#7a5a05;
+    --wash:rgba(28,66,139,0.09);
+    --wash2:rgba(203,0,29,0.08);
+    --wash3:rgba(176,125,9,0.10);
+    --washg:rgba(12,163,12,0.10);
+    --hover:rgba(18,48,106,0.045);
+    --shadow:0 6px 22px rgba(10,28,63,.14);
+    --shadow-lg:0 24px 70px rgba(8,20,45,.30);
+    --focus:#2a529c;
   }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth;scroll-padding-top:96px;}
-  @media(max-width:760px){html{scroll-padding-top:12px;}}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
-  .wrap{max-width:1480px;margin:0 auto;padding:20px;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --surface-1:#141a26; --surface-2:#1a2130; --plane:#0a1120;
+      --text-primary:#ffffff; --text-secondary:#b9c1cd; --muted:#8a92a0;
+      --grid:#262e3c; --axis:#38414f; --border:rgba(255,255,255,0.11);
+      --s1:#5a84d4; --ord-1:#89b7ff; --ord-2:#5d88d7; --ord-3:#325aa6;
+      --s2:#f73743; --str-1:#ff5e62; --str-2:#e11631;
+      --inert:#313a4a;
+      --good:#3ec93e; --warning:#ffc94a; --critical:#ff6b6b;
+      --gold:#e0ae3d; --gold-ink:#e8bd5c;
+      --wash:rgba(90,132,212,0.16);
+      --wash2:rgba(247,55,67,0.14);
+      --wash3:rgba(224,174,61,0.14);
+      --washg:rgba(62,201,62,0.14);
+      --hover:rgba(255,255,255,0.045);
+      --shadow:0 6px 22px rgba(0,0,0,.45);
+      --shadow-lg:0 24px 70px rgba(0,0,0,.6);
+      --focus:#89b7ff;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --surface-1:#141a26; --surface-2:#1a2130; --plane:#0a1120;
+    --text-primary:#ffffff; --text-secondary:#b9c1cd; --muted:#8a92a0;
+    --grid:#262e3c; --axis:#38414f; --border:rgba(255,255,255,0.11);
+    --s1:#5a84d4; --ord-1:#89b7ff; --ord-2:#5d88d7; --ord-3:#325aa6;
+    --s2:#f73743; --str-1:#ff5e62; --str-2:#e11631;
+    --inert:#313a4a;
+    --good:#3ec93e; --warning:#ffc94a; --critical:#ff6b6b;
+    --gold:#e0ae3d; --gold-ink:#e8bd5c;
+    --wash:rgba(90,132,212,0.16);
+    --wash2:rgba(247,55,67,0.14);
+    --wash3:rgba(224,174,61,0.14);
+    --washg:rgba(62,201,62,0.14);
+    --hover:rgba(255,255,255,0.045);
+    --shadow:0 6px 22px rgba(0,0,0,.45);
+    --shadow-lg:0 24px 70px rgba(0,0,0,.6);
+    --focus:#89b7ff;
+  }
 
-  /* ---------- Top bar ---------- */
-  .topbar{background:var(--card);border-radius:16px;padding:14px 22px;display:flex;align-items:center;gap:16px;box-shadow:var(--sh);border:1px solid #eef0f5;flex-wrap:wrap;position:sticky;top:10px;z-index:50;}
-  .logo{display:flex;align-items:center;gap:14px;}
-  .dlogo{height:36px;width:auto;display:block;}
-  .divider{width:1px;height:32px;background:var(--line);}
-  .title h1{margin:0;font-size:20px;color:var(--navy);letter-spacing:-.2px;font-weight:800;}
-  .title p{margin:3px 0 0;font-size:10.5px;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;font-weight:600;}
-  .topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end;}
-  .datebox{color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;}
-  .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;font-weight:600;font-size:13px;cursor:pointer;color:var(--navy);transition:background .15s,border-color .15s;}
-  .btn:hover{background:#f7f9fc;border-color:#d9dce4;}
-  .btn.primary{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:var(--sh);}
-  .btn.primary:hover{background:var(--navy2);}
-  .btn.danger{color:var(--red);border-color:#f3c2c7;}
+  *{box-sizing:border-box}
+  html{scroll-behavior:auto;}
+  body{
+    margin:0;background:var(--plane);color:var(--text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+  /* Shell is wide because leaderboards and report tables need the room;
+     reading content is capped narrower inside it (.readcol). */
+  .wrap{max-width:1320px;margin:0 auto;padding:0 22px 64px;}
+  .readcol{max-width:1080px;}
+
+  /* ===================================================================
+     APP BAR — full-bleed navy, two deliberate rows.
+     Row 1 is identity + status + account actions.
+     Row 2 is navigation only, so tabs never fight the logo for space.
+     =================================================================== */
+  .appbar{
+    position:sticky;top:0;z-index:60;
+    background:var(--navy);color:var(--on-navy);
+    border-top:4px solid var(--s2);
+    box-shadow:0 1px 0 rgba(0,0,0,.18);
+  }
+  .barin{max-width:1320px;margin:0 auto;padding:0 22px;}
+  .bar1{display:flex;align-items:center;gap:14px;padding:11px 0;}
+  .logos{display:flex;align-items:center;gap:7px;background:#fff;border-radius:8px;padding:6px 9px;flex:none;}
+  .dlogo{height:26px;width:auto;display:block;}
+  .ident{margin-right:auto;min-width:0;}
+  .ident h1{margin:0;font-size:16px;font-weight:680;letter-spacing:-.01em;color:var(--on-navy);line-height:1.2;}
+  .ident p{margin:2px 0 0;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--on-navy-soft);}
+  .bar1 .acts{display:flex;align-items:center;gap:9px;flex:none;}
+  .datebox{font-size:12.5px;color:var(--on-navy-soft);white-space:nowrap;}
+
+  /* folio countdown lives in the bar so the deadline is always on screen
+     without spending a 90px strip on it */
+  .foliochip{
+    display:none;align-items:center;gap:9px;text-decoration:none;
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);
+    border-radius:9px;padding:5px 11px;white-space:nowrap;
+  }
+  .foliochip:hover{background:rgba(255,255,255,.17);}
+  .foliochip.on{display:inline-flex;}
+  .foliochip .fl{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--on-navy-blue);display:block;}
+  .foliochip .fd{font-size:12.5px;font-weight:640;color:var(--on-navy);display:block;margin-top:1px;}
+  .foliochip .fn{font-size:16px;font-weight:660;color:var(--on-navy);font-variant-numeric:tabular-nums;line-height:1;}
+  .foliochip .fu{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--on-navy-soft);display:block;margin-top:2px;}
+  .foliochip .cnt{text-align:right;padding-left:10px;border-left:1px solid rgba(255,255,255,.2);}
+  .foliochip.soon{background:rgba(255,138,145,.16);border-color:rgba(255,138,145,.4);}
+  .foliochip.soon .fl,.foliochip.soon .fn,.foliochip.soon .fu{color:var(--on-navy-red);}
+  .foliochip.today{background:var(--s2);border-color:var(--s2);}
+  .foliochip.today .fl,.foliochip.today .fu,.foliochip.today .fn,.foliochip.today .fd{color:#fff;}
+
+  .ibtn{
+    font:inherit;font-size:13px;font-weight:600;cursor:pointer;
+    padding:7px 12px;border-radius:8px;
+    background:transparent;color:var(--on-navy);
+    border:1px solid rgba(255,255,255,.34);
+    display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+  }
+  .ibtn:hover{background:rgba(255,255,255,.12);}
+  .ibtn[disabled]{opacity:.55;cursor:default;}
+
+  /* ---- row 2: tabs ---- */
+  .bar2{display:flex;align-items:center;gap:4px;border-top:1px solid rgba(255,255,255,.14);}
+  .tab{
+    appearance:none;border:0;background:transparent;font:inherit;
+    font-size:13.5px;font-weight:640;color:var(--on-navy-soft);
+    padding:12px 15px;cursor:pointer;position:relative;white-space:nowrap;
+    border-bottom:3px solid transparent;margin-bottom:-1px;text-decoration:none;
+  }
+  .tab:hover{color:var(--on-navy);}
+  .tab[aria-selected="true"]{color:var(--on-navy);border-bottom-color:var(--on-navy-red);}
+  .tab .n{
+    font-size:10.5px;font-weight:700;margin-left:7px;padding:1px 6px;border-radius:999px;
+    background:rgba(255,255,255,.14);color:var(--on-navy-soft);vertical-align:1px;
+  }
+  .tab[aria-selected="true"] .n{background:rgba(255,255,255,.22);color:var(--on-navy);}
+  /* A tool opens in a new tab rather than switching views here, so it is
+     filled — it must not read as one of the four sections. */
+  .toolchip{
+    margin-left:auto;text-decoration:none;white-space:nowrap;
+    background:#fff;color:var(--navy);font-size:12.5px;font-weight:700;
+    border-radius:8px;padding:6px 13px;align-self:center;
+  }
+  .toolchip:hover{background:var(--on-navy-soft);}
+  .toolchip .g{font-weight:400;opacity:.65;}
+
+  /* ===================================================================
+     VIEWS
+     Each tab is a screen. Hidden views stay in the DOM (all render
+     functions keep their target elements) but are display:none, so
+     switching costs nothing and never re-renders a list into itself.
+     =================================================================== */
+  .view{display:none;padding-top:20px;}
+  .view.on{display:block;}
+  .viewhd{margin:4px 0 18px;}
+  .viewhd h2{font-size:25px;line-height:1.2;margin:0;font-weight:680;letter-spacing:-.015em;color:var(--ord-3);}
+  .viewhd p{margin:5px 0 0;font-size:14px;color:var(--text-secondary);}
+  :root[data-theme="dark"] .viewhd h2{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .viewhd h2{color:var(--ord-1);}}
+
+  /* ---------- strips above the views ---------- */
+  .strip{
+    display:none;align-items:center;gap:13px;margin-top:18px;
+    background:var(--navy-2);color:var(--on-navy);border-radius:12px;padding:11px 16px;
+  }
+  .strip.on{display:flex;}
+  .strip .flag{background:var(--s2);border-radius:6px;font-size:10px;font-weight:800;letter-spacing:.09em;padding:4px 8px;text-transform:uppercase;white-space:nowrap;flex:none;}
+  .strip p{margin:0;font-size:14px;font-weight:500;line-height:1.4;}
+  .strip a{color:var(--on-navy-blue);font-weight:640;text-decoration:none;margin-left:auto;white-space:nowrap;font-size:13px;flex:none;}
+  .strip a:hover{text-decoration:underline;}
+  .loadfail{
+    display:none;margin-top:18px;background:var(--wash2);border:1px solid var(--str-2);
+    border-radius:12px;padding:14px 17px;color:var(--text-primary);font-size:13.5px;line-height:1.55;
+  }
+  .loadfail.on{display:block;}
+  .loadfail b{display:block;font-size:14px;margin-bottom:3px;color:var(--str-2);}
+
+  /* ===================================================================
+     CARDS — flat, hairline border, no drop shadow. Section titles carry
+     a 3px navy rule on the left, exactly as in the Quote Plan.
+     =================================================================== */
+  .card{background:var(--surface-1);border:1px solid var(--border);border-radius:14px;margin-bottom:18px;overflow:hidden;}
+  .card-hd{display:flex;align-items:center;gap:11px;padding:18px 22px 0;flex-wrap:wrap;}
+  .card-hd h2{
+    margin:0;font-size:15px;font-weight:650;letter-spacing:-.005em;line-height:1.3;
+    padding-left:12px;border-left:3px solid var(--ord-3);color:var(--text-primary);
+  }
+  :root[data-theme="dark"] .card-hd h2{border-left-color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .card-hd h2{border-left-color:var(--ord-1);}}
+  .card-hd .sub{font-size:12.5px;color:var(--text-secondary);}
+  .card-hd .right{margin-left:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap;}
+  .card-bd{padding:16px 22px 20px;}
+  .cap{padding:4px 22px 0 37px;font-size:13px;color:var(--text-secondary);margin:0;}
+  .card.flush .card-bd{padding-top:8px;}
+
+  /* buttons on light surfaces */
+  .btn{
+    font:inherit;font-size:13px;font-weight:600;cursor:pointer;
+    border:1px solid var(--border);background:var(--surface-1);color:var(--text-primary);
+    border-radius:9px;padding:7px 13px;white-space:nowrap;
+  }
+  .btn:hover{background:var(--hover);}
+  .btn.primary{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .btn.primary:hover{background:var(--navy-2);}
+  .btn.danger{color:var(--str-2);border-color:var(--str-2);background:transparent;}
   .btn.sm{padding:5px 10px;font-size:12px;border-radius:8px;}
 
-  /* section nav chips */
-  .navchips{display:flex;gap:6px;flex-wrap:wrap;}
-  .navchips a{font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;transition:background .15s;}
-  .navchips a:hover{background:var(--blue-pale);border-color:#c4d7fb;}
-  /* Opens a standalone tool in a new tab rather than jumping to a section on
-     this page, so it is filled to read as an action, not an anchor. */
-  .navchips a.tool{background:var(--navy);color:#fff;border-color:var(--navy);}
-  .navchips a.tool:hover{background:var(--navy2);border-color:var(--navy2);}
-  .navchips a.tool span{font-weight:400;opacity:.75;}
+  /* ===================================================================
+     NAVY HERO — district totals, the Quote Plan's signature figure block
+     =================================================================== */
+  .card.navy{background:var(--navy);border-color:transparent;color:var(--on-navy);}
+  .card.navy .card-hd h2{color:var(--on-navy);border-left-color:var(--on-navy-red);}
+  .card.navy .card-hd .sub{color:var(--on-navy-soft);}
+  .hero2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.16);border-radius:12px;overflow:hidden;}
+  .fig{background:var(--navy);padding:19px 22px 21px;}
+  .figrule{height:3px;width:38px;border-radius:2px;background:var(--on-navy-blue);margin-bottom:12px;}
+  .fig.red .figrule{background:var(--on-navy-red);}
+  .figlab{font-size:12.5px;color:var(--on-navy-blue);font-weight:600;margin-bottom:8px;}
+  .fig.red .figlab{color:var(--on-navy-red);}
+  .fignum{font-size:50px;line-height:1;font-weight:640;letter-spacing:-.03em;color:var(--on-navy);font-variant-numeric:tabular-nums;}
+  .figunit{font-size:13.5px;color:var(--on-navy-soft);margin-top:8px;font-weight:500;}
+  .fignote{font-size:12px;color:var(--on-navy-soft);opacity:.72;margin-top:6px;}
 
-  /* ---------- Announcement banner ---------- */
-  .banner{margin-top:14px;background:linear-gradient(90deg,var(--navy),var(--navy2));border-radius:14px;padding:13px 20px;display:flex;align-items:center;gap:12px;color:#fff;box-shadow:var(--sh-md);}
-  .banner .flag{background:var(--red);border-radius:8px;font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 9px;text-transform:uppercase;white-space:nowrap;}
-  .banner p{margin:0;font-size:14px;font-weight:600;line-height:1.4;}
-  .banner a{color:#fde68a;font-weight:700;text-decoration:none;margin-left:auto;white-space:nowrap;font-size:13px;}
-  .banner a:hover{text-decoration:underline;}
-
-  /* ---------- Grid ---------- */
-  .maingrid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;margin-top:16px;align-items:start;}
-  @media(max-width:1080px){.maingrid{grid-template-columns:1fr;}}
-  .leftcol{display:flex;flex-direction:column;gap:16px;min-width:0;}
-  .card{background:var(--card);border-radius:16px;border:1px solid #eef0f5;box-shadow:var(--sh);overflow:hidden;}
-  .card-hd{display:flex;align-items:center;gap:10px;padding:15px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
-  .card-hd h2{margin:0;font-size:15px;color:var(--navy);font-weight:800;letter-spacing:.2px;}
-  .card-hd .sub{font-size:12px;color:var(--muted);font-weight:500;}
-  .card-hd .right{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-  .card-bd{padding:16px 20px;}
-  .accent{width:8px;height:22px;border-radius:4px;background:var(--red);}
-  .accent.blue{background:var(--blue);}
-  .accent.gold{background:var(--gold);}
-
-  /* ---------- Scoreboard ---------- */
-  .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;}
-  .seg button{border:0;background:transparent;padding:7px 13px;font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer;}
+  /* ===================================================================
+     SCOREBOARD
+     =================================================================== */
+  .filterbar{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;padding:14px 22px;border-top:1px solid var(--grid);border-bottom:1px solid var(--grid);background:var(--surface-2);margin-top:16px;}
+  .fgroup{display:flex;flex-direction:column;gap:5px;}
+  .flabel{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding-left:2px;line-height:1;}
+  .seg{display:inline-flex;border:1px solid var(--border);border-radius:9px;overflow:hidden;background:var(--surface-1);}
+  .seg button{border:0;background:transparent;padding:7px 13px;font:inherit;font-size:12.5px;font-weight:640;color:var(--text-secondary);cursor:pointer;}
+  .seg button:hover{background:var(--hover);}
   .seg button.on{background:var(--navy);color:#fff;}
-  .seg.red button.on{background:var(--red);}
-  .switch{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-weight:600;cursor:pointer;user-select:none;}
-  .switch input{accent-color:var(--navy);}
-  .podium{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
-  @media(max-width:640px){.podium{grid-template-columns:1fr;}}
-  .pod{border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;background:linear-gradient(180deg,#fff,#fafbfe);}
-  .pod .medal{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:15px;flex:none;}
-  .pod.p1 .medal{background:var(--gold);} .pod.p2 .medal{background:#9ca3af;} .pod.p3 .medal{background:#b45309;}
+  .seg.red button.on{background:var(--s2);}
+  .switch{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-secondary);font-weight:600;cursor:pointer;user-select:none;height:33px;}
+  .switch input{accent-color:var(--s1);}
+  #staffOnlyWrap .switch{padding:0 2px;}
+  .searchbox{
+    font:inherit;font-size:13px;border:1px solid var(--border);border-radius:9px;
+    padding:7px 11px;color:var(--text-primary);background:var(--surface-1);width:190px;max-width:100%;
+  }
+  .searchbox::placeholder{color:var(--muted);}
+  .searchbox:focus{outline:none;border-color:var(--s1);box-shadow:0 0 0 3px var(--wash);}
+  .searchbox.sm{width:150px;}
+
+  .boardnote{margin:14px 22px 0;padding:10px 14px;border-radius:10px;font-size:12.5px;font-weight:500;line-height:1.5;}
+  .boardnote.warn{background:var(--wash3);color:var(--text-primary);border:1px solid var(--gold);}
+  .boardnote.err{background:var(--wash2);color:var(--text-primary);border:1px solid var(--str-2);}
+
+  .podium{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;}
+  .pod{background:var(--surface-1);padding:14px 16px;display:flex;align-items:center;gap:12px;}
+  .pod.click{cursor:pointer;}
+  .pod.click:hover{background:var(--hover);}
+  /* gold / silver / bronze, so the ordering is legible without reading */
+  .pod .medal{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none;color:#fff;background:var(--ord-2);}
+  .pod.p1 .medal{background:var(--gold);}
+  .pod.p2 .medal{background:#8f9bb0;}
+  .pod.p3 .medal{background:var(--serious);}
   .pod .who{min-width:0;}
-  .pod .who b{display:block;font-size:14px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pod .who b{display:block;font-size:14px;font-weight:640;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .pod .who span{font-size:11.5px;color:var(--muted);}
-  .pod .val{margin-left:auto;text-align:right;}
-  .pod .val b{font-size:22px;color:var(--navy);}
-  .pod .val span{display:block;font-size:10px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;font-weight:700;white-space:nowrap;}
-  .pod .val{flex:none;}
-  table.board{width:100%;border-collapse:collapse;font-size:13.5px;}
-  table.board th{position:sticky;top:0;background:#fff;text-align:left;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;border-bottom:2px solid var(--line);}
-  table.board td{padding:9px 10px;border-bottom:1px solid #f1f3f8;vertical-align:middle;}
+  .pod .val{margin-left:auto;text-align:right;flex:none;}
+  .pod .val b{font-size:22px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+  .pod .val span{display:block;font-size:10px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;font-weight:700;white-space:nowrap;margin-top:2px;}
+
+  .boardwrap{max-height:560px;overflow:auto;border:1px solid var(--border);border-radius:12px;}
+  table.board{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed;}
+  /* Fixed widths everywhere except the bar column, which absorbs the
+     slack. Letting the NAME column absorb it instead left a 400px hole
+     between the name and the district chip on a wide screen. */
+  table.board .c-rank{width:44px;}
+  table.board thead th:nth-child(2){width:24%;}
+  table.board .c-dist{width:96px;}
+  table.board thead th:nth-child(4),table.board thead th:nth-child(5){width:132px;}
+  table.board .c-bar{width:auto;}
+  table.board td:nth-child(2){overflow:hidden;}
+  .pname .nm{min-width:0;}
+  .pname .nm b,.pname .nm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  table.board th{
+    position:sticky;top:0;z-index:1;background:var(--surface-1);text-align:left;
+    font-size:11.5px;font-weight:600;color:var(--text-secondary);
+    padding:10px;border-bottom:1px solid var(--axis);
+  }
+  table.board td{padding:10px;border-bottom:1px solid var(--grid);vertical-align:middle;}
   table.board tr:last-child td{border-bottom:0;}
-  .boardwrap{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px;}
-  .rank{font-weight:800;color:var(--muted);width:34px;}
-  .avatar{width:30px;height:30px;border-radius:50%;background:var(--blue-pale);color:var(--navy);display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:800;margin-right:9px;flex:none;}
+  table.board tr.click{cursor:pointer;}
+  table.board tr.click:hover td{background:var(--hover);}
+  .rank{font-weight:600;color:var(--muted);width:38px;font-variant-numeric:tabular-nums;}
+  .avatar{width:29px;height:29px;border-radius:8px;background:var(--wash);color:var(--ord-3);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-right:10px;flex:none;}
+  :root[data-theme="dark"] .avatar{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .avatar{color:var(--ord-1);}}
   .pname{display:flex;align-items:center;min-width:0;}
-  .pname .nm b{display:block;font-size:13.5px;}
-  .pname .nm span{font-size:11px;color:var(--muted);}
-  .dchip{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;}
-  .dchip.d32{background:var(--blue-pale);color:var(--navy);}
-  .dchip.d49{background:var(--red-pale);color:var(--red);}
-  .metric{font-weight:800;color:var(--ink);text-align:right;}
-  .barcell{width:32%;min-width:120px;}
-  .bar{height:8px;border-radius:6px;background:#eef1f7;overflow:hidden;}
-  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--blue),var(--navy2));}
-  .bar.red i{background:linear-gradient(90deg,var(--red-soft),var(--red));}
-  .asof{font-size:11.5px;color:var(--muted);}
-  .empty{padding:26px;text-align:center;color:var(--muted);font-size:13.5px;}
-  .statrow{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
-  .stat{flex:1;min-width:170px;border:1px solid var(--line);border-radius:12px;padding:11px 15px;background:linear-gradient(180deg,#fff,#fafbfe);display:flex;align-items:center;gap:12px;}
-  .stat .ic{flex:none;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--blue-pale);}
-  .stat.red .ic{background:var(--red-pale);}
-  .stat .v b{display:block;font-size:22px;color:var(--navy);line-height:1.1;}
-  .stat .v span{font-size:10px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;font-weight:700;}
-  .stat .scope{margin-left:auto;font-size:10.5px;color:var(--muted);text-align:right;line-height:1.4;}
+  .pname .nm b{display:block;font-size:14px;font-weight:620;}
+  .pname .nm span{font-size:11.5px;color:var(--muted);}
+  .dchip{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;}
+  .dchip.d32{background:var(--wash);color:var(--ord-3);}
+  .dchip.d49{background:var(--wash2);color:var(--str-2);}
+  :root[data-theme="dark"] .dchip.d32{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dchip.d32{color:var(--ord-1);}}
+  .metric{font-weight:620;text-align:right;font-variant-numeric:tabular-nums;}
+  /* NOT display:flex — a flex <td> stops behaving as a table cell and
+     shrink-wraps to its content, so the bar collapsed to ~100px inside a
+     529px column. Table-cell layout plus an absolutely placed chevron. */
+  .barcell{position:relative;padding-right:28px!important;min-width:120px;}
+  .bar{display:block;height:7px;border-radius:4px;background:var(--grid);overflow:hidden;width:100%;}
+  .bar i{display:block;height:100%;border-radius:4px;background:var(--ord-2);}
+  .bar.red i{background:var(--s2);}
+  .rowchev{position:absolute;right:9px;top:50%;transform:translateY(-50%);color:var(--inert);font-size:15px;font-weight:700;}
+  .ownflag{font-size:8.5px;font-weight:700;background:var(--wash3);color:var(--gold-ink);border-radius:4px;padding:1px 5px;margin-left:6px;letter-spacing:.04em;vertical-align:1px;}
+  .thper{font-size:9.5px;letter-spacing:.05em;color:var(--muted);font-weight:600;}
+  .boardstate{padding:38px 20px;text-align:center;color:var(--text-secondary);font-size:13.5px;line-height:1.6;}
+  .boardstate b{display:block;color:var(--text-primary);font-size:14.5px;margin-bottom:4px;font-weight:640;}
+  .hint{font-size:12px;color:var(--muted);line-height:1.55;margin:10px 0 0;}
+  .hint code{background:var(--wash);border-radius:5px;padding:1px 5px;font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  .empty{padding:28px;text-align:center;color:var(--muted);font-size:13.5px;}
+  .livepill{font-size:12px;font-weight:600;color:var(--good);white-space:nowrap;display:none;align-items:center;gap:5px;}
+  .livepill.on{display:inline-flex;}
+  .livepill.err{color:var(--str-2);}
+  .livepill.busy{color:var(--muted);}
+  /* on navy, --good and --str-2 are both under-contrasted */
+  .card.navy .livepill{color:var(--on-navy-soft);}
+  .card.navy .livepill.err{color:var(--on-navy-red);}
+  .card.navy .livepill.busy{color:var(--on-navy-soft);opacity:.7;}
 
-  /* ---------- table report viewer ---------- */
-  .tvOverlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:120;padding:22px;}
-  .tvOverlay.on{display:flex;}
-  .tv{background:#fff;border-radius:16px;max-width:1320px;width:100%;margin:auto;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;}
-  .tv-hd{padding:13px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fff;}
-  .tv-hd .accent{height:20px;}
-  .tv-hd h3{margin:0;font-size:15px;color:var(--navy);font-weight:800;}
-  .tv-hd .sub{font-size:12px;color:var(--muted);font-weight:500;}
-  .tv-hd .right{margin-left:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap;}
-  .tv-hd input{border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-size:12.5px;width:190px;font-family:inherit;}
-  .tv-tabs{display:flex;gap:5px;flex-wrap:wrap;padding:9px 20px 0;background:#fafbfe;border-bottom:1px solid var(--line);}
-  .tv-tabs:empty{display:none;}
-  .tv-tabs button{border:1px solid var(--line);border-bottom:0;background:#fff;border-radius:9px 9px 0 0;padding:7px 14px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;}
-  .tv-tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy);}
-  .tv-bd{overflow:auto;flex:1;}
-  table.datatable{border-collapse:collapse;width:100%;font-size:12.5px;}
-  table.datatable th{position:sticky;top:0;background:var(--navy);color:#fff;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;font-weight:700;padding:9px 12px;text-align:left;white-space:nowrap;z-index:2;}
-  table.datatable td{padding:7px 12px;border-bottom:1px solid #f1f3f8;white-space:nowrap;color:var(--ink);}
-  table.datatable tbody tr:nth-child(even) td{background:#f8fafd;}
-  table.datatable tbody tr:hover td{background:var(--blue-pale);}
-  table.datatable td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
-  .tv-ft{padding:9px 20px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);background:#fafbfe;}
+  /* ===================================================================
+     TWO-COLUMN CONTENT (news + events, newsletter + resources)
+     =================================================================== */
+  .cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;align-items:start;}
+  .cols2 .card{margin-bottom:0;}
 
-  /* ---------- Right rail ---------- */
-  .rail{display:flex;flex-direction:column;gap:16px;}
-  .newsitem{padding:13px 0;border-bottom:1px solid #f1f3f8;}
+  /* ---------- news ---------- */
+  .newsitem{padding:14px 0;border-bottom:1px solid var(--grid);}
+  .newsitem:first-child{padding-top:2px;}
   .newsitem:last-child{border-bottom:0;padding-bottom:2px;}
-  .newsitem .meta{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
-  .tag{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:3px 8px;border-radius:999px;}
-  .tag.news{background:var(--blue-pale);color:var(--navy);}
-  .tag.promo{background:var(--red-pale);color:var(--red);}
-  .tag.recognition{background:var(--gold-pale);color:#92600a;}
-  .tag.update{background:#e7f6ec;color:var(--ok);}
+  .newsitem .meta{display:flex;align-items:center;gap:9px;margin-bottom:5px;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:5px;}
+  .tag.news{background:var(--wash);color:var(--ord-3);}
+  .tag.promo{background:var(--wash2);color:var(--str-2);}
+  .tag.recognition{background:var(--wash3);color:var(--gold-ink);}
+  .tag.update{background:var(--washg);color:var(--good);}
+  :root[data-theme="dark"] .tag.news{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag.news{color:var(--ord-1);}}
   .newsitem .meta time{font-size:11.5px;color:var(--muted);font-weight:600;}
-  .newsitem h3{margin:0 0 3px;font-size:14px;color:var(--ink);}
-  .newsitem p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.5;}
+  .newsitem h3{margin:0 0 4px;font-size:14.5px;font-weight:640;line-height:1.35;}
+  .newsitem h3 a{color:var(--text-primary);text-decoration:none;}
+  .newsitem h3 a:hover{text-decoration:underline;}
+  .newsitem p{margin:0;font-size:13px;color:var(--text-secondary);line-height:1.55;white-space:pre-line;}
+  .newsitem .more{display:inline-block;margin-top:6px;color:var(--s1);font-weight:640;font-size:12.5px;text-decoration:none;}
+  .newsitem .more:hover{text-decoration:underline;}
   .pin{color:var(--gold);font-size:12px;margin-left:auto;}
-  .eventrow{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #f1f3f8;align-items:flex-start;}
+
+  /* ---------- events ---------- */
+  .eventrow{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--grid);align-items:flex-start;}
+  .eventrow:first-child{padding-top:2px;}
   .eventrow:last-child{border-bottom:0;}
-  .datebadge{flex:none;width:48px;border:1px solid var(--line);border-radius:10px;text-align:center;overflow:hidden;background:#fff;}
-  .datebadge .m{display:block;background:var(--red);color:#fff;font-size:9.5px;font-weight:800;letter-spacing:1px;padding:2px 0;text-transform:uppercase;}
-  .datebadge .d{display:block;font-size:18px;font-weight:800;color:var(--navy);padding:3px 0 4px;}
-  .eventrow .info b{display:block;font-size:13.5px;}
+  .datebadge{flex:none;width:48px;border:1px solid var(--border);border-radius:9px;text-align:center;overflow:hidden;background:var(--surface-1);}
+  .datebadge .m{display:block;background:var(--navy);color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.09em;padding:3px 0;text-transform:uppercase;}
+  .datebadge .d{display:block;font-size:18px;font-weight:650;padding:4px 0 5px;font-variant-numeric:tabular-nums;}
+  .eventrow .info{min-width:0;}
+  .eventrow .info b{display:block;font-size:14px;font-weight:640;}
   .eventrow .info .where{font-size:11.5px;color:var(--muted);font-weight:600;}
-  .eventrow .info p{margin:3px 0 0;font-size:12px;color:var(--muted);line-height:1.45;}
+  .eventrow .info p{margin:4px 0 0;font-size:12.5px;color:var(--text-secondary);line-height:1.5;white-space:pre-line;}
 
-  /* ---------- Competitions ---------- */
-  .comps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
-  .comp{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;display:flex;flex-direction:column;}
-  .comp .hd{background:linear-gradient(90deg,var(--navy),var(--navy2));color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;}
-  .comp .hd b{font-size:14.5px;}
+  /* ---------- competitions ---------- */
+  .comps{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;}
+  .comp{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface-1);display:flex;flex-direction:column;}
+  .comp .hd{background:var(--navy);color:var(--on-navy);padding:14px 17px;display:flex;align-items:center;gap:12px;}
+  .comp .hd b{font-size:14.5px;font-weight:650;}
   .comp .hd .left{min-width:0;}
-  .comp .hd span{display:block;font-size:11px;opacity:.8;font-weight:600;margin-top:1px;}
-  .comp .days{margin-left:auto;background:rgba(255,255,255,.14);border-radius:9px;padding:5px 10px;text-align:center;flex:none;}
-  .comp .days b{display:block;font-size:16px;}
-  .comp .days span{font-size:9px;letter-spacing:.8px;text-transform:uppercase;opacity:.85;}
-  .comp .bd{padding:13px 16px;font-size:12.5px;color:var(--muted);line-height:1.5;}
+  .comp .hd span{display:block;font-size:11.5px;color:var(--on-navy-soft);font-weight:500;margin-top:2px;}
+  .comp .days{margin-left:auto;background:rgba(255,255,255,.13);border-radius:8px;padding:6px 11px;text-align:center;flex:none;}
+  .comp .days b{display:block;font-size:16px;font-weight:650;font-variant-numeric:tabular-nums;}
+  .comp .days span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--on-navy-soft);}
+  .comp .bd{padding:15px 17px;font-size:13px;color:var(--text-secondary);line-height:1.55;}
   .comp .ctext{white-space:pre-line;}
-  .comp.isended .hd{background:linear-gradient(90deg,#4b5563,#6b7280);}
-  .comp .days.ended b{font-size:15px;}
-  .newsitem p,.eventrow .info p{white-space:pre-line;}
-  .comp .prize{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:#92600a;background:var(--gold-pale);border-radius:9px;padding:7px 11px;margin-top:9px;}
-  .standings{margin:6px 16px 14px;border-top:1px dashed var(--line);padding-top:9px;}
-  .standings .srow{display:flex;align-items:center;gap:9px;padding:5px 0;font-size:13px;}
-  .standings .srow .r{width:20px;font-weight:800;color:var(--muted);font-size:12px;}
-  .standings .srow b{color:var(--ink);}
-  .standings .srow .v{margin-left:auto;font-weight:800;color:var(--navy);}
-  .standings .lbl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:2px;}
+  .comp.isended .hd{background:var(--navy-3);}
+  .comp.isended .hd .days b{font-size:15px;}
+  .comp .prize{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:640;color:var(--gold-ink);background:var(--wash3);border-radius:9px;padding:8px 12px;margin-top:11px;}
+  .standings{margin:0 17px 15px;border-top:1px solid var(--grid);padding-top:11px;}
+  .standings .srow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13.5px;}
+  .standings .srow .r{width:20px;font-weight:700;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;}
+  .standings .srow b{font-weight:620;}
+  .standings .srow .v{margin-left:auto;font-weight:650;font-variant-numeric:tabular-nums;}
+  .standings .lbl{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px;}
 
-  /* ---------- Docs (newsletter + reports) ---------- */
-  .docsgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start;}
-  @media(max-width:900px){.docsgrid{grid-template-columns:1fr;}}
-  .latestnl{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:16px;background:linear-gradient(180deg,#fff,#f8faff);}
-  .nlthumb{flex:none;width:64px;height:82px;border-radius:8px;background:linear-gradient(160deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-md);}
-  .latestnl .info b{display:block;font-size:15px;color:var(--ink);}
-  .latestnl .info span{font-size:12px;color:var(--muted);font-weight:600;}
+  /* ===================================================================
+     DOCUMENTS — newsletter, reports, resources
+     =================================================================== */
+  .latestnl{display:flex;gap:16px;align-items:center;border:1px solid var(--border);border-radius:12px;padding:16px;background:var(--surface-2);}
+  .nlthumb{flex:none;width:56px;height:72px;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:center;}
+  .latestnl .info{min-width:0;}
+  .latestnl .info b{display:block;font-size:15px;font-weight:640;}
+  .latestnl .info span{font-size:12.5px;color:var(--text-secondary);}
   .latestnl .open{margin-left:auto;flex:none;}
-  .filelist .frow{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid #f1f3f8;}
+  .filelist .frow{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--grid);}
   .filelist .frow:last-child{border-bottom:0;}
-  .fico{flex:none;width:34px;height:34px;border-radius:9px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;}
-  .fico.red{background:var(--red-pale);}
-  .fico.gold{background:var(--gold-pale);}
-  .frow .fi b{display:block;font-size:13.5px;}
+  .fico{flex:none;width:32px;height:32px;border-radius:8px;background:var(--wash);display:flex;align-items:center;justify-content:center;color:var(--ord-2);}
+  .fico.red{background:var(--wash2);color:var(--s2);}
+  .fico.gold{background:var(--wash3);color:var(--gold);}
+  .frow .fi{min-width:0;}
+  .frow .fi b{display:block;font-size:13.5px;font-weight:620;overflow-wrap:anywhere;}
   .frow .fi span{font-size:11.5px;color:var(--muted);}
   .frow .open{margin-left:auto;flex:none;}
-  .cat{font-size:10.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:13px 0 3px;}
+  .cat{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 2px;}
   .cat:first-child{margin-top:0;}
-  a.filelink{color:var(--navy);font-weight:700;text-decoration:none;font-size:12.5px;border:1px solid var(--line);border-radius:9px;padding:6px 12px;background:#fff;white-space:nowrap;}
-  a.filelink:hover{background:#f7f9fc;}
-
-  footer{margin:26px 0 10px;text-align:center;color:var(--muted);font-size:12px;}
-  footer b{color:var(--navy);}
-
-  /* ---------- Admin drawer ---------- */
-  .adminbar{display:none;margin-top:14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:10px 16px;font-size:13px;color:#9a3412;align-items:center;gap:10px;flex-wrap:wrap;}
-  .adminbar.on{display:flex;}
-  .adminbar b{color:#7c2d12;}
-  .drawer{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:100;}
-  .drawer.on{display:block;}
-  .panel{position:absolute;top:0;right:0;bottom:0;width:min(720px,100%);background:#fff;box-shadow:-12px 0 40px rgba(0,0,0,.2);display:flex;flex-direction:column;}
-  .panel-hd{padding:16px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
-  .panel-hd h2{margin:0;font-size:16px;color:var(--navy);}
-  .panel-hd .x{margin-left:auto;}
-  .ptabs{display:flex;gap:4px;padding:10px 16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap;background:#fafbfe;}
-  .ptabs button{border:1px solid transparent;border-bottom:0;background:transparent;padding:8px 13px;font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer;border-radius:9px 9px 0 0;}
-  .ptabs button.on{background:#fff;color:var(--navy);border-color:var(--line);}
-  .panel-bd{flex:1;overflow:auto;padding:18px 22px;}
-  .panel-ft{padding:13px 22px;border-top:1px solid var(--line);display:flex;gap:9px;align-items:center;background:#fafbfe;flex-wrap:wrap;}
-  .dirty{font-size:12px;font-weight:700;color:#b45309;display:none;}
-  .dirty.on{display:inline;}
-  .pubstat{font-size:12px;font-weight:600;color:var(--muted);margin-left:auto;}
-  fieldset.box{border:1px solid var(--line);border-radius:12px;margin:0 0 16px;padding:13px 15px;}
-  fieldset.box legend{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:0 6px;}
-  .frm{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-  .frm .full{grid-column:1/-1;}
-  .frm label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:3px;letter-spacing:.3px;}
-  .frm input[type=text],.frm input[type=date],.frm input[type=password],.frm select,.frm textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:13px;font-family:inherit;color:var(--ink);background:#fff;}
-  .frm textarea{min-height:64px;resize:vertical;}
-  .itemrow{display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:11px;margin-bottom:7px;background:#fff;}
-  .itemrow .t{min-width:0;flex:1;}
-  .itemrow .t b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .itemrow .t span{font-size:11.5px;color:var(--muted);}
-  .drop{border:2px dashed #c4d0e4;border-radius:13px;padding:22px;text-align:center;color:var(--muted);font-size:13px;background:#fafbfe;cursor:pointer;transition:border-color .15s,background .15s;}
-  .drop.hover{border-color:var(--blue);background:var(--blue-pale);}
-  .drop b{color:var(--navy);}
-  .stagechip{display:inline-flex;align-items:center;gap:7px;background:#e7f6ec;color:var(--ok);border-radius:999px;font-size:12px;font-weight:700;padding:5px 6px 5px 11px;margin:6px 6px 0 0;}
-  .chipx{border:0;background:rgba(22,163,74,.14);color:var(--ok);border-radius:50%;width:18px;height:18px;line-height:1;font-size:10px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;font-family:inherit;}
-  .chipx:hover{background:var(--red-pale);color:var(--red);}
-  .itemrow.broken{border-color:#f3c2c7;background:#fffafa;}
-  .nofile{color:var(--red);font-weight:700;}
-  .pinflag{font-size:8.5px;font-weight:800;background:var(--gold-pale);color:#8a6a0e;border-radius:5px;padding:1px 5px;margin-left:6px;letter-spacing:.4px;vertical-align:1px;}
-  .hint{font-size:11.5px;color:var(--muted);line-height:1.5;margin:7px 0 0;}
-  .hint code{background:#f1f3f8;border-radius:5px;padding:1px 5px;font-size:11px;}
-  table.gridedit{width:100%;border-collapse:collapse;font-size:12.5px;}
-  table.gridedit th{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px;border-bottom:2px solid var(--line);}
-  table.gridedit td{border-bottom:1px solid #f1f3f8;padding:2px;}
-  table.gridedit input{width:100%;border:1px solid transparent;border-radius:6px;padding:6px;font-size:12.5px;background:transparent;}
-  table.gridedit input:focus{border-color:var(--blue);background:#fff;outline:none;}
-  .num{max-width:64px;}
-  .msg{border-radius:10px;padding:9px 13px;font-size:12.5px;font-weight:600;margin-top:9px;display:none;}
-  .msg.ok{display:block;background:#e7f6ec;color:var(--ok);}
-  .msg.err{display:block;background:var(--red-pale);color:var(--red);}
-
-  /* ==================================================================
-     SCOREBOARD FILTER BAR
-     Pulled out of the card header so five controls never fight the
-     title for horizontal space. Labelled groups instead of a wall
-     of anonymous buttons.
-     ================================================================== */
-  .filterbar{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;padding:12px 20px;background:#fafbfe;border-bottom:1px solid var(--line);}
-  .fgroup{display:flex;flex-direction:column;gap:5px;}
-  .flabel{font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:800;padding-left:2px;line-height:1;}
-  #staffOnlyWrap .switch{height:33px;padding:0 2px;}
-
-  /* ---------- search inputs ---------- */
-  .searchbox{border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-size:12.5px;font-family:inherit;color:var(--ink);background:#fff;width:180px;max-width:100%;}
-  .searchbox:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.12);}
-
-  /* ---------- reports archive ---------- */
-  .yearhd{display:flex;align-items:center;gap:9px;width:100%;background:transparent;border:0;border-top:1px solid var(--line);margin-top:10px;padding:12px 0 4px;cursor:pointer;font-family:inherit;color:var(--navy);font-weight:800;font-size:11.5px;letter-spacing:.8px;text-transform:uppercase;text-align:left;}
-  .yearhd:hover{color:var(--blue);}
+  a.filelink,button.filelink{
+    font:inherit;font-size:12.5px;font-weight:640;color:var(--text-primary);text-decoration:none;
+    border:1px solid var(--border);border-radius:8px;padding:6px 12px;background:var(--surface-1);
+    white-space:nowrap;cursor:pointer;display:inline-block;
+  }
+  a.filelink:hover,button.filelink:hover{background:var(--hover);}
+  .yearhd{
+    display:flex;align-items:center;gap:9px;width:100%;background:transparent;border:0;
+    border-top:1px solid var(--grid);margin-top:14px;padding:14px 0 4px;cursor:pointer;
+    font:inherit;color:var(--text-secondary);font-weight:700;font-size:11px;letter-spacing:.09em;
+    text-transform:uppercase;text-align:left;
+  }
+  .yearhd:hover{color:var(--text-primary);}
   .yearhd .chev{font-size:9px;color:var(--muted);transition:transform .15s;display:inline-block;}
   .yearhd[aria-expanded="true"] .chev{transform:rotate(90deg);}
-  .yearhd .count{margin-left:auto;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:0;text-transform:none;}
+  .yearhd .count{margin-left:auto;font-size:11px;color:var(--muted);font-weight:500;letter-spacing:0;text-transform:none;}
   .yearhd.static{cursor:default;border-top:0;margin-top:0;padding-top:0;}
-  .yearhd.static:hover{color:var(--navy);}
   .yearbody[hidden]{display:none;}
-  .yearbody .cat:first-child{margin-top:10px;}
-  /* the View action on interactive reports is a real button, not a fake link */
-  button.filelink{cursor:pointer;font-family:inherit;}
+  .yearbody .cat:first-child{margin-top:12px;}
 
-  /* ---------- load failure notice ---------- */
-  .loadfail{margin-top:14px;background:var(--red-pale);border:1px solid #f3c2c7;border-radius:14px;padding:14px 18px;color:#8b1620;font-size:13.5px;line-height:1.5;display:none;}
-  .loadfail.on{display:block;}
-  .loadfail b{display:block;font-size:14px;margin-bottom:3px;color:#7a1119;}
+  /* ===================================================================
+     TABLE REPORT VIEWER
+     =================================================================== */
+  .tvOverlay{display:none;position:fixed;inset:0;background:rgba(8,20,45,.55);z-index:120;padding:22px;}
+  .tvOverlay.on{display:flex;}
+  .tv{background:var(--surface-1);border-radius:14px;max-width:1320px;width:100%;margin:auto;max-height:92vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg);overflow:hidden;}
+  .tv-hd{padding:15px 20px;border-bottom:1px solid var(--grid);display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .tv-hd h3{margin:0;font-size:15px;font-weight:650;padding-left:12px;border-left:3px solid var(--ord-3);}
+  .tv-hd .sub{font-size:12.5px;color:var(--text-secondary);}
+  .tv-hd .right{margin-left:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap;}
+  .tv-hd input{font:inherit;font-size:13px;border:1px solid var(--border);border-radius:9px;padding:7px 11px;width:200px;background:var(--surface-1);color:var(--text-primary);}
+  .tv-tabs{display:flex;gap:5px;flex-wrap:wrap;padding:10px 20px 0;background:var(--surface-2);border-bottom:1px solid var(--grid);}
+  .tv-tabs:empty{display:none;}
+  .tv-tabs button{font:inherit;border:1px solid var(--border);border-bottom:0;background:var(--surface-1);border-radius:9px 9px 0 0;padding:7px 14px;font-size:12.5px;font-weight:640;color:var(--text-secondary);cursor:pointer;}
+  .tv-tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .tv-bd{overflow:auto;flex:1;}
+  table.datatable{border-collapse:collapse;width:100%;font-size:13px;}
+  table.datatable th{position:sticky;top:0;background:var(--navy);color:#fff;font-size:11px;letter-spacing:.04em;font-weight:600;padding:10px 12px;text-align:left;white-space:nowrap;z-index:2;}
+  table.datatable td{padding:8px 12px;border-bottom:1px solid var(--grid);white-space:nowrap;}
+  table.datatable tbody tr:nth-child(even) td{background:var(--surface-2);}
+  table.datatable tbody tr:hover td{background:var(--wash);}
+  table.datatable td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
+  .tv-ft{padding:10px 20px;border-top:1px solid var(--grid);font-size:11.5px;color:var(--muted);background:var(--surface-2);}
 
-  /* ---------- folio close strip ----------
-     Deliberately gold rather than navy so it reads as a deadline, not
-     as another news banner. */
-  .folio{margin-top:14px;background:linear-gradient(90deg,#fffaf0,#fff5e0);border:1px solid #f0d99b;border-left:5px solid var(--gold);border-radius:14px;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:var(--sh);}
-  .folio .fflag{background:var(--gold);color:#fff;border-radius:8px;font-size:10.5px;font-weight:800;letter-spacing:1px;padding:4px 9px;text-transform:uppercase;white-space:nowrap;}
-  .folio .fmain{min-width:0;}
-  .folio .fmain b{display:block;font-size:15px;color:#7a5a05;font-weight:800;line-height:1.25;}
-  .folio .fmain span{display:block;font-size:11.5px;color:#9a7a2a;font-weight:600;margin-top:1px;}
-  .folio .fcount{margin-left:auto;background:#fff;border:1px solid #f0d99b;border-radius:10px;padding:5px 13px;text-align:center;flex:none;}
-  .folio .fcount b{display:block;font-size:18px;color:#7a5a05;font-weight:800;line-height:1.1;}
-  .folio .fcount span{font-size:9px;letter-spacing:.9px;text-transform:uppercase;color:#9a7a2a;font-weight:800;}
-  .folio .fcount.today{background:var(--red);border-color:var(--red);}
-  .folio .fcount.today b,.folio .fcount.today span{color:#fff;}
-  .folio .fcount.soon{background:#fdf3d4;}
-  .folio .fcal{font-size:12px;font-weight:700;color:#7a5a05;white-space:nowrap;text-decoration:underline;text-decoration-color:rgba(122,90,5,.35);text-underline-offset:3px;}
-  .folio .fcal:hover{color:var(--navy);text-decoration-color:var(--navy);}
-
-  /* ---------- board search + warnings ---------- */
-  .searchbox.sm{width:130px;padding:6px 10px;font-size:12.5px;}
-  .boardnote{margin:0 20px;padding:9px 13px;border-radius:10px;font-size:12.5px;font-weight:600;line-height:1.45;}
-  .boardnote.warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;}
-  .boardnote.err{background:var(--red-pale);border:1px solid #f3c2c7;color:#8b1620;}
-  .thper{font-size:9px;letter-spacing:.5px;color:#9aa3b2;font-weight:700;}
-  .boardstate{padding:34px 20px;text-align:center;color:var(--muted);font-size:13.5px;line-height:1.6;}
-  .boardstate b{display:block;color:var(--ink);font-size:14px;margin-bottom:3px;}
-  .hidnote{font-size:11.5px;color:var(--muted);margin-top:9px;}
-
-  /* ---------- live data status ---------- */
-  .livepill{font-size:11.5px;font-weight:700;color:var(--ok);white-space:nowrap;display:none;align-items:center;gap:5px;}
-  .livepill.on{display:inline-flex;}
-  .livepill.err{color:var(--red);}
-  .livepill.busy{color:var(--muted);}
-  table.board tr.click{cursor:pointer;}
-  table.board tr.click:hover td{background:#f4f7fc;}
-  .rowchev{color:#b6bfd0;font-size:15px;font-weight:800;margin-left:8px;vertical-align:middle;}
-  .barcell{display:flex;align-items:center;gap:0;}
-  .barcell .bar{flex:1;}
-  .pod.click{cursor:pointer;}
-  .pod.click:hover{border-color:#c4d7fb;background:linear-gradient(180deg,#fff,#f4f8ff);}
-  .ownflag{font-size:8.5px;font-weight:800;background:var(--gold-pale);color:#8a6a0e;border-radius:5px;padding:1px 5px;margin-left:6px;letter-spacing:.4px;vertical-align:1px;}
-
-  /* ---------- drill-down modal (ported from the performance tracker) ---------- */
-  .modal{position:fixed;inset:0;background:rgba(8,20,45,.5);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;z-index:130;overflow:auto;}
+  /* ===================================================================
+     DRILL-DOWN
+     =================================================================== */
+  .modal{position:fixed;inset:0;background:rgba(8,20,45,.55);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;z-index:130;overflow:auto;}
   .modal.open{display:flex;}
-  .modal .sheet{background:#fff;border-radius:18px;max-width:880px;width:100%;padding:22px;box-shadow:0 24px 70px rgba(8,20,45,.32);}
+  .modal .sheet{background:var(--surface-1);border-radius:16px;max-width:880px;width:100%;padding:22px;box-shadow:var(--shadow-lg);}
   .drill-hd{display:flex;align-items:center;gap:13px;margin-bottom:4px;flex-wrap:wrap;}
-  .drill-hd .av{width:46px;height:46px;border-radius:50%;background:#e8eefc;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:var(--navy);flex:none;}
-  .drill-hd h2{margin:0;font-size:20px;color:var(--navy);}
-  .drill-hd .sub{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px;}
+  .drill-hd .av{width:44px;height:44px;border-radius:11px;background:var(--wash);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:var(--ord-3);flex:none;}
+  :root[data-theme="dark"] .drill-hd .av{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .drill-hd .av{color:var(--ord-1);}}
+  .drill-hd h2{margin:0;font-size:20px;font-weight:660;letter-spacing:-.015em;}
+  .drill-hd .sub{font-size:12.5px;color:var(--text-secondary);margin-top:2px;}
   .drill-hd .xbtn{margin-left:auto;}
-  .chiprow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 4px;}
-  .chip{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center;}
-  .chip .cl{font-size:9.5px;font-weight:800;letter-spacing:.8px;color:var(--muted);text-transform:uppercase;}
-  .chip .cv{display:flex;justify-content:center;gap:16px;margin-top:6px;}
-  .chip .cv b{font-size:19px;font-weight:800;}
-  .chip .cv .cq{color:var(--blue);} .chip .cv .cn{color:var(--red);}
-  .chip .cv small{display:block;font-size:8.5px;font-weight:700;color:var(--muted);letter-spacing:.5px;}
-  .trendcard{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:14px;}
+  .chiprow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:16px 0 4px;}
+  .chip{background:var(--surface-1);padding:12px 13px;text-align:center;}
+  .chip .cl{font-size:9.5px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;}
+  .chip .cv{display:flex;justify-content:center;gap:18px;margin-top:7px;}
+  .chip .cv b{font-size:19px;font-weight:650;font-variant-numeric:tabular-nums;}
+  .chip .cv .cq{color:var(--s1);} .chip .cv .cn{color:var(--s2);}
+  .chip .cv small{display:block;font-size:8.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;}
+  .trendcard{border:1px solid var(--border);border-radius:12px;padding:15px 17px;margin-top:16px;}
   .trend-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px;}
-  .trend-top h3{margin:0;font-size:11.5px;color:var(--navy);letter-spacing:.8px;text-transform:uppercase;}
-  .perseg{display:inline-flex;background:#f1f5f9;border-radius:9px;padding:3px;}
-  .perseg button{border:0;background:transparent;padding:6px 14px;border-radius:7px;font-weight:700;color:var(--muted);cursor:pointer;font-size:12.5px;font-family:inherit;}
+  .trend-top h3{margin:0;font-size:11px;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;font-weight:700;}
+  .perseg{display:inline-flex;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:3px;}
+  .perseg button{font:inherit;border:0;background:transparent;padding:5px 13px;border-radius:6px;font-weight:640;color:var(--text-secondary);cursor:pointer;font-size:12.5px;}
   .perseg button.active{background:var(--navy);color:#fff;}
-  .trend-top .legend{display:flex;gap:14px;margin-left:auto;font-size:12px;color:var(--ink);font-weight:600;align-items:center;}
-  .legend .sw{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--blue);margin-right:5px;vertical-align:-1px;}
-  .legend .swn{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red);margin-right:5px;vertical-align:-1px;}
+  .trend-top .legend{display:flex;gap:15px;margin-left:auto;font-size:12.5px;color:var(--text-secondary);font-weight:500;align-items:center;}
+  .legend .sw{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--s1);margin-right:6px;vertical-align:-1px;}
+  .legend .swn{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--s2);margin-right:6px;vertical-align:-1px;}
   .chartwrap{position:relative;}
   .chartwrap svg{display:block;width:100%;height:auto;}
   .chartwrap rect.hov{fill:transparent;}
-  .chartwrap rect.hov:hover{fill:rgba(37,99,235,.07);}
-  .ctip{position:absolute;pointer-events:none;background:var(--navy);color:#fff;font-size:12px;border-radius:8px;padding:7px 10px;box-shadow:0 6px 16px rgba(8,20,45,.25);display:none;white-space:nowrap;z-index:5;transform:translate(-50%,-112%);}
-  .ctip .tq{color:#9ec2ff;font-weight:800;} .ctip .tn{color:#ffb3ba;font-weight:800;}
-  .trend-empty{padding:28px 10px;text-align:center;color:var(--muted);font-size:13px;line-height:1.5;}
-  .prodlist{margin-top:16px;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
-  .prodlist .pl-hd{background:#f8fafc;padding:10px 16px;font-size:11.5px;font-weight:800;letter-spacing:.6px;color:var(--navy);}
-  .prodlist .pl-hd span{color:var(--muted);font-weight:600;letter-spacing:.3px;text-transform:none;}
-  .plcols{display:grid;grid-template-columns:1fr 74px 74px 16px;gap:8px;padding:8px 14px 4px;font-size:9px;font-weight:800;letter-spacing:.6px;color:var(--muted);}
+  .chartwrap rect.hov:hover{fill:var(--wash);}
+  .ctip{position:absolute;pointer-events:none;background:var(--surface-1);border:1px solid var(--border);color:var(--text-primary);font-size:12.5px;border-radius:9px;padding:8px 11px;box-shadow:var(--shadow);display:none;white-space:nowrap;z-index:5;transform:translate(-50%,-112%);}
+  .ctip .tq{color:var(--s1);font-weight:650;} .ctip .tn{color:var(--s2);font-weight:650;}
+  .trend-empty{padding:30px 10px;text-align:center;color:var(--muted);font-size:13px;line-height:1.5;}
+  .prodlist{margin-top:16px;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .prodlist .pl-hd{background:var(--surface-2);padding:11px 16px;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--text-secondary);}
+  .prodlist .pl-hd span{color:var(--muted);font-weight:500;letter-spacing:0;text-transform:none;}
+  .plcols{display:grid;grid-template-columns:1fr 74px 74px 16px;gap:8px;padding:9px 16px 4px;font-size:9px;font-weight:700;letter-spacing:.07em;color:var(--muted);}
   .plcols div:nth-child(2),.plcols div:nth-child(3){text-align:center;}
-  .plrow{display:grid;grid-template-columns:1fr 74px 74px 16px;gap:8px;align-items:center;padding:9px 14px;border-top:1px solid var(--line);cursor:pointer;transition:background .12s;}
-  .plrow:hover{background:#f4f7fc;}
-  .plrow .who2{display:flex;align-items:center;gap:10px;min-width:0;}
-  .plrow .av2{width:30px;height:30px;border-radius:50%;background:#e8eefc;color:var(--navy);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;}
-  .plrow .nm2{font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .plrow .pv{text-align:center;font-weight:800;font-size:14px;border-radius:7px;padding:4px 0;}
-  .plrow .pv.q{background:var(--blue-pale);color:var(--blue);}
-  .plrow .pv.n{background:var(--red-pale);color:var(--red);}
-  .plrow .chev2{color:#b6bfd0;font-size:13px;}
+  .plrow{display:grid;grid-template-columns:1fr 74px 74px 16px;gap:8px;align-items:center;padding:10px 16px;border-top:1px solid var(--grid);cursor:pointer;}
+  .plrow:hover{background:var(--hover);}
+  .plrow .who2{display:flex;align-items:center;gap:11px;min-width:0;}
+  .plrow .av2{width:29px;height:29px;border-radius:8px;background:var(--wash);color:var(--ord-3);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;}
+  :root[data-theme="dark"] .plrow .av2{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .plrow .av2{color:var(--ord-1);}}
+  .plrow .nm2{font-weight:620;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .plrow .pv{text-align:center;font-weight:650;font-size:14px;border-radius:7px;padding:4px 0;font-variant-numeric:tabular-nums;}
+  .plrow .pv.q{background:var(--wash);color:var(--ord-3);}
+  .plrow .pv.n{background:var(--wash2);color:var(--s2);}
+  :root[data-theme="dark"] .plrow .pv.q{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .plrow .pv.q{color:var(--ord-1);}}
+  .plrow .chev2{color:var(--inert);font-size:13px;}
 
-  /* left column of the docs grid stacks newsletter above resources */
-  .doccol{display:flex;flex-direction:column;gap:16px;min-width:0;}
+  /* ===================================================================
+     ADMIN
+     =================================================================== */
+  .adminbar{display:none;margin-top:18px;background:var(--wash3);border:1px solid var(--gold);border-radius:12px;padding:11px 16px;font-size:13px;color:var(--text-primary);align-items:center;gap:11px;flex-wrap:wrap;}
+  .adminbar.on{display:flex;}
+  .adminbar b{color:var(--gold-ink);}
+  .drawer{display:none;position:fixed;inset:0;background:rgba(8,20,45,.5);z-index:100;}
+  .drawer.on{display:block;}
+  .panel{position:absolute;top:0;right:0;bottom:0;width:min(720px,100%);background:var(--surface-1);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;}
+  .panel-hd{padding:17px 22px;border-bottom:1px solid var(--grid);display:flex;align-items:center;gap:12px;}
+  .panel-hd h2{margin:0;font-size:16px;font-weight:660;}
+  .panel-hd .x{margin-left:auto;}
+  .ptabs{display:flex;gap:4px;padding:10px 16px 0;border-bottom:1px solid var(--grid);flex-wrap:wrap;background:var(--surface-2);}
+  .ptabs button{font:inherit;border:1px solid transparent;border-bottom:0;background:transparent;padding:8px 13px;font-size:12.5px;font-weight:640;color:var(--text-secondary);cursor:pointer;border-radius:9px 9px 0 0;}
+  .ptabs button.on{background:var(--surface-1);color:var(--text-primary);border-color:var(--border);}
+  .panel-bd{flex:1;overflow:auto;padding:18px 22px;}
+  .panel-ft{padding:13px 22px;border-top:1px solid var(--grid);display:flex;gap:9px;align-items:center;background:var(--surface-2);flex-wrap:wrap;}
+  .dirty{font-size:12px;font-weight:650;color:var(--gold-ink);display:none;}
+  .dirty.on{display:inline;}
+  .pubstat{font-size:12px;font-weight:600;color:var(--muted);margin-left:auto;}
+  fieldset.box{border:1px solid var(--border);border-radius:12px;margin:0 0 16px;padding:14px 16px;}
+  fieldset.box legend{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:0 6px;}
+  .frm{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .frm .full{grid-column:1/-1;}
+  .frm label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:4px;letter-spacing:.03em;}
+  .frm input[type=text],.frm input[type=date],.frm input[type=password],.frm select,.frm textarea{
+    width:100%;border:1px solid var(--border);border-radius:9px;padding:8px 10px;font-size:13px;
+    font-family:inherit;color:var(--text-primary);background:var(--surface-1);
+  }
+  .frm textarea{min-height:64px;resize:vertical;}
+  .itemrow{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:7px;background:var(--surface-1);}
+  .itemrow .t{min-width:0;flex:1;}
+  .itemrow .t b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .itemrow .t span{font-size:11.5px;color:var(--muted);}
+  .itemrow.broken{border-color:var(--str-2);background:var(--wash2);}
+  .drop{border:2px dashed var(--axis);border-radius:12px;padding:22px;text-align:center;color:var(--muted);font-size:13px;background:var(--surface-2);cursor:pointer;}
+  .drop.hover{border-color:var(--s1);background:var(--wash);}
+  .drop b{color:var(--text-primary);}
+  .stagechip{display:inline-flex;align-items:center;gap:7px;background:var(--washg);color:var(--good);border-radius:999px;font-size:12px;font-weight:650;padding:5px 6px 5px 11px;margin:6px 6px 0 0;}
+  .chipx{border:0;background:rgba(12,163,12,.16);color:var(--good);border-radius:50%;width:18px;height:18px;line-height:1;font-size:10px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;font-family:inherit;}
+  .chipx:hover{background:var(--wash2);color:var(--s2);}
+  .nofile{color:var(--str-2);font-weight:700;}
+  .pinflag{font-size:8.5px;font-weight:700;background:var(--wash3);color:var(--gold-ink);border-radius:4px;padding:1px 5px;margin-left:6px;letter-spacing:.04em;vertical-align:1px;}
+  table.gridedit{width:100%;border-collapse:collapse;font-size:12.5px;}
+  table.gridedit th{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px;border-bottom:1px solid var(--axis);}
+  table.gridedit td{border-bottom:1px solid var(--grid);padding:2px;}
+  table.gridedit input{width:100%;border:1px solid transparent;border-radius:6px;padding:6px;font-size:12.5px;background:transparent;color:var(--text-primary);font-family:inherit;}
+  table.gridedit input:focus{border-color:var(--s1);background:var(--surface-1);outline:none;}
+  .num{max-width:64px;}
+  .msg{border-radius:10px;padding:10px 13px;font-size:12.5px;font-weight:600;margin-top:9px;display:none;}
+  .msg.ok{display:block;background:var(--washg);color:var(--good);}
+  .msg.err{display:block;background:var(--wash2);color:var(--str-2);}
 
-  /* ---------- accessibility / focus ---------- */
-  :focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:6px;}
+  /* ===================================================================
+     ACCESSIBILITY
+     =================================================================== */
+  :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px;}
   .skip{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;padding:10px 16px;border-radius:0 0 10px 0;z-index:200;font-weight:700;font-size:13px;text-decoration:none;}
   .skip:focus{left:0;}
+  .sronly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;} html{scroll-behavior:auto;}}
 
-  /* ==================================================================
-     RESPONSIVE
-     Field agents open this on phones between appointments. Every
-     breakpoint below was checked against a rendered screenshot.
-     ================================================================== */
+  footer.hubfoot{margin:30px 0 0;text-align:center;color:var(--muted);font-size:12px;line-height:1.7;}
+  footer.hubfoot b{color:var(--text-secondary);}
 
-  /* --- laptops: drop the decorative date, tighten the top bar --- */
-  @media(max-width:1180px){
+  /* ===================================================================
+     RESPONSIVE — every breakpoint checked against a rendered screenshot
+     =================================================================== */
+  @media(max-width:1240px){
     .datebox{display:none;}
-    .topbar-right .divider{display:none;}
   }
-
-  /* --- tablets: bar column is the least informative, shed it first --- */
-  @media(max-width:860px){
+  @media(max-width:1040px){
+    .foliochip .fd{max-width:150px;overflow:hidden;text-overflow:ellipsis;}
+  }
+  @media(max-width:900px){
     table.board .c-bar,table.board .barcell{display:none;}
-    .wrap{padding:16px;}
-    .maingrid,.docsgrid{gap:14px;}
+    .barcell{display:none;}
+    .podium{grid-template-columns:1fr;}
   }
-
-  /* --- phones / small tablets --- */
   @media(max-width:760px){
-    /* a sticky header this tall would eat a third of the screen */
-    .topbar{position:static;padding:12px 14px;gap:10px;border-radius:14px;}
-    .dlogo{height:28px;}
-    .title h1{font-size:17px;}
-    .title p{font-size:9.5px;letter-spacing:1px;}
-    .topbar-right{margin-left:0;width:100%;justify-content:space-between;gap:8px;}
-    #btnAdmin{font-size:12px;padding:6px 11px;opacity:.75;}
-    /* nav chips get their own swipeable row rather than wrapping to three lines */
-    .navchips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;order:2;width:100%;padding-bottom:2px;}
-    .navchips::-webkit-scrollbar{display:none;}
-    .navchips a{flex:none;}
-    #btnAdmin{order:1;margin-left:auto;}
-
-    .wrap{padding:12px;}
-    .card{border-radius:14px;}
-    .card-hd{padding:13px 15px;}
-    .card-bd{padding:14px 15px;}
-    .card-hd h2{font-size:14px;}
-
-    /* filters stay visible (not hidden behind a disclosure) but compact */
-    .filterbar{gap:12px 14px;padding:11px 15px;}
-    .seg button{padding:6px 10px;font-size:12px;}
-    .flabel{font-size:9px;}
-
-    .banner{padding:12px 15px;border-radius:12px;flex-wrap:wrap;}
-    .banner p{font-size:13px;}
-    .banner a{margin-left:0;}
-
-    /* folio: flag and countdown share the top line, details underneath */
-    .folio{padding:11px 14px;gap:8px 12px;border-radius:12px;}
-    .folio .fflag{order:1;}
-    .folio .fcount{order:2;margin-left:auto;padding:3px 11px;}
-    .folio .fcount b{font-size:15px;}
-    .folio .fmain{order:3;flex:1 1 100%;}
-    .folio .fmain b{font-size:14px;}
-    .folio .fcal{order:4;flex:1 1 100%;}
-
-    .stat{padding:10px 12px;min-width:0;}
-    .stat .scope{display:none;}
-    .boardwrap{max-height:none;}
-    table.board{font-size:13px;}
-    table.board th,table.board td{padding:8px 7px;}
-    .avatar{width:26px;height:26px;font-size:10.5px;margin-right:7px;}
-
+    .wrap,.barin{padding-left:14px;padding-right:14px;}
+    /* A sticky header on a 844px screen has to earn every pixel. Identity
+       and the two actions share one line; the folio deadline takes a
+       second, single-line row. Measured at 390px: ~150px total. */
+    .bar1{gap:9px;padding:9px 0;flex-wrap:wrap;}
+    .logos{gap:5px;padding:5px 7px;}
+    .dlogo{height:18px;}
+    .ident h1{font-size:14.5px;}
+    .ident p{font-size:9px;letter-spacing:.07em;}
+    .ident p .long{display:none;}
+    .bar1 .acts{gap:6px;flex:none;}
+    .ibtn{padding:6px 9px;font-size:12px;}
+    .foliochip.on{order:3;width:100%;justify-content:space-between;padding:5px 11px;align-items:baseline;}
+    .foliochip > span:first-child{display:flex;align-items:baseline;gap:7px;}
+    .foliochip .cnt{display:flex;align-items:baseline;gap:5px;border-left:0;padding-left:0;}
+    .foliochip .fd{margin-top:0;font-size:12px;}
+    .foliochip .fu{margin-top:0;}
+    /* tabs become a swipeable row; the active tab is scrolled into view */
+    .bar2{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .bar2::-webkit-scrollbar{display:none;}
+    .tab{flex:none;padding:11px 12px;font-size:13px;}
+    .toolchip{order:-1;margin-left:0;margin-right:6px;flex:none;align-self:center;}
+    .view{padding-top:16px;}
+    .viewhd h2{font-size:21px;}
+    .card-hd{padding:15px 16px 0;}
+    .card-bd{padding:14px 16px 18px;}
+    .cap{padding-left:31px;padding-right:16px;}
+    /* Six stacked filter groups cost ~300px before the first name. A
+       two-up grid halves that and still shows every control. */
+    .filterbar{display:grid;grid-template-columns:1fr 1fr;padding:12px 16px;gap:12px 12px;align-items:end;}
+    .filterbar .seg{width:100%;}
+    .filterbar .seg button{flex:1;text-align:center;}
+    #segPeriod{width:100%;}
+    .filterbar .fgroup:nth-child(3){grid-column:1/-1;}
+    #staffOnlyWrap .flabel{display:none;}
+    #staffOnlyWrap .switch{height:auto;}
+    #boardFindWrap{grid-column:1/-1;margin-left:0!important;}
+    .boardnote{margin-left:16px;margin-right:16px;}
+    .seg button{padding:6px 8px;font-size:12px;}
+    .fignum{font-size:40px;}
+    .fig{padding:15px 17px 17px;}
+    .fignote{display:none;}
+    /* the flag, the text and the link each get their own line rather than
+       the link floating beside a six-line paragraph */
+    .strip,.strip.on{display:block;padding:12px 15px;}
+    .strip .flag{display:inline-block;margin-bottom:8px;}
+    .strip a{display:inline-block;margin-left:0;margin-top:8px;}
+    .cols2{grid-template-columns:1fr;gap:14px;}
     .comps{grid-template-columns:1fr;}
+    .boardwrap{max-height:none;}
+    table.board th,table.board td{padding:9px 8px;}
     .latestnl{flex-wrap:wrap;padding:14px;gap:13px;}
     .latestnl .open{margin-left:0;width:100%;text-align:center;}
-    .nlthumb{width:52px;height:66px;}
-    .frow .fi{min-width:0;}
-    .frow .fi b{overflow-wrap:anywhere;}
-
-    .searchbox{width:150px;}
-
-    /* table viewer takes the whole screen on a phone */
+    .nlthumb{width:50px;height:64px;}
+    .searchbox{width:100%;}
+    .card-hd .right{width:100%;}
     .tvOverlay{padding:0;}
     .tv{border-radius:0;max-height:100vh;height:100%;}
-    .tv-hd{padding:11px 14px;}
+    .tv-hd{padding:12px 15px;}
     .tv-hd .right{width:100%;margin-left:0;}
     .tv-hd input{flex:1;width:auto;}
-
-    /* drill-down goes full-bleed on phones */
     .modal{padding:0;}
     .modal .sheet{border-radius:0;min-height:100vh;padding:16px;}
     .chiprow{grid-template-columns:repeat(2,1fr);}
     .drill-hd{flex-wrap:nowrap;gap:10px;}
     .drill-hd > div:not(.av){min-width:0;}
-    .drill-hd h2{font-size:16px;overflow:hidden;text-overflow:ellipsis;}
+    .drill-hd h2{font-size:17px;overflow:hidden;text-overflow:ellipsis;}
     .drill-hd .av{width:38px;height:38px;font-size:13px;}
     .drill-hd .xbtn{flex:none;align-self:flex-start;}
-    .drill-hd .sub{font-size:11px;}
-    .trendcard{padding:12px;}
-    .trend-top .legend{margin-left:0;width:100%;font-size:11.5px;}
+    .trend-top .legend{margin-left:0;width:100%;font-size:12px;}
     .plcols,.plrow{grid-template-columns:1fr 58px 58px 14px;}
-    .doccol{gap:14px;}
-
-    /* admin editor */
     .frm{grid-template-columns:1fr;}
     .panel-hd,.panel-bd,.panel-ft{padding-left:15px;padding-right:15px;}
     .ptabs{padding-left:10px;padding-right:10px;}
-    .adminbar{padding:10px 13px;font-size:12.5px;}
   }
-
-  /* --- narrow phones --- */
   @media(max-width:430px){
-    .podium{gap:9px;}
-    .pod{padding:11px 12px;}
+    .pod{padding:12px 13px;}
     .pod .val b{font-size:19px;}
-    .card-hd .right{width:100%;}
-    .searchbox{width:100%;}
     table.board .c-dist,table.board td:nth-child(3){display:none;}
-    .filterbar{gap:10px 12px;}
-    .seg button{padding:6px 9px;font-size:11.5px;}
-    a.filelink{padding:5px 10px;font-size:12px;}
+    .fignum{font-size:36px;}
+    a.filelink,button.filelink{padding:5px 10px;font-size:12px;}
+    .datebadge{width:42px;}
   }
 </style>
-</head>
-<body>
-<a class="skip" href="#scoreboard">Skip to scoreboard</a>
-<div class="wrap">
 
-  <!-- ============ TOP BAR ============ -->
-  <div class="topbar">
-    <div class="logo">
-      <img class="dlogo" alt="District 32 — Waco, TX" src="data:image/png;base64,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">
-      <img class="dlogo" alt="District 49 — Arizona" src="data:image/png;base64,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">
+<body>
+<a class="skip" href="#view-board">Skip to the scoreboard</a>
+
+<!-- ===================================================================
+     APP BAR
+     Row 1: who this is, what the deadline is, and the two account
+     actions. Row 2: the four sections, plus standalone tools.
+     =================================================================== -->
+<header class="appbar">
+  <div class="barin">
+    <div class="bar1">
+      <div class="logos">
+        <img class="dlogo" alt="District 32 — Waco, TX" src="data:image/png;base64,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">
+        <img class="dlogo" alt="District 49 — Arizona" src="data:image/png;base64,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">
+      </div>
+      <div class="ident">
+        <h1>District Hub</h1>
+        <p><span class="long">Farmers Insurance · </span>Districts 32 &amp; 49</p>
+      </div>
+      <a class="foliochip" id="folioStrip" href="#reports" title="">
+        <span>
+          <span class="fl">Folio close</span>
+          <span class="fd" id="folioDate"></span>
+        </span>
+        <span class="cnt">
+          <span class="fn" id="folioCount"></span>
+          <span class="fu" id="folioUnit"></span>
+        </span>
+      </a>
+      <span class="sronly" id="folioNext"></span>
+      <div class="acts">
+        <span class="datebox" id="todaybox"></span>
+        <button class="ibtn" id="btnTheme" type="button" title="Switch between light and dark">Dark</button>
+        <button class="ibtn" id="btnAdmin" type="button" onclick="adminToggle()">Admin</button>
+      </div>
     </div>
-    <div class="divider"></div>
-    <div class="title">
-      <h1>District Hub</h1>
-      <p>Farmers Insurance · Districts 32 &amp; 49</p>
-    </div>
-    <div class="topbar-right">
-      <nav class="navchips">
-        <a class="tool" href="files/nb-accelerator-quote-plan.html" target="_blank" rel="noopener">Quote Plan <span aria-hidden="true">&#8599;</span></a>
-        <a href="#scoreboard">Scoreboard</a>
-        <a href="#competitions">Competitions</a>
-        <a href="#newsletter">Newsletter</a>
-        <a href="#reports">Reports</a>
-        <a href="#resources">Resources</a>
-        <a href="#events">Events</a>
-      </nav>
-      <div class="divider"></div>
-      <span class="datebox" id="todaybox"></span>
-      <button class="btn" id="btnAdmin" onclick="adminToggle()">🔒 Admin</button>
-    </div>
+    <nav class="bar2" id="tabbar" role="tablist" aria-label="Sections">
+      <a class="tab" role="tab" id="tab-board"   href="#scoreboard"   aria-controls="view-board"   aria-selected="true">Scoreboard</a>
+      <a class="tab" role="tab" id="tab-reports" href="#reports"      aria-controls="view-reports" aria-selected="false">Reports &amp; Files<span class="n" id="nReports"></span></a>
+      <a class="tab" role="tab" id="tab-comps"   href="#competitions" aria-controls="view-comps"   aria-selected="false">Competitions<span class="n" id="nComps"></span></a>
+      <a class="tab" role="tab" id="tab-news"    href="#news"         aria-controls="view-news"    aria-selected="false">News &amp; Events<span class="n" id="nNews"></span></a>
+      <a class="toolchip" href="files/nb-accelerator-quote-plan.html" target="_blank" rel="noopener">Quote Plan <span class="g" aria-hidden="true">&#8599;</span></a>
+    </nav>
   </div>
+</header>
+
+<div class="wrap">
 
   <!-- admin mode strip -->
   <div class="adminbar" id="adminbar">
@@ -552,22 +759,11 @@
     <button class="btn sm" onclick="adminToggle()">Lock</button>
   </div>
 
-  <!-- ============ BANNER ============ -->
-  <div class="banner" id="banner" style="display:none">
+  <!-- district-wide announcement: one line, above every view -->
+  <div class="strip" id="banner">
     <span class="flag">District News</span>
     <p id="bannerText"></p>
     <a id="bannerLink" href="#">See more →</a>
-  </div>
-
-  <!-- ============ FOLIO CLOSE ============ -->
-  <div class="folio" id="folioStrip" style="display:none">
-    <span class="fflag">Folio Close</span>
-    <div class="fmain">
-      <b id="folioDate"></b>
-      <span id="folioNext"></span>
-    </div>
-    <div class="fcount" id="folioCount"></div>
-    <a class="fcal" id="folioCal" href="#resources">Full 2026 calendar →</a>
   </div>
 
   <!-- shown only when content.json can't be loaded — never silently fake data -->
@@ -576,20 +772,30 @@
     <span id="loadFailMsg"></span> Everything below may be blank or out of date. Refresh in a moment, and let the district office know if it keeps happening.
   </div>
 
-  <!-- ============ MAIN GRID ============ -->
-  <div class="maingrid">
-    <div class="leftcol">
-    <!-- Scoreboard -->
-    <div class="card" id="scoreboard">
+  <!-- =================================================================
+       VIEW 1 — SCOREBOARD (default)
+       ================================================================= -->
+  <section class="view on" id="view-board" role="tabpanel" aria-labelledby="tab-board">
+
+    <div class="card navy">
       <div class="card-hd">
-        <span class="accent"></span>
-        <h2>Quotes &amp; New Business Scoreboard</h2>
-        <span class="sub asof" id="lbAsOf"></span>
+        <h2>District production</h2>
+        <span class="sub" id="lbAsOf"></span>
         <div class="right">
           <span class="livepill" id="liveStatus"></span>
-          <button class="btn sm" id="btnRefresh" type="button" title="Pull the latest numbers from the district sheets">↻ Refresh</button>
+          <button class="ibtn" id="btnRefresh" type="button" title="Pull the latest numbers from the district sheets">↻ Refresh</button>
         </div>
       </div>
+      <div class="card-bd">
+        <div class="hero2" id="lbTotals"></div>
+      </div>
+    </div>
+
+    <div class="card flush" id="scoreboard">
+      <div class="card-hd">
+        <h2>Quotes &amp; New Business leaderboard</h2>
+      </div>
+      <p class="cap">Live from the district quote &amp; sales sheets. Tap any row for that person's day-by-day and week-by-week trend.</p>
       <div class="filterbar">
         <div class="fgroup">
           <span class="flabel">View</span>
@@ -626,14 +832,13 @@
           <span class="flabel" aria-hidden="true">&nbsp;</span>
           <label class="switch" title="Hides agency owners' own production so the list is just staff producers. The totals above always include everyone."><input type="checkbox" id="staffOnly" checked onchange="LB.staffOnly=this.checked;renderBoard()">Staff only</label>
         </div>
-        <div class="fgroup" id="boardFindWrap">
+        <div class="fgroup" id="boardFindWrap" style="margin-left:auto">
           <span class="flabel">Find</span>
           <input type="search" class="searchbox sm" id="boardSearch" placeholder="Your name…" aria-label="Find a producer or agency">
         </div>
       </div>
       <div class="boardnote" id="boardWarn" style="display:none"></div>
       <div class="card-bd">
-        <div class="statrow" id="lbTotals"></div>
         <div class="podium" id="podium"></div>
         <div class="boardwrap">
           <table class="board">
@@ -644,96 +849,109 @@
         <p class="hint" id="lbNote"></p>
       </div>
     </div>
+  </section>
 
-    <!-- ============ DRILL-DOWN (producer / agency deep dive) ============ -->
-    <div class="modal drill" id="drillModal" role="dialog" aria-modal="true" aria-labelledby="drillName">
-      <div class="sheet">
-        <div class="drill-hd">
-          <button class="btn sm" id="drillBackBtn" type="button" style="display:none">← Back</button>
-          <div class="av" id="drillAv"></div>
-          <div>
-            <h2 id="drillName"></h2>
-            <div class="sub" id="drillSub"></div>
-          </div>
-          <button class="btn sm xbtn" type="button" id="drillClose">✕ Close</button>
+  <!-- =================================================================
+       VIEW 2 — REPORTS & FILES
+       One search box across the whole library, then the newsletter,
+       the report archive and the standalone tools.
+       ================================================================= -->
+  <section class="view" id="view-reports" role="tabpanel" aria-labelledby="tab-reports" hidden>
+    <div class="viewhd readcol">
+      <h2>Reports &amp; files</h2>
+      <p>Every district report, newsletter and tool in one place. Search filters the report archive and the resources together.</p>
+    </div>
+    <div style="margin:0 0 18px"><input type="search" class="searchbox" id="libSearch" style="width:360px" placeholder="Search reports and resources…" aria-label="Search reports and resources"></div>
+
+    <div class="cols2">
+      <div class="card" id="reports">
+        <div class="card-hd"><h2>Reports library</h2></div>
+        <div class="card-bd filelist" id="reportList"></div>
+      </div>
+      <div>
+        <div class="card" id="newsletter">
+          <div class="card-hd"><h2>District newsletter</h2></div>
+          <div class="card-bd" id="nlArea"></div>
         </div>
-        <div class="chiprow" id="drillChips"></div>
-        <div class="trendcard">
-          <div class="trend-top">
-            <h3>Trend</h3>
-            <div class="perseg" id="drillSeg">
-              <button data-v="daily" type="button">Daily</button>
-              <button data-v="weekly" type="button" class="active">Weekly</button>
-            </div>
-            <div class="legend"><span><span class="sw"></span>Quotes</span><span><span class="swn"></span>New Business</span></div>
-          </div>
-          <div class="chartwrap" id="drillChart"></div>
+        <div class="card" id="resources">
+          <div class="card-hd"><h2>Tools &amp; resources</h2></div>
+          <div class="card-bd filelist" id="resourceList"></div>
         </div>
-        <div id="drillProds"></div>
       </div>
     </div>
+  </section>
 
-    <!-- Competitions -->
-    <div class="card" id="competitions">
-      <div class="card-hd"><span class="accent"></span><h2>Competitions &amp; Promos</h2></div>
-      <div class="card-bd"><div class="comps" id="compList"></div></div>
+  <!-- =================================================================
+       VIEW 3 — COMPETITIONS
+       ================================================================= -->
+  <section class="view" id="view-comps" role="tabpanel" aria-labelledby="tab-comps" hidden>
+    <div class="viewhd readcol">
+      <h2>Competitions &amp; promos</h2>
+      <p>What is running now, what it pays, and where the district currently stands.</p>
     </div>
-    </div><!-- /leftcol -->
+    <div id="competitions"><div class="comps" id="compList"></div></div>
+  </section>
 
-    <!-- Right rail -->
-    <div class="rail">
+  <!-- =================================================================
+       VIEW 4 — NEWS & EVENTS
+       ================================================================= -->
+  <section class="view" id="view-news" role="tabpanel" aria-labelledby="tab-news" hidden>
+    <div class="viewhd readcol">
+      <h2>News &amp; events</h2>
+      <p>District announcements and what is on the calendar next.</p>
+    </div>
+    <div class="cols2">
       <div class="card">
-        <div class="card-hd"><span class="accent blue"></span><h2>What's New</h2></div>
+        <div class="card-hd"><h2>What's new</h2></div>
         <div class="card-bd" id="newsList"></div>
       </div>
       <div class="card" id="events">
-        <div class="card-hd"><span class="accent gold"></span><h2>Upcoming Events</h2></div>
+        <div class="card-hd"><h2>Upcoming events</h2></div>
         <div class="card-bd" id="eventList"></div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ============ NEWSLETTER + RESOURCES + REPORTS ============ -->
-  <div class="docsgrid">
-    <div class="doccol">
-      <div class="card" id="newsletter">
-        <div class="card-hd"><span class="accent blue"></span><h2>District Newsletter</h2></div>
-        <div class="card-bd" id="nlArea"></div>
-      </div>
-      <div class="card" id="resources">
-        <div class="card-hd">
-          <span class="accent"></span><h2>District Resources</h2>
-          <div class="right">
-            <input type="search" class="searchbox" id="resSearch" placeholder="Filter resources…" aria-label="Filter resources">
-          </div>
-        </div>
-        <div class="card-bd filelist" id="resourceList"></div>
-      </div>
-    </div>
-    <div class="card" id="reports">
-      <div class="card-hd">
-        <span class="accent gold"></span><h2>Reports Library</h2>
-        <div class="right">
-          <input type="search" class="searchbox" id="repSearch" placeholder="Filter reports…" aria-label="Filter reports">
-        </div>
-      </div>
-      <div class="card-bd filelist" id="reportList"></div>
-    </div>
-  </div>
-
-  <footer>
+  <footer class="hubfoot">
     <b>District Hub</b> · created and maintained by Conrey Guy · last updated <span id="lastUpdated">—</span>
   </footer>
+</div>
+
+<!-- ============ DRILL-DOWN (producer / agency deep dive) ============ -->
+<div class="modal drill" id="drillModal" role="dialog" aria-modal="true" aria-labelledby="drillName">
+  <div class="sheet">
+    <div class="drill-hd">
+      <button class="btn sm" id="drillBackBtn" type="button" style="display:none">← Back</button>
+      <div class="av" id="drillAv"></div>
+      <div>
+        <h2 id="drillName"></h2>
+        <div class="sub" id="drillSub"></div>
+      </div>
+      <button class="btn sm xbtn" type="button" id="drillClose">✕ Close</button>
+    </div>
+    <div class="chiprow" id="drillChips"></div>
+    <div class="trendcard">
+      <div class="trend-top">
+        <h3>Trend</h3>
+        <div class="perseg" id="drillSeg">
+          <button data-v="daily" type="button">Daily</button>
+          <button data-v="weekly" type="button" class="active">Weekly</button>
+        </div>
+        <div class="legend"><span><span class="sw"></span>Quotes</span><span><span class="swn"></span>New Business</span></div>
+      </div>
+      <div class="chartwrap" id="drillChart"></div>
+    </div>
+    <div id="drillProds"></div>
+  </div>
 </div>
 
 <!-- ============ TABLE REPORT VIEWER ============ -->
 <div class="tvOverlay" id="tvOverlay" role="dialog" aria-modal="true" aria-labelledby="tvTitle" onclick="if(event.target===this)closeViewer()">
   <div class="tv">
     <div class="tv-hd">
-      <span class="accent"></span>
       <h3 id="tvTitle"></h3><span class="sub" id="tvSub"></span>
       <div class="right">
-        <input type="search" id="tvSearch" placeholder="🔎 Filter rows…">
+        <input type="search" id="tvSearch" placeholder="Filter rows…">
         <button class="btn" onclick="closeViewer()">✕ Close</button>
       </div>
     </div>
@@ -763,8 +981,8 @@
     </div>
     <div class="panel-bd" id="panelBody"></div>
     <div class="panel-ft">
-      <button class="btn primary" onclick="publishAll()">🚀 Publish to site</button>
-      <button class="btn" id="btnExport" onclick="exportBundle()">⬇ Save a backup copy</button>
+      <button class="btn primary" onclick="publishAll()">Publish to site</button>
+      <button class="btn" id="btnExport" onclick="exportBundle()">Save a backup copy</button>
       <button class="btn danger" onclick="discardChanges()">Discard changes</button>
       <span class="pubstat" id="pubStat"></span>
     </div>
@@ -913,6 +1131,7 @@ function renderAll(){
     $('loadFail').classList.add('on');
   }
   try{ $('lastUpdated').textContent = fmtDate(data().updated) || "—"; }catch(e){}
+  try{ tabCounts(); }catch(e){}
 }
 
 /* =====================================================================
@@ -935,30 +1154,31 @@ function nextFolioClose(today){
   return folioDates().find(d=>d.getTime()>=t.getTime()) || null;   // >= so the close day itself still counts
 }
 function renderFolio(today){
-  const strip=$('folioStrip');
+  const chip=$('folioStrip');
   const now=midnight(today||new Date());
   const next=nextFolioClose(now);
   if(!next){
     /* ran off the end of the published calendar — say so rather than
        showing nothing, which would look like there is no deadline */
-    strip.style.display='flex';
-    $('folioDate').textContent='2027 calendar not posted yet';
-    $('folioNext').textContent='The '+FOLIO_CLOSE[FOLIO_CLOSE.length-1].slice(0,4)+' folio calendar has run out — ask the district office for next year’s dates.';
-    $('folioCount').className='fcount';
-    $('folioCount').innerHTML='<b>—</b><span>days</span>';
+    chip.className='foliochip on';
+    $('folioDate').textContent='2027 dates not posted';
+    $('folioCount').textContent='—';
+    $('folioUnit').textContent='days';
+    const msg='The '+FOLIO_CLOSE[FOLIO_CLOSE.length-1].slice(0,4)+' folio calendar has run out \u2014 ask the district office for next year\u2019s dates.';
+    $('folioNext').textContent=msg; chip.title=msg;
     return;
   }
-  strip.style.display='flex';
   const days=Math.round((next-now)/86400000);
-  $('folioDate').textContent = next.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  chip.className='foliochip on'+(days===0?' today':(days<=5?' soon':''));
+  $('folioDate').textContent = next.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+  $('folioCount').textContent = days===0 ? 'TODAY' : String(days);
+  $('folioUnit').textContent = days===0 ? 'closes' : ('day'+(days===1?'':'s')+' left');
   const after = folioDates().find(d=>d.getTime()>next.getTime());
-  $('folioNext').textContent = days===0
-    ? 'Folio closes today — get business submitted.'
+  const msg = days===0
+    ? 'Folio closes today \u2014 get business submitted.'
     : (after ? 'Next close after this one: '+after.toLocaleDateString('en-US',{month:'long',day:'numeric'}) : 'Last published close of the year.');
-  const c=$('folioCount');
-  c.className='fcount'+(days===0?' today':(days<=5?' soon':''));
-  c.innerHTML = days===0 ? '<b>TODAY</b><span>closes</span>'
-    : `<b>${days}</b><span>day${days===1?'':'s'} left</span>`;
+  $('folioNext').textContent = msg;
+  chip.title = 'Folio close \u2014 '+next.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})+'. '+msg;
 }
 /* Re-check on a timer and whenever the tab regains focus, so a page left
    open overnight rolls over on its own instead of showing a stale date. */
@@ -968,7 +1188,7 @@ document.addEventListener('visibilitychange',()=>{ if(!document.hidden) renderFo
 /* ---------- banner ---------- */
 function renderBanner(){
   const b = data().banner || {};
-  $('banner').style.display = (b.active && b.text) ? 'flex' : 'none';
+  $('banner').classList.toggle('on', !!(b.active && b.text));
   $('bannerText').textContent = b.text || "";
   const a = $('bannerLink'), href = safeUrl(b.link);
   if(href){ a.style.display='inline'; a.href=href; } else { a.style.display='none'; }
@@ -1391,15 +1611,19 @@ function renderBoard(){
   const tn=everyone.reduce((s,p)=>s+(+p.n[LB.period].actual||0),0);
   const scopeLbl = LB.dist==='all' ? 'Districts 32 + 49' : 'District '+LB.dist;
   $('lbTotals').innerHTML = `
-    <div class="stat">
-      <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2563eb"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
-      <div class="v"><b>${tq.toLocaleString()}</b><span>Total Quotes · ${esc(perLbl)}</span></div>
-      <div class="scope">${scopeLbl}<br>every agency</div>
+    <div class="fig">
+      <div class="figrule"></div>
+      <div class="figlab">Total quotes &middot; ${esc(perLbl)}</div>
+      <div class="fignum">${tq.toLocaleString()}</div>
+      <div class="figunit">${scopeLbl} &middot; every agency</div>
+      <div class="fignote">Owners and staff producers combined.</div>
     </div>
-    <div class="stat red">
-      <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#d92231"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" fill="none" stroke="#d92231" stroke-width="2"/></svg></div>
-      <div class="v"><b>${tn.toLocaleString()}</b><span>Total New Business · ${esc(perLbl)}</span></div>
-      <div class="scope">${scopeLbl}<br>every agency</div>
+    <div class="fig red">
+      <div class="figrule"></div>
+      <div class="figlab">Total new business &middot; ${esc(perLbl)}</div>
+      <div class="fignum">${tn.toLocaleString()}</div>
+      <div class="figunit">${scopeLbl} &middot; every agency</div>
+      <div class="fignote">Items written, not premium.</div>
     </div>`;
 
   const rows = boardRows().sort((a,b)=> b[LB.metric]-a[LB.metric] || b[LB.metric==='q'?'n':'q']-a[LB.metric==='q'?'n':'q']);
@@ -1408,7 +1632,7 @@ function renderBoard(){
 
   if(!rows.length){
     const st=boardState();
-    $('podium').innerHTML=`<div class="boardstate" style="grid-column:1/-1"><b>${esc(st.b)}</b>${esc(st.p)}</div>`;
+    $('podium').innerHTML=`<div class="boardstate" style="grid-column:1/-1;background:var(--surface-1)"><b>${esc(st.b)}</b>${esc(st.p)}</div>`;
     $('boardBody').innerHTML=`<tr><td colspan="6"></td></tr>`;
   }else{
     $('podium').innerHTML = rows.slice(0,3).map((r,i)=>`
@@ -1430,9 +1654,7 @@ function renderBoard(){
 
   /* say plainly what the list is showing and what it is leaving out */
   const bits=[];
-  if(dailyAsOf) bits.push('Live from the district quote &amp; sales sheets. “Daily” is the last complete business day ('+dailyAsOf.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+').');
-  else bits.push('Live from the district quote &amp; sales sheets.');
-  bits.push('Tap any row to see that person’s trend.');
+  if(dailyAsOf) bits.push('“Daily” is the last complete business day ('+dailyAsOf.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+').');
   if(LB.view==='producer' && LB.staffOnly){
     const hidden = PEOPLE.filter(p=>isProducer(p.role)&&p.owner&&(LB.dist==='all'||normDistrict(p.district)===LB.dist)).length;
     if(hidden) bits.push('<b>Staff only</b> is on, so '+hidden+' agency owner'+(hidden===1?'’s':'s’')+' own production '+(hidden===1?'is':'are')+' hidden from this list — untick it to include them. The totals above always count everyone.');
@@ -1576,26 +1798,33 @@ function renderDrillChart(p){
   const step=plotW/s.length;
   const cx=i=>padL+step*(i+0.5);
   const barW=Math.max(6,Math.min(26,step*0.55));
+  const INK=getComputedStyle(document.documentElement);
+  const cGrid=INK.getPropertyValue('--grid').trim()||'#eef1f6';
+  const cAxis=INK.getPropertyValue('--axis').trim()||'#d7dbe4';
+  const cMuted=INK.getPropertyValue('--muted').trim()||'#9aa3b2';
+  const cQ=INK.getPropertyValue('--s1').trim()||'#2a529c';
+  const cN=INK.getPropertyValue('--s2').trim()||'#d60028';
+  const cSurf=INK.getPropertyValue('--surface-1').trim()||'#fff';
   let g='';
-  sc.ticks.forEach(t=>{ g+=`<line x1="${padL}" y1="${y(t)}" x2="${W-padR}" y2="${y(t)}" stroke="#eef1f6" stroke-width="1"/>`
-    +`<text x="${padL-7}" y="${y(t)+3.5}" text-anchor="end" font-size="10" fill="#9aa3b2">${t}</text>`; });
+  sc.ticks.forEach(t=>{ g+=`<line x1="${padL}" y1="${y(t)}" x2="${W-padR}" y2="${y(t)}" stroke="${cGrid}" stroke-width="1"/>`
+    +`<text x="${padL-7}" y="${y(t)+3.5}" text-anchor="end" font-size="10" fill="${cMuted}">${t}</text>`; });
   let bars='';
   s.forEach((d,i)=>{
     if(d.q<=0) return;
     const x0=cx(i)-barW/2, y0=y(d.q), y1=y(0), r=Math.min(4,barW/2,y1-y0);
-    bars+=`<path d="M${x0},${y1} L${x0},${y0+r} Q${x0},${y0} ${x0+r},${y0} L${x0+barW-r},${y0} Q${x0+barW},${y0} ${x0+barW},${y0+r} L${x0+barW},${y1} Z" fill="#2563eb"${d.partial?' fill-opacity=".45"':''}/>`;
+    bars+=`<path d="M${x0},${y1} L${x0},${y0+r} Q${x0},${y0} ${x0+r},${y0} L${x0+barW-r},${y0} Q${x0+barW},${y0} ${x0+barW},${y0+r} L${x0+barW},${y1} Z" fill="${cQ}"${d.partial?' fill-opacity=".45"':''}/>`;
   });
   const pts=s.map((d,i)=>`${cx(i)},${y(d.n)}`).join(' ');
-  let line = s.length>1 ? `<polyline points="${pts}" fill="none" stroke="#d92231" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>` : '';
-  s.forEach((d,i)=>{ line+=`<circle cx="${cx(i)}" cy="${y(d.n)}" r="3.5" fill="#d92231" stroke="#fff" stroke-width="2"/>`; });
+  let line = s.length>1 ? `<polyline points="${pts}" fill="none" stroke="${cN}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>` : '';
+  s.forEach((d,i)=>{ line+=`<circle cx="${cx(i)}" cy="${y(d.n)}" r="3.5" fill="${cN}" stroke="${cSurf}" stroke-width="2"/>`; });
   const every=Math.ceil(s.length/8);
   let xl='';
-  s.forEach((d,i)=>{ if((s.length-1-i)%every===0) xl+=`<text x="${cx(i)}" y="${H-8}" text-anchor="middle" font-size="10" fill="#9aa3b2">${d.label}</text>`; });
+  s.forEach((d,i)=>{ if((s.length-1-i)%every===0) xl+=`<text x="${cx(i)}" y="${H-8}" text-anchor="middle" font-size="10" fill="${cMuted}">${d.label}</text>`; });
   let hov='';
   s.forEach((d,i)=>{ hov+=`<rect class="hov" data-i="${i}" x="${padL+step*i}" y="${padT}" width="${step}" height="${plotH}" rx="6"/>`; });
   host.innerHTML =
     `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(p.name)} ${drillView} trend">`+
-    `<line x1="${padL}" y1="${y(0)}" x2="${W-padR}" y2="${y(0)}" stroke="#d7dbe4" stroke-width="1"/>`+
+    `<line x1="${padL}" y1="${y(0)}" x2="${W-padR}" y2="${y(0)}" stroke="${cAxis}" stroke-width="1"/>`+
     g+bars+line+xl+hov+`</svg><div class="ctip" id="drillTip"></div>`;
   const svg=host.querySelector('svg'), tip=host.querySelector('#drillTip');
   host.querySelectorAll('rect.hov').forEach(r=>{
@@ -1644,14 +1873,14 @@ function renderNews(){
     const href = safeUrl(n.link);
     const ext = href && !href.startsWith('#');
     const title = href
-      ? `<a href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''} style="color:var(--navy);text-decoration:none">${esc(n.title)}</a>`
+      ? `<a href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''}>${esc(n.title)}</a>`
       : esc(n.title);
     const tag = /^(news|promo|recognition|update)$/.test(n.tag||'') ? n.tag : 'news';
     return `<div class="newsitem">
       <div class="meta"><span class="tag ${tag}">${tag}</span><time>${fmtDate(n.date)}</time>${n.pinned?'<span class="pin" title="Pinned">📌</span>':''}</div>
       <h3>${title}</h3>
       <p>${esc(n.body||'')}</p>
-      ${href?`<p style="margin-top:5px"><a href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''} style="color:var(--blue);font-weight:700;font-size:12px;text-decoration:none">Read more →</a></p>`:''}
+      ${href?`<a class="more" href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''}>Read more →</a>`:''}
     </div>`;
   }).join('') || '<div class="empty">Nothing posted yet.</div>';
 }
@@ -1720,7 +1949,7 @@ function renderNewsletter(){
   const latestHref = safeUrl(fileHref(latest.file||''));
   $('nlArea').innerHTML = `
     <div class="latestnl">
-      <div class="nlthumb"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M6 2h9l5 5v15H6z" opacity=".95"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
+      <div class="nlthumb"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M6 2h9l5 5v15H6z" opacity=".95"/><path d="M14 2v6h6" fill="#89b7ff"/></svg></div>
       <div class="info"><b>${esc(latest.title)}</b><span>${fmtDate(latest.date)} · Latest issue</span></div>
       ${latestHref?`<a class="btn primary open" href="${esc(latestHref)}" target="_blank" rel="noopener">Read it →</a>`
                   :`<span class="btn open" style="pointer-events:none;opacity:.55">File missing</span>`}
@@ -1728,7 +1957,7 @@ function renderNewsletter(){
     ${rest.length?`<div class="cat" style="margin-top:14px">Past issues</div>
     <div class="filelist">${rest.map(n=>`
       <div class="frow">
-        <div class="fico"><svg width="17" height="17" viewBox="0 0 24 24" fill="#2563eb"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
+        <div class="fico"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill-opacity=".45"/></svg></div>
         <div class="fi"><b>${esc(n.title)}</b><span>${fmtDate(n.date)}</span></div>
         <a class="filelink open" href="${esc(safeUrl(fileHref(n.file||''))||'#')}" target="_blank" rel="noopener">Open</a>
       </div>`).join('')}</div>`:''}`;
@@ -1739,18 +1968,18 @@ function renderNewsletter(){
    categories in a fixed order; earlier years collapse into an archive so
    the library is still usable after three years of monthly reports. */
 const CAT_ORDER = ['Production','Life','Trackers','Programs','Other'];
-const CAT_STYLE = {Life:{cls:'red',fill:'#d92231'}, Trackers:{cls:'gold',fill:'#d4a017'}};
+const CAT_STYLE = {Life:{cls:'red'}, Trackers:{cls:'gold'}};
 let repFilter = '';
 const openYears = new Set();
 
 function reportRow(r){
   const cat = r.category||'Other';
-  const st = CAT_STYLE[cat] || {cls:'',fill:'#2563eb'};
+  const st = CAT_STYLE[cat] || {cls:''};
   const action = r.type==='table'
-    ? `<button class="filelink open" type="button" data-view="${esc(r.id)}">📊 View</button>`
+    ? `<button class="filelink open" type="button" data-view="${esc(r.id)}">View table</button>`
     : `<a class="filelink open" href="${esc(safeUrl(fileHref(r.file||r.link||'')) || '#')}" target="_blank" rel="noopener">Open</a>`;
   return `<div class="frow">
-    <div class="fico ${st.cls}"><svg width="17" height="17" viewBox="0 0 24 24" fill="${st.fill}" aria-hidden="true"><rect x="4" y="11" width="3" height="9"/><rect x="10" y="6" width="3" height="14"/><rect x="16" y="9" width="3" height="11"/></svg></div>
+    <div class="fico ${st.cls}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="11" width="3" height="9"/><rect x="10" y="6" width="3" height="14"/><rect x="16" y="9" width="3" height="11"/></svg></div>
     <div class="fi"><b>${esc(r.title)}</b><span>${fmtDate(r.date)}${r.note?' · '+esc(r.note):''}</span></div>
     ${action}
   </div>`;
@@ -1804,7 +2033,7 @@ function renderReports(){
 async function adminToggle(){
   if(adminMode){
     if(dirty && !confirm("You have unpublished changes. Lock admin mode anyway? (Changes stay staged in this tab.)")) return;
-    adminMode=false; $('adminbar').classList.remove('on'); $('btnAdmin').textContent='🔒 Admin'; closePanel(); renderAll(); return;
+    adminMode=false; $('adminbar').classList.remove('on'); $('btnAdmin').textContent='Admin'; closePanel(); renderAll(); return;
   }
   if(PUBLISH_URL){
     let pw = safeLocal(()=>localStorage.getItem(PW_KEY), null), prompted = false;
@@ -1813,9 +2042,9 @@ async function adminToggle(){
       if(pw===null || !pw.trim()) return;
       pw = pw.trim(); prompted = true;
     }
-    const btn=$('btnAdmin'); btn.textContent='⏳ Checking…'; btn.disabled=true;
+    const btn=$('btnAdmin'); btn.textContent='Checking…'; btn.disabled=true;
     const ok = await verifyPw(pw);
-    btn.textContent='🔒 Admin'; btn.disabled=false;
+    btn.textContent='Admin'; btn.disabled=false;
     if(ok===null){ alert("Can't reach the publish service right now — check your internet connection and try again."); return; }
     if(!ok){
       safeLocal(()=>localStorage.removeItem(PW_KEY));
@@ -1830,7 +2059,7 @@ async function adminToggle(){
      until the admin supplies their own GitHub token in the Publish tab. */
   adminMode=true;
   if(!EDIT){ EDIT = clone(CONTENT); offerDraftRestore(); }
-  $('adminbar').classList.add('on'); $('btnAdmin').textContent='🔓 Admin';
+  $('adminbar').classList.add('on'); $('btnAdmin').textContent='Admin •';
   renderAll();
 }
 async function verifyPw(pw){
@@ -1844,7 +2073,7 @@ async function verifyPw(pw){
 function signOutDevice(){
   if(!confirm("Sign out on this computer?\n\nYou'll need the admin password again to make edits here"+(dirty||STAGED.length?", and anything you haven't published will be lost.":"."))) return;
   safeLocal(()=>localStorage.removeItem(PW_KEY)); ADMIN_PW=null;
-  adminMode=false; $('adminbar').classList.remove('on'); $('btnAdmin').textContent='🔒 Admin'; closePanel(); renderAll();
+  adminMode=false; $('adminbar').classList.remove('on'); $('btnAdmin').textContent='Admin'; closePanel(); renderAll();
 }
 function openPanel(){ $('drawer').classList.add('on'); showTab(currentTab); }
 function closePanel(){ $('drawer').classList.remove('on'); }
@@ -2277,17 +2506,13 @@ function renderResources(){
 function resourceRow(r){
   const meta = [r.note, fmtDate(r.date)].filter(Boolean).map(esc).join(' · ');
   return `<div class="frow">
-    <div class="fico"><svg width="17" height="17" viewBox="0 0 24 24" fill="#0a2d6e" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill="#bcd2ff"/></svg></div>
+    <div class="fico"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill-opacity=".45"/></svg></div>
     <div class="fi"><b>${esc(r.title)}</b><span>${meta}</span></div>
     <a class="filelink open" href="${esc(safeUrl(fileHref(r.file||r.link||'')) || '#')}" target="_blank" rel="noopener" download>Download</a>
   </div>`;
 }
 let resDebounce;
-$('resSearch').addEventListener('input', e=>{
-  clearTimeout(resDebounce);
-  const v=e.target.value;
-  resDebounce=setTimeout(()=>{ resFilter=v.trim(); renderResources(); },120);
-});
+/* replaced by the unified library search — see LIBRARY SEARCH below */
 
 /* ---------- reports library wiring ----------
    Delegated so report ids never get interpolated into inline handlers. */
@@ -2302,10 +2527,11 @@ $('reportList').addEventListener('click', e=>{
   }
 });
 let repDebounce;
-$('repSearch').addEventListener('input', e=>{
-  clearTimeout(repDebounce);
-  const v = e.target.value;
-  repDebounce = setTimeout(()=>{ repFilter = v.trim(); renderReports(); }, 120);
+let libDebounce;
+$('libSearch').addEventListener('input', e=>{
+  clearTimeout(libDebounce);
+  const v=e.target.value;
+  libDebounce=setTimeout(()=>{ repFilter=v.trim(); resFilter=v.trim(); renderReports(); renderResources(); },120);
 });
 
 /* ---------- scoreboard tab ---------- */
@@ -2468,6 +2694,103 @@ function exportBundle(){
 }
 
 boot();
+
+/* =====================================================================
+   VIEW ROUTER
+   The hub is four screens, not one 2,200px scroll. Every view stays in
+   the DOM (so every render function keeps its target element and a tab
+   switch costs nothing); only visibility changes.
+
+   Legacy fragment links from content.json — #reports, #newsletter,
+   #events and so on — still resolve, because they are mapped onto the
+   view that now contains them.
+   ===================================================================== */
+const VIEWS = ['board','reports','comps','news'];
+const HASH_TO_VIEW = {
+  '':'board', 'scoreboard':'board', 'board':'board', 'leaderboard':'board',
+  'reports':'reports', 'newsletter':'reports', 'resources':'reports', 'library':'reports', 'files':'reports',
+  'competitions':'comps', 'comps':'comps', 'promos':'comps', 'programs':'comps',
+  'news':'news', 'events':'news', 'bulletin':'news'
+};
+let currentView = 'board';
+
+function showView(v, opts){
+  if(VIEWS.indexOf(v)<0) v = 'board';
+  currentView = v;
+  VIEWS.forEach(k=>{
+    const sec=$('view-'+k), tab=$('tab-'+k);
+    const on = k===v;
+    sec.classList.toggle('on', on);
+    if(on) sec.removeAttribute('hidden'); else sec.setAttribute('hidden','');
+    tab.setAttribute('aria-selected', on?'true':'false');
+  });
+  document.title = (v==='board' ? 'District Hub' : ({reports:'Reports & Files',comps:'Competitions',news:'News & Events'}[v]+' — District Hub'))
+                 + (v==='board' ? ' — Farmers Districts 32 & 49' : '');
+  if(!(opts&&opts.keepScroll)) window.scrollTo(0,0);
+  /* on a phone the tab row is a scroller — keep the active tab in view */
+  const t=$('tab-'+v);
+  if(t && t.scrollIntoView) try{ t.scrollIntoView({block:'nearest',inline:'nearest'}); }catch(e){}
+}
+function viewFromHash(){
+  const h = (location.hash||'').replace(/^#/,'').toLowerCase();
+  return HASH_TO_VIEW[h] || (VIEWS.indexOf(h)>=0 ? h : 'board');
+}
+window.addEventListener('hashchange', ()=>showView(viewFromHash()));
+document.addEventListener('click', e=>{
+  const a = e.target.closest('a[href^="#"]');
+  if(!a || a.classList.contains('skip')) return;
+  const h = a.getAttribute('href').slice(1).toLowerCase();
+  const v = HASH_TO_VIEW[h];
+  if(!v) return;                       // not a section link — leave it alone
+  e.preventDefault();
+  if(location.hash.replace(/^#/,'').toLowerCase() === h) showView(v);
+  else location.hash = h;              // hashchange does the rest, so back works
+});
+showView(viewFromHash());
+
+/* ---- counts on the tabs, so the sections advertise themselves ---- */
+function tabCounts(){
+  const d = data()||{};
+  const set=(id,n)=>{ const el=$(id); if(el) el.textContent = n>0 ? String(n) : ''; };
+  set('nReports', (d.reports||[]).length + (d.resources||[]).length + (d.newsletters||[]).length);
+  set('nComps', (d.competitions||[]).filter(c=>c.active).length);
+  const today=new Date(); today.setHours(0,0,0,0);
+  const ev=(d.events||[]).filter(e=>{ const x=new Date(e.date+'T23:59:59'); return !isNaN(x)&&x>=today; }).length;
+  set('nNews', (d.news||[]).length + ev);
+}
+
+/* =====================================================================
+   THEME
+   Three states: follow the operating system (default), forced light,
+   forced dark. The button always names the mode it will switch you to,
+   the same way the Quote Plan's does.
+   ===================================================================== */
+const THEME_KEY='d32hub_theme';
+function systemDark(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
+function effectiveDark(){
+  const t=document.documentElement.getAttribute('data-theme');
+  return t ? t==='dark' : systemDark();
+}
+function paintThemeBtn(){
+  const b=$('btnTheme'); if(!b) return;
+  const dark=effectiveDark();
+  b.textContent = dark ? 'Light' : 'Dark';
+  b.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+}
+$('btnTheme').addEventListener('click', ()=>{
+  const next = effectiveDark() ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  safeLocal(()=>localStorage.setItem(THEME_KEY, next));
+  paintThemeBtn();
+  /* the trend chart is drawn with resolved colours, so it has to be
+     redrawn rather than restyled */
+  if(drillStack.length) renderDrill();
+});
+if(window.matchMedia) try{
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paintThemeBtn);
+}catch(e){}
+paintThemeBtn();
+
 </script>
 </body>
 </html>
