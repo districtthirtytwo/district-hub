@@ -49,6 +49,11 @@
   .navchips{display:flex;gap:6px;flex-wrap:wrap;}
   .navchips a{font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;transition:background .15s;}
   .navchips a:hover{background:var(--blue-pale);border-color:#c4d7fb;}
+  /* Opens a standalone tool in a new tab rather than jumping to a section on
+     this page, so it is filled to read as an action, not an anchor. */
+  .navchips a.tool{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .navchips a.tool:hover{background:var(--navy2);border-color:var(--navy2);}
+  .navchips a.tool span{font-weight:400;opacity:.75;}
 
   /* ---------- Announcement banner ---------- */
   .banner{margin-top:14px;background:linear-gradient(90deg,var(--navy),var(--navy2));border-radius:14px;padding:13px 20px;display:flex;align-items:center;gap:12px;color:#fff;box-shadow:var(--sh-md);}
@@ -525,6 +530,7 @@
     </div>
     <div class="topbar-right">
       <nav class="navchips">
+        <a class="tool" href="files/nb-accelerator-quote-plan.html" target="_blank" rel="noopener">Quote Plan <span aria-hidden="true">&#8599;</span></a>
         <a href="#scoreboard">Scoreboard</a>
         <a href="#competitions">Competitions</a>
         <a href="#newsletter">Newsletter</a>
