@@ -16,21 +16,12 @@
       "link": "#reports"
     },
     {
-      "id": "n6",
-      "date": "2026-08-11",
-      "tag": "update",
-      "title": "July District Matrix \u2014 ranks corrected",
-      "body": "The matrix now ranks on Weighted Score rather than the raw sum of the eight placings, which is what the stated weights always intended. Eleven of the 27 agents move by one to three places; the eight underlying category ranks are unchanged. If you looked at the matrix before today, check your line again.",
-      "pinned": true,
-      "link": "#reports"
-    },
-    {
       "id": "n5",
       "date": "2026-08-06",
       "tag": "update",
       "title": "July District Matrix is posted",
       "body": "The District Performance Matrix through August folio is up in Reports, now as a sortable table you can search by name. Ranked on Personal Lines, Life, Business and Prime Score. June's edition stays available underneath it.",
-      "pinned": false,
+      "pinned": true,
       "link": "#reports"
     },
     {
@@ -183,7 +174,7 @@
       "category": "Production",
       "file": "files/district-matrix-july-2026.json",
       "type": "table",
-      "note": "June Prime Score; all other lines as of August folio. Ranks corrected 8/11."
+      "note": "June Prime Score; all other lines as of August folio"
     },
     {
       "id": "r-qst",
@@ -236,5 +227,5 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r909d6b92a9ce69d4ujp8"
+  "rev": "r9e0783c4ad84b9921ghu"
 }
