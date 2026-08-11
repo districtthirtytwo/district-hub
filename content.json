@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-06",
+  "updated": "2026-08-11",
   "banner": {
     "active": true,
     "text": "Jamaica qualification is live all year \u2014 $45K life premium and 20 I&P. Q2 Producer Cup winners are posted below.",
@@ -186,6 +186,14 @@
   ],
   "resources": [
     {
+      "id": "res-nba-quote-plan",
+      "title": "NB Accelerator \u2014 Agent Quote Plan (D32 & D49)",
+      "category": "Programs",
+      "note": "Pick a district, an agent and a premium target \u2014 see the quotes per day it takes. Snapshot as of August 7, 2026.",
+      "date": "2026-08-07",
+      "file": "files/nb-accelerator-quote-plan.html"
+    },
+    {
       "id": "res-folio",
       "title": "2026 Folio Close Date Calendar",
       "category": "Programs",
@@ -194,5 +202,5 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rc25b7126a6fa5eb8jmys"
+  "rev": "r6cded779a92058dexp1y"
 }
