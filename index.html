@@ -2124,10 +2124,10 @@ const EDITORS = {
   ], sum:i=>({b:i.title, s:(i.category||'Other')+' · '+fmtDate(i.date)+(i.type==='table'?' · interactive table':'')}), upload:{folder:'files/', accept:'.pdf,.xlsx,.xls,.csv,.png,.jpg', hint:'Drop an Excel/CSV here and it becomes an interactive on-brand table (matrixes, producer reports, life results…). PDFs and images post as openable files. Fill in title & category after it appears.'} },
   resources: { list:'resources', label:'Resource', fields:[
     {k:'title', label:'Title'},
-    {k:'category', label:'Category', t:'select', opts:['Recruiting','Training','Programs','Forms','Other']},
+    {k:'category', label:'Category', t:'select', opts:['Recruiting','Training','Agency Setup','Programs','Forms','Other']},
     {k:'note', label:'Short description'},
     {k:'date', label:'Date added', t:'date'}
-  ], sum:i=>({b:i.title, s:(i.category||'Other')+(i.note?' · '+i.note:'')}), upload:{folder:'files/', accept:'.pdf,.docx,.xlsx,.pptx,.png,.jpg', hint:'Drop any PDF or document agents should be able to download — playbooks, program one-pagers, forms. Set the title and category after it appears.'} }
+  ], sum:i=>({b:i.title, s:(i.category||'Other')+(i.note?' · '+i.note:'')}), upload:{folder:'files/', accept:'.pdf,.docx,.xlsx,.pptx,.png,.jpg,.html', hint:'Drop any PDF or document agents should be able to download — playbooks, program one-pagers, forms. Set the title and category after it appears.'} }
 };
 
 let currentTab = 'news';
@@ -2485,7 +2485,7 @@ window.addEventListener('resize',()=>{
    Same shape as the reports library but for evergreen documents —
    playbooks, program one-pagers, forms. No year archiving: these are
    reference material, not dated snapshots. */
-const RES_ORDER = ['Recruiting','Training','Programs','Forms','Other'];
+const RES_ORDER = ['Recruiting','Training','Agency Setup','Programs','Forms','Other'];
 let resFilter = '';
 function renderResources(){
   const all = (data().resources||[]).slice()
@@ -2505,10 +2505,13 @@ function renderResources(){
 }
 function resourceRow(r){
   const meta = [r.note, fmtDate(r.date)].filter(Boolean).map(esc).join(' · ');
+  /* an .html resource is a page, not a download — forcing the download
+     attribute on it drops a raw file in Downloads instead of opening it */
+  const isPage = /\.html?(?:[?#]|$)/i.test(r.file||r.link||'');
   return `<div class="frow">
     <div class="fico"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill-opacity=".45"/></svg></div>
     <div class="fi"><b>${esc(r.title)}</b><span>${meta}</span></div>
-    <a class="filelink open" href="${esc(safeUrl(fileHref(r.file||r.link||'')) || '#')}" target="_blank" rel="noopener" download>Download</a>
+    <a class="filelink open" href="${esc(safeUrl(fileHref(r.file||r.link||'')) || '#')}" target="_blank" rel="noopener"${isPage?'':' download'}>${isPage?'Open':'Download'}</a>
   </div>`;
 }
 let resDebounce;
