@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-13",
+ "updated": "2026-08-18",
  "banner": {
   "active": true,
   "text": "Jamaica standings are posted — $45,000 life premium and 20 I&P, qualifying through December 31.",
@@ -256,6 +256,14 @@
  ],
  "resources": [
   {
+   "id": "res-tech-stack",
+   "title": "Recommended Technology Stack — Sales Team",
+   "category": "Agency Setup",
+   "note": "Standard producer tech stack — workstation, monitors, headset, dock, and the software that runs the day. Prices as of August 2026.",
+   "date": "2026-08-18",
+   "file": "files/sales-tech-stack.html"
+  },
+  {
    "id": "res-nba-quote-plan",
    "title": "NB Accelerator — Agent Quote Plan (D32 & D49)",
    "category": "Programs",
@@ -272,5 +280,5 @@
    "file": "files/folio-close-calendar-2026.pdf"
   }
  ],
- "rev": "raa255c361ed01329ee26hub"
+ "rev": "r11a691f0e65b8d09c6a0hub"
 }
