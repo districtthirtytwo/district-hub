@@ -898,7 +898,7 @@
         <div class="podium" id="podium"></div>
         <div class="boardwrap" id="boardWrap">
           <table class="board">
-            <thead><tr><th class="c-rank"></th><th>Name</th><th class="c-dist">District</th><th style="text-align:right">Quotes <span class="thper" id="thQ"></span></th><th style="text-align:right">New Biz <span class="thper" id="thN"></span></th><th class="c-bar"></th></tr></thead>
+            <thead><tr><th class="c-rank"></th><th>Name</th><th class="c-dist">District</th><th style="text-align:right">Quotes <span class="thper" id="thQ"></span></th><th style="text-align:right">New Biz <span class="thper" id="thN"></span></th><th class="c-bar" id="thBar"></th></tr></thead>
             <tbody id="boardBody"></tbody>
           </table>
         </div>
@@ -1651,6 +1651,9 @@ function renderBoard(){
   const perLbl = periodLabel();
   $('thQ').textContent = perLbl.toUpperCase();
   $('thN').textContent = perLbl.toUpperCase();
+  /* the bar column used to ship an empty header, so the bars read as
+     decoration; name what they measure and follow the Rank by toggle */
+  $('thBar').textContent = (LB.metric==='q'?'Quotes':'New Biz')+' vs. the leader';
 
   /* warnings the viewer needs before they trust the numbers */
   const warn=$('boardWarn');
@@ -1727,7 +1730,7 @@ function renderBoard(){
         <td><span class="dchip d${r.district==='49'?'49':'32'}">D${r.district==='49'?'49':'32'}</span></td>
         <td class="metric">${r.q.toLocaleString()}</td>
         <td class="metric">${r.n.toLocaleString()}</td>
-        <td class="barcell"><div class="bar ${LB.metric==='n'?'red':''}"><i style="width:${Math.round(r[LB.metric]/max*100)}%"></i></div><span class="rowchev" aria-hidden="true">›</span></td>
+        <td class="barcell" title="${i===0?'Top of this list':Math.round(r[LB.metric]/max*100)+'% of the leader\u2019s '+max.toLocaleString()}"><div class="bar ${LB.metric==='n'?'red':''}"><i style="width:${Math.round(r[LB.metric]/max*100)}%"></i></div><span class="rowchev" aria-hidden="true">›</span></td>
       </tr>`).join('');
   }
 
