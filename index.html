@@ -121,29 +121,41 @@
   .logos{display:flex;align-items:center;gap:7px;background:#fff;border-radius:8px;padding:6px 9px;flex:none;}
   .dlogo{height:26px;width:auto;display:block;}
   .ident{margin-right:auto;min-width:0;}
-  .ident h1{margin:0;font-size:16px;font-weight:680;letter-spacing:-.01em;color:var(--on-navy);line-height:1.2;}
-  .ident p{margin:2px 0 0;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--on-navy-soft);}
+  .ident h1{margin:0;font-size:16px;font-weight:680;letter-spacing:-.01em;color:var(--on-navy);line-height:1.2;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ident p{margin:2px 0 0;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--on-navy-soft);
+           white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .bar1 .acts{display:flex;align-items:center;gap:9px;flex:none;}
   .datebox{font-size:12.5px;color:var(--on-navy-soft);white-space:nowrap;}
 
   /* folio countdown lives in the bar so the deadline is always on screen
      without spending a 90px strip on it */
   .foliochip{
-    display:none;align-items:center;gap:9px;text-decoration:none;
+    display:none;text-decoration:none;
+    grid-template-columns:auto auto auto;column-gap:7px;align-items:baseline;flex:none;
     background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);
-    border-radius:9px;padding:5px 11px;white-space:nowrap;
+    border-radius:9px;padding:5px 13px 7px;white-space:nowrap;
   }
   .foliochip:hover{background:rgba(255,255,255,.17);}
-  .foliochip.on{display:inline-flex;}
-  .foliochip .fl{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--on-navy-blue);display:block;}
-  .foliochip .fd{font-size:12.5px;font-weight:640;color:var(--on-navy);display:block;margin-top:1px;}
-  .foliochip .fn{font-size:16px;font-weight:660;color:var(--on-navy);font-variant-numeric:tabular-nums;line-height:1;}
-  .foliochip .fu{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--on-navy-soft);display:block;margin-top:2px;}
-  .foliochip .cnt{text-align:right;padding-left:10px;border-left:1px solid rgba(255,255,255,.2);}
-  .foliochip.soon{background:rgba(255,138,145,.16);border-color:rgba(255,138,145,.4);}
-  .foliochip.soon .fl,.foliochip.soon .fn,.foliochip.soon .fu{color:var(--on-navy-red);}
+  .foliochip.on{display:inline-grid;}
+  /* one label over one line of fact: "Folio close / Fri, Sep 18 | 29 days
+     left". The old chip stacked label-over-value on the left and
+     value-over-label on the right, so nothing shared a baseline and the
+     countdown was set smaller than the date beside it. */
+  .foliochip .fl,.foliochip .fu{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;line-height:1.5;}
+  .foliochip .fl{grid-column:1/-1;color:var(--on-navy-blue);margin-bottom:1px;}
+  .foliochip .fu{color:var(--on-navy-soft);}
+  .foliochip .fd{font-size:13px;font-weight:640;color:var(--on-navy);line-height:1.1;}
+  .foliochip .fn{font-size:18px;font-weight:700;color:var(--on-navy);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1.1;
+                 margin-left:11px;padding-left:13px;border-left:1px solid rgba(255,255,255,.24);}
+  .foliochip.soon{background:rgba(255,138,145,.16);border-color:rgba(255,138,145,.45);}
+  .foliochip.soon .fl,.foliochip.soon .fu,.foliochip.soon .fn,.foliochip.soon .fd{color:var(--on-navy-red);}
   .foliochip.today{background:var(--s2);border-color:var(--s2);}
   .foliochip.today .fl,.foliochip.today .fu,.foliochip.today .fn,.foliochip.today .fd{color:#fff;}
+  .foliochip.today .fn{font-size:13.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-left-color:rgba(255,255,255,.45);}
+  /* the published calendar has run out: say so on one line rather than
+     pairing the message with an em-dash count that means nothing */
+  .foliochip.nodata .fn,.foliochip.nodata .fu{display:none;}
 
   .ibtn{
     font:inherit;font-size:13px;font-weight:600;cursor:pointer;
@@ -156,7 +168,9 @@
   .ibtn[disabled]{opacity:.55;cursor:default;}
 
   /* ---- row 2: tabs ---- */
-  .bar2{display:flex;align-items:center;gap:4px;border-top:1px solid rgba(255,255,255,.14);}
+  .bar2{display:flex;align-items:center;gap:4px;border-top:1px solid rgba(255,255,255,.14);
+        flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .bar2::-webkit-scrollbar{display:none;}
   .tab{
     appearance:none;border:0;background:transparent;font:inherit;
     font-size:13.5px;font-weight:640;color:var(--on-navy-soft);
@@ -234,6 +248,7 @@
     font:inherit;font-size:13px;font-weight:600;cursor:pointer;
     border:1px solid var(--border);background:var(--surface-1);color:var(--text-primary);
     border-radius:9px;padding:7px 13px;white-space:nowrap;
+    text-decoration:none;display:inline-block;
   }
   .btn:hover{background:var(--hover);}
   .btn.primary{background:var(--navy);color:#fff;border-color:var(--navy);}
@@ -254,8 +269,21 @@
   .figlab{font-size:12.5px;color:var(--on-navy-blue);font-weight:600;margin-bottom:8px;}
   .fig.red .figlab{color:var(--on-navy-red);}
   .fignum{font-size:50px;line-height:1;font-weight:640;letter-spacing:-.03em;color:var(--on-navy);font-variant-numeric:tabular-nums;}
+  /* no data is an em dash, never a zero — a zero is a claim about production */
+  .fig.nodata .fignum{color:var(--on-navy-soft);opacity:.5;font-size:34px;}
   .figunit{font-size:13.5px;color:var(--on-navy-soft);margin-top:8px;font-weight:500;}
   .fignote{font-size:12px;color:var(--on-navy-soft);opacity:.72;margin-top:6px;}
+  /* the district split — same totals, decomposed, so the widest card on
+     the landing view carries information instead of empty navy */
+  .figsplit{margin-top:15px;max-width:400px;}
+  .figbar{height:6px;border-radius:3px;background:rgba(255,255,255,.22);overflow:hidden;}
+  .figbar i{display:block;height:100%;background:var(--on-navy-blue);}
+  .fig.red .figbar i{background:var(--on-navy-red);}
+  .figleg{display:flex;gap:18px;margin-top:8px;font-size:11.5px;color:var(--on-navy-soft);font-weight:600;font-variant-numeric:tabular-nums;}
+  .figleg em{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;font-style:normal;}
+  .figleg .k1{background:var(--on-navy-blue);}
+  .fig.red .figleg .k1{background:var(--on-navy-red);}
+  .figleg .k2{background:rgba(255,255,255,.30);}
 
   /* ===================================================================
      SCOREBOARD
@@ -267,7 +295,9 @@
   .seg button{border:0;background:transparent;padding:7px 13px;font:inherit;font-size:12.5px;font-weight:640;color:var(--text-secondary);cursor:pointer;}
   .seg button:hover{background:var(--hover);}
   .seg button.on{background:var(--navy);color:#fff;}
-  .seg.red button.on{background:var(--s2);}
+  /* active colour tracks the metric it selects, so it agrees with the bars */
+  #segMetric button.on{background:var(--navy);}
+  #segMetric button[data-m="n"].on{background:var(--s2);}
   .switch{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-secondary);font-weight:600;cursor:pointer;user-select:none;height:33px;}
   .switch input{accent-color:var(--s1);}
   #staffOnlyWrap .switch{padding:0 2px;}
@@ -363,6 +393,12 @@
      =================================================================== */
   .cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;align-items:start;}
   .cols2 .card{margin-bottom:0;}
+  /* News runs far longer than the events list beside it; let the events
+     card follow the reader instead of stranding it at the top. */
+  @media(min-width:761px){
+    #view-news .cols2{align-items:stretch;}
+    #view-news .cols2 > #events{position:sticky;top:142px;align-self:start;}
+  }
 
   /* ---------- news ---------- */
   .newsitem{padding:14px 0;border-bottom:1px solid var(--grid);}
@@ -383,7 +419,8 @@
   .newsitem p{margin:0;font-size:13px;color:var(--text-secondary);line-height:1.55;white-space:pre-line;}
   .newsitem .more{display:inline-block;margin-top:6px;color:var(--s1);font-weight:640;font-size:12.5px;text-decoration:none;}
   .newsitem .more:hover{text-decoration:underline;}
-  .pin{color:var(--gold);font-size:12px;margin-left:auto;}
+  .pin{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+       color:var(--gold-ink);background:var(--wash3);border-radius:5px;padding:3px 7px;}
 
   /* ---------- events ---------- */
   .eventrow{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--grid);align-items:flex-start;}
@@ -398,19 +435,22 @@
   .eventrow .info p{margin:4px 0 0;font-size:12.5px;color:var(--text-secondary);line-height:1.5;white-space:pre-line;}
 
   /* ---------- competitions ---------- */
-  .comps{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;}
+  .comps{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;align-items:start;}
   .comp{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface-1);display:flex;flex-direction:column;}
-  .comp .hd{background:var(--navy);color:var(--on-navy);padding:14px 17px;display:flex;align-items:center;gap:12px;}
+  /* headers sat at three different heights across a row of cards, because
+     one promo had no countdown chip and an ended one set its glyph a
+     point smaller — pin the chip's line box and the header's min height */
+  .comp .hd{background:var(--navy);color:var(--on-navy);padding:14px 17px;display:flex;align-items:center;gap:12px;min-height:80px;}
   .comp .hd b{font-size:14.5px;font-weight:650;}
   .comp .hd .left{min-width:0;}
   .comp .hd span{display:block;font-size:11.5px;color:var(--on-navy-soft);font-weight:500;margin-top:2px;}
   .comp .days{margin-left:auto;background:rgba(255,255,255,.13);border-radius:8px;padding:6px 11px;text-align:center;flex:none;}
-  .comp .days b{display:block;font-size:16px;font-weight:650;font-variant-numeric:tabular-nums;}
+  .comp .days b{display:block;font-size:16px;line-height:21px;font-weight:650;font-variant-numeric:tabular-nums;}
   .comp .days span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--on-navy-soft);}
   .comp .bd{padding:15px 17px;font-size:13px;color:var(--text-secondary);line-height:1.55;}
   .comp .ctext{white-space:pre-line;}
   .comp.isended .hd{background:var(--navy-3);}
-  .comp.isended .hd .days b{font-size:15px;}
+  .comp.isended .hd .days b{font-size:15px;line-height:21px;}
   .comp .prize{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:640;color:var(--gold-ink);background:var(--wash3);border-radius:9px;padding:8px 12px;margin-top:11px;}
   .standings{margin:0 17px 15px;border-top:1px solid var(--grid);padding-top:11px;}
   .standings .srow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13.5px;}
@@ -610,12 +650,25 @@
     .datebox{display:none;}
   }
   @media(max-width:1040px){
-    .foliochip .fd{max-width:150px;overflow:hidden;text-overflow:ellipsis;}
+    /* clamp a long date, but never the run-out-of-calendar message, which
+       is the whole content of the chip in that state */
+    .foliochip:not(.nodata) .fd{max-width:170px;overflow:hidden;text-overflow:ellipsis;}
+    /* below this the subtitle wrapped to "DISTRICTS 32 & / 49" and the
+       squeeze ellipsised the folio date — drop the prefix instead */
+    .ident p .long{display:none;}
   }
   @media(max-width:900px){
     table.board .c-bar,table.board .barcell{display:none;}
     .barcell{display:none;}
+    /* the bar column was the only auto one; without it Name must take the
+       slack or it truncates while the row sits half empty */
+    table.board thead th:nth-child(2){width:auto;}
+    table.board thead th:nth-child(4),table.board thead th:nth-child(5){width:104px;}
     .podium{grid-template-columns:1fr;}
+    /* the four tabs plus a right-aligned tool chip stop fitting at about
+       810px; measured on the rendered bar. Below that the chip leads the
+       scroller instead of being clipped against the right edge. */
+    .toolchip{order:-1;margin-left:0;margin-right:8px;flex:none;align-self:center;}
   }
   @media(max-width:760px){
     .wrap,.barin{padding-left:14px;padding-right:14px;}
@@ -630,11 +683,12 @@
     .ident p .long{display:none;}
     .bar1 .acts{gap:6px;flex:none;}
     .ibtn{padding:6px 9px;font-size:12px;}
-    .foliochip.on{order:3;width:100%;justify-content:space-between;padding:5px 11px;align-items:baseline;}
-    .foliochip > span:first-child{display:flex;align-items:baseline;gap:7px;}
-    .foliochip .cnt{display:flex;align-items:baseline;gap:5px;border-left:0;padding-left:0;}
-    .foliochip .fd{margin-top:0;font-size:12px;}
-    .foliochip .fu{margin-top:0;}
+    /* one line on a phone: label, date, count, unit */
+    .foliochip.on{order:3;width:100%;grid-template-columns:auto 1fr auto auto;column-gap:8px;padding:6px 12px;}
+    .foliochip .fl{grid-column:1;margin-bottom:0;}
+    .foliochip .fd{grid-column:2;font-size:12.5px;}
+    .foliochip .fn{grid-column:3;font-size:16px;margin-left:0;padding-left:0;border-left:0;}
+    .foliochip .fu{grid-column:4;}
     /* tabs become a swipeable row; the active tab is scrolled into view */
     .bar2{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
     .bar2::-webkit-scrollbar{display:none;}
@@ -660,6 +714,7 @@
     .fignum{font-size:40px;}
     .fig{padding:15px 17px 17px;}
     .fignote{display:none;}
+    .figsplit{display:none;}
     /* the flag, the text and the link each get their own line rather than
        the link floating beside a six-line paragraph */
     .strip,.strip.on{display:block;padding:12px 15px;}
@@ -697,6 +752,11 @@
     .pod{padding:12px 13px;}
     .pod .val b{font-size:19px;}
     table.board .c-dist,table.board td:nth-child(3){display:none;}
+    table.board .c-rank{width:30px;}
+    table.board thead th:nth-child(4),table.board thead th:nth-child(5){width:66px;}
+    table.board th,table.board td{padding:9px 6px;}
+    /* on a 390px screen the name has to win the argument with the avatar */
+    table.board .pname .avatar{display:none;}
     .fignum{font-size:36px;}
     a.filelink,button.filelink{padding:5px 10px;font-size:12px;}
     .datebadge{width:42px;}
@@ -723,14 +783,10 @@
         <p><span class="long">Farmers Insurance · </span>Districts 32 &amp; 49</p>
       </div>
       <a class="foliochip" id="folioStrip" href="#reports" title="">
-        <span>
-          <span class="fl">Folio close</span>
-          <span class="fd" id="folioDate"></span>
-        </span>
-        <span class="cnt">
-          <span class="fn" id="folioCount"></span>
-          <span class="fu" id="folioUnit"></span>
-        </span>
+        <span class="fl">Folio close</span>
+        <span class="fd" id="folioDate"></span>
+        <span class="fn" id="folioCount"></span>
+        <span class="fu" id="folioUnit"></span>
       </a>
       <span class="sronly" id="folioNext"></span>
       <div class="acts">
@@ -840,7 +896,7 @@
       <div class="boardnote" id="boardWarn" style="display:none"></div>
       <div class="card-bd">
         <div class="podium" id="podium"></div>
-        <div class="boardwrap">
+        <div class="boardwrap" id="boardWrap">
           <table class="board">
             <thead><tr><th class="c-rank"></th><th>Name</th><th class="c-dist">District</th><th style="text-align:right">Quotes <span class="thper" id="thQ"></span></th><th style="text-align:right">New Biz <span class="thper" id="thN"></span></th><th class="c-bar"></th></tr></thead>
             <tbody id="boardBody"></tbody>
@@ -858,10 +914,10 @@
        ================================================================= -->
   <section class="view" id="view-reports" role="tabpanel" aria-labelledby="tab-reports" hidden>
     <div class="viewhd readcol">
-      <h2>Reports &amp; files</h2>
-      <p>Every district report, newsletter and tool in one place. Search filters the report archive and the resources together.</p>
+      <h2>Reports &amp; Files</h2>
+      <p>Every district report, newsletter and tool in one place. One search covers all three.</p>
     </div>
-    <div style="margin:0 0 18px"><input type="search" class="searchbox" id="libSearch" style="width:360px" placeholder="Search reports and resources…" aria-label="Search reports and resources"></div>
+    <div style="margin:0 0 18px"><input type="search" class="searchbox" id="libSearch" style="width:360px" placeholder="Search reports, newsletters and resources…" aria-label="Search reports, newsletters and resources"></div>
 
     <div class="cols2">
       <div class="card" id="reports">
@@ -897,7 +953,7 @@
        ================================================================= -->
   <section class="view" id="view-news" role="tabpanel" aria-labelledby="tab-news" hidden>
     <div class="viewhd readcol">
-      <h2>News &amp; events</h2>
+      <h2>News &amp; Events</h2>
       <p>District announcements and what is on the calendar next.</p>
     </div>
     <div class="cols2">
@@ -1160,10 +1216,10 @@ function renderFolio(today){
   if(!next){
     /* ran off the end of the published calendar — say so rather than
        showing nothing, which would look like there is no deadline */
-    chip.className='foliochip on';
-    $('folioDate').textContent='2027 dates not posted';
-    $('folioCount').textContent='—';
-    $('folioUnit').textContent='days';
+    chip.className='foliochip on nodata';
+    $('folioDate').textContent='Next year\u2019s dates not posted yet';
+    $('folioCount').textContent='';
+    $('folioUnit').textContent='';
     const msg='The '+FOLIO_CLOSE[FOLIO_CLOSE.length-1].slice(0,4)+' folio calendar has run out \u2014 ask the district office for next year\u2019s dates.';
     $('folioNext').textContent=msg; chip.title=msg;
     return;
@@ -1171,14 +1227,14 @@ function renderFolio(today){
   const days=Math.round((next-now)/86400000);
   chip.className='foliochip on'+(days===0?' today':(days<=5?' soon':''));
   $('folioDate').textContent = next.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-  $('folioCount').textContent = days===0 ? 'TODAY' : String(days);
-  $('folioUnit').textContent = days===0 ? 'closes' : ('day'+(days===1?'':'s')+' left');
+  $('folioCount').textContent = days===0 ? 'Closes today' : String(days);
+  $('folioUnit').textContent = days===0 ? '' : ('day'+(days===1?'':'s')+' left');
   const after = folioDates().find(d=>d.getTime()>next.getTime());
   const msg = days===0
     ? 'Folio closes today \u2014 get business submitted.'
     : (after ? 'Next close after this one: '+after.toLocaleDateString('en-US',{month:'long',day:'numeric'}) : 'Last published close of the year.');
   $('folioNext').textContent = msg;
-  chip.title = 'Folio close \u2014 '+next.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})+'. '+msg;
+  chip.title = 'Folio close \u2014 '+next.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})+'. '+msg+' The full close calendar is in Reports & files.';
 }
 /* Re-check on a timer and whenever the tab regains focus, so a page left
    open overnight rolls over on its own instead of showing a stale date. */
@@ -1606,24 +1662,45 @@ function renderBoard(){
     warn.textContent='District '+staleDistrict.d+"'s sheet was last updated "+staleDistrict.asOf.toLocaleDateString('en-US',{month:'short',day:'numeric'})+', so Combined numbers mix two different dates. Use the D32 and D49 buttons for a like-for-like comparison.';
   }else{ warn.style.display='none'; }
 
-  const everyone = PEOPLE.filter(p=> !isProducer(p.role) && (LB.dist==='all'||normDistrict(p.district)===LB.dist));
-  const tq=everyone.reduce((s,p)=>s+(+p.q[LB.period].actual||0),0);
-  const tn=everyone.reduce((s,p)=>s+(+p.n[LB.period].actual||0),0);
+  const agencies = PEOPLE.filter(p=> !isProducer(p.role));
+  const everyone = agencies.filter(p=> LB.dist==='all'||normDistrict(p.district)===LB.dist);
+  const tot=(list,k)=>list.reduce((s,p)=>s+(+p[k][LB.period].actual||0),0);
+  const tq=tot(everyone,'q'), tn=tot(everyone,'n');
   const scopeLbl = LB.dist==='all' ? 'Districts 32 + 49' : 'District '+LB.dist;
+
+  /* Nothing loaded is not the same as nothing produced. Show an em dash
+     and say why, rather than a 50px zero the viewer will read as fact. */
+  const noData = !PEOPLE.length;
+  const figUnit = noData
+    ? (liveLoading ? 'Waiting on the district sheets\u2026' : 'Not loaded \u2014 press \u21bb Refresh')
+    : scopeLbl+' \u00b7 every agency';
+
+  /* The split is only honest when both districts are in and in scope. */
+  const showSplit = !noData && LB.dist==='all' && !missingDistrict;
+  function split(k){
+    if(!showSplit) return '';
+    const a=tot(agencies.filter(p=>normDistrict(p.district)==='32'),k);
+    const b=tot(agencies.filter(p=>normDistrict(p.district)==='49'),k);
+    if(!(a+b)) return '';
+    return `<div class="figsplit">
+      <div class="figbar"><i style="width:${(a/(a+b)*100).toFixed(1)}%"></i></div>
+      <div class="figleg"><span><em class="k1"></em>D32 ${a.toLocaleString()}</span><span><em class="k2"></em>D49 ${b.toLocaleString()}</span></div>
+    </div>`;
+  }
   $('lbTotals').innerHTML = `
-    <div class="fig">
+    <div class="fig${noData?' nodata':''}">
       <div class="figrule"></div>
       <div class="figlab">Total quotes &middot; ${esc(perLbl)}</div>
-      <div class="fignum">${tq.toLocaleString()}</div>
-      <div class="figunit">${scopeLbl} &middot; every agency</div>
-      <div class="fignote">Owners and staff producers combined.</div>
+      <div class="fignum">${noData?'&mdash;':tq.toLocaleString()}</div>
+      <div class="figunit">${esc(figUnit)}</div>
+      ${noData?'':'<div class="fignote">Owners and staff producers combined.</div>'+split('q')}
     </div>
-    <div class="fig red">
+    <div class="fig red${noData?' nodata':''}">
       <div class="figrule"></div>
       <div class="figlab">Total new business &middot; ${esc(perLbl)}</div>
-      <div class="fignum">${tn.toLocaleString()}</div>
-      <div class="figunit">${scopeLbl} &middot; every agency</div>
-      <div class="fignote">Items written, not premium.</div>
+      <div class="fignum">${noData?'&mdash;':tn.toLocaleString()}</div>
+      <div class="figunit">${esc(figUnit)}</div>
+      ${noData?'':'<div class="fignote">Items written, not premium.</div>'+split('n')}
     </div>`;
 
   const rows = boardRows().sort((a,b)=> b[LB.metric]-a[LB.metric] || b[LB.metric==='q'?'n':'q']-a[LB.metric==='q'?'n':'q']);
@@ -1633,8 +1710,10 @@ function renderBoard(){
   if(!rows.length){
     const st=boardState();
     $('podium').innerHTML=`<div class="boardstate" style="grid-column:1/-1;background:var(--surface-1)"><b>${esc(st.b)}</b>${esc(st.p)}</div>`;
-    $('boardBody').innerHTML=`<tr><td colspan="6"></td></tr>`;
+    $('boardBody').innerHTML='';
+    $('boardWrap').style.display='none';   // no ghost header under the message
   }else{
+    $('boardWrap').style.display='';
     $('podium').innerHTML = rows.slice(0,3).map((r,i)=>`
       <div class="pod p${i+1} click" data-idx="${r.idx}" title="See ${esc(r.name)}'s trend">
         <div class="medal">${i+1}</div>
@@ -1877,7 +1956,7 @@ function renderNews(){
       : esc(n.title);
     const tag = /^(news|promo|recognition|update)$/.test(n.tag||'') ? n.tag : 'news';
     return `<div class="newsitem">
-      <div class="meta"><span class="tag ${tag}">${tag}</span><time>${fmtDate(n.date)}</time>${n.pinned?'<span class="pin" title="Pinned">📌</span>':''}</div>
+      <div class="meta"><span class="tag ${tag}">${tag}</span><time>${fmtDate(n.date)}</time>${n.pinned?'<span class="pin">Pinned</span>':''}</div>
       <h3>${title}</h3>
       <p>${esc(n.body||'')}</p>
       ${href?`<a class="more" href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''}>Read more →</a>`:''}
@@ -1942,10 +2021,30 @@ function fileHref(f){
   const st = STAGED.find(s=>s.path===f);
   return st ? st.blobUrl : f;
 }
+let nlFilter = '';
+function nlRow(n){
+  return `<div class="frow">
+        <div class="fico"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill-opacity=".45"/></svg></div>
+        <div class="fi"><b>${esc(n.title)}</b><span>${fmtDate(n.date)}</span></div>
+        <a class="filelink open" href="${esc(safeUrl(fileHref(n.file||''))||'#')}" target="_blank" rel="noopener">Open</a>
+      </div>`;
+}
 function renderNewsletter(){
-  const list = (data().newsletters||[]).slice().sort((a,b)=> String(b.date||'').localeCompare(String(a.date||'')));
-  if(!list.length){ $('nlArea').innerHTML='<div class="empty">No newsletters yet.</div>'; return; }
-  const latest = list[0], rest = list.slice(1);
+  const all = (data().newsletters||[]).slice().sort((a,b)=> String(b.date||'').localeCompare(String(a.date||'')));
+  if(!all.length){ $('nlArea').innerHTML='<div class="empty">No newsletters yet.</div>'; return; }
+
+  /* While a library search is running this card has to answer the search
+     like the other two, or a full list of issues reads as three matches. */
+  const q = nlFilter.toLowerCase();
+  if(q){
+    const hits = all.filter(n=> [n.title, n.date, fmtDate(n.date)].filter(Boolean).join(' ').toLowerCase().includes(q));
+    $('nlArea').innerHTML = hits.length
+      ? `<div class="filelist">${hits.map(nlRow).join('')}</div>`
+      : `<div class="empty">No newsletters match &ldquo;${esc(nlFilter)}&rdquo;.</div>`;
+    return;
+  }
+
+  const latest = all[0], rest = all.slice(1);
   const latestHref = safeUrl(fileHref(latest.file||''));
   $('nlArea').innerHTML = `
     <div class="latestnl">
@@ -1955,12 +2054,7 @@ function renderNewsletter(){
                   :`<span class="btn open" style="pointer-events:none;opacity:.55">File missing</span>`}
     </div>
     ${rest.length?`<div class="cat" style="margin-top:14px">Past issues</div>
-    <div class="filelist">${rest.map(n=>`
-      <div class="frow">
-        <div class="fico"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill-opacity=".45"/></svg></div>
-        <div class="fi"><b>${esc(n.title)}</b><span>${fmtDate(n.date)}</span></div>
-        <a class="filelink open" href="${esc(safeUrl(fileHref(n.file||''))||'#')}" target="_blank" rel="noopener">Open</a>
-      </div>`).join('')}</div>`:''}`;
+    <div class="filelist">${rest.map(nlRow).join('')}</div>`:''}`;
 }
 
 /* ---------- reports ----------
@@ -2463,7 +2557,9 @@ function renderViewer(){
     <thead><tr>${head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead>
     <tbody>${body.map(r=>`<tr>${r.map(c=>`<td class="${isNum(c)?'num':''}">${esc(c)}</td>`).join('')}</tr>`).join('') || `<tr><td colspan="${head.length||1}"><div class="empty">No matching rows.</div></td></tr>`}</tbody>
   </table>`;
-  $('tvFoot').textContent=`${body.length} row${body.length===1?'':'s'}${filter?' matching "'+$('tvSearch').value+'"':''} · ${d.sheets[TV.sheet].name}`;
+  const bd=$('tvBody');
+  const clipped = bd.scrollWidth > bd.clientWidth + 2;
+  $('tvFoot').textContent=`${body.length} row${body.length===1?'':'s'}${filter?' matching "'+$('tvSearch').value+'"':''} · ${d.sheets[TV.sheet].name} · ${head.length} column${head.length===1?'':'s'}${clipped?' — scroll sideways for the rest':''}`;
 }
 function closeViewer(){ $('tvOverlay').classList.remove('on'); document.body.style.overflow=''; TV.data=null; }
 let tvDebounce;
@@ -2504,7 +2600,8 @@ function renderResources(){
     .map(c=>`<div class="cat">${esc(c)}</div>${cats[c].map(resourceRow).join('')}`).join('');
 }
 function resourceRow(r){
-  const meta = [r.note, fmtDate(r.date)].filter(Boolean).map(esc).join(' · ');
+  /* same order as reportRow — date first, then the note */
+  const meta = [fmtDate(r.date), r.note].filter(Boolean).map(esc).join(' · ');
   /* an .html resource is a page, not a download — forcing the download
      attribute on it drops a raw file in Downloads instead of opening it */
   const isPage = /\.html?(?:[?#]|$)/i.test(r.file||r.link||'');
@@ -2534,7 +2631,8 @@ let libDebounce;
 $('libSearch').addEventListener('input', e=>{
   clearTimeout(libDebounce);
   const v=e.target.value;
-  libDebounce=setTimeout(()=>{ repFilter=v.trim(); resFilter=v.trim(); renderReports(); renderResources(); },120);
+  libDebounce=setTimeout(()=>{ repFilter=v.trim(); resFilter=v.trim(); nlFilter=v.trim();
+    renderReports(); renderResources(); renderNewsletter(); },120);
 });
 
 /* ---------- scoreboard tab ---------- */
