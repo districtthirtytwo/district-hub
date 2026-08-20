@@ -334,11 +334,10 @@
   /* Fixed widths everywhere except the bar column, which absorbs the
      slack. Letting the NAME column absorb it instead left a 400px hole
      between the name and the district chip on a wide screen. */
-  table.board .c-rank{width:44px;}
-  table.board thead th:nth-child(2){width:24%;}
-  table.board .c-dist{width:96px;}
-  table.board thead th:nth-child(4),table.board thead th:nth-child(5){width:132px;}
-  table.board .c-bar{width:auto;}
+  table.board .c-rank{width:46px;}
+  table.board thead th:nth-child(2){width:auto;}
+  table.board thead th:nth-child(3),table.board thead th:nth-child(4){width:150px;}
+  table.board .c-chev{width:34px;}
   table.board td:nth-child(2){overflow:hidden;}
   .pname .nm{min-width:0;}
   .pname .nm b,.pname .nm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -348,6 +347,7 @@
     padding:10px;border-bottom:1px solid var(--axis);
   }
   table.board td{padding:10px;border-bottom:1px solid var(--grid);vertical-align:middle;}
+  table.board tbody tr:nth-child(even) td{background:var(--surface-2);}
   table.board tr:last-child td{border-bottom:0;}
   table.board tr.click{cursor:pointer;}
   table.board tr.click:hover td{background:var(--hover);}
@@ -358,20 +358,19 @@
   .pname{display:flex;align-items:center;min-width:0;}
   .pname .nm b{display:block;font-size:14px;font-weight:620;}
   .pname .nm span{font-size:11.5px;color:var(--muted);}
-  .dchip{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;}
+  .pname .nm .sub2{display:flex;align-items:center;gap:7px;min-width:0;}
+  .pname .nm .sub2 .dchip{flex:none;}
+  .dchip{font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:5px;letter-spacing:.02em;}
   .dchip.d32{background:var(--wash);color:var(--ord-3);}
   .dchip.d49{background:var(--wash2);color:var(--str-2);}
   :root[data-theme="dark"] .dchip.d32{color:var(--ord-1);}
   @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dchip.d32{color:var(--ord-1);}}
   .metric{font-weight:620;text-align:right;font-variant-numeric:tabular-nums;}
-  /* NOT display:flex — a flex <td> stops behaving as a table cell and
-     shrink-wraps to its content, so the bar collapsed to ~100px inside a
-     529px column. Table-cell layout plus an absolutely placed chevron. */
-  .barcell{position:relative;padding-right:28px!important;min-width:120px;}
-  .bar{display:block;height:7px;border-radius:4px;background:var(--grid);overflow:hidden;width:100%;}
-  .bar i{display:block;height:100%;border-radius:4px;background:var(--ord-2);}
-  .bar.red i{background:var(--s2);}
-  .rowchev{position:absolute;right:9px;top:50%;transform:translateY(-50%);color:var(--inert);font-size:15px;font-weight:700;}
+  /* all that is left of the bar column: the affordance that says a row
+     opens. Keep it — the caption alone did not carry it. */
+  .chevcell{padding-left:0!important;padding-right:12px!important;text-align:right;}
+  .rowchev{color:var(--inert);font-size:15px;font-weight:700;line-height:1;}
+  tr.click:hover .rowchev{color:var(--s1);}
   .ownflag{font-size:8.5px;font-weight:700;background:var(--wash3);color:var(--gold-ink);border-radius:4px;padding:1px 5px;margin-left:6px;letter-spacing:.04em;vertical-align:1px;}
   .thper{font-size:9.5px;letter-spacing:.05em;color:var(--muted);font-weight:600;}
   .boardstate{padding:38px 20px;text-align:center;color:var(--text-secondary);font-size:13.5px;line-height:1.6;}
@@ -658,12 +657,9 @@
     .ident p .long{display:none;}
   }
   @media(max-width:900px){
-    table.board .c-bar,table.board .barcell{display:none;}
-    .barcell{display:none;}
-    /* the bar column was the only auto one; without it Name must take the
-       slack or it truncates while the row sits half empty */
-    table.board thead th:nth-child(2){width:auto;}
-    table.board thead th:nth-child(4),table.board thead th:nth-child(5){width:104px;}
+    /* Name is the slack column at every width now that the bar is gone;
+       the metrics just get tighter. */
+    table.board thead th:nth-child(3),table.board thead th:nth-child(4){width:108px;}
     .podium{grid-template-columns:1fr;}
     /* the four tabs plus a right-aligned tool chip stop fitting at about
        810px; measured on the rendered bar. Below that the chip leads the
@@ -715,6 +711,18 @@
     .fig{padding:15px 17px 17px;}
     .fignote{display:none;}
     .figsplit{display:none;}
+    /* A truncated name on a leaderboard is the one thing this table must
+       never do — below the tablet breakpoint the name and its agency wrap
+       to a second line instead of ellipsing. Rows get taller; phones have
+       vertical space and do not have horizontal space. */
+    table.board .pname{align-items:flex-start;}
+    table.board .pname .avatar{margin-top:1px;}
+    table.board .pname .nm b,table.board .pname .nm .sub2{white-space:normal;overflow:visible;text-overflow:clip;}
+    /* block, not flex: as a flex row the chip and the agency are two items
+       and a tight cell drops the whole agency to its own line. Inline, the
+       agency text wraps where it needs to and the chip stays put. */
+    table.board .pname .nm .sub2{display:block;}
+    table.board .pname .nm .sub2 .dchip{margin-right:6px;vertical-align:1px;}
     /* the flag, the text and the link each get their own line rather than
        the link floating beside a six-line paragraph */
     .strip,.strip.on{display:block;padding:12px 15px;}
@@ -748,12 +756,19 @@
     .panel-hd,.panel-bd,.panel-ft{padding-left:15px;padding-right:15px;}
     .ptabs{padding-left:10px;padding-right:10px;}
   }
+  @media(max-width:620px){
+    table.board .c-rank{width:34px;}
+    table.board thead th:nth-child(3),table.board thead th:nth-child(4){width:76px;}
+    table.board .c-chev{width:22px;}
+    .chevcell{padding-right:6px!important;}
+  }
   @media(max-width:430px){
     .pod{padding:12px 13px;}
     .pod .val b{font-size:19px;}
-    table.board .c-dist,table.board td:nth-child(3){display:none;}
-    table.board .c-rank{width:30px;}
-    table.board thead th:nth-child(4),table.board thead th:nth-child(5){width:66px;}
+    table.board .c-rank{width:28px;}
+    table.board thead th:nth-child(3),table.board thead th:nth-child(4){width:62px;}
+    table.board .c-chev{width:18px;}
+    .chevcell{padding-right:4px!important;}
     table.board th,table.board td{padding:9px 6px;}
     /* on a 390px screen the name has to win the argument with the avatar */
     table.board .pname .avatar{display:none;}
@@ -898,7 +913,7 @@
         <div class="podium" id="podium"></div>
         <div class="boardwrap" id="boardWrap">
           <table class="board">
-            <thead><tr><th class="c-rank"></th><th>Name</th><th class="c-dist">District</th><th style="text-align:right">Quotes <span class="thper" id="thQ"></span></th><th style="text-align:right">New Biz <span class="thper" id="thN"></span></th><th class="c-bar" id="thBar"></th></tr></thead>
+            <thead><tr><th class="c-rank"><span class="sronly">Rank</span></th><th>Name</th><th style="text-align:right">Quotes <span class="thper" id="thQ"></span></th><th style="text-align:right">New Biz <span class="thper" id="thN"></span></th><th class="c-chev"><span class="sronly">Open trend</span></th></tr></thead>
             <tbody id="boardBody"></tbody>
           </table>
         </div>
@@ -1651,9 +1666,6 @@ function renderBoard(){
   const perLbl = periodLabel();
   $('thQ').textContent = perLbl.toUpperCase();
   $('thN').textContent = perLbl.toUpperCase();
-  /* the bar column used to ship an empty header, so the bars read as
-     decoration; name what they measure and follow the Rank by toggle */
-  $('thBar').textContent = (LB.metric==='q'?'Quotes':'New Biz')+' vs. the leader';
 
   /* warnings the viewer needs before they trust the numbers */
   const warn=$('boardWarn');
@@ -1707,7 +1719,6 @@ function renderBoard(){
     </div>`;
 
   const rows = boardRows().sort((a,b)=> b[LB.metric]-a[LB.metric] || b[LB.metric==='q'?'n':'q']-a[LB.metric==='q'?'n':'q']);
-  const max = Math.max(1, ...rows.map(r=>r[LB.metric]));
   const mLbl = LB.metric==='q' ? 'Quotes' : 'New Biz';
 
   if(!rows.length){
@@ -1726,11 +1737,10 @@ function renderBoard(){
     $('boardBody').innerHTML = rows.map((r,i)=>`
       <tr class="click" data-idx="${r.idx}" tabindex="0" role="button" aria-label="${esc(r.name)} — open trend history">
         <td class="rank">${i+1}</td>
-        <td><div class="pname"><span class="avatar">${esc(initials(r.name))}</span><span class="nm"><b>${esc(r.name)}${r.owner?'<span class="ownflag">OWNER</span>':''}</b><span>${esc(r.sub||'')}</span></span></div></td>
-        <td><span class="dchip d${r.district==='49'?'49':'32'}">D${r.district==='49'?'49':'32'}</span></td>
+        <td><div class="pname"><span class="avatar">${esc(initials(r.name))}</span><span class="nm"><b>${esc(r.name)}${r.owner?'<span class="ownflag">OWNER</span>':''}</b><span class="sub2"><span class="dchip d${r.district==='49'?'49':'32'}">D${r.district==='49'?'49':'32'}</span>${esc(r.sub||'')}</span></span></div></td>
         <td class="metric">${r.q.toLocaleString()}</td>
         <td class="metric">${r.n.toLocaleString()}</td>
-        <td class="barcell" title="${i===0?'Top of this list':Math.round(r[LB.metric]/max*100)+'% of the leader\u2019s '+max.toLocaleString()}"><div class="bar ${LB.metric==='n'?'red':''}"><i style="width:${Math.round(r[LB.metric]/max*100)}%"></i></div><span class="rowchev" aria-hidden="true">›</span></td>
+        <td class="chevcell"><span class="rowchev" aria-hidden="true">›</span></td>
       </tr>`).join('');
   }
 
