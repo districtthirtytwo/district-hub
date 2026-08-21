@@ -2136,6 +2136,12 @@ function renderBoard(){
   const rows = boardRows().sort((a,b)=> b[LB.metric]-a[LB.metric] || b[LB.metric==='q'?'n':'q']-a[LB.metric==='q'?'n':'q']);
   const mLbl = LB.metric==='q' ? 'Quotes' : 'New Biz';
 
+  /* A stopped feed and not one nonzero row means this column is absent,
+     not zero. Rank nobody on it and print the em dash instead of 0. */
+  const emptyMetric = m => !!metricStale(m) && !rows.some(r => r[m]);
+  const emptyQ = emptyMetric('q'), emptyN = emptyMetric('n');
+  const podDead = LB.metric==='q' ? emptyQ : emptyN;
+
   if(!rows.length){
     const st=boardState();
     $('podium').innerHTML=`<div class="boardstate" style="grid-column:1/-1;background:var(--surface-1)"><b>${esc(st.b)}</b>${esc(st.p)}</div>`;
@@ -2143,6 +2149,14 @@ function renderBoard(){
     $('boardWrap').style.display='none';   // no ghost header under the message
   }else{
     $('boardWrap').style.display='';
+    if(podDead){
+      const st = metricStale(LB.metric);
+      $('podium').innerHTML = `<div class="boardstate" style="grid-column:1/-1;background:var(--surface-1)">`
+        + `<b>Nothing to rank.</b>` + esc(metricNoun(LB.metric)+' stop at '+shortDay(st.last)+', so every '
+        + 'producer in this view sits at zero for '+perLbl+'. Switch Rank by to '
+        + (LB.metric==='q'?'New Biz':'Quotes')+', or widen the period to YTD.')
+        + `</div>`;
+    }else
     $('podium').innerHTML = rows.slice(0,3).map((r,i)=>`
       <div class="pod p${i+1} click" data-idx="${r.idx}" tabindex="0" role="button" title="See ${esc(r.name)}'s trend" aria-label="${esc(r.name)} — open trend history">
         <div class="medal">${i+1}</div>
@@ -2153,8 +2167,8 @@ function renderBoard(){
       <tr class="click" data-idx="${r.idx}" tabindex="0" aria-label="${esc(r.name)} — press Enter for their trend history">
         <td class="rank">${i+1}</td>
         <td><div class="pname"><span class="avatar">${esc(initials(r.name))}</span><span class="nm"><b>${esc(r.name)}${r.owner?'<span class="ownflag">OWNER</span>':''}</b><span class="sub2"><span class="dchip d${r.district==='49'?'49':'32'}">D${r.district==='49'?'49':'32'}</span>${esc(r.sub||'')}</span></span></div></td>
-        <td class="metric">${r.q.toLocaleString()}</td>
-        <td class="metric">${r.n.toLocaleString()}</td>
+        <td class="metric">${emptyQ?'&mdash;':r.q.toLocaleString()}</td>
+        <td class="metric">${emptyN?'&mdash;':r.n.toLocaleString()}</td>
         <td class="chevcell"><span class="rowchev" aria-hidden="true">›</span></td>
       </tr>`).join('');
   }
