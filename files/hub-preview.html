@@ -278,6 +278,7 @@
   .fig.nodata .fignum{color:var(--on-navy-soft);opacity:.5;font-size:34px;}
   .figunit{font-size:13.5px;color:var(--on-navy-soft);margin-top:8px;font-weight:500;}
   .fignote{font-size:12px;color:var(--on-navy-soft);opacity:.72;margin-top:6px;}
+  .fignote.stale{color:var(--on-navy-red);opacity:1;font-weight:640;}
   /* the district split — same totals, decomposed, so the widest card on
      the landing view carries information instead of empty navy */
   .figsplit{margin-top:15px;max-width:400px;}
@@ -786,6 +787,7 @@
     .fignum{font-size:40px;}
     .fig{padding:15px 17px 17px;}
     .fignote{display:none;}
+    .fignote.stale{display:block;font-size:12.5px;}
     .figsplit{display:none;}
     /* A truncated name on a leaderboard is the one thing this table must
        never do — below the tablet breakpoint the name and its agency wrap
@@ -1476,7 +1478,9 @@ let dataAsOf = null;          // newest date present in the export
 let dailyAsOf = null;         // last complete business day (what "Daily" means)
 let liveLoading = false;
 let staleDistrict = null;
-let skipped = [];   // {d, asOf} when one sheet is lagging the other
+let skipped = [];
+/* { '32': {q:<ms|null>, n:<ms|null>}, '49': {…} } */
+let metricLastByDist = {};   // {d, asOf} when one sheet is lagging the other
 
 /* ---- small helpers (shared with the parser) ---- */
 function initials(name){ return String(name).split(/\s+/).filter(w=>/[A-Za-z]/.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('')||'?'; }
@@ -1691,8 +1695,19 @@ function parseDistrictExport(rows){
       addHist(a,rec,hk);
     }
   });
+  /* the newest day this sheet actually carries a count for, per metric.
+     A feed can stop while the rest of the export keeps flowing, and the
+     shared cutoff hides it completely. */
+  const lastFor = m => {
+    let t = null;
+    recs.forEach(r=>{ if(r.metric!==m || !r.count || !r.date) return;
+      const tt = r.date.getTime();
+      if(tt <= cutoffEnd && (t===null || tt>t)) t = tt; });
+    return t===null ? null : new Date(t);
+  };
   return {people:[...Object.values(producers), ...Object.values(agencies)],
-          dataAsOf:cutoff, dailyAsOf:anchor, undated, futureRows, totalRecs:recs.length};
+          dataAsOf:cutoff, dailyAsOf:anchor, undated, futureRows, totalRecs:recs.length,
+          metricLast:{q:lastFor('q'), n:lastFor('n')}};
 }
 
 /* ---- fetch + cache -------------------------------------------------
@@ -1730,7 +1745,7 @@ function readCache(){
 function writeCache(){
   safeLocal(()=>localStorage.setItem(LIVE_CACHE_KEY, JSON.stringify({
     people:PEOPLE, at:Date.now(),
-    missingDistrict,
+    missingDistrict, metricLastByDist,
     staleDistrict: staleDistrict ? {d:staleDistrict.d, asOf:staleDistrict.asOf.getTime()} : null,
     dataAsOf:dataAsOf?dataAsOf.getTime():null,
     dailyAsOf:dailyAsOf?dailyAsOf.getTime():null
@@ -1788,6 +1803,13 @@ async function loadLive(opts){
        date past today. Small numbers are normal; a spike means the sheet
        changed shape and the totals are quietly short. */
     skipped = [];
+    metricLastByDist = {};
+    ok.forEach(o=>{
+      const dd = o.people[0] && o.people[0].district;
+      if(dd) metricLastByDist[dd] = {
+        q: o.metricLast.q ? o.metricLast.q.getTime() : null,
+        n: o.metricLast.n ? o.metricLast.n.getTime() : null };
+    });
     ok.forEach(o=>{
       const d = o.people[0] && o.people[0].district;
       if(o.futureRows) skipped.push('District '+d+': '+o.futureRows+' row'+(o.futureRows===1?'':'s')+' dated after today were ignored.');
@@ -1830,6 +1852,7 @@ function bootLive(){
   if(c){
     PEOPLE=c.people;
     missingDistrict=c.missingDistrict||null;
+    metricLastByDist=c.metricLastByDist||{};
     staleDistrict=c.staleDistrict?{d:c.staleDistrict.d,asOf:new Date(c.staleDistrict.asOf)}:null;
     if(missingDistrict && LB.dist==='all'){
       LB.dist = missingDistrict==='49' ? '32' : '49';
@@ -1868,6 +1891,38 @@ function agencyProducers(a){
   return PEOPLE.map((p,i)=>({p,i}))
     .filter(x=> isProducer(x.p.role) && normDistrict(x.p.district)===normDistrict(a.district) && x.p.agency && normName(x.p.agency)===normName(a.name));
 }
+/* The newest day the CURRENT SCOPE has data for, per metric. Takes the
+   earliest across the districts in view — "current through" must never
+   be more optimistic than the weakest sheet behind it. */
+function metricLastFor(m){
+  const ds = LB.dist==='all' ? Object.keys(metricLastByDist) : [LB.dist];
+  let min = null;
+  ds.forEach(d=>{
+    const v = metricLastByDist[d] && metricLastByDist[d][m];
+    if(v==null) return;
+    if(min===null || v<min) min = v;
+  });
+  return min===null ? null : new Date(min);
+}
+/* Three days, so an ordinary Friday-to-Monday gap never trips it. */
+const METRIC_STALE_DAYS = 3;
+function metricStale(m){
+  if(!dataAsOf) return null;
+  const last = metricLastFor(m);
+  if(!last) return null;
+  const days = Math.round((midnight(dataAsOf) - midnight(last)) / 86400000);
+  return days > METRIC_STALE_DAYS ? {last, days} : null;
+}
+/* "New business" is singular and "quotes" is plural, so the verb has to
+   come along with the noun or half these sentences read as broken. */
+const metricNoun    = m => m==='q' ? 'Quotes' : 'New business';
+const metricUnit    = m => m==='q' ? 'quote' : 'new business';
+const metricStops   = m => m==='q' ? 'Quotes stop at' : 'New business stops at';
+const metricNoUpd   = m => m==='q' ? 'Quotes have not updated since'
+                                   : 'New business has not updated since';
+const metricCurrent = m => m==='q' ? 'New business is current.' : 'Quotes are current.';
+const shortDay = d => d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+
 function periodLabel(){
   if(LB.period==='daily') return dailyAsOf ? dailyAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric'}) : 'Daily';
   if(LB.period==='weekly') return 'Last 7 days';
@@ -1903,6 +1958,15 @@ function renderMovers(){
      surge for everyone. Show nothing rather than something flattering. */
   const minK=earliestHistKey();
   if(!minK || minK > dayKeyOf(startPrev)) return hide();
+
+  /* If this metric's feed has stopped there is nothing to compare, and
+     an empty strip reads as "nobody improved" rather than "no data". */
+  const st=metricStale(LB.metric);
+  if(st){
+    $('moversSub').textContent = metricNoUpd(LB.metric)+' '+shortDay(st.last)
+      +', so there is no week to compare.';
+    row.innerHTML=''; wrap.hidden=false; return;
+  }
 
   const kThisA=dayKeyOf(startThis), kThisB=dayKeyOf(end);
   const kPrevA=dayKeyOf(startPrev), kPrevB=dayKeyOf(endPrev);
@@ -1945,23 +2009,40 @@ function boardState(){
   return {b:'Nothing to show for this view', p:'Try a different District or Period.'};
 }
 function renderBoard(){
-  $('lbAsOf').textContent = dataAsOf ? ('data through '+dataAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})) : '';
+  if(dataAsOf){
+    const parts = ['data through '+dataAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})];
+    ['q','n'].forEach(m=>{ const st=metricStale(m);
+      if(st) parts.push(metricNoun(m).toLowerCase()+' only through '+shortDay(st.last)); });
+    $('lbAsOf').textContent = parts.join(' \u00b7 ');
+  }else $('lbAsOf').textContent = '';
   $('staffOnlyWrap').style.visibility = LB.view==='producer' ? 'visible' : 'hidden';
   const perLbl = periodLabel();
   $('thQ').textContent = perLbl.toUpperCase();
   $('thN').textContent = perLbl.toUpperCase();
 
   /* warnings the viewer needs before they trust the numbers */
+  /* More than one of these can be true at once, and hiding the second
+     one behind the first is how a page ends up quietly wrong. */
   const warn=$('boardWarn');
+  const notes=[]; let worst='warn';
   if(missingDistrict){
-    warn.className='boardnote err'; warn.style.display='block';
-    warn.textContent='District '+missingDistrict+' numbers could not be loaded, so Combined totals are switched off — you are seeing District '+(missingDistrict==='49'?'32':'49')+' only.';
-  }else if(skipped.length){
-    warn.className='boardnote warn'; warn.style.display='block';
-    warn.textContent = skipped.join(' ')+' Those rows are not counted in any total on this page.';
-  }else if(staleDistrict){
-    warn.className='boardnote warn'; warn.style.display='block';
-    warn.textContent='District '+staleDistrict.d+"'s sheet was last updated "+staleDistrict.asOf.toLocaleDateString('en-US',{month:'short',day:'numeric'})+', so Combined numbers mix two different dates. Use the D32 and D49 buttons for a like-for-like comparison.';
+    worst='err';
+    notes.push('District '+missingDistrict+' numbers could not be loaded, so Combined totals are switched off — you are seeing District '+(missingDistrict==='49'?'32':'49')+' only.');
+  }
+  const bothStale = !!(metricStale('q') && metricStale('n'));
+  ['q','n'].forEach(m=>{
+    const st = metricStale(m);
+    if(!st) return;
+    worst='err';
+    notes.push(metricStops(m)+' '+shortDay(st.last)+' — '+st.days+
+      ' days ago. Every '+metricUnit(m)+' number on this page, including the '+
+      'totals above, stops there.'+(bothStale ? '' : ' '+metricCurrent(m)));
+  });
+  if(skipped.length) notes.push(skipped.join(' ')+' Those rows are not counted in any total on this page.');
+  if(staleDistrict) notes.push('District '+staleDistrict.d+"'s sheet was last updated "+shortDay(staleDistrict.asOf)+', so Combined numbers mix two different dates. Use the D32 and D49 buttons for a like-for-like comparison.');
+  if(notes.length){
+    warn.className='boardnote '+worst; warn.style.display='block';
+    warn.textContent = notes.join(' ');
   }else{ warn.style.display='none'; }
 
   const agencies = PEOPLE.filter(p=> !isProducer(p.role));
@@ -1978,6 +2059,15 @@ function renderBoard(){
   const figUnit = noData
     ? (liveLoading ? 'Waiting on the district sheets\u2026' : 'Not loaded \u2014 press \u21bb Refresh')
     : scopeLbl+' \u00b7 every agency';
+
+  /* A tile whose feed has stopped says so where the caption would be —
+     the caption is the only thing standing between "566" and the reader
+     assuming it covers the month. */
+  function staleNote(m){
+    const st = metricStale(m);
+    if(!st) return '';
+    return `<div class="fignote stale">&#9888; Stops at ${esc(shortDay(st.last))} &mdash; not the full ${esc(perLbl)}</div>`;
+  }
 
   /* The split is only honest when both districts are in and in scope. */
   const showSplit = !noData && LB.dist==='all' && !missingDistrict;
@@ -1998,14 +2088,14 @@ function renderBoard(){
       <div class="figlab">Total quotes &middot; ${esc(perLbl)}</div>
       <div class="fignum">${noData?'&mdash;':tq.toLocaleString()}</div>
       <div class="figunit">${esc(figUnit)}</div>
-      ${noData?'':'<div class="fignote">Owners and staff producers combined.</div>'+split('q')}
+      ${noData?'':(staleNote('q')||'<div class="fignote">Owners and staff producers combined.</div>')+split('q')}
     </div>
     <div class="fig red${noData?' nodata':''}">
       <div class="figrule"></div>
       <div class="figlab">Total new business &middot; ${esc(perLbl)}</div>
       <div class="fignum">${noData?'&mdash;':tn.toLocaleString()}</div>
       <div class="figunit">${esc(figUnit)}</div>
-      ${noData?'':'<div class="fignote">Items written, not premium.</div>'+split('n')}
+      ${noData?'':(staleNote('n')||'<div class="fignote">Items written, not premium.</div>')+split('n')}
     </div>`;
 
   renderMovers();
@@ -2038,6 +2128,10 @@ function renderBoard(){
 
   /* say plainly what the list is showing and what it is leaving out */
   const bits=[];
+  ['q','n'].forEach(m=>{
+    const st=metricStale(m);
+    if(st) bits.push('<b>'+metricStops(m)+' '+shortDay(st.last)+'</b> — that column is '+st.days+' days behind the one beside it.');
+  });
   if(dailyAsOf) bits.push('“Daily” is the last complete business day ('+dailyAsOf.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+').');
   if(LB.view==='producer' && LB.staffOnly){
     const hidden = PEOPLE.filter(p=>isProducer(p.role)&&p.owner&&(LB.dist==='all'||normDistrict(p.district)===LB.dist)).length;
