@@ -1,0 +1,32 @@
+{
+  "name": "District Hub \u2014 Farmers Districts 32 & 49",
+  "short_name": "District Hub",
+  "description": "Quotes, new business, reports and competitions for Farmers Insurance Districts 32 and 49.",
+  "start_url": "/district-hub/",
+  "scope": "/district-hub/",
+  "id": "/district-hub/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#12306a",
+  "theme_color": "#12306a",
+  "icons": [
+    {
+      "src": "hub-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "hub-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "hub-icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
