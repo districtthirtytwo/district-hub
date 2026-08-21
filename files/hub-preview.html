@@ -1915,8 +1915,22 @@ function metricStale(m){
 }
 /* "New business" is singular and "quotes" is plural, so the verb has to
    come along with the noun or half these sentences read as broken. */
+/* Non-null when the districts in scope disagree about where this metric
+   ends. Gated on metricStale so an ordinary one-day posting lag between
+   two sheets never suppresses the split. */
+function metricSplitStale(m){
+  if(LB.dist!=='all') return null;
+  if(!metricStale(m)) return null;
+  const ds = Object.keys(metricLastByDist)
+    .filter(d => metricLastByDist[d] && metricLastByDist[d][m] != null);
+  if(ds.length < 2) return null;
+  const vals = ds.map(d => metricLastByDist[d][m]);
+  if(Math.max.apply(null, vals) === Math.min.apply(null, vals)) return null;
+  return ds.sort().map(d => ({d, last:new Date(metricLastByDist[d][m])}));
+}
 const metricNoun    = m => m==='q' ? 'Quotes' : 'New business';
 const metricUnit    = m => m==='q' ? 'quote' : 'new business';
+const metricPlain   = m => m==='q' ? 'quotes' : 'new business';
 const metricStops   = m => m==='q' ? 'Quotes stop at' : 'New business stops at';
 const metricNoUpd   = m => m==='q' ? 'Quotes have not updated since'
                                    : 'New business has not updated since';
@@ -2038,6 +2052,14 @@ function renderBoard(){
       ' days ago. Every '+metricUnit(m)+' number on this page, including the '+
       'totals above, stops there.'+(bothStale ? '' : ' '+metricCurrent(m)));
   });
+  ['q','n'].forEach(m=>{
+    const sp = metricSplitStale(m);
+    if(!sp) return;
+    notes.push('The two districts stopped on different days ('+
+      sp.map(x=>'D'+x.d+' '+shortDay(x.last)).join(', ')+'), so the Combined '+
+      metricUnit(m)+' total mixes two different windows and the D32/D49 split is '+
+      'switched off. Use the D32 and D49 buttons to compare like for like.');
+  });
   if(skipped.length) notes.push(skipped.join(' ')+' Those rows are not counted in any total on this page.');
   if(staleDistrict) notes.push('District '+staleDistrict.d+"'s sheet was last updated "+shortDay(staleDistrict.asOf)+', so Combined numbers mix two different dates. Use the D32 and D49 buttons for a like-for-like comparison.');
   if(notes.length){
@@ -2063,16 +2085,27 @@ function renderBoard(){
   /* A tile whose feed has stopped says so where the caption would be —
      the caption is the only thing standing between "566" and the reader
      assuming it covers the month. */
+  /* Stale feed AND nothing in the period means the period has no data,
+     not that the districts wrote nothing. Show the same em dash the
+     load-failure state uses rather than a 50px zero. */
+  const dash = m => !noData && !(m==='q'?tq:tn) && !!metricStale(m);
+
   function staleNote(m){
     const st = metricStale(m);
     if(!st) return '';
-    return `<div class="fignote stale">&#9888; Stops at ${esc(shortDay(st.last))} &mdash; not the full ${esc(perLbl)}</div>`;
+    if(dash(m)) return `<div class="fignote stale">&#9888; No ${esc(metricPlain(m))} reported since ${esc(shortDay(st.last))}</div>`;
+    const sp = metricSplitStale(m);
+    const where = sp
+      ? sp.map(x => shortDay(x.last)+' (D'+x.d+')').join(' \u00b7 ')
+      : shortDay(st.last);
+    return `<div class="fignote stale">&#9888; ${sp?'Through':'Stops at'} ${esc(where)} &mdash; not the full ${esc(perLbl)}</div>`;
   }
 
   /* The split is only honest when both districts are in and in scope. */
   const showSplit = !noData && LB.dist==='all' && !missingDistrict;
   function split(k){
     if(!showSplit) return '';
+    if(metricSplitStale(k)) return '';
     const a=tot(agencies.filter(p=>normDistrict(p.district)==='32'),k);
     const b=tot(agencies.filter(p=>normDistrict(p.district)==='49'),k);
     if(a<0 || b<0 || !(a+b)) return '';
@@ -2083,17 +2116,17 @@ function renderBoard(){
     </div>`;
   }
   $('lbTotals').innerHTML = `
-    <div class="fig${noData?' nodata':''}">
+    <div class="fig${noData||dash('q')?' nodata':''}">
       <div class="figrule"></div>
       <div class="figlab">Total quotes &middot; ${esc(perLbl)}</div>
-      <div class="fignum">${noData?'&mdash;':tq.toLocaleString()}</div>
+      <div class="fignum">${noData||dash('q')?'&mdash;':tq.toLocaleString()}</div>
       <div class="figunit">${esc(figUnit)}</div>
       ${noData?'':(staleNote('q')||'<div class="fignote">Owners and staff producers combined.</div>')+split('q')}
     </div>
-    <div class="fig red${noData?' nodata':''}">
+    <div class="fig red${noData||dash('n')?' nodata':''}">
       <div class="figrule"></div>
       <div class="figlab">Total new business &middot; ${esc(perLbl)}</div>
-      <div class="fignum">${noData?'&mdash;':tn.toLocaleString()}</div>
+      <div class="fignum">${noData||dash('n')?'&mdash;':tn.toLocaleString()}</div>
       <div class="figunit">${esc(figUnit)}</div>
       ${noData?'':(staleNote('n')||'<div class="fignote">Items written, not premium.</div>')+split('n')}
     </div>`;
