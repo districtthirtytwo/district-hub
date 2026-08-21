@@ -276,14 +276,22 @@
   /* the district split — same totals, decomposed, so the widest card on
      the landing view carries information instead of empty navy */
   .figsplit{margin-top:15px;max-width:400px;}
-  .figbar{height:6px;border-radius:3px;background:rgba(255,255,255,.22);overflow:hidden;}
-  .figbar i{display:block;height:100%;background:var(--on-navy-blue);}
-  .fig.red .figbar i{background:var(--on-navy-red);}
-  .figleg{display:flex;gap:18px;margin-top:8px;font-size:11.5px;color:var(--on-navy-soft);font-weight:600;font-variant-numeric:tabular-nums;}
-  .figleg em{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;font-style:normal;}
-  .figleg .k1{background:var(--on-navy-blue);}
-  .fig.red .figleg .k1{background:var(--on-navy-red);}
-  .figleg .k2{background:rgba(255,255,255,.30);}
+  /* Two districts, two solid colours, the SAME two on both figures: this
+     bar encodes which district, not which metric. D32 blue and D49 red
+     match the district chips on the leaderboard, so the colour is already
+     learned by the time an agent scrolls down. The first version left D49
+     as a translucent track, which read as the empty half of a progress
+     bar rather than as a district. */
+  .figbar{height:8px;border-radius:4px;overflow:hidden;display:flex;background:rgba(255,255,255,.12);}
+  .figbar i{display:block;height:100%;}
+  .figbar .s32{background:var(--on-navy-blue);}
+  /* a 2px navy divider so the boundary survives when the two hues do not
+     separate — colour-blind viewers, cheap projectors, printed screenshots */
+  .figbar .s49{background:var(--on-navy-red);border-left:2px solid var(--navy);}
+  .figleg{display:flex;gap:18px;margin-top:9px;font-size:11.5px;color:var(--on-navy-soft);font-weight:600;font-variant-numeric:tabular-nums;}
+  .figleg em{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;font-style:normal;vertical-align:-1px;}
+  .figleg .k32{background:var(--on-navy-blue);}
+  .figleg .k49{background:var(--on-navy-red);}
 
   /* ===================================================================
      SCOREBOARD
@@ -359,7 +367,15 @@
   .pname .nm b{display:block;font-size:14px;font-weight:620;}
   .pname .nm span{font-size:11.5px;color:var(--muted);}
   .pname .nm .sub2{display:flex;align-items:center;gap:7px;min-width:0;}
+  /* `.pname .nm span` (0,2,1) outranks `.dchip.d32` (0,2,0), so moving the
+     chip inside the name cell silently greyed its text — the districts
+     were left telling themselves apart by background alone. Restate the
+     colours at a specificity that wins. */
   .pname .nm .sub2 .dchip{flex:none;}
+  .pname .nm .sub2 .dchip.d32{color:var(--ord-3);}
+  .pname .nm .sub2 .dchip.d49{color:var(--str-2);}
+  :root[data-theme="dark"] .pname .nm .sub2 .dchip.d32{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pname .nm .sub2 .dchip.d32{color:var(--ord-1);}}
   .dchip{font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:5px;letter-spacing:.02em;}
   .dchip.d32{background:var(--wash);color:var(--ord-3);}
   .dchip.d49{background:var(--wash2);color:var(--str-2);}
@@ -1697,9 +1713,10 @@ function renderBoard(){
     const a=tot(agencies.filter(p=>normDistrict(p.district)==='32'),k);
     const b=tot(agencies.filter(p=>normDistrict(p.district)==='49'),k);
     if(!(a+b)) return '';
+    const p32=(a/(a+b)*100).toFixed(1), p49=(b/(a+b)*100).toFixed(1);
     return `<div class="figsplit">
-      <div class="figbar"><i style="width:${(a/(a+b)*100).toFixed(1)}%"></i></div>
-      <div class="figleg"><span><em class="k1"></em>D32 ${a.toLocaleString()}</span><span><em class="k2"></em>D49 ${b.toLocaleString()}</span></div>
+      <div class="figbar"><i class="s32" style="width:${p32}%"></i><i class="s49" style="width:${p49}%"></i></div>
+      <div class="figleg"><span><em class="k32"></em>D32 ${a.toLocaleString()}</span><span><em class="k49"></em>D49 ${b.toLocaleString()}</span></div>
     </div>`;
   }
   $('lbTotals').innerHTML = `
