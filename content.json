@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20",
+  "updated": "2026-08-21",
   "banner": {
     "active": true,
     "text": "Jamaica standings are posted \u2014 $45,000 life premium and 20 I&P, qualifying through December 31.",
@@ -280,5 +280,8 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rf3e8237f432599aaf086hub"
+  "rev": "rb7211d5c7813a24975b1hub",
+  "analytics": {
+    "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
+  }
 }
