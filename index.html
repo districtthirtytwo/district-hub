@@ -11,6 +11,11 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="District Hub — Farmers Districts 32 &amp; 49">
 <meta property="og:description" content="News, events, competitions, newsletters, reports and the production scoreboard.">
+<link rel="manifest" href="files/hub.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="District Hub">
+<link rel="apple-touch-icon" href="files/hub-icon-180.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312306a'/%3E%3Crect x='14' y='32' width='8' height='18' rx='2' fill='%23ffffff'/%3E%3Crect x='28' y='22' width='8' height='28' rx='2' fill='%23ffffff'/%3E%3Crect x='42' y='14' width='8' height='36' rx='2' fill='%23d92231'/%3E%3C/svg%3E">
 <script>
 (function(){
@@ -317,6 +322,24 @@
   .searchbox:focus{border-color:var(--s1);box-shadow:0 0 0 3px var(--wash);}
   .searchbox.sm{width:150px;}
 
+  /* one quiet row; no colour of its own — the gains are all positive so
+     colouring them would encode nothing */
+  .movers{margin:0 0 18px;}
+  .movers .mv-hd{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 10px;}
+  .movers .mv-hd b{font-size:13px;font-weight:700;color:var(--text-primary);}
+  .movers .mv-hd span{font-size:11.5px;color:var(--muted);}
+  .mvrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;
+         background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .mv{background:var(--surface-1);padding:11px 14px;display:flex;align-items:baseline;gap:10px;min-width:0;
+      border:0;font:inherit;text-align:left;width:100%;cursor:pointer;}
+  .mv:hover{background:var(--hover);}
+  .mv .who{min-width:0;flex:1;}
+  .mv .who b{display:block;font-size:13.5px;font-weight:640;color:var(--text-primary);
+             overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .mv .who span{display:block;font-size:11px;color:var(--muted);
+                overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .mv .up{font-size:15px;font-weight:700;color:var(--text-primary);font-variant-numeric:tabular-nums;
+          white-space:nowrap;flex:none;}
   .boardnote{margin:14px 22px 0;padding:10px 14px;border-radius:10px;font-size:12.5px;font-weight:500;line-height:1.5;}
   .boardnote.warn{background:var(--wash3);color:var(--text-primary);border:1px solid var(--gold);}
   .boardnote.err{background:var(--wash2);color:var(--text-primary);border:1px solid var(--str-2);}
@@ -654,6 +677,39 @@
   .appbar :focus-visible,.card.navy :focus-visible{outline-color:#fff;}
   /* the search boxes killed the ring outright; keep it for keyboard use */
   .searchbox:focus:not(:focus-visible){outline:none;}
+  .a2hs{
+    display:none;align-items:center;gap:13px;margin:0 0 18px;padding:12px 15px;
+    background:var(--surface-1);border:1px solid var(--border);border-radius:12px;
+  }
+  .a2hs.on{display:flex;}
+  .a2hs .ic{
+    width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;flex:none;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .a2hs .tx{min-width:0;flex:1;}
+  .a2hs .tx b{display:block;font-size:13.5px;font-weight:640;color:var(--text-primary);}
+  .a2hs .tx span{font-size:12.5px;color:var(--text-secondary);line-height:1.45;}
+  .a2hs .tx kbd{
+    font:inherit;font-size:12.5px;font-weight:700;background:var(--wash);
+    color:var(--ord-3);border-radius:5px;padding:1px 6px;
+  }
+  :root[data-theme="dark"] .a2hs .tx kbd{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .a2hs .tx kbd{color:var(--ord-1);}}
+  .a2hs .x{
+    flex:none;background:transparent;border:0;color:var(--muted);font:inherit;font-size:17px;
+    line-height:1;cursor:pointer;padding:6px 4px;border-radius:6px;
+  }
+  .a2hs .x:hover{color:var(--text-primary);background:var(--hover);}
+  @media(max-width:520px){
+    .a2hs{align-items:flex-start;}
+    .a2hs .ic{display:none;}
+  }
+  .previewbar{
+    display:none;background:#3b2a02;color:#ffd479;border-bottom:1px solid #6b4d05;
+    font-size:12.5px;font-weight:650;padding:7px 22px;text-align:center;letter-spacing:.01em;
+  }
+  .previewbar.on{display:block;}
+  .previewbar b{color:#fff;letter-spacing:.06em;text-transform:uppercase;font-size:11px;margin-right:8px;}
   .skip{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;padding:10px 16px;border-radius:0 0 10px 0;z-index:200;font-weight:700;font-size:13px;text-decoration:none;}
   .skip:focus{left:0;}
   .sronly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
@@ -799,6 +855,9 @@
 </style>
 
 <body>
+<div class="previewbar" id="previewBar" role="status">
+  <b>Preview</b>Test copy of the District Hub — not the version agents see. Changes made here are not published.
+</div>
 <a class="skip" href="#view-board">Skip to the scoreboard</a>
 
 <!-- ===================================================================
@@ -835,7 +894,7 @@
       <a class="tab" id="tab-reports" href="#reports">Reports &amp; Files<span class="n" id="nReports"></span></a>
       <a class="tab" id="tab-comps"   href="#competitions">Competitions<span class="n" id="nComps"></span></a>
       <a class="tab" id="tab-news"    href="#news">News &amp; Events<span class="n" id="nNews"></span></a>
-      <a class="toolchip" href="files/nb-accelerator-quote-plan.html" target="_blank" rel="noopener">Quote Plan <span class="g" aria-hidden="true">&#8599;</span></a>
+      <a class="toolchip" id="toolQuotePlan" href="files/nb-accelerator-quote-plan.html" target="_blank" rel="noopener">Quote Plan <span class="g" aria-hidden="true">&#8599;</span></a>
     </nav>
   </div>
 </header>
@@ -880,6 +939,23 @@
       <div class="card-bd">
         <div class="hero2" id="lbTotals"></div>
       </div>
+    </div>
+
+    <div class="a2hs" id="a2hs">
+      <span class="ic" aria-hidden="true">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v11"/><path d="M7.5 9.5 12 5l4.5 4.5"/><path d="M5 19h14"/></svg>
+      </span>
+      <span class="tx">
+        <b>Keep the hub one tap away</b>
+        <span id="a2hsHow"></span>
+      </span>
+      <button class="btn sm primary" type="button" id="a2hsGo" style="display:none">Add</button>
+      <button class="x" type="button" id="a2hsNo" aria-label="Dismiss">&#10005;</button>
+    </div>
+
+    <div class="movers" id="moversWrap" hidden>
+      <div class="mv-hd"><b>Biggest gains</b><span id="moversSub"></span></div>
+      <div class="mvrow" id="moversRow"></div>
     </div>
 
     <div class="card flush" id="scoreboard">
@@ -1121,6 +1197,10 @@ let BASE_REV = null;    // which revision of content.json this session started f
 let adminMode = false;
 let dirty = false;
 
+/* '' in production; '../' when this same file is served as the staging
+   copy at files/hub-preview.html, so content.json and files/* resolve. */
+const ROOT = /\/files\/[^/]*$/.test(location.pathname) ? '../' : '';
+const IS_PREVIEW = ROOT !== '';
 const $ = id => document.getElementById(id);
 const esc = s => String(s??"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clone = o => JSON.parse(JSON.stringify(o));
@@ -1145,12 +1225,23 @@ function safeUrl(u){
   return s;                                              // bare path like files/x.pdf
 }
 
+if(IS_PREVIEW){
+  $('previewBar').classList.add('on');
+  const m=document.createElement('meta'); m.name='robots'; m.content='noindex,nofollow';
+  document.head.appendChild(m);
+  /* three hrefs are hardcoded in the markup as repo-relative, which
+     resolves to files/files/… from the staging copy */
+  document.querySelectorAll('link[rel=manifest],link[rel=apple-touch-icon]')
+    .forEach(l=>l.setAttribute('href', ROOT+l.getAttribute('href')));
+  const qp=$('toolQuotePlan'); if(qp) qp.setAttribute('href', ROOT+qp.getAttribute('href'));
+}
+
 /* ---------- boot ---------- */
 async function boot(){
   $('todaybox').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
   let failure = '';
   try{
-    const res = await fetch('content.json?v='+Date.now(), {cache:'no-store'});
+    const res = await fetch(ROOT+'content.json?v='+Date.now(), {cache:'no-store'});
     if(!res.ok) failure = 'The content file returned an error (HTTP '+res.status+').';
     else{
       try{
@@ -1226,7 +1317,7 @@ function renderAll(){
   let failed=[];
   [['banner',renderBanner],['scoreboard',renderBoard],['news',renderNews],['events',renderEvents],
    ['competitions',renderComps],['newsletter',renderNewsletter],['reports',renderReports],
-   ['resources',renderResources],['folio',renderFolio]].forEach(([name,fn])=>{
+   ['resources',renderResources],['folio',renderFolio],['analytics',initAnalytics]].forEach(([name,fn])=>{
     try{ fn(); }catch(e){ failed.push(name); console.error('District Hub: '+name+' failed to render', e); }
   });
   if(failed.length){
@@ -1288,6 +1379,75 @@ function renderFolio(today){
 setInterval(()=>renderFolio(), 10*60*1000);
 document.addEventListener('visibilitychange',()=>{ if(!document.hidden) renderFolio(); });
 
+/* ---------- add to home screen ----------
+   Chrome fires beforeinstallprompt and lets us call it. iOS Safari has
+   no equivalent — the only route is the Share sheet — so iOS is told
+   what to tap rather than given a button that cannot work. */
+const A2HS_KEY='d32hub_a2hs_dismissed';
+let deferredInstall=null;
+function isStandalone(){
+  return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone===true;
+}
+function showA2HS(mode){
+  if(isStandalone()) return;
+  if(safeLocal(()=>localStorage.getItem(A2HS_KEY),null)) return;
+  const how=$('a2hsHow'), go=$('a2hsGo');
+  if(mode==='prompt'){
+    how.textContent='Add it to your home screen and your numbers are one tap away.';
+    go.style.display='';
+  }else if(mode==='android'){
+    how.innerHTML='In Chrome: tap <kbd>⋮</kbd> at the top right, then <kbd>Add to Home screen</kbd>.';
+    go.style.display='none';
+  }else{
+    how.innerHTML='On your iPhone: tap <kbd>Share</kbd> at the bottom of Safari, then <kbd>Add to Home Screen</kbd>.';
+    go.style.display='none';
+  }
+  $('a2hs').classList.add('on');
+}
+function hideA2HS(remember){
+  $('a2hs').classList.remove('on');
+  if(remember) safeLocal(()=>localStorage.setItem(A2HS_KEY,'1'));
+}
+window.addEventListener('beforeinstallprompt', e=>{
+  e.preventDefault(); deferredInstall=e; showA2HS('prompt');
+});
+window.addEventListener('appinstalled', ()=>hideA2HS(true));
+$('a2hsNo').addEventListener('click',()=>hideA2HS(true));
+$('a2hsGo').addEventListener('click',async()=>{
+  if(!deferredInstall) return;
+  deferredInstall.prompt();
+  try{ await deferredInstall.userChoice; }catch(e){}
+  deferredInstall=null; hideA2HS(true);
+});
+/* iOS never fires the event, and Chrome's install criteria are not
+   guaranteed from a project subdirectory, so both platforms get real
+   instructions if no prompt has arrived. A button that does nothing is
+   worse than a sentence that works. */
+(function(){
+  const ua=navigator.userAgent||'';
+  const iOS=/iPad|iPhone|iPod/.test(ua) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  const safari=/Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
+  const android=/Android/.test(ua);
+  if(iOS && safari) setTimeout(()=>showA2HS('ios'), 1500);
+  else if(android) setTimeout(()=>{ if(!deferredInstall) showA2HS('android'); }, 2500);
+})();
+
+/* ---------- visitor counts, for the district office ----------
+   Cloudflare Web Analytics: no cookies, no personal data, and nothing
+   loads at all until a beacon token is set in the editor. The token is
+   a public identifier by design — it ships in the script tag on every
+   page that uses it — so keeping it in content.json is fine. */
+function initAnalytics(){
+  const t=(data().analytics||{}).cfBeacon;
+  if(!t || !/^[a-f0-9]{16,64}$/i.test(String(t))) return;
+  if(document.getElementById('cfBeacon')) return;
+  const sc=document.createElement('script');
+  sc.id='cfBeacon'; sc.defer=true;
+  sc.src='https://static.cloudflareinsights.com/beacon.min.js';
+  sc.setAttribute('data-cf-beacon', JSON.stringify({token:String(t)}));
+  document.head.appendChild(sc);
+}
+
 /* ---------- banner ---------- */
 function renderBanner(){
   const b = data().banner || {};
@@ -1306,7 +1466,7 @@ function renderBanner(){
    ===================================================================== */
 const SHEET_CSV_URL_32 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_FOf8EcLIkjobzgh26E0Dcg7CSa2MsETwKvCzQF5oKiRvVUm-zpeExB8w1nipKZjnQjCIZpQMf1QP/pub?gid=0&single=true&output=csv";
 const SHEET_CSV_URL_49 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_FOf8EcLIkjobzgh26E0Dcg7CSa2MsETwKvCzQF5oKiRvVUm-zpeExB8w1nipKZjnQjCIZpQMf1QP/pub?gid=1994705473&single=true&output=csv";
-const LIVE_CACHE_KEY = 'd32hub_live_v1';
+const LIVE_CACHE_KEY = 'd32hub_live_v1' + (IS_PREVIEW ? '_preview' : '');
 const LIVE_MAX_AGE_MS = 30*60*1000;   // serve cache instantly, refresh in the background past this
 
 const PERIODS = ['daily','weekly','monthly','ytd'];
@@ -1722,6 +1882,59 @@ function boardRows(){
     q:+p.q[LB.period].actual||0, n:+p.n[LB.period].actual||0
   })).filter(r=> !q || (r.name+' '+r.sub).toLowerCase().includes(q));
 }
+/* Sums a person's day history between two day keys, inclusive. */
+function histBetween(p, metric, fromKey, toKey){
+  let t=0; const h=p.hist||{};
+  for(const k in h){ if(k>=fromKey && k<=toKey) t += +h[k][metric]||0; }
+  return t;
+}
+function renderMovers(){
+  const wrap=$('moversWrap'), row=$('moversRow');
+  const hide=()=>{ wrap.hidden=true; row.innerHTML=''; };
+  if(!PEOPLE.length || !dataAsOf) return hide();
+
+  const end=midnight(dataAsOf);
+  const startThis=new Date(end); startThis.setDate(startThis.getDate()-6);
+  const endPrev=new Date(startThis); endPrev.setDate(endPrev.getDate()-1);
+  const startPrev=new Date(end); startPrev.setDate(startPrev.getDate()-13);
+
+  /* Without two complete weeks behind the cutoff the comparison is
+     against a window that only partly exists, which would read as a
+     surge for everyone. Show nothing rather than something flattering. */
+  const minK=earliestHistKey();
+  if(!minK || minK > dayKeyOf(startPrev)) return hide();
+
+  const kThisA=dayKeyOf(startThis), kThisB=dayKeyOf(end);
+  const kPrevA=dayKeyOf(startPrev), kPrevB=dayKeyOf(endPrev);
+  const m=LB.metric;
+
+  const rows=[];
+  PEOPLE.forEach((p,i)=>{
+    if(!inScope(p)) return;
+    const now=histBetween(p,m,kThisA,kThisB);
+    const before=histBetween(p,m,kPrevA,kPrevB);
+    if(now-before > 0) rows.push({idx:i, name:p.name,
+      sub: isProducer(p.role) ? (p.agency||'') : '',
+      now, up:now-before});
+  });
+  if(!rows.length) return hide();
+
+  rows.sort((a,b)=> b.up-a.up || b.now-a.now);
+  const mLbl = m==='q' ? 'quotes' : 'new business';
+  $('moversSub').textContent = 'Last 7 days vs the 7 before \u2014 '+mLbl+', '
+    + startThis.toLocaleDateString('en-US',{month:'short',day:'numeric'}) + '\u2013'
+    + end.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  row.innerHTML = rows.slice(0,5).map(r=>
+    `<button type="button" class="mv" data-idx="${r.idx}" aria-label="${esc(r.name)} \u2014 up ${r.up} ${esc(mLbl)} on the previous week. Open trend history.">
+       <span class="who"><b>${esc(r.name)}</b><span>${esc(r.sub)}</span></span>
+       <span class="up">+${r.up.toLocaleString()}</span>
+     </button>`).join('');
+  wrap.hidden=false;
+}
+$('moversRow').addEventListener('click',e=>{
+  const b=e.target.closest('.mv[data-idx]'); if(b) openDrill(+b.dataset.idx);
+});
+
 function boardState(){
   /* One place decides what the board says when it has nothing to show,
      so a failed load never reads as "nobody produced anything". */
@@ -1794,6 +2007,8 @@ function renderBoard(){
       <div class="figunit">${esc(figUnit)}</div>
       ${noData?'':'<div class="fignote">Items written, not premium.</div>'+split('n')}
     </div>`;
+
+  renderMovers();
 
   const rows = boardRows().sort((a,b)=> b[LB.metric]-a[LB.metric] || b[LB.metric==='q'?'n':'q']-a[LB.metric==='q'?'n':'q']);
   const mLbl = LB.metric==='q' ? 'Quotes' : 'New Biz';
@@ -2120,7 +2335,9 @@ function renderComps(){
 /* ---------- newsletter ---------- */
 function fileHref(f){
   const st = STAGED.find(s=>s.path===f);
-  return st ? st.blobUrl : f;
+  if(st) return st.blobUrl;
+  /* content.json stores repo-relative paths like files/x.pdf */
+  return (f && !/^(https?:|blob:|data:|mailto:|tel:|#|\/)/i.test(f)) ? ROOT+f : f;
 }
 let nlFilter = '';
 function nlRow(n){
@@ -2810,6 +3027,14 @@ function renderPublishTab(){
         <p class="hint" style="margin:0">${dirty?'Content changes':'No content changes yet'}${STAGED.length?` + ${STAGED.length} new file(s): ${STAGED.map(s=>'<code>'+esc(s.name)+'</code>').join(', ')}`:''}.</p>
         ${PENDING_DELETE.length?`<p class="hint" style="color:var(--red);font-weight:700">${PENDING_DELETE.length} file(s) will be taken off the site: ${PENDING_DELETE.map(p=>'<code>'+esc(p.replace('files/',''))+'</code>').join(', ')}</p>`:''}
       </fieldset>
+      <fieldset class="box"><legend>Visitor counts</legend>
+        <p class="hint" style="margin:0 0 10px">Nothing is measured and no outside script loads until you put a token here. Cloudflare Web Analytics is free, sets no cookies, and records page views rather than people \u2014 it cannot tell you <i>who</i> visited.</p>
+        <p class="hint" style="margin:0 0 10px"><b>To get one:</b> Cloudflare dashboard \u2192 Analytics &amp; Logs \u2192 Web Analytics \u2192 <b>Add a site</b> \u2192 hostname <code>districtthirtytwo.github.io</code>. It shows you a snippet; the token is the long hex string inside it. Paste just that string below and publish.</p>
+        <div class="frm"><div><label for="cfTok">Cloudflare Web Analytics token</label>
+          <input type="text" id="cfTok" value="${esc((EDIT.analytics||{}).cfBeacon||'')}" placeholder="blank = no tracking at all"></div></div>
+        <p style="margin:11px 0 0"><button class="btn sm primary" onclick="saveAnalytics()">Save token</button></p>
+        <div class="msg" id="cfMsg"></div>
+      </fieldset>
       <fieldset class="box"><legend>Good to know</legend>
         <p class="hint" style="margin:0">Changes stage in <b>this browser</b> until you publish — if two admins edit at the same time, the last publish wins, so don't update simultaneously. If the password ever changes (done in Cloudflare by the hub owner), everyone just signs in again with the new one.</p>
       </fieldset>`;
@@ -2834,6 +3059,19 @@ function renderPublishTab(){
     <fieldset class="box"><legend>No-GitHub fallback</legend>
       <p class="hint" style="margin:0">If you ever need to update the site by hand: click <b>Export content.json</b> (bottom bar), then upload that file — plus anything you dropped in — to the repo on github.com (Add file → Upload files). Same result, just manual.</p>
     </fieldset>`;
+}
+function saveAnalytics(){
+  const v=$('cfTok').value.trim(), m=$('cfMsg');
+  if(v && !/^[a-f0-9]{16,64}$/i.test(v)){
+    m.className='msg err';
+    m.textContent='That is not a beacon token. Copy only the long hex string from inside the Cloudflare snippet \u2014 not the whole <script> tag.';
+    return;
+  }
+  EDIT.analytics = EDIT.analytics || {};
+  EDIT.analytics.cfBeacon = v;
+  markDirty();
+  m.className='msg ok';
+  m.textContent = v ? 'Saved. Hit Publish to switch it on.' : 'Cleared. Hit Publish to switch it off.';
 }
 function saveGh(){
   localStorage.setItem(GH_KEY, JSON.stringify({owner:$('ghOwner').value.trim(), repo:$('ghRepo').value.trim(), branch:$('ghBranch').value.trim()||'main', token:$('ghToken').value.trim()}));
@@ -2971,6 +3209,7 @@ function showView(v, opts){
   });
   document.title = (v==='board' ? 'District Hub' : ({reports:'Reports & Files',comps:'Competitions',news:'News & Events'}[v]+' — District Hub'))
                  + (v==='board' ? ' — Farmers Districts 32 & 49' : '');
+  if(IS_PREVIEW) document.title = '[Preview] '+document.title;
   if(!(opts&&opts.keepScroll)) window.scrollTo(0,0);
   /* on a phone the tab row is a scroller — keep the active tab in view */
   const t=$('tab-'+v);
