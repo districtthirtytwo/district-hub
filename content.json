@@ -1,284 +1,284 @@
 {
- "updated": "2026-08-18",
- "banner": {
-  "active": true,
-  "text": "Jamaica standings are posted — $45,000 life premium and 20 I&P, qualifying through December 31.",
-  "link": "#competitions"
- },
- "news": [
-  {
-   "id": "n8",
-   "date": "2026-08-13",
-   "tag": "news",
-   "title": "August Newsletter is out — July commission inside",
-   "body": "The August district newsletter is posted, with July commission and every leaderboard: Life, Auto, Fire, Specialty, Folio, Business and New Business Commission. Steven Tindell leads July new business commission at $10,683 and Caleb Milne leads July folio premium at $83,740.",
-   "pinned": true,
-   "link": "#newsletter"
+  "updated": "2026-08-20",
+  "banner": {
+    "active": true,
+    "text": "Jamaica standings are posted \u2014 $45,000 life premium and 20 I&P, qualifying through December 31.",
+    "link": "#competitions"
   },
-  {
-   "id": "n9",
-   "date": "2026-08-13",
-   "tag": "recognition",
-   "title": "Welcome Aaron Vicknair, Krystal Hawk and Travis Veselka",
-   "body": "Three new agents join Team ThirtyTwo. Aaron Vicknair is already on the board with 28 auto units and $34,986 in folio premium for July.",
-   "pinned": false,
-   "link": "#newsletter"
-  },
-  {
-   "id": "n7",
-   "date": "2026-08-11",
-   "tag": "update",
-   "title": "August Producer Report and YTD Life results are posted",
-   "body": "Producer Report as of 8/7 and Life results as of 8/9 are both in Reports. Walt Beayrd leads POY year-to-date, Breanna Ashley leads the current quarter. On life, the district is at 210 I&P and $247,011 against the Jamaica bar of 20 I&P and $45,000.",
-   "pinned": false,
-   "link": "#reports"
-  },
-  {
-   "id": "n5",
-   "date": "2026-08-06",
-   "tag": "update",
-   "title": "July District Matrix is posted",
-   "body": "The District Performance Matrix through August folio is up in Reports, now as a sortable table you can search by name. Ranked on Personal Lines, Life, Business and Prime Score. June's edition stays available underneath it.",
-   "pinned": true,
-   "link": "#reports"
-  },
-  {
-   "id": "n1",
-   "date": "2026-07-31",
-   "tag": "news",
-   "title": "July Newsletter is out — June commission inside",
-   "body": "The July district newsletter is posted below, with June commission and every leaderboard: Life, Auto, Fire, Specialty, Folio, Business and New Business Commission.",
-   "pinned": false,
-   "link": "#newsletter"
-  },
-  {
-   "id": "n2",
-   "date": "2026-07-31",
-   "tag": "recognition",
-   "title": "Q2 Producer Cup winners announced",
-   "body": "McKenzie Scruggs takes first for Q2. Full top five is in the Competitions section and in the July newsletter.",
-   "pinned": false,
-   "link": "#competitions"
-  },
-  {
-   "id": "n3",
-   "date": "2026-07-24",
-   "tag": "update",
-   "title": "Scoreboard is now live from the district sheets",
-   "body": "Quotes and new business update straight from the D32 and D49 tracking sheets — no more waiting on a posted snapshot. Click any producer or agency for their day-by-day and week-by-week trend.",
-   "pinned": false,
-   "link": "#scoreboard"
-  },
-  {
-   "id": "n4",
-   "date": "2026-07-06",
-   "tag": "update",
-   "title": "New Retail Program effective July 2026",
-   "body": "The updated Retail Program is live: 36-month bonus structure with monthly bonuses up to 340%. Talk to the district office if you have Protégé or new-agent candidates.",
-   "pinned": false
-  }
- ],
- "events": [
-  {
-   "id": "e1",
-   "date": "2026-09-30",
-   "time": "",
-   "title": "Q3 ends — quarter close",
-   "location": "",
-   "link": "",
-   "description": "Last day of the quarter. Q3 Producer Cup standings final and Topper Club pace check."
-  },
-  {
-   "id": "e2",
-   "date": "2026-12-31",
-   "time": "",
-   "title": "Jamaica qualifying period closes",
-   "location": "",
-   "link": "",
-   "description": "Final day to reach $45,000 life premium and 20 I&P for the 2026 Annual Life Promo."
-  }
- ],
- "competitions": [
-  {
-   "id": "c-jamaica",
-   "active": true,
-   "title": "Jamaica — 2026 Annual Life Promo",
-   "period": "Jan 1 – Dec 31, 2026",
-   "ends": "2026-12-31",
-   "prize": "4 nights all-inclusive, agent + guest",
-   "metricLabel": "YTD life through July close",
-   "description": "Qualify with $45,000 life premium and 20 I&P. Agents who I&P $70,000 in life premium also bring an agency producer and their guest. Travel likely Jan/Feb 2027. Standings are annual first year premium and issued-and-paid counts through the July close, as published in the August newsletter. Steven Tindell has cleared both bars. Jeffrey Pechacek is $5,406 of premium away and Matt Hodges is 8 I&P away. FNWL reports are the official source for tracking and disputes are settled at the District Manager's discretion. No cash in lieu, no refunds or credits if the trip is not taken, and the agent must be in good standing with Farmers at the time of travel.",
-   "standings": [
+  "news": [
     {
-     "name": "Steven Tindell",
-     "value": "$59,159 · 42 I&P ✓"
+      "id": "n8",
+      "date": "2026-08-13",
+      "tag": "news",
+      "title": "August Newsletter is out \u2014 July commission inside",
+      "body": "The August district newsletter is posted, with July commission and every leaderboard: Life, Auto, Fire, Specialty, Folio, Business and New Business Commission. Steven Tindell leads July new business commission at $10,683 and Caleb Milne leads July folio premium at $83,740.",
+      "pinned": true,
+      "link": "#newsletter"
     },
     {
-     "name": "Jeffrey Pechacek",
-     "value": "$39,594 · 25 I&P"
+      "id": "n9",
+      "date": "2026-08-13",
+      "tag": "recognition",
+      "title": "Welcome Aaron Vicknair, Krystal Hawk and Travis Veselka",
+      "body": "Three new agents join Team ThirtyTwo. Aaron Vicknair is already on the board with 28 auto units and $34,986 in folio premium for July.",
+      "pinned": false,
+      "link": "#newsletter"
     },
     {
-     "name": "Matt Hodges",
-     "value": "$46,628 · 12 I&P"
+      "id": "n7",
+      "date": "2026-08-11",
+      "tag": "update",
+      "title": "August Producer Report and YTD Life results are posted",
+      "body": "Producer Report as of 8/7 and Life results as of 8/9 are both in Reports. Walt Beayrd leads POY year-to-date, Breanna Ashley leads the current quarter. On life, the district is at 210 I&P and $247,011 against the Jamaica bar of 20 I&P and $45,000.",
+      "pinned": false,
+      "link": "#reports"
     },
     {
-     "name": "Jason Kirk",
-     "value": "$14,115 · 12 I&P"
+      "id": "n5",
+      "date": "2026-08-06",
+      "tag": "update",
+      "title": "July District Matrix is posted",
+      "body": "The District Performance Matrix through August folio is up in Reports, now as a sortable table you can search by name. Ranked on Personal Lines, Life, Business and Prime Score. June's edition stays available underneath it.",
+      "pinned": true,
+      "link": "#reports"
     },
     {
-     "name": "Chris Gutierrez",
-     "value": "$8,403 · 14 I&P"
+      "id": "n1",
+      "date": "2026-07-31",
+      "tag": "news",
+      "title": "July Newsletter is out \u2014 June commission inside",
+      "body": "The July district newsletter is posted below, with June commission and every leaderboard: Life, Auto, Fire, Specialty, Folio, Business and New Business Commission.",
+      "pinned": false,
+      "link": "#newsletter"
+    },
+    {
+      "id": "n2",
+      "date": "2026-07-31",
+      "tag": "recognition",
+      "title": "Q2 Producer Cup winners announced",
+      "body": "McKenzie Scruggs takes first for Q2. Full top five is in the Competitions section and in the July newsletter.",
+      "pinned": false,
+      "link": "#competitions"
+    },
+    {
+      "id": "n3",
+      "date": "2026-07-24",
+      "tag": "update",
+      "title": "Scoreboard is now live from the district sheets",
+      "body": "Quotes and new business update straight from the D32 and D49 tracking sheets \u2014 no more waiting on a posted snapshot. Click any producer or agency for their day-by-day and week-by-week trend.",
+      "pinned": false,
+      "link": "#scoreboard"
+    },
+    {
+      "id": "n4",
+      "date": "2026-07-06",
+      "tag": "update",
+      "title": "New Retail Program effective July 2026",
+      "body": "The updated Retail Program is live: 36-month bonus structure with monthly bonuses up to 340%. Talk to the district office if you have Prot\u00e9g\u00e9 or new-agent candidates.",
+      "pinned": false
     }
-   ]
-  },
-  {
-   "id": "c-producercup",
-   "active": true,
-   "title": "Producer Cup — Q2 winners",
-   "period": "Q2 2026 · Apr 1 – Jun 30",
-   "ends": "2026-06-30",
-   "prize": "Quarterly recognition",
-   "metricLabel": "Q2 final placing",
-   "description": "Congratulations to the Q2 Producer Cup top five. Q3 standings will be posted after the quarter closes on September 30.",
-   "standings": [
+  ],
+  "events": [
     {
-     "name": "McKenzie Scruggs — Jeff Pechacek Agency",
-     "value": "1st"
+      "id": "e1",
+      "date": "2026-09-30",
+      "time": "",
+      "title": "Q3 ends \u2014 quarter close",
+      "location": "",
+      "link": "",
+      "description": "Last day of the quarter. Q3 Producer Cup standings final and Topper Club pace check."
     },
     {
-     "name": "Walt Beayrd — Steven Tindell Agency",
-     "value": "2nd"
-    },
-    {
-     "name": "Marcus Hudson — Caleb Milne Agency",
-     "value": "3rd"
-    },
-    {
-     "name": "Lauren Geier — David Dickerson Agency",
-     "value": "4th"
-    },
-    {
-     "name": "Breanna Ashley — Chris Gutierrez Agency",
-     "value": "5th"
+      "id": "e2",
+      "date": "2026-12-31",
+      "time": "",
+      "title": "Jamaica qualifying period closes",
+      "location": "",
+      "link": "",
+      "description": "Final day to reach $45,000 life premium and 20 I&P for the 2026 Annual Life Promo."
     }
-   ]
-  },
-  {
-   "id": "c-summer",
-   "active": true,
-   "title": "Summer Surprise",
-   "period": "On hold",
-   "ends": "",
-   "prize": "To be announced",
-   "metricLabel": "",
-   "description": "The district office is holding the Summer Surprise promo until the quotes and NB tracker data is reporting correctly. They expect to resume shortly and will confirm here once it restarts. Nothing to do in the meantime — qualification will be announced with the restart.",
-   "standings": []
-  }
- ],
- "newsletters": [
-  {
-   "id": "nl3",
-   "title": "August Newsletter — July Commission",
-   "date": "2026-08-13",
-   "file": "files/2026-08-newsletter.pdf"
-  },
-  {
-   "id": "nl2",
-   "title": "July Newsletter — June Commission",
-   "date": "2026-07-31",
-   "file": "files/2026-07-newsletter.pdf"
-  },
-  {
-   "id": "nl1",
-   "title": "June Newsletter — May Commission",
-   "date": "2026-06-30",
-   "file": "files/2026-06-newsletter.pdf"
-  }
- ],
- "reports": [
-  {
-   "id": "r-life-0809",
-   "title": "YTD Life Results",
-   "date": "2026-08-09",
-   "category": "Life",
-   "file": "files/ytd-life-results-2026-08-09.pdf",
-   "note": "Jamaica tracking — 20 I&P and $45,000 APE. District at 210 I&P / $247,011"
-  },
-  {
-   "id": "r-prod-0807",
-   "title": "2026 Producer Report",
-   "date": "2026-08-07",
-   "category": "Production",
-   "file": "files/producer-report-2026-08-07.pdf",
-   "note": "PL NB premium by producer — Q1/Q2/Q3 and POY year-to-date"
-  },
-  {
-   "id": "r-matrix-jul26",
-   "title": "District Matrix — July Production / June Prime",
-   "date": "2026-08-04",
-   "category": "Production",
-   "file": "files/district-matrix-july-2026.json",
-   "type": "table",
-   "note": "June Prime Score; all other lines as of August folio"
-  },
-  {
-   "id": "r-qst",
-   "title": "2026 Quote & Sales Tracker",
-   "date": "2026-07-10",
-   "category": "Trackers",
-   "file": "files/quote-sales-tracker-2026-07-10.pdf",
-   "note": "As of 7/10/26"
-  },
-  {
-   "id": "r-life",
-   "title": "YTD Life Results",
-   "date": "2026-07-19",
-   "category": "Life",
-   "file": "files/ytd-life-results-2026-07-19.pdf",
-   "note": "As of 7/19/26"
-  },
-  {
-   "id": "r-prod",
-   "title": "2026 Producer Report",
-   "date": "2026-07-17",
-   "category": "Production",
-   "file": "files/producer-report-2026-07-17.pdf",
-   "note": "As of 7/17/26"
-  },
-  {
-   "id": "r-matrix",
-   "title": "District Matrix — June Production / May Prime",
-   "date": "2026-07-02",
-   "category": "Production",
-   "file": "files/district-matrix-june-2026.pdf",
-   "note": ""
-  }
- ],
- "resources": [
-  {
-   "id": "res-tech-stack",
-   "title": "Recommended Technology Stack — Sales Team",
-   "category": "Agency Setup",
-   "note": "Standard producer tech stack — workstation, monitors, headset, dock, and the software that runs the day. Prices as of August 2026.",
-   "date": "2026-08-18",
-   "file": "files/sales-tech-stack.html"
-  },
-  {
-   "id": "res-nba-quote-plan",
-   "title": "NB Accelerator — Agent Quote Plan (D32 & D49)",
-   "category": "Programs",
-   "note": "Pick a district, an agent and a premium target — see the quotes per day it takes. Snapshot as of August 7, 2026.",
-   "date": "2026-08-07",
-   "file": "files/nb-accelerator-quote-plan.html"
-  },
-  {
-   "id": "res-folio",
-   "title": "2026 Folio Close Date Calendar",
-   "category": "Programs",
-   "note": "Every close date for the year, one page",
-   "date": "2026-07-31",
-   "file": "files/folio-close-calendar-2026.pdf"
-  }
- ],
- "rev": "r11a691f0e65b8d09c6a0hub"
+  ],
+  "competitions": [
+    {
+      "id": "c-jamaica",
+      "active": true,
+      "title": "Jamaica \u2014 2026 Annual Life Promo",
+      "period": "Jan 1 \u2013 Dec 31, 2026",
+      "ends": "2026-12-31",
+      "prize": "4 nights all-inclusive, agent + guest",
+      "metricLabel": "YTD life through July close",
+      "description": "Qualify with $45,000 life premium and 20 I&P. Agents who I&P $70,000 in life premium also bring an agency producer and their guest. Travel likely Jan/Feb 2027. Standings are annual first year premium and issued-and-paid counts through the July close, as published in the August newsletter. Steven Tindell has cleared both bars. Jeffrey Pechacek is $5,406 of premium away and Matt Hodges is 8 I&P away. FNWL reports are the official source for tracking and disputes are settled at the District Manager's discretion. No cash in lieu, no refunds or credits if the trip is not taken, and the agent must be in good standing with Farmers at the time of travel.",
+      "standings": [
+        {
+          "name": "Steven Tindell",
+          "value": "$59,159 \u00b7 42 I&P \u2713"
+        },
+        {
+          "name": "Jeffrey Pechacek",
+          "value": "$39,594 \u00b7 25 I&P"
+        },
+        {
+          "name": "Matt Hodges",
+          "value": "$46,628 \u00b7 12 I&P"
+        },
+        {
+          "name": "Jason Kirk",
+          "value": "$14,115 \u00b7 12 I&P"
+        },
+        {
+          "name": "Chris Gutierrez",
+          "value": "$8,403 \u00b7 14 I&P"
+        }
+      ]
+    },
+    {
+      "id": "c-producercup",
+      "active": true,
+      "title": "Producer Cup \u2014 Q2 winners",
+      "period": "Q2 2026 \u00b7 Apr 1 \u2013 Jun 30",
+      "ends": "2026-06-30",
+      "prize": "Quarterly recognition",
+      "metricLabel": "Q2 final placing",
+      "description": "Congratulations to the Q2 Producer Cup top five. Q3 standings will be posted after the quarter closes on September 30.",
+      "standings": [
+        {
+          "name": "McKenzie Scruggs \u2014 Jeff Pechacek Agency",
+          "value": "1st"
+        },
+        {
+          "name": "Walt Beayrd \u2014 Steven Tindell Agency",
+          "value": "2nd"
+        },
+        {
+          "name": "Marcus Hudson \u2014 Caleb Milne Agency",
+          "value": "3rd"
+        },
+        {
+          "name": "Lauren Geier \u2014 David Dickerson Agency",
+          "value": "4th"
+        },
+        {
+          "name": "Breanna Ashley \u2014 Chris Gutierrez Agency",
+          "value": "5th"
+        }
+      ]
+    },
+    {
+      "id": "c-summer",
+      "active": true,
+      "title": "Summer Surprise",
+      "period": "On hold",
+      "ends": "",
+      "prize": "To be announced",
+      "metricLabel": "",
+      "description": "The district office is holding the Summer Surprise promo until the quotes and NB tracker data is reporting correctly. They expect to resume shortly and will confirm here once it restarts. Nothing to do in the meantime \u2014 qualification will be announced with the restart.",
+      "standings": []
+    }
+  ],
+  "newsletters": [
+    {
+      "id": "nl3",
+      "title": "August Newsletter \u2014 July Commission",
+      "date": "2026-08-13",
+      "file": "files/2026-08-newsletter.pdf"
+    },
+    {
+      "id": "nl2",
+      "title": "July Newsletter \u2014 June Commission",
+      "date": "2026-07-31",
+      "file": "files/2026-07-newsletter.pdf"
+    },
+    {
+      "id": "nl1",
+      "title": "June Newsletter \u2014 May Commission",
+      "date": "2026-06-30",
+      "file": "files/2026-06-newsletter.pdf"
+    }
+  ],
+  "reports": [
+    {
+      "id": "r-life-0809",
+      "title": "YTD Life Results",
+      "date": "2026-08-09",
+      "category": "Life",
+      "file": "files/ytd-life-results-2026-08-09.pdf",
+      "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 210 I&P / $247,011"
+    },
+    {
+      "id": "r-prod-0807",
+      "title": "2026 Producer Report",
+      "date": "2026-08-07",
+      "category": "Production",
+      "file": "files/producer-report-2026-08-07.pdf",
+      "note": "PL NB premium by producer \u2014 Q1/Q2/Q3 and POY year-to-date"
+    },
+    {
+      "id": "r-matrix-jul26",
+      "title": "District Matrix \u2014 July Production / June Prime",
+      "date": "2026-08-04",
+      "category": "Production",
+      "file": "files/district-matrix-july-2026.json",
+      "type": "table",
+      "note": "June Prime Score; all other lines as of August folio"
+    },
+    {
+      "id": "r-qst",
+      "title": "2026 Quote & Sales Tracker",
+      "date": "2026-07-10",
+      "category": "Trackers",
+      "file": "files/quote-sales-tracker-2026-07-10.pdf",
+      "note": "As of 7/10/26"
+    },
+    {
+      "id": "r-life",
+      "title": "YTD Life Results",
+      "date": "2026-07-19",
+      "category": "Life",
+      "file": "files/ytd-life-results-2026-07-19.pdf",
+      "note": "As of 7/19/26"
+    },
+    {
+      "id": "r-prod",
+      "title": "2026 Producer Report",
+      "date": "2026-07-17",
+      "category": "Production",
+      "file": "files/producer-report-2026-07-17.pdf",
+      "note": "As of 7/17/26"
+    },
+    {
+      "id": "r-matrix",
+      "title": "District Matrix \u2014 June Production / May Prime",
+      "date": "2026-07-02",
+      "category": "Production",
+      "file": "files/district-matrix-june-2026.pdf",
+      "note": ""
+    }
+  ],
+  "resources": [
+    {
+      "id": "res-tech-stack",
+      "title": "Recommended Technology Stack \u2014 Sales Team",
+      "category": "Agency Setup",
+      "note": "Standard producer tech stack \u2014 workstation, monitors, headset, dock, and the software that runs the day. Prices as of August 2026.",
+      "date": "2026-08-18",
+      "file": "files/sales-tech-stack.html"
+    },
+    {
+      "id": "res-nba-quote-plan",
+      "title": "NB Accelerator \u2014 Agent Quote Plan (D32 & D49)",
+      "category": "Programs",
+      "note": "Pick a district, an agent and a premium target \u2014 see the quotes per day it takes. Snapshot as of August 7, 2026.",
+      "date": "2026-08-07",
+      "file": "files/nb-accelerator-quote-plan.html"
+    },
+    {
+      "id": "res-folio",
+      "title": "2026 Folio Close Date Calendar",
+      "category": "Programs",
+      "note": "Every close date for the year, one page",
+      "date": "2026-07-31",
+      "file": "files/folio-close-calendar-2026.pdf"
+    }
+  ],
+  "rev": "rf3e8237f432599aaf086hub"
 }
