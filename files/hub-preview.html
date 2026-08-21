@@ -1,0 +1,3285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>District Hub — Farmers Districts 32 &amp; 49</title>
+<meta name="description" content="News, events, competitions, newsletters, reports and the production scoreboard for Farmers Insurance Districts 32 and 49.">
+<meta name="theme-color" content="#12306a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a1120" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="District Hub — Farmers Districts 32 &amp; 49">
+<meta property="og:description" content="News, events, competitions, newsletters, reports and the production scoreboard.">
+<link rel="manifest" href="files/hub.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="District Hub">
+<link rel="apple-touch-icon" href="files/hub-icon-180.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312306a'/%3E%3Crect x='14' y='32' width='8' height='18' rx='2' fill='%23ffffff'/%3E%3Crect x='28' y='22' width='8' height='28' rx='2' fill='%23ffffff'/%3E%3Crect x='42' y='14' width='8' height='36' rx='2' fill='%23d92231'/%3E%3C/svg%3E">
+<script>
+(function(){
+  try{
+    var t=localStorage.getItem('d32hub_theme');
+    if(t==='dark'||t==='light') document.documentElement.setAttribute('data-theme',t);
+    else document.documentElement.removeAttribute('data-theme');
+  }catch(e){ document.documentElement.removeAttribute('data-theme'); }
+})();
+</script>
+<style>
+  /* ===================================================================
+     DISTRICT HUB — visual system
+     Tokens, type scale and card language are lifted from the NB
+     Accelerator Quote Plan (files/nb-accelerator-quote-plan.html) so the
+     hub and the tools it links to read as one product. Anything the hub
+     needs on top of that set (gold, tag colours, chart ink) is defined
+     here in BOTH modes — never as a bare hex, or dark mode breaks.
+     =================================================================== */
+  :root{
+    color-scheme: light;
+    --navy:#12306a; --navy-2:#0e2652; --navy-3:#0a1c3f;
+    --on-navy:#ffffff; --on-navy-soft:#c9dcf7;
+    --on-navy-blue:#89b7ff; --on-navy-red:#ff8a91;
+    --surface-1:#ffffff; --surface-2:#f7f9fc; --plane:#eef3fa;
+    --text-primary:#0d1117; --text-secondary:#4c535f; --muted:#737b88;
+    --grid:#e4e9f0; --axis:#c1cad8; --border:rgba(18,48,106,0.13);
+    --s1:#2a529c; --ord-1:#719def; --ord-2:#466fbc; --ord-3:#1c428b;
+    --s2:#d60028; --str-1:#ff4750; --str-2:#cb001d;
+    --inert:#c6cfdd;
+    --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b;
+    --gold:#b07d09; --gold-ink:#7a5a05;
+    --wash:rgba(28,66,139,0.09);
+    --wash2:rgba(203,0,29,0.08);
+    --wash3:rgba(176,125,9,0.10);
+    --washg:rgba(12,163,12,0.10);
+    --hover:rgba(18,48,106,0.045);
+    --shadow:0 6px 22px rgba(10,28,63,.14);
+    --shadow-lg:0 24px 70px rgba(8,20,45,.30);
+    --focus:#2a529c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --surface-1:#141a26; --surface-2:#1a2130; --plane:#0a1120;
+      --text-primary:#ffffff; --text-secondary:#b9c1cd; --muted:#8a92a0;
+      --grid:#262e3c; --axis:#38414f; --border:rgba(255,255,255,0.11);
+      --s1:#5a84d4; --ord-1:#89b7ff; --ord-2:#5d88d7; --ord-3:#325aa6;
+      --s2:#f73743; --str-1:#ff5e62; --str-2:#e11631;
+      --inert:#313a4a;
+      --good:#3ec93e; --warning:#ffc94a; --critical:#ff6b6b;
+      --gold:#e0ae3d; --gold-ink:#e8bd5c;
+      --wash:rgba(90,132,212,0.16);
+      --wash2:rgba(247,55,67,0.14);
+      --wash3:rgba(224,174,61,0.14);
+      --washg:rgba(62,201,62,0.14);
+      --hover:rgba(255,255,255,0.045);
+      --shadow:0 6px 22px rgba(0,0,0,.45);
+      --shadow-lg:0 24px 70px rgba(0,0,0,.6);
+      --focus:#89b7ff;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --surface-1:#141a26; --surface-2:#1a2130; --plane:#0a1120;
+    --text-primary:#ffffff; --text-secondary:#b9c1cd; --muted:#8a92a0;
+    --grid:#262e3c; --axis:#38414f; --border:rgba(255,255,255,0.11);
+    --s1:#5a84d4; --ord-1:#89b7ff; --ord-2:#5d88d7; --ord-3:#325aa6;
+    --s2:#f73743; --str-1:#ff5e62; --str-2:#e11631;
+    --inert:#313a4a;
+    --good:#3ec93e; --warning:#ffc94a; --critical:#ff6b6b;
+    --gold:#e0ae3d; --gold-ink:#e8bd5c;
+    --wash:rgba(90,132,212,0.16);
+    --wash2:rgba(247,55,67,0.14);
+    --wash3:rgba(224,174,61,0.14);
+    --washg:rgba(62,201,62,0.14);
+    --hover:rgba(255,255,255,0.045);
+    --shadow:0 6px 22px rgba(0,0,0,.45);
+    --shadow-lg:0 24px 70px rgba(0,0,0,.6);
+    --focus:#89b7ff;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:auto;}
+  body{
+    margin:0;background:var(--plane);color:var(--text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+  /* Shell is wide because leaderboards and report tables need the room;
+     reading content is capped narrower inside it (.readcol). */
+  .wrap{max-width:1320px;margin:0 auto;padding:0 22px 64px;}
+  .readcol{max-width:1080px;}
+
+  /* ===================================================================
+     APP BAR — full-bleed navy, two deliberate rows.
+     Row 1 is identity + status + account actions.
+     Row 2 is navigation only, so tabs never fight the logo for space.
+     =================================================================== */
+  .appbar{
+    position:sticky;top:0;z-index:60;
+    background:var(--navy);color:var(--on-navy);
+    border-top:4px solid var(--s2);
+    box-shadow:0 1px 0 rgba(0,0,0,.18);
+  }
+  .barin{max-width:1320px;margin:0 auto;padding:0 22px;}
+  .bar1{display:flex;align-items:center;gap:14px;padding:11px 0;}
+  .logos{display:flex;align-items:center;gap:7px;background:#fff;border-radius:8px;padding:6px 9px;flex:none;}
+  .dlogo{height:26px;width:auto;display:block;}
+  .ident{margin-right:auto;min-width:0;}
+  .ident h1{margin:0;font-size:16px;font-weight:680;letter-spacing:-.01em;color:var(--on-navy);line-height:1.2;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ident p{margin:2px 0 0;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--on-navy-soft);
+           white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .bar1 .acts{display:flex;align-items:center;gap:9px;flex:none;}
+  .datebox{font-size:12.5px;color:var(--on-navy-soft);white-space:nowrap;}
+
+  /* folio countdown lives in the bar so the deadline is always on screen
+     without spending a 90px strip on it */
+  .foliochip{
+    display:none;text-decoration:none;
+    grid-template-columns:auto auto auto;column-gap:7px;align-items:baseline;flex:none;
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);
+    border-radius:9px;padding:5px 13px 7px;white-space:nowrap;
+  }
+  .foliochip:hover{background:rgba(255,255,255,.17);}
+  .foliochip.on{display:inline-grid;}
+  /* one label over one line of fact: "Folio close / Fri, Sep 18 | 29 days
+     left". The old chip stacked label-over-value on the left and
+     value-over-label on the right, so nothing shared a baseline and the
+     countdown was set smaller than the date beside it. */
+  .foliochip .fl,.foliochip .fu{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;line-height:1.5;}
+  .foliochip .fl{grid-column:1/-1;color:var(--on-navy-blue);margin-bottom:1px;}
+  .foliochip .fu{color:var(--on-navy-soft);}
+  .foliochip .fd{font-size:13px;font-weight:640;color:var(--on-navy);line-height:1.1;}
+  .foliochip .fn{font-size:18px;font-weight:700;color:var(--on-navy);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1.1;
+                 margin-left:11px;padding-left:13px;border-left:1px solid rgba(255,255,255,.24);}
+  .foliochip.soon{background:rgba(255,138,145,.16);border-color:rgba(255,138,145,.45);}
+  .foliochip.soon .fl,.foliochip.soon .fu,.foliochip.soon .fn,.foliochip.soon .fd{color:var(--on-navy-red);}
+  .foliochip.today{background:var(--s2);border-color:var(--s2);}
+  .foliochip.today .fl,.foliochip.today .fu,.foliochip.today .fn,.foliochip.today .fd{color:#fff;}
+  .foliochip.today .fn{font-size:13.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-left-color:rgba(255,255,255,.45);}
+  /* the published calendar has run out: say so on one line rather than
+     pairing the message with an em-dash count that means nothing */
+  .foliochip.nodata .fn,.foliochip.nodata .fu{display:none;}
+
+  .ibtn{
+    font:inherit;font-size:13px;font-weight:600;cursor:pointer;
+    padding:7px 12px;border-radius:8px;
+    background:transparent;color:var(--on-navy);
+    border:1px solid rgba(255,255,255,.34);
+    display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+  }
+  .ibtn:hover{background:rgba(255,255,255,.12);}
+  .ibtn[disabled]{opacity:.55;cursor:default;}
+
+  /* ---- row 2: tabs ---- */
+  .bar2{display:flex;align-items:center;gap:4px;border-top:1px solid rgba(255,255,255,.14);
+        flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .bar2::-webkit-scrollbar{display:none;}
+  .tab{
+    appearance:none;border:0;background:transparent;font:inherit;
+    font-size:13.5px;font-weight:640;color:var(--on-navy-soft);
+    padding:12px 15px;cursor:pointer;position:relative;white-space:nowrap;
+    border-bottom:3px solid transparent;margin-bottom:-1px;text-decoration:none;
+  }
+  .tab:hover{color:var(--on-navy);}
+  .tab[aria-current="page"]{color:var(--on-navy);border-bottom-color:var(--on-navy-red);}
+  .tab .n{
+    font-size:10.5px;font-weight:700;margin-left:7px;padding:1px 6px;border-radius:999px;
+    background:rgba(255,255,255,.14);color:var(--on-navy-soft);vertical-align:1px;
+  }
+  .tab[aria-current="page"] .n{background:rgba(255,255,255,.22);color:var(--on-navy);}
+  /* A tool opens in a new tab rather than switching views here, so it is
+     filled — it must not read as one of the four sections. */
+  .toolchip{
+    margin-left:auto;text-decoration:none;white-space:nowrap;
+    background:#fff;color:var(--navy);font-size:12.5px;font-weight:700;
+    border-radius:8px;padding:6px 13px;align-self:center;
+  }
+  .toolchip:hover{background:var(--on-navy-soft);}
+  .toolchip .g{font-weight:400;opacity:.65;}
+
+  /* ===================================================================
+     VIEWS
+     Each tab is a screen. Hidden views stay in the DOM (all render
+     functions keep their target elements) but are display:none, so
+     switching costs nothing and never re-renders a list into itself.
+     =================================================================== */
+  .view{display:none;padding-top:20px;}
+  .view.on{display:block;}
+  .viewhd{margin:4px 0 18px;}
+  .viewhd h2{font-size:25px;line-height:1.2;margin:0;font-weight:680;letter-spacing:-.015em;color:var(--ord-3);}
+  .viewhd p{margin:5px 0 0;font-size:14px;color:var(--text-secondary);}
+  :root[data-theme="dark"] .viewhd h2{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .viewhd h2{color:var(--ord-1);}}
+
+  /* ---------- strips above the views ---------- */
+  .strip{
+    display:none;align-items:center;gap:13px;margin-top:18px;
+    background:var(--navy-2);color:var(--on-navy);border-radius:12px;padding:11px 16px;
+  }
+  .strip.on{display:flex;}
+  .strip .flag{background:var(--s2);border-radius:6px;font-size:10px;font-weight:800;letter-spacing:.09em;padding:4px 8px;text-transform:uppercase;white-space:nowrap;flex:none;}
+  .strip p{margin:0;font-size:14px;font-weight:500;line-height:1.4;}
+  .strip a{color:var(--on-navy-blue);font-weight:640;text-decoration:none;margin-left:auto;white-space:nowrap;font-size:13px;flex:none;}
+  .strip a:hover{text-decoration:underline;}
+  .loadfail{
+    display:none;margin-top:18px;background:var(--wash2);border:1px solid var(--str-2);
+    border-radius:12px;padding:14px 17px;color:var(--text-primary);font-size:13.5px;line-height:1.55;
+  }
+  .loadfail.on{display:block;}
+  .loadfail b{display:block;font-size:14px;margin-bottom:3px;color:var(--str-2);}
+
+  /* ===================================================================
+     CARDS — flat, hairline border, no drop shadow. Section titles carry
+     a 3px navy rule on the left, exactly as in the Quote Plan.
+     =================================================================== */
+  .card{background:var(--surface-1);border:1px solid var(--border);border-radius:14px;margin-bottom:18px;overflow:hidden;}
+  .card-hd{display:flex;align-items:center;gap:11px;padding:18px 22px 0;flex-wrap:wrap;}
+  .card-hd h2{
+    margin:0;font-size:15px;font-weight:650;letter-spacing:-.005em;line-height:1.3;
+    padding-left:12px;border-left:3px solid var(--ord-3);color:var(--text-primary);
+  }
+  :root[data-theme="dark"] .card-hd h2{border-left-color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .card-hd h2{border-left-color:var(--ord-1);}}
+  .card-hd .sub{font-size:12.5px;color:var(--text-secondary);}
+  .card-hd .right{margin-left:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap;}
+  .card-bd{padding:16px 22px 20px;}
+  .cap{padding:4px 22px 0 37px;font-size:13px;color:var(--text-secondary);margin:0;}
+  .card.flush .card-bd{padding-top:8px;}
+
+  /* buttons on light surfaces */
+  .btn{
+    font:inherit;font-size:13px;font-weight:600;cursor:pointer;
+    border:1px solid var(--border);background:var(--surface-1);color:var(--text-primary);
+    border-radius:9px;padding:7px 13px;white-space:nowrap;
+    text-decoration:none;display:inline-block;
+  }
+  .btn:hover{background:var(--hover);}
+  .btn.primary{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .btn.primary:hover{background:var(--navy-2);}
+  .btn.danger{color:var(--str-2);border-color:var(--str-2);background:transparent;}
+  .btn.sm{padding:5px 10px;font-size:12px;border-radius:8px;}
+
+  /* ===================================================================
+     NAVY HERO — district totals, the Quote Plan's signature figure block
+     =================================================================== */
+  .card.navy{background:var(--navy);border-color:transparent;color:var(--on-navy);}
+  .card.navy .card-hd h2{color:var(--on-navy);border-left-color:var(--on-navy-red);}
+  .card.navy .card-hd .sub{color:var(--on-navy-soft);}
+  .hero2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.16);border-radius:12px;overflow:hidden;}
+  .fig{background:var(--navy);padding:19px 22px 21px;}
+  .figrule{height:3px;width:38px;border-radius:2px;background:var(--on-navy-blue);margin-bottom:12px;}
+  .fig.red .figrule{background:var(--on-navy-red);}
+  .figlab{font-size:12.5px;color:var(--on-navy-blue);font-weight:600;margin-bottom:8px;}
+  .fig.red .figlab{color:var(--on-navy-red);}
+  .fignum{font-size:50px;line-height:1;font-weight:640;letter-spacing:-.03em;color:var(--on-navy);font-variant-numeric:tabular-nums;}
+  /* no data is an em dash, never a zero — a zero is a claim about production */
+  .fig.nodata .fignum{color:var(--on-navy-soft);opacity:.5;font-size:34px;}
+  .figunit{font-size:13.5px;color:var(--on-navy-soft);margin-top:8px;font-weight:500;}
+  .fignote{font-size:12px;color:var(--on-navy-soft);opacity:.72;margin-top:6px;}
+  /* the district split — same totals, decomposed, so the widest card on
+     the landing view carries information instead of empty navy */
+  .figsplit{margin-top:15px;max-width:400px;}
+  /* Two districts, two solid colours, the SAME two on both figures: this
+     bar encodes which district, not which metric. D32 blue and D49 red
+     match the district chips on the leaderboard, so the colour is already
+     learned by the time an agent scrolls down. The first version left D49
+     as a translucent track, which read as the empty half of a progress
+     bar rather than as a district. */
+  .figbar{height:8px;border-radius:4px;overflow:hidden;display:flex;background:rgba(255,255,255,.12);}
+  .figbar i{display:block;height:100%;}
+  .figbar .s32{background:var(--on-navy-blue);}
+  /* a 2px navy divider so the boundary survives when the two hues do not
+     separate — colour-blind viewers, cheap projectors, printed screenshots */
+  .figbar .s49{background:var(--on-navy-red);border-left:2px solid var(--navy);}
+  .figleg{display:flex;gap:18px;margin-top:9px;font-size:11.5px;color:var(--on-navy-soft);font-weight:600;font-variant-numeric:tabular-nums;}
+  .figleg em{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;font-style:normal;vertical-align:-1px;}
+  .figleg .k32{background:var(--on-navy-blue);}
+  .figleg .k49{background:var(--on-navy-red);}
+
+  /* ===================================================================
+     SCOREBOARD
+     =================================================================== */
+  .filterbar{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;padding:14px 22px;border-top:1px solid var(--grid);border-bottom:1px solid var(--grid);background:var(--surface-2);margin-top:16px;}
+  .fgroup{display:flex;flex-direction:column;gap:5px;}
+  .flabel{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding-left:2px;line-height:1;}
+  .seg{display:inline-flex;border:1px solid var(--border);border-radius:9px;overflow:hidden;background:var(--surface-1);}
+  .seg button{border:0;background:transparent;padding:7px 13px;font:inherit;font-size:12.5px;font-weight:640;color:var(--text-secondary);cursor:pointer;}
+  .seg button:hover{background:var(--hover);}
+  .seg button.on{background:var(--navy);color:#fff;}
+  /* active colour tracks the metric it selects, so it agrees with the bars */
+  #segMetric button.on{background:var(--navy);}
+  #segMetric button[data-m="n"].on{background:var(--s2);}
+  .switch{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-secondary);font-weight:600;cursor:pointer;user-select:none;height:33px;}
+  .switch input{accent-color:var(--s1);}
+  #staffOnlyWrap .switch{padding:0 2px;}
+  .searchbox{
+    font:inherit;font-size:13px;border:1px solid var(--border);border-radius:9px;
+    padding:7px 11px;color:var(--text-primary);background:var(--surface-1);width:190px;max-width:100%;
+  }
+  .searchbox::placeholder{color:var(--muted);}
+  .searchbox:focus{border-color:var(--s1);box-shadow:0 0 0 3px var(--wash);}
+  .searchbox.sm{width:150px;}
+
+  /* one quiet row; no colour of its own — the gains are all positive so
+     colouring them would encode nothing */
+  .movers{margin:0 0 18px;}
+  .movers .mv-hd{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 10px;}
+  .movers .mv-hd b{font-size:13px;font-weight:700;color:var(--text-primary);}
+  .movers .mv-hd span{font-size:11.5px;color:var(--muted);}
+  .mvrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;
+         background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .mv{background:var(--surface-1);padding:11px 14px;display:flex;align-items:baseline;gap:10px;min-width:0;
+      border:0;font:inherit;text-align:left;width:100%;cursor:pointer;}
+  .mv:hover{background:var(--hover);}
+  .mv .who{min-width:0;flex:1;}
+  .mv .who b{display:block;font-size:13.5px;font-weight:640;color:var(--text-primary);
+             overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .mv .who span{display:block;font-size:11px;color:var(--muted);
+                overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .mv .up{font-size:15px;font-weight:700;color:var(--text-primary);font-variant-numeric:tabular-nums;
+          white-space:nowrap;flex:none;}
+  .boardnote{margin:14px 22px 0;padding:10px 14px;border-radius:10px;font-size:12.5px;font-weight:500;line-height:1.5;}
+  .boardnote.warn{background:var(--wash3);color:var(--text-primary);border:1px solid var(--gold);}
+  .boardnote.err{background:var(--wash2);color:var(--text-primary);border:1px solid var(--str-2);}
+
+  .podium{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;}
+  .pod{background:var(--surface-1);padding:14px 16px;display:flex;align-items:center;gap:12px;}
+  .pod.click{cursor:pointer;}
+  .pod.click:hover{background:var(--hover);}
+  /* gold / silver / bronze, so the ordering is legible without reading */
+  .pod .medal{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none;color:#fff;background:var(--ord-2);}
+  .pod.p1 .medal{background:var(--gold);}
+  .pod.p2 .medal{background:#8f9bb0;}
+  .pod.p3 .medal{background:var(--serious);}
+  .pod .who{min-width:0;}
+  .pod .who b{display:block;font-size:14px;font-weight:640;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pod .who span{font-size:11.5px;color:var(--muted);}
+  .pod .val{margin-left:auto;text-align:right;flex:none;}
+  .pod .val b{font-size:22px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+  .pod .val span{display:block;font-size:10px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;font-weight:700;white-space:nowrap;margin-top:2px;}
+
+  .boardwrap{max-height:560px;overflow:auto;border:1px solid var(--border);border-radius:12px;}
+  table.board{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed;}
+  /* Fixed widths everywhere except the bar column, which absorbs the
+     slack. Letting the NAME column absorb it instead left a 400px hole
+     between the name and the district chip on a wide screen. */
+  table.board .c-rank{width:46px;}
+  table.board thead th:nth-child(2){width:auto;}
+  table.board thead th:nth-child(3),table.board thead th:nth-child(4){width:150px;}
+  table.board .c-chev{width:34px;}
+  table.board td:nth-child(2){overflow:hidden;}
+  .pname .nm{min-width:0;}
+  .pname .nm b,.pname .nm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  table.board th{
+    position:sticky;top:0;z-index:1;background:var(--surface-1);text-align:left;
+    font-size:11.5px;font-weight:600;color:var(--text-secondary);
+    padding:10px;border-bottom:1px solid var(--axis);
+  }
+  table.board td{padding:10px;border-bottom:1px solid var(--grid);vertical-align:middle;}
+  table.board tbody tr:nth-child(even) td{background:var(--surface-2);}
+  table.board tr:last-child td{border-bottom:0;}
+  table.board tr.click{cursor:pointer;}
+  table.board tr.click:hover td{background:var(--hover);}
+  .rank{font-weight:600;color:var(--muted);width:38px;font-variant-numeric:tabular-nums;}
+  .avatar{width:29px;height:29px;border-radius:8px;background:var(--wash);color:var(--ord-3);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-right:10px;flex:none;}
+  :root[data-theme="dark"] .avatar{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .avatar{color:var(--ord-1);}}
+  .pname{display:flex;align-items:center;min-width:0;}
+  .pname .nm b{display:block;font-size:14px;font-weight:620;}
+  .pname .nm span{font-size:11.5px;color:var(--muted);}
+  .pname .nm .sub2{display:flex;align-items:center;gap:7px;min-width:0;}
+  /* `.pname .nm span` (0,2,1) outranks `.dchip.d32` (0,2,0), so moving the
+     chip inside the name cell silently greyed its text — the districts
+     were left telling themselves apart by background alone. Restate the
+     colours at a specificity that wins. */
+  .pname .nm .sub2 .dchip{flex:none;}
+  .pname .nm .sub2 .dchip.d32{color:var(--ord-3);}
+  .pname .nm .sub2 .dchip.d49{color:var(--str-2);}
+  :root[data-theme="dark"] .pname .nm .sub2 .dchip.d32{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pname .nm .sub2 .dchip.d32{color:var(--ord-1);}}
+  .dchip{font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:5px;letter-spacing:.02em;}
+  .dchip.d32{background:var(--wash);color:var(--ord-3);}
+  .dchip.d49{background:var(--wash2);color:var(--str-2);}
+  :root[data-theme="dark"] .dchip.d32{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dchip.d32{color:var(--ord-1);}}
+  .metric{font-weight:620;text-align:right;font-variant-numeric:tabular-nums;}
+  /* all that is left of the bar column: the affordance that says a row
+     opens. Keep it — the caption alone did not carry it. */
+  .chevcell{padding-left:0!important;padding-right:12px!important;text-align:right;}
+  .rowchev{color:var(--inert);font-size:15px;font-weight:700;line-height:1;}
+  tr.click:hover .rowchev{color:var(--s1);}
+  .ownflag{font-size:8.5px;font-weight:700;background:var(--wash3);color:var(--gold-ink);border-radius:4px;padding:1px 5px;margin-left:6px;letter-spacing:.04em;vertical-align:1px;}
+  .thper{font-size:9.5px;letter-spacing:.05em;color:var(--muted);font-weight:600;}
+  .boardstate{padding:38px 20px;text-align:center;color:var(--text-secondary);font-size:13.5px;line-height:1.6;}
+  .boardstate b{display:block;color:var(--text-primary);font-size:14.5px;margin-bottom:4px;font-weight:640;}
+  .hint{font-size:12px;color:var(--muted);line-height:1.55;margin:10px 0 0;}
+  .hint code{background:var(--wash);border-radius:5px;padding:1px 5px;font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  .empty{padding:28px;text-align:center;color:var(--muted);font-size:13.5px;}
+  .livepill{font-size:12px;font-weight:600;color:var(--good);white-space:nowrap;display:none;align-items:center;gap:5px;}
+  .livepill.on{display:inline-flex;}
+  .livepill.err{color:var(--str-2);}
+  .livepill.busy{color:var(--muted);}
+  /* on navy, --good and --str-2 are both under-contrasted */
+  .card.navy .livepill{color:var(--on-navy-soft);}
+  .card.navy .livepill.err{color:var(--on-navy-red);}
+  .card.navy .livepill.busy{color:var(--on-navy-soft);opacity:.7;}
+
+  /* ===================================================================
+     TWO-COLUMN CONTENT (news + events, newsletter + resources)
+     =================================================================== */
+  .cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;align-items:start;}
+  .cols2 .card{margin-bottom:0;}
+  /* News runs far longer than the events list beside it; let the events
+     card follow the reader instead of stranding it at the top. */
+  @media(min-width:761px){
+    #view-news .cols2{align-items:stretch;}
+    #view-news .cols2 > #events{position:sticky;top:142px;align-self:start;}
+  }
+
+  /* ---------- news ---------- */
+  .newsitem{padding:14px 0;border-bottom:1px solid var(--grid);}
+  .newsitem:first-child{padding-top:2px;}
+  .newsitem:last-child{border-bottom:0;padding-bottom:2px;}
+  .newsitem .meta{display:flex;align-items:center;gap:9px;margin-bottom:5px;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:5px;}
+  .tag.news{background:var(--wash);color:var(--ord-3);}
+  .tag.promo{background:var(--wash2);color:var(--str-2);}
+  .tag.recognition{background:var(--wash3);color:var(--gold-ink);}
+  .tag.update{background:var(--washg);color:var(--good);}
+  :root[data-theme="dark"] .tag.news{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag.news{color:var(--ord-1);}}
+  .newsitem .meta time{font-size:11.5px;color:var(--muted);font-weight:600;}
+  .newsitem h3{margin:0 0 4px;font-size:14.5px;font-weight:640;line-height:1.35;}
+  .newsitem h3 a{color:var(--text-primary);text-decoration:none;}
+  .newsitem h3 a:hover{text-decoration:underline;}
+  .newsitem p{margin:0;font-size:13px;color:var(--text-secondary);line-height:1.55;white-space:pre-line;}
+  .newsitem .more{display:inline-block;margin-top:6px;color:var(--s1);font-weight:640;font-size:12.5px;text-decoration:none;}
+  .newsitem .more:hover{text-decoration:underline;}
+  .pin{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+       color:var(--gold-ink);background:var(--wash3);border-radius:5px;padding:3px 7px;}
+
+  /* ---------- events ---------- */
+  .eventrow{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--grid);align-items:flex-start;}
+  .eventrow:first-child{padding-top:2px;}
+  .eventrow:last-child{border-bottom:0;}
+  .datebadge{flex:none;width:48px;border:1px solid var(--border);border-radius:9px;text-align:center;overflow:hidden;background:var(--surface-1);}
+  .datebadge .m{display:block;background:var(--navy);color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.09em;padding:3px 0;text-transform:uppercase;}
+  .datebadge .d{display:block;font-size:18px;font-weight:650;padding:4px 0 5px;font-variant-numeric:tabular-nums;}
+  .eventrow .info{min-width:0;}
+  .eventrow .info b{display:block;font-size:14px;font-weight:640;}
+  .eventrow .info .where{font-size:11.5px;color:var(--muted);font-weight:600;}
+  .eventrow .info p{margin:4px 0 0;font-size:12.5px;color:var(--text-secondary);line-height:1.5;white-space:pre-line;}
+
+  /* ---------- competitions ---------- */
+  .comps{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;align-items:start;}
+  .comp{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface-1);display:flex;flex-direction:column;}
+  /* headers sat at three different heights across a row of cards, because
+     one promo had no countdown chip and an ended one set its glyph a
+     point smaller — pin the chip's line box and the header's min height */
+  .comp .hd{background:var(--navy);color:var(--on-navy);padding:14px 17px;display:flex;align-items:center;gap:12px;min-height:80px;}
+  .comp .hd b{font-size:14.5px;font-weight:650;}
+  .comp .hd .left{min-width:0;}
+  .comp .hd span{display:block;font-size:11.5px;color:var(--on-navy-soft);font-weight:500;margin-top:2px;}
+  .comp .days{margin-left:auto;background:rgba(255,255,255,.13);border-radius:8px;padding:6px 11px;text-align:center;flex:none;}
+  .comp .days b{display:block;font-size:16px;line-height:21px;font-weight:650;font-variant-numeric:tabular-nums;}
+  .comp .days span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--on-navy-soft);}
+  .comp .bd{padding:15px 17px;font-size:13px;color:var(--text-secondary);line-height:1.55;}
+  .comp .ctext{white-space:pre-line;}
+  .comp.isended .hd{background:var(--navy-3);}
+  .comp.isended .hd .days b{font-size:15px;line-height:21px;}
+  .comp .prize{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:640;color:var(--gold-ink);background:var(--wash3);border-radius:9px;padding:8px 12px;margin-top:11px;}
+  .standings{margin:0 17px 15px;border-top:1px solid var(--grid);padding-top:11px;}
+  .standings .srow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13.5px;}
+  .standings .srow .r{width:20px;font-weight:700;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;}
+  .standings .srow b{font-weight:620;}
+  .standings .srow .v{margin-left:auto;font-weight:650;font-variant-numeric:tabular-nums;}
+  .standings .lbl{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px;}
+
+  /* ===================================================================
+     DOCUMENTS — newsletter, reports, resources
+     =================================================================== */
+  .latestnl{display:flex;gap:16px;align-items:center;border:1px solid var(--border);border-radius:12px;padding:16px;background:var(--surface-2);}
+  .nlthumb{flex:none;width:56px;height:72px;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:center;}
+  .latestnl .info{min-width:0;}
+  .latestnl .info b{display:block;font-size:15px;font-weight:640;}
+  .latestnl .info span{font-size:12.5px;color:var(--text-secondary);}
+  .latestnl .open{margin-left:auto;flex:none;}
+  .filelist .frow{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--grid);}
+  .filelist .frow:last-child{border-bottom:0;}
+  .fico{flex:none;width:32px;height:32px;border-radius:8px;background:var(--wash);display:flex;align-items:center;justify-content:center;color:var(--ord-2);}
+  .fico.red{background:var(--wash2);color:var(--s2);}
+  .fico.gold{background:var(--wash3);color:var(--gold);}
+  .frow .fi{min-width:0;}
+  .frow .fi b{display:block;font-size:13.5px;font-weight:620;overflow-wrap:anywhere;}
+  .frow .fi span{font-size:11.5px;color:var(--muted);}
+  .frow .open{margin-left:auto;flex:none;}
+  .cat{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 2px;}
+  .cat:first-child{margin-top:0;}
+  a.filelink,button.filelink{
+    font:inherit;font-size:12.5px;font-weight:640;color:var(--text-primary);text-decoration:none;
+    border:1px solid var(--border);border-radius:8px;padding:6px 12px;background:var(--surface-1);
+    white-space:nowrap;cursor:pointer;display:inline-block;
+  }
+  a.filelink:hover,button.filelink:hover{background:var(--hover);}
+  .yearhd{
+    display:flex;align-items:center;gap:9px;width:100%;background:transparent;border:0;
+    border-top:1px solid var(--grid);margin-top:14px;padding:14px 0 4px;cursor:pointer;
+    font:inherit;color:var(--text-secondary);font-weight:700;font-size:11px;letter-spacing:.09em;
+    text-transform:uppercase;text-align:left;
+  }
+  .yearhd:hover{color:var(--text-primary);}
+  .yearhd .chev{font-size:9px;color:var(--muted);transition:transform .15s;display:inline-block;}
+  .yearhd[aria-expanded="true"] .chev{transform:rotate(90deg);}
+  .yearhd .count{margin-left:auto;font-size:11px;color:var(--muted);font-weight:500;letter-spacing:0;text-transform:none;}
+  .yearhd.static{cursor:default;border-top:0;margin-top:0;padding-top:0;}
+  .yearbody[hidden]{display:none;}
+  .yearbody .cat:first-child{margin-top:12px;}
+
+  /* ===================================================================
+     TABLE REPORT VIEWER
+     =================================================================== */
+  .tvOverlay{display:none;position:fixed;inset:0;background:rgba(8,20,45,.55);z-index:120;padding:22px;}
+  .tvOverlay.on{display:flex;}
+  .tv{background:var(--surface-1);border-radius:14px;max-width:1320px;width:100%;margin:auto;max-height:92vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg);overflow:hidden;}
+  .tv-hd{padding:15px 20px;border-bottom:1px solid var(--grid);display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .tv-hd h3{margin:0;font-size:15px;font-weight:650;padding-left:12px;border-left:3px solid var(--ord-3);}
+  .tv-hd .sub{font-size:12.5px;color:var(--text-secondary);}
+  .tv-hd .right{margin-left:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap;}
+  .tv-hd input{font:inherit;font-size:13px;border:1px solid var(--border);border-radius:9px;padding:7px 11px;width:200px;background:var(--surface-1);color:var(--text-primary);}
+  .tv-tabs{display:flex;gap:5px;flex-wrap:wrap;padding:10px 20px 0;background:var(--surface-2);border-bottom:1px solid var(--grid);}
+  .tv-tabs:empty{display:none;}
+  .tv-tabs button{font:inherit;border:1px solid var(--border);border-bottom:0;background:var(--surface-1);border-radius:9px 9px 0 0;padding:7px 14px;font-size:12.5px;font-weight:640;color:var(--text-secondary);cursor:pointer;}
+  .tv-tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .tv-bd{overflow:auto;flex:1;}
+  table.datatable{border-collapse:collapse;width:100%;font-size:13px;}
+  table.datatable th{position:sticky;top:0;background:var(--navy);color:#fff;font-size:11px;letter-spacing:.04em;font-weight:600;padding:10px 12px;text-align:left;white-space:nowrap;z-index:2;}
+  table.datatable td{padding:8px 12px;border-bottom:1px solid var(--grid);white-space:nowrap;}
+  table.datatable tbody tr:nth-child(even) td{background:var(--surface-2);}
+  table.datatable tbody tr:hover td{background:var(--wash);}
+  table.datatable td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
+  .tv-ft{padding:10px 20px;border-top:1px solid var(--grid);font-size:11.5px;color:var(--muted);background:var(--surface-2);}
+
+  /* ===================================================================
+     DRILL-DOWN
+     =================================================================== */
+  .modal{position:fixed;inset:0;background:rgba(8,20,45,.55);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;z-index:130;overflow:auto;}
+  .modal.open{display:flex;}
+  .modal .sheet{background:var(--surface-1);border-radius:16px;max-width:880px;width:100%;padding:22px;box-shadow:var(--shadow-lg);}
+  .drill-hd{display:flex;align-items:center;gap:13px;margin-bottom:4px;flex-wrap:wrap;}
+  .drill-hd .av{width:44px;height:44px;border-radius:11px;background:var(--wash);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:var(--ord-3);flex:none;}
+  :root[data-theme="dark"] .drill-hd .av{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .drill-hd .av{color:var(--ord-1);}}
+  .drill-hd h2{margin:0;font-size:20px;font-weight:660;letter-spacing:-.015em;}
+  .drill-hd .sub{font-size:12.5px;color:var(--text-secondary);margin-top:2px;}
+  .drill-hd .xbtn{margin-left:auto;}
+  .chiprow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:16px 0 4px;}
+  .chip{background:var(--surface-1);padding:12px 13px;text-align:center;}
+  .chip .cl{font-size:9.5px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;}
+  .chip .cv{display:flex;justify-content:center;gap:18px;margin-top:7px;}
+  .chip .cv b{font-size:19px;font-weight:650;font-variant-numeric:tabular-nums;}
+  .chip .cv .cq{color:var(--s1);} .chip .cv .cn{color:var(--s2);}
+  .chip .cv small{display:block;font-size:8.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;}
+  .trendcard{border:1px solid var(--border);border-radius:12px;padding:15px 17px;margin-top:16px;}
+  .trend-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px;}
+  .trend-top h3{margin:0;font-size:11px;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;font-weight:700;}
+  .perseg{display:inline-flex;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:3px;}
+  .perseg button{font:inherit;border:0;background:transparent;padding:5px 13px;border-radius:6px;font-weight:640;color:var(--text-secondary);cursor:pointer;font-size:12.5px;}
+  .perseg button.active{background:var(--navy);color:#fff;}
+  .trend-top .legend{display:flex;gap:15px;margin-left:auto;font-size:12.5px;color:var(--text-secondary);font-weight:500;align-items:center;}
+  .legend .sw{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--s1);margin-right:6px;vertical-align:-1px;}
+  .legend .swn{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--s2);margin-right:6px;vertical-align:-1px;}
+  .chartwrap{position:relative;}
+  .chartwrap svg{display:block;width:100%;height:auto;}
+  .chartwrap rect.hov{fill:transparent;}
+  .chartwrap rect.hov:hover{fill:var(--wash);}
+  .ctip{position:absolute;pointer-events:none;background:var(--surface-1);border:1px solid var(--border);color:var(--text-primary);font-size:12.5px;border-radius:9px;padding:8px 11px;box-shadow:var(--shadow);display:none;white-space:nowrap;z-index:5;transform:translate(-50%,-112%);}
+  .ctip .tq{color:var(--s1);font-weight:650;} .ctip .tn{color:var(--s2);font-weight:650;}
+  .trend-empty{padding:30px 10px;text-align:center;color:var(--muted);font-size:13px;line-height:1.5;}
+  .prodlist{margin-top:16px;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .prodlist .pl-hd{background:var(--surface-2);padding:11px 16px;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--text-secondary);}
+  .prodlist .pl-hd span{color:var(--muted);font-weight:500;letter-spacing:0;text-transform:none;}
+  .plcols{display:grid;grid-template-columns:1fr 74px 74px 16px;gap:8px;padding:9px 16px 4px;font-size:9px;font-weight:700;letter-spacing:.07em;color:var(--muted);}
+  .plcols div:nth-child(2),.plcols div:nth-child(3){text-align:center;}
+  .plrow{display:grid;grid-template-columns:1fr 74px 74px 16px;gap:8px;align-items:center;padding:10px 16px;border-top:1px solid var(--grid);cursor:pointer;}
+  .plrow:hover{background:var(--hover);}
+  .plrow .who2{display:flex;align-items:center;gap:11px;min-width:0;}
+  .plrow .av2{width:29px;height:29px;border-radius:8px;background:var(--wash);color:var(--ord-3);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;}
+  :root[data-theme="dark"] .plrow .av2{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .plrow .av2{color:var(--ord-1);}}
+  .plrow .nm2{font-weight:620;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .plrow .pv{text-align:center;font-weight:650;font-size:14px;border-radius:7px;padding:4px 0;font-variant-numeric:tabular-nums;}
+  .plrow .pv.q{background:var(--wash);color:var(--ord-3);}
+  .plrow .pv.n{background:var(--wash2);color:var(--s2);}
+  :root[data-theme="dark"] .plrow .pv.q{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .plrow .pv.q{color:var(--ord-1);}}
+  .plrow .chev2{color:var(--inert);font-size:13px;}
+
+  /* ===================================================================
+     ADMIN
+     =================================================================== */
+  .adminbar{display:none;margin-top:18px;background:var(--wash3);border:1px solid var(--gold);border-radius:12px;padding:11px 16px;font-size:13px;color:var(--text-primary);align-items:center;gap:11px;flex-wrap:wrap;}
+  .adminbar.on{display:flex;}
+  .adminbar b{color:var(--gold-ink);}
+  .drawer{display:none;position:fixed;inset:0;background:rgba(8,20,45,.5);z-index:100;}
+  .drawer.on{display:block;}
+  .panel{position:absolute;top:0;right:0;bottom:0;width:min(720px,100%);background:var(--surface-1);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;}
+  .panel-hd{padding:17px 22px;border-bottom:1px solid var(--grid);display:flex;align-items:center;gap:12px;}
+  .panel-hd h2{margin:0;font-size:16px;font-weight:660;}
+  .panel-hd .x{margin-left:auto;}
+  .ptabs{display:flex;gap:4px;padding:10px 16px 0;border-bottom:1px solid var(--grid);flex-wrap:wrap;background:var(--surface-2);}
+  .ptabs button{font:inherit;border:1px solid transparent;border-bottom:0;background:transparent;padding:8px 13px;font-size:12.5px;font-weight:640;color:var(--text-secondary);cursor:pointer;border-radius:9px 9px 0 0;}
+  .ptabs button.on{background:var(--surface-1);color:var(--text-primary);border-color:var(--border);}
+  .panel-bd{flex:1;overflow:auto;padding:18px 22px;}
+  .panel-ft{padding:13px 22px;border-top:1px solid var(--grid);display:flex;gap:9px;align-items:center;background:var(--surface-2);flex-wrap:wrap;}
+  .dirty{font-size:12px;font-weight:650;color:var(--gold-ink);display:none;}
+  .dirty.on{display:inline;}
+  .pubstat{font-size:12px;font-weight:600;color:var(--muted);margin-left:auto;}
+  fieldset.box{border:1px solid var(--border);border-radius:12px;margin:0 0 16px;padding:14px 16px;}
+  fieldset.box legend{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:0 6px;}
+  .frm{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .frm .full{grid-column:1/-1;}
+  .frm label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:4px;letter-spacing:.03em;}
+  .frm input[type=text],.frm input[type=date],.frm input[type=password],.frm select,.frm textarea{
+    width:100%;border:1px solid var(--border);border-radius:9px;padding:8px 10px;font-size:13px;
+    font-family:inherit;color:var(--text-primary);background:var(--surface-1);
+  }
+  .frm textarea{min-height:64px;resize:vertical;}
+  .itemrow{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:7px;background:var(--surface-1);}
+  .itemrow .t{min-width:0;flex:1;}
+  .itemrow .t b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .itemrow .t span{font-size:11.5px;color:var(--muted);}
+  .itemrow.broken{border-color:var(--str-2);background:var(--wash2);}
+  .drop{border:2px dashed var(--axis);border-radius:12px;padding:22px;text-align:center;color:var(--muted);font-size:13px;background:var(--surface-2);cursor:pointer;}
+  .drop.hover{border-color:var(--s1);background:var(--wash);}
+  .drop b{color:var(--text-primary);}
+  .stagechip{display:inline-flex;align-items:center;gap:7px;background:var(--washg);color:var(--good);border-radius:999px;font-size:12px;font-weight:650;padding:5px 6px 5px 11px;margin:6px 6px 0 0;}
+  .chipx{border:0;background:rgba(12,163,12,.16);color:var(--good);border-radius:50%;width:18px;height:18px;line-height:1;font-size:10px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;font-family:inherit;}
+  .chipx:hover{background:var(--wash2);color:var(--s2);}
+  .nofile{color:var(--str-2);font-weight:700;}
+  .pinflag{font-size:8.5px;font-weight:700;background:var(--wash3);color:var(--gold-ink);border-radius:4px;padding:1px 5px;margin-left:6px;letter-spacing:.04em;vertical-align:1px;}
+  table.gridedit{width:100%;border-collapse:collapse;font-size:12.5px;}
+  table.gridedit th{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px;border-bottom:1px solid var(--axis);}
+  table.gridedit td{border-bottom:1px solid var(--grid);padding:2px;}
+  table.gridedit input{width:100%;border:1px solid transparent;border-radius:6px;padding:6px;font-size:12.5px;background:transparent;color:var(--text-primary);font-family:inherit;}
+  table.gridedit input:focus{border-color:var(--s1);background:var(--surface-1);outline:none;}
+  .num{max-width:64px;}
+  .msg{border-radius:10px;padding:10px 13px;font-size:12.5px;font-weight:600;margin-top:9px;display:none;}
+  .msg.ok{display:block;background:var(--washg);color:var(--good);}
+  .msg.err{display:block;background:var(--wash2);color:var(--str-2);}
+
+  /* ===================================================================
+     ACCESSIBILITY
+     =================================================================== */
+  :focus-visible{outline:2px solid var(--focus);outline-offset:2px;}
+  /* on navy the light-mode focus colour is 1.7:1 — invisible */
+  .appbar :focus-visible,.card.navy :focus-visible{outline-color:#fff;}
+  /* the search boxes killed the ring outright; keep it for keyboard use */
+  .searchbox:focus:not(:focus-visible){outline:none;}
+  .a2hs{
+    display:none;align-items:center;gap:13px;margin:0 0 18px;padding:12px 15px;
+    background:var(--surface-1);border:1px solid var(--border);border-radius:12px;
+  }
+  .a2hs.on{display:flex;}
+  .a2hs .ic{
+    width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;flex:none;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .a2hs .tx{min-width:0;flex:1;}
+  .a2hs .tx b{display:block;font-size:13.5px;font-weight:640;color:var(--text-primary);}
+  .a2hs .tx span{font-size:12.5px;color:var(--text-secondary);line-height:1.45;}
+  .a2hs .tx kbd{
+    font:inherit;font-size:12.5px;font-weight:700;background:var(--wash);
+    color:var(--ord-3);border-radius:5px;padding:1px 6px;
+  }
+  :root[data-theme="dark"] .a2hs .tx kbd{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .a2hs .tx kbd{color:var(--ord-1);}}
+  .a2hs .x{
+    flex:none;background:transparent;border:0;color:var(--muted);font:inherit;font-size:17px;
+    line-height:1;cursor:pointer;padding:6px 4px;border-radius:6px;
+  }
+  .a2hs .x:hover{color:var(--text-primary);background:var(--hover);}
+  @media(max-width:520px){
+    .a2hs{align-items:flex-start;}
+    .a2hs .ic{display:none;}
+  }
+  .previewbar{
+    display:none;background:#3b2a02;color:#ffd479;border-bottom:1px solid #6b4d05;
+    font-size:12.5px;font-weight:650;padding:7px 22px;text-align:center;letter-spacing:.01em;
+  }
+  .previewbar.on{display:block;}
+  .previewbar b{color:#fff;letter-spacing:.06em;text-transform:uppercase;font-size:11px;margin-right:8px;}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;padding:10px 16px;border-radius:0 0 10px 0;z-index:200;font-weight:700;font-size:13px;text-decoration:none;}
+  .skip:focus{left:0;}
+  .sronly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;} html{scroll-behavior:auto;}}
+
+  footer.hubfoot{margin:30px 0 0;text-align:center;color:var(--muted);font-size:12px;line-height:1.7;}
+  footer.hubfoot b{color:var(--text-secondary);}
+
+  /* ===================================================================
+     RESPONSIVE — every breakpoint checked against a rendered screenshot
+     =================================================================== */
+  @media(max-width:1240px){
+    .datebox{display:none;}
+  }
+  @media(max-width:1040px){
+    /* clamp a long date, but never the run-out-of-calendar message, which
+       is the whole content of the chip in that state */
+    .foliochip:not(.nodata) .fd{max-width:170px;overflow:hidden;text-overflow:ellipsis;}
+    /* below this the subtitle wrapped to "DISTRICTS 32 & / 49" and the
+       squeeze ellipsised the folio date — drop the prefix instead */
+    .ident p .long{display:none;}
+  }
+  @media(max-width:900px){
+    /* Name is the slack column at every width now that the bar is gone;
+       the metrics just get tighter. */
+    table.board thead th:nth-child(3),table.board thead th:nth-child(4){width:108px;}
+    .podium{grid-template-columns:1fr;}
+    /* the four tabs plus a right-aligned tool chip stop fitting at about
+       810px; measured on the rendered bar. Below that the chip leads the
+       scroller instead of being clipped against the right edge. */
+    .toolchip{order:-1;margin-left:0;margin-right:8px;flex:none;align-self:center;}
+  }
+  @media(max-width:760px){
+    .wrap,.barin{padding-left:14px;padding-right:14px;}
+    /* A sticky header on a 844px screen has to earn every pixel. Identity
+       and the two actions share one line; the folio deadline takes a
+       second, single-line row. Measured at 390px: ~150px total. */
+    .bar1{gap:9px;padding:9px 0;flex-wrap:wrap;}
+    .logos{gap:5px;padding:5px 7px;}
+    .dlogo{height:18px;}
+    .ident h1{font-size:14.5px;}
+    .ident p{font-size:9px;letter-spacing:.07em;}
+    .ident p .long{display:none;}
+    .bar1 .acts{gap:6px;flex:none;}
+    .ibtn{padding:6px 9px;font-size:12px;}
+    /* one line on a phone: label, date, count, unit */
+    .foliochip.on{order:3;width:100%;grid-template-columns:auto 1fr auto auto;column-gap:8px;padding:6px 12px;}
+    .foliochip .fl{grid-column:1;margin-bottom:0;}
+    .foliochip .fd{grid-column:2;font-size:12.5px;}
+    .foliochip .fn{grid-column:3;font-size:16px;margin-left:0;padding-left:0;border-left:0;}
+    .foliochip .fu{grid-column:4;}
+    /* tabs become a swipeable row; the active tab is scrolled into view */
+    .bar2{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .bar2::-webkit-scrollbar{display:none;}
+    .tab{flex:none;padding:11px 12px;font-size:13px;}
+    .toolchip{order:-1;margin-left:0;margin-right:6px;flex:none;align-self:center;}
+    .view{padding-top:16px;}
+    .viewhd h2{font-size:21px;}
+    .card-hd{padding:15px 16px 0;}
+    .card-bd{padding:14px 16px 18px;}
+    .cap{padding-left:31px;padding-right:16px;}
+    /* Six stacked filter groups cost ~300px before the first name. A
+       two-up grid halves that and still shows every control. */
+    .filterbar{display:grid;grid-template-columns:1fr 1fr;padding:12px 16px;gap:12px 12px;align-items:end;}
+    .filterbar .seg{width:100%;}
+    .filterbar .seg button{flex:1;text-align:center;}
+    #segPeriod{width:100%;}
+    .filterbar .fgroup:nth-child(3){grid-column:1/-1;}
+    #staffOnlyWrap .flabel{display:none;}
+    #staffOnlyWrap .switch{height:auto;}
+    #boardFindWrap{grid-column:1/-1;margin-left:0!important;}
+    .boardnote{margin-left:16px;margin-right:16px;}
+    .seg button{padding:6px 8px;font-size:12px;}
+    .fignum{font-size:40px;}
+    .fig{padding:15px 17px 17px;}
+    .fignote{display:none;}
+    .figsplit{display:none;}
+    /* A truncated name on a leaderboard is the one thing this table must
+       never do — below the tablet breakpoint the name and its agency wrap
+       to a second line instead of ellipsing. Rows get taller; phones have
+       vertical space and do not have horizontal space. */
+    table.board .pname{align-items:flex-start;}
+    table.board .pname .avatar{margin-top:1px;}
+    table.board .pname .nm b,table.board .pname .nm .sub2{white-space:normal;overflow:visible;text-overflow:clip;}
+    /* block, not flex: as a flex row the chip and the agency are two items
+       and a tight cell drops the whole agency to its own line. Inline, the
+       agency text wraps where it needs to and the chip stays put. */
+    table.board .pname .nm .sub2{display:block;}
+    table.board .pname .nm .sub2 .dchip{margin-right:6px;vertical-align:1px;}
+    /* the flag, the text and the link each get their own line rather than
+       the link floating beside a six-line paragraph */
+    .strip,.strip.on{display:block;padding:12px 15px;}
+    .strip .flag{display:inline-block;margin-bottom:8px;}
+    .strip a{display:inline-block;margin-left:0;margin-top:8px;}
+    .cols2{grid-template-columns:1fr;gap:14px;}
+    .comps{grid-template-columns:1fr;}
+    .boardwrap{max-height:none;}
+    table.board th,table.board td{padding:9px 8px;}
+    .latestnl{flex-wrap:wrap;padding:14px;gap:13px;}
+    .latestnl .open{margin-left:0;width:100%;text-align:center;}
+    .nlthumb{width:50px;height:64px;}
+    .searchbox{width:100%;}
+    .card-hd .right{width:100%;}
+    .tvOverlay{padding:0;}
+    .tv{border-radius:0;max-height:100vh;height:100%;}
+    .tv-hd{padding:12px 15px;}
+    .tv-hd .right{width:100%;margin-left:0;}
+    .tv-hd input{flex:1;width:auto;}
+    .modal{padding:0;}
+    .modal .sheet{border-radius:0;min-height:100vh;padding:16px;}
+    .chiprow{grid-template-columns:repeat(2,1fr);}
+    .drill-hd{flex-wrap:nowrap;gap:10px;}
+    .drill-hd > div:not(.av){min-width:0;}
+    .drill-hd h2{font-size:17px;overflow:hidden;text-overflow:ellipsis;}
+    .drill-hd .av{width:38px;height:38px;font-size:13px;}
+    .drill-hd .xbtn{flex:none;align-self:flex-start;}
+    .trend-top .legend{margin-left:0;width:100%;font-size:12px;}
+    .plcols,.plrow{grid-template-columns:1fr 58px 58px 14px;}
+    .frm{grid-template-columns:1fr;}
+    .panel-hd,.panel-bd,.panel-ft{padding-left:15px;padding-right:15px;}
+    .ptabs{padding-left:10px;padding-right:10px;}
+  }
+  @media(max-width:620px){
+    table.board .c-rank{width:34px;}
+    table.board thead th:nth-child(3),table.board thead th:nth-child(4){width:76px;}
+    table.board .c-chev{width:22px;}
+    .chevcell{padding-right:6px!important;}
+  }
+  @media(max-width:430px){
+    .pod{padding:12px 13px;}
+    .pod .val b{font-size:19px;}
+    table.board .c-rank{width:28px;}
+    table.board thead th:nth-child(3),table.board thead th:nth-child(4){width:62px;}
+    table.board .c-chev{width:18px;}
+    .chevcell{padding-right:4px!important;}
+    table.board th,table.board td{padding:9px 6px;}
+    /* on a 390px screen the name has to win the argument with the avatar */
+    table.board .pname .avatar{display:none;}
+    .fignum{font-size:36px;}
+    a.filelink,button.filelink{padding:5px 10px;font-size:12px;}
+    .datebadge{width:42px;}
+  }
+</style>
+
+<body>
+<div class="previewbar" id="previewBar" role="status">
+  <b>Preview</b>Test copy of the District Hub — not the version agents see. Changes made here are not published.
+</div>
+<a class="skip" href="#view-board">Skip to the scoreboard</a>
+
+<!-- ===================================================================
+     APP BAR
+     Row 1: who this is, what the deadline is, and the two account
+     actions. Row 2: the four sections, plus standalone tools.
+     =================================================================== -->
+<header class="appbar">
+  <div class="barin">
+    <div class="bar1">
+      <div class="logos">
+        <img class="dlogo" alt="District 32 — Waco, TX" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMEAAABICAMAAAB4I2G+AAAAwFBMVEX///////3+//78/////v7+/v/+/v7+/v39/v7//f39/f78/f78/f38/fz8/P37/fz7/P77/P37/Pz7/Pv6/Pv5+vrz8/Tn6u7c4efh2N/I1+K/0N7bwMmvxtqtwtaats6VscuTsMqQrciPrciSq8iNrMiNq8mNq8iMq8eSqcOHpcXbhJJxlrpojrdYgq05bKEqYpsTUZEKS44HRYoCQ4oAQ4sAQYkAP4gAO4YAOoUAOIMAL34ALHkAK3sAK3kAKnyPufZDAAAIf0lEQVR42u2bCXfiOBKASzI2wlxjiA+MA909PZsMBt830z3//19tlWyObtI9S9Jvd/OelYBtUSXXJ1WVJIcAvP+y3j3/652Wpz92jxrA/uvx63stx68BjsHuGHx8/v09lqePh2ZPBH9v328EfGkJPhim8R6LaWyOHQEs3uUITOCxJ+gJeoKeoCfoCXqCnqAn6Al6gp6gJ/hvFlV9HcF0OV+eysLgKL1YiPYjzVgsODW9mNMHwBcoM1/gvlUK6Iv54qKJahMu1dhksWxbEMb81DjKapoxnzKq5zNj3N5hsZzIGpgb8kaTN48BG47oXfYGY7KCCTryAQh2kdM1GH6nia+2Sqe3IV7z7yRYJ9bSdUIwRC0xxaNl4eVEvZNAg8+H6+Kw5e4QrMkKDWyssAfjgUNHpjOnE9pvHYCx9ukbTWxnb0mjp7vDYavp2MYmuBIIXDc47M2u4d0ST6jFvcmQhq0PURSFBxf48D4CAeGxqpu6aWoqjQvLqDnuwKCudLHWwdN10xS2PKIclrpKD9ZEasoKUqw+ZM1xAzPQVRfF1jBGhcNflWyV3qq/N+tjXTogFrA51pkNYgbb4zHUhM7soKpK/K3LgzlU7yQIqiQ9l8yFaZiVH1sCJ00TInCzNLbbYxJjycv8GJoQlKTZaZfOvsrC4RR+g0OVBTAZoMK+ubSd1BsrSYs1TJCsSspHOtmX5R5MYYVNUqZRlJVpEyzRQ++KA8fFn31VRC4Vi7GwqD91BFmeSoIiT+zu6Fq27aLtzQY1XdfZVXmraTppjh1gaHacFzQEwFWbJLaotSZZaxgVNXYOH4aovwdDx06otmCyQ5NUgWNZLn2wg/krInlbF1EbbdN/ILBlLIZlFZw081ZzwtATDmDCU12GTG+DjIpb5rHVxrqUeAAnyZMqHOrosSVCMzdLamxOG6IDlBkOt3oXgdB1U/+IY/Cgj3WdD4ngj7Gp68bYfYlAHaumvmvKEMakuUVNkzSnHMVjWzWjolx33ahhK/oaCWx9pusPsCO4B9g0cVihoWDHJcHtGzRbNThHuDTD/pvdOwYGfEA72hQuCT50DvYSgaYLE5AgoHxowBa9aCFTkMHQJ57gsSrDoTgn0jFIAhqPCZ4WkSVgfwyxy9Y4PBl2hPqAznWgUQeYYRtlwMQrCOorAoyutSzbF70Iixll9Z7uSQRFR4C2ZmWEvlRuYAwvEAiwE2pQC4+BW6C/ozJ6FdXWW1USGOquySPzxo3uJcjyoi35y5H8iAFXujRnXBPAnIV1+hxX4fKqD68IYIB+jznIjpudGdchg31VfaCRyNHvJq0lGFfoWNpbCUo5OdTVDQGm1ThOqjLHVLKE7wnQ2CxNq03rEbcEEwrlHWwqxJCBELS+VOSF287kM9jUJ+k3EYTdLHrrRTlOYHmaRp/YTHxPwMUwrNIyMsUPxsDAUEa32TexA/s6c1kk47kdA+l4y18zBj+L5DQ4BGmO3Wx2mlcEaMSmTDDBX6eSa4IxPJYYusExXKJkvbUwp07FdRw8qLv6F8QBZlPDnM9N46VsiskPxz6yZuotgUbG5C7Xf0BAxpaRFTUYvg7OaU6B08ADv8pFc0oEb89FRfWTGc0xxpizm2dcPbxA4BAB/IiAYxKr4nXcbGGOy69wU9VPsMRFBnmOTolBxS5o/nzVfPDtGPx0Tn7oZiDxMkHxYwK8CJpkn2GjJhya6FDSMommiQSTMx/PaHzT5DaQfzHBbGLHGQ774n4CDOUmiTDWUXnbJHGBzQmYMuQqcWmOq+6KFkwTeAUB5p+WgLMwq85r06xbm2bd2pSOmrQjPc0HZRYtrwiy7Iag1YIulJO0CthYNp61qhNhR3VSxUEY48IuNHX1FQSfjk03BoLh/uC52x/gir3dH1RZtz/IqdN0DEa8k8aJADWvCIqqviFoqrQjEODkdUHNY0jETXEMZBJFnLApy6ouyyawmHr/LnPMNmEYtHsjMT2E4YaN5e3CMHQwrOhoYyuuPGowBZQPyVLsVNR8uOQiqXFNoJ+12lAOSBOTjWB7PNuycWvgwzaMkyQONuw2CP6T1bXcryqtF01PO1rcItOWcdheoQinI63ZGO3X2bLb/DJ23hdyImE32+MrCdmYvJT3PMkKvIvtOJbcgL9qp4/L4JMmF0J04zjQdbnIxCqNtgUXKaHj1rDVHIqrjS0p85v1+7WEODc/FNTs6UmLnOJhPOPv+HmRdu65/pldT9AT9AQ9QU/QE/QEPUFP8E9lcHM6oONgdPlgJC8Go9GN2pXQ/3AMOAxYZxSXpkvTutcLxO0jFkIY/F+MwcwSA+W3iWVpA2HRMztFWa2wyvJWimgttlZYJpq9Wlnq0lIUS+XCtARoiunZQvsFBB/v/t715a6DmW9x31P8FR9NfQ9mmuX73kxb+Z7v8ZEkWHlYtQB8s0emb618vlQ8fzkg0ZW4jJR29/euTwT3f/f9susdge+hIZY/JKt8c6kgBsywFizfHJCjaBx8G5ZYZVszWPm+PZyZiMOntm8rhnL2Rna3Hd1335vg8+75rrKz+WkUBhx7G63yYGT4ZJaC1hIX7s/pRR4/GvkrjGL8dKWNFN9XRoCwSEu6yulhogr2n3ea8dT+/8H+S/Plr/vK1/Xl7zEj7vtokEVWoYOYeFhZS7rwfCHMlZA8K/lmmtj5nudrJsqgmoUyyvT8J2DnrzsN+XL8EmAnrne/f76zPNuadnEjz9NsdHnmYZfjS8GOHWtz7GVrho6FHT5SPRtJsWbFLU9RPNNCT7M8Qe53fmRBY/B0ryX0fzjaW+cVzrkK5FWcy0RJkanhNbmP4lkqZU16ZKR1f4odkSgMNeDd8643Psygr5rcX755AIIuLucAmp3kUU5TNIvxmaJo54lrNOok2l/SGX07o73CEh3+Dd41PvGVPnYOAAAAAElFTkSuQmCC">
+        <img class="dlogo" alt="District 49 — Arizona" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAABICAMAAABcOu5+AAAAwFBMVEX///////7+/////v7+/v/+/v7///3+/v3+/vz9//79/v78/v79/v38/v39/vz6/v3//f7+/f/+/f7+/f3+/P79/f78/f38/P3+/fv8/fz8/Pz7/f37/fz7/Pz7/Pr6/Pz8+/v7+/z7+/r7+/j6+/r89/f1+fnr8PPm7PDk6u/i6+/e5erP0tq7sr1/m7Oej6Jxkaxwj6psjapqiadjhKOGdIw/aJEoVoUXS34VSHwTRHkORn8OQnkOQXUKPXQENW58YNMtAAALRElEQVR42u2aDXeivBKAo20EwoddNYooH7YoVsBPFlAQ//+/upMglrZ2391u33PruXdOLUkYksdhMkwwiGAsqxqlMogKItdErRooiKK+lUqjVpffKSlnoVcvla/1UTXy69hR6Ha7PSIqCGNsupbL5JFJvfCqwa3LK826XG181d/bQdx311/tw5RlHWFJQjchukwR7qNwt65ks9mcD5ttVdis38vmlfq5fE2j3nNdY7Nltc0W5IMhXslyHYqGjAQLbU/7A5Mjk+pYSlE2HT+Qorhevq58tc47fzfAoY5xOOzT0xY5MhIttD4G3vN8/syFHRcgzy8yn79p+JVUmuwS/82JxRvNajz4LM5ypcf5fO75h3UFW/jf210byDvWYEV3NH4Rg8lLdTRi9eH4d6S6dPi6C2hgck1zVA1gvL3kMrwtPB9KN3jkljU7NSEg+JcNHwquNNklr04wuapZaX84iD5G8/2OwQol7BB/Y6nDbm4BdlvBnm7JsqebsazFYcf/h/3fhF0cdjcHK5awo+8fDaxbgi0ft7cAe4huB3aR12HN7w67QxPCfHZ3A5Y97pD5J7AE1uP/Tcv+EvacDpsmR6QmhpydlhWsWZZlGAPTYFU4mCZTNExDhBMCLi8462I4M+AFwXq0xMsZapTNojh8NJgxeAfs79oE47Ddx+uwRH9ZVvSJbiPU9uYzhO5tRRGVxmXF4Sjt+grkDj6iSgTJ4MtnSsqOGgP21BFZkyA2+MJaYwqO/NBVNa4p1pYxChbew1oUda7DUjxbVhJgx0aLZRwncRR6aED0ln8+BVVdCpcvwk54Sl+wGgGcJYaoY3sJC2n0yHoFzZneCtjC2hXD9TKULNq1MJQ8LPovnTSMP4NteEmenUCKU4imKEyyvCiKPI895IxQUGQ5nMr3cYhQDDpFzhpOx0VU5CGa9PVZnB0DsLvemCVFkfgPfdwFzWQ2ROHptEMzGBY0kK05UEr9FgpObAg2ZIAs8hHs9hos8uI0ibgEd81wn+3j5XIDyPECfCJI03gXRXGa7QO0jFgpjeGwc4MkiT3BRmGWrtGTItPWDDrKNk2DdFCUxzMDhft8jVy0yZIs9oYDG63zhMGWfcKfj95a9vkfYME0cemOkuAl2X4NDosWUZrvJBc6ztao1ZhH+yziOtCw407YXGf7JRp6cZb4dxOZWTbO0jQNkNtBcRHPdBTmxYbBFmlaLNGELa+TBXSxP5R9oabeuRK6ABZ/ANtisDPjybYNbqZ41nBNFy2SNPUbjG1LXYA+HGIX9yeYwZIJpSbykzSeo2WWLZHB/WkW5zGzoamjCGA1FB6LNbjBpojjPPUBGyy74H1GE/5SjujKh7C7j2FRo9FqTuCO5UvkYtyHjlmRdbwZzKZ3wSGLR5gMSstCJOrYnHOWZMlC7J9hi90yB3aXww4Z7IbBnmLwrsguYXmfpWUbOnkPu61NMPMq7MLzvLn31IwO++Ae7CTaeJnnG3bLwA0gmu0ycD8Dm9zUHHakLcCMy/SwRE+4go3Aj8ARKti8hC2SeZTDdLxYdh8HTHx9RPGvosFV2DQBSZfMfWEoQIGpFR6KiMPGYbiM9+CZYECTNXDLyjozbcJuOx1eYGNwpCxycQ3WRVuA9VPoAJ999pCmWQ4hCL7mK9hOuaz5J1iIVYfTBgJDDfbIYQ9pBuEqT2IIM/CMAticw4KrYC9JEzCYTSrYU6zYUboPuWUHAMujAcD6CG7Ujtm4hE24wKR7FbnAtc5rsF+6QXlXhFGcHQIMKgTcoCi4G0Bcg8AVtxsuuPugBgtmXrL5qMn6C6zU8sGL59GJT7CsDF0AK8Ao+2B5Suaszzzy5nPPm+mqJnwEu/0QtnwpbkB8PPIJRp/AOAWbYPsjuF2cH+ABgM+WjSrY+7JCxBfY5hOfd9u3sI0G+E+0LJLnEpaPJ3TpD/znsDPDtW19Avc+Szw0MR9RABHXv2MdbwQxYB7H3AB89nCBNXilOdBl8uKzfQP6S+Ijj7Ml7PaUnONWvK9g++5kMrH7r0PXC6zgcNjBu8ctC4+zO10hIhHAabMI3Ar5cVZsEYuvcJiBxx2i0RNhbsDmXdlJVelwx9NaDFZS7EaQpPtD+VDI1/xxC7A2nUOgSDksn7r8KaSN37oBe+WpIMG4CkvOcZZ/R4NFpn2yW0ZJVsSezmAh8NlgrRQcwaFG3bKDuk/g/h186whp7Ue0PCYAyx4xWeUGCCJ3eIQJ+SxAF1n1fEdO9zqsdR1WmCWnxLvTxPP4cc5yjCKPFi0dEpnTKUKm2QBrFAGaGGWDUcGeTnHVI72DjmKk6yy3OUEiY7JEJgLLRqejj4bqUI5OxX7BEhmexYCEyH0HuzvDbq7AYhlSxHCml7DCBM3CXRRHy6DVMojRhHQubOoUYiYUsEF5wx09Z5e1CtaxGy5DURWJ1WRZozkQ2UF0BZYYtnRtKPC0EjdrKeKdLVyFPb83eLdglFnOLOoCv0rsjFhu3GRrhT5hv/WBqCKWKSsAFmHH6lKhXhEVnefakIWPeD5OeNatS+zQEgVB4HWRkFoK38X4Cqz8ISx46qS+viCm0YUFyfkO6I+PZRZnTia8iU5q2vTcWC5aBGti3PPy8LFc1pSnB/bkom6Wh7PQq8uaX8J+r5ccNwtr3wTsOXSNbgV283/Yf+XN9+Tbw3Yu72c73/+VJ8+6AFa9Fdh0y2DxjVh2e7bs14YuQv49WJhgf/EyWSIPDxzuoUOIBP0KmiorosB+ee/y5AEKEmG/0Xeg/GlYvt/gb2FJZUnSeehgSZJEvUMUTXgAwh7PR6ANE0kisvQ3lq1g/zLOEspeKJM2uR8Sohp9lTRVVSVKpy/J/PWR2abdfpvQsf7wF27wNbDd3oNCMXGmUyQRpzcgUxCn279HrKVLnfshdRxV6jq9nvQVsMWnYXuQ/q8czUHhahVO5WnoIX8FRZ1OWQt7KRIiHPpNBwWru0/uE+i8+qH587DjkROugqaLVmFvFaLp6lkCw64CGejhGDab4c8ArWAFqDG9wed/YSxhjb+AJU8oCP1VbwIGDAAGYGHZCsYciKtAAmNKUPk5DQMk+aDwQL8A9vhZWMruf/jTb3M3QDbANsEvdGK0AB1gm2BVOBUgrvf8ZnH1+7DPZSJDLA471HW9exG9lC6LljxknhtFUZbv6y4r+avAD0MMTNPVXJ6u/Kb3M5hO3bMbIOYCK/CEOdNb3TnqJdYqitDtaCB8pO6b7VEwXqfC0A3+fraEXRc+fiq3e5VS7hh7EX6CKQwGut6rrymlIETSNJw1w6AJzE/hsxSswIjTNp9gTw6cwOwrgF5zGk7p+ALb6ehPVm1325sh69vVbME/wzrcZ39bmnWHIYMnaWJbmtHv6bbktEeaJncFmGIDcwyhqzmx9XHbINK4rSL3SW86pvqy1m83f3tM9HyBZRsn597vydzT696kt0ftntx+6Ixtnfba8oB2231ZUi2L2m11pNLRcKgNR7RHRz2jLWO1T16injdneyJ/a1C/nGAKe9weDof9PuWyhxL/pGfZV8KLRYTqU1qRdV3ROoowpn1KVdrvq5qhKQrkAj1d7WqA36NyT5bZp0MlhV4eDGyn3p6NW3XP/rHdp/URK0lOEX8oGDhkvz2VsmOlHRxK4S2lbLfsbxeFgvY1uZQphNF2dxl1d2GoSNig7LNh/yO+2RdT+ofbmb8qlXQ+sY0aC2PbsSzn8XFig1gg9V3iDpOy4rq25TjCV8FKQ8uq70nnb44Mw7LYscJ4BJ0JoxixDepEEFVN7ypsd3+/32cHyiPdjx8/aLntv0+rjaNaF2tf5AVYVCVBZpv7q9BKq+3+LPgSfNnAiglrZ1v//wPySTRAkOLAHQAAAABJRU5ErkJggg==">
+      </div>
+      <div class="ident">
+        <h1>District Hub</h1>
+        <p><span class="long">Farmers Insurance · </span>Districts 32 &amp; 49</p>
+      </div>
+      <a class="foliochip" id="folioStrip" href="#reports" title="">
+        <span class="fl">Folio close</span>
+        <span class="fd" id="folioDate"></span>
+        <span class="fn" id="folioCount"></span>
+        <span class="fu" id="folioUnit"></span>
+      </a>
+      <span class="sronly" id="folioNext"></span>
+      <div class="acts">
+        <span class="datebox" id="todaybox"></span>
+        <button class="ibtn" id="btnTheme" type="button" title="Switch between light and dark">Dark</button>
+        <button class="ibtn" id="btnAdmin" type="button" onclick="adminToggle()">Admin</button>
+      </div>
+    </div>
+    <nav class="bar2" id="tabbar" aria-label="Sections">
+      <a class="tab" id="tab-board"   href="#scoreboard">Scoreboard</a>
+      <a class="tab" id="tab-reports" href="#reports">Reports &amp; Files<span class="n" id="nReports"></span></a>
+      <a class="tab" id="tab-comps"   href="#competitions">Competitions<span class="n" id="nComps"></span></a>
+      <a class="tab" id="tab-news"    href="#news">News &amp; Events<span class="n" id="nNews"></span></a>
+      <a class="toolchip" id="toolQuotePlan" href="files/nb-accelerator-quote-plan.html" target="_blank" rel="noopener">Quote Plan <span class="g" aria-hidden="true">&#8599;</span></a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- admin mode strip -->
+  <div class="adminbar" id="adminbar">
+    <b>Admin mode</b> — changes preview instantly on this page but are <b>not live</b> until you hit Publish.
+    <span class="dirty" id="dirtyFlag">● Unpublished changes</span>
+    <button class="btn sm primary" style="margin-left:auto" onclick="openPanel()">Open Editor</button>
+    <button class="btn sm" onclick="adminToggle()">Lock</button>
+  </div>
+
+  <!-- district-wide announcement: one line, above every view -->
+  <div class="strip" id="banner">
+    <span class="flag">District News</span>
+    <p id="bannerText"></p>
+    <a id="bannerLink" href="#">See more →</a>
+  </div>
+
+  <!-- shown only when content.json can't be loaded — never silently fake data -->
+  <div class="loadfail" id="loadFail" role="alert">
+    <b>This page couldn't load the district's live content.</b>
+    <span id="loadFailMsg"></span> Everything below may be blank or out of date. Refresh in a moment, and let the district office know if it keeps happening.
+  </div>
+
+  <!-- =================================================================
+       VIEW 1 — SCOREBOARD (default)
+       ================================================================= -->
+  <section class="view on" id="view-board" tabindex="-1">
+
+    <div class="card navy">
+      <div class="card-hd">
+        <h2>District production</h2>
+        <span class="sub" id="lbAsOf"></span>
+        <div class="right">
+          <span class="livepill" id="liveStatus" role="status"></span>
+          <button class="ibtn" id="btnRefresh" type="button" title="Pull the latest numbers from the district sheets">↻ Refresh</button>
+        </div>
+      </div>
+      <div class="card-bd">
+        <div class="hero2" id="lbTotals"></div>
+      </div>
+    </div>
+
+    <div class="a2hs" id="a2hs">
+      <span class="ic" aria-hidden="true">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v11"/><path d="M7.5 9.5 12 5l4.5 4.5"/><path d="M5 19h14"/></svg>
+      </span>
+      <span class="tx">
+        <b>Keep the hub one tap away</b>
+        <span id="a2hsHow"></span>
+      </span>
+      <button class="btn sm primary" type="button" id="a2hsGo" style="display:none">Add</button>
+      <button class="x" type="button" id="a2hsNo" aria-label="Dismiss">&#10005;</button>
+    </div>
+
+    <div class="movers" id="moversWrap" hidden>
+      <div class="mv-hd"><b>Biggest gains</b><span id="moversSub"></span></div>
+      <div class="mvrow" id="moversRow"></div>
+    </div>
+
+    <div class="card flush" id="scoreboard">
+      <div class="card-hd">
+        <h2>Quotes &amp; New Business leaderboard</h2>
+      </div>
+      <p class="cap">Live from the district quote &amp; sales sheets. Tap any row for that person's day-by-day and week-by-week trend.</p>
+      <div class="filterbar">
+        <div class="fgroup">
+          <span class="flabel">View</span>
+          <div class="seg" id="segView">
+            <button data-v="producer" class="on">Producers</button>
+            <button data-v="agency">Agencies</button>
+          </div>
+        </div>
+        <div class="fgroup">
+          <span class="flabel">District</span>
+          <div class="seg" id="segDist">
+            <button data-d="all" class="on">Combined</button>
+            <button data-d="32">D32</button>
+            <button data-d="49">D49</button>
+          </div>
+        </div>
+        <div class="fgroup">
+          <span class="flabel">Period</span>
+          <div class="seg" id="segPeriod">
+            <button data-p="daily">Daily</button>
+            <button data-p="weekly">Weekly</button>
+            <button data-p="monthly" class="on">MTD</button>
+            <button data-p="ytd">YTD</button>
+          </div>
+        </div>
+        <div class="fgroup">
+          <span class="flabel">Rank by</span>
+          <div class="seg red" id="segMetric">
+            <button data-m="q" class="on">Quotes</button>
+            <button data-m="n">New Biz</button>
+          </div>
+        </div>
+        <div class="fgroup" id="staffOnlyWrap">
+          <span class="flabel" aria-hidden="true">&nbsp;</span>
+          <label class="switch" title="Hides agency owners' own production so the list is just staff producers. The totals above always include everyone."><input type="checkbox" id="staffOnly" checked onchange="LB.staffOnly=this.checked;renderBoard()">Staff only</label>
+        </div>
+        <div class="fgroup" id="boardFindWrap" style="margin-left:auto">
+          <span class="flabel">Find</span>
+          <input type="search" class="searchbox sm" id="boardSearch" placeholder="Your name…" aria-label="Find a producer or agency">
+        </div>
+      </div>
+      <div class="boardnote" id="boardWarn" style="display:none"></div>
+      <div class="card-bd">
+        <div class="podium" id="podium"></div>
+        <div class="boardwrap" id="boardWrap">
+          <table class="board">
+            <thead><tr><th class="c-rank"><span class="sronly">Rank</span></th><th>Name</th><th style="text-align:right">Quotes <span class="thper" id="thQ"></span></th><th style="text-align:right">New Biz <span class="thper" id="thN"></span></th><th class="c-chev"><span class="sronly">Open trend</span></th></tr></thead>
+            <tbody id="boardBody"></tbody>
+          </table>
+        </div>
+        <p class="hint" id="lbNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       VIEW 2 — REPORTS & FILES
+       One search box across the whole library, then the newsletter,
+       the report archive and the standalone tools.
+       ================================================================= -->
+  <section class="view" id="view-reports" tabindex="-1" hidden>
+    <div class="viewhd readcol">
+      <h2>Reports &amp; Files</h2>
+      <p>Every district report, newsletter and tool in one place. One search covers all three.</p>
+    </div>
+    <div style="margin:0 0 18px"><input type="search" class="searchbox" id="libSearch" style="width:360px" placeholder="Search reports, newsletters and resources…" aria-label="Search reports, newsletters and resources"></div>
+
+    <div class="cols2">
+      <div class="card" id="reports">
+        <div class="card-hd"><h2>Reports library</h2></div>
+        <div class="card-bd filelist" id="reportList"></div>
+      </div>
+      <div>
+        <div class="card" id="newsletter">
+          <div class="card-hd"><h2>District newsletter</h2></div>
+          <div class="card-bd" id="nlArea"></div>
+        </div>
+        <div class="card" id="resources">
+          <div class="card-hd"><h2>Tools &amp; resources</h2></div>
+          <div class="card-bd filelist" id="resourceList"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       VIEW 3 — COMPETITIONS
+       ================================================================= -->
+  <section class="view" id="view-comps" tabindex="-1" hidden>
+    <div class="viewhd readcol">
+      <h2>Competitions &amp; promos</h2>
+      <p>What is running now, what it pays, and where the district currently stands.</p>
+    </div>
+    <div id="competitions"><div class="comps" id="compList"></div></div>
+  </section>
+
+  <!-- =================================================================
+       VIEW 4 — NEWS & EVENTS
+       ================================================================= -->
+  <section class="view" id="view-news" tabindex="-1" hidden>
+    <div class="viewhd readcol">
+      <h2>News &amp; Events</h2>
+      <p>District announcements and what is on the calendar next.</p>
+    </div>
+    <div class="cols2">
+      <div class="card">
+        <div class="card-hd"><h2>What's new</h2></div>
+        <div class="card-bd" id="newsList"></div>
+      </div>
+      <div class="card" id="events">
+        <div class="card-hd"><h2>Upcoming events</h2></div>
+        <div class="card-bd" id="eventList"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="hubfoot">
+    <b>District Hub</b> · created and maintained by Conrey Guy · last updated <span id="lastUpdated">—</span>
+  </footer>
+</div>
+
+<!-- ============ DRILL-DOWN (producer / agency deep dive) ============ -->
+<div class="modal drill" id="drillModal" role="dialog" aria-modal="true" aria-labelledby="drillName">
+  <div class="sheet">
+    <div class="drill-hd">
+      <button class="btn sm" id="drillBackBtn" type="button" style="display:none">← Back</button>
+      <div class="av" id="drillAv"></div>
+      <div>
+        <h2 id="drillName"></h2>
+        <div class="sub" id="drillSub"></div>
+      </div>
+      <button class="btn sm xbtn" type="button" id="drillClose">✕ Close</button>
+    </div>
+    <div class="chiprow" id="drillChips"></div>
+    <div class="trendcard">
+      <div class="trend-top">
+        <h3>Trend</h3>
+        <div class="perseg" id="drillSeg">
+          <button data-v="daily" type="button">Daily</button>
+          <button data-v="weekly" type="button" class="active">Weekly</button>
+        </div>
+        <div class="legend"><span><span class="sw"></span>Quotes</span><span><span class="swn"></span>New Business</span></div>
+      </div>
+      <div class="chartwrap" id="drillChart"></div>
+    </div>
+    <div id="drillProds"></div>
+  </div>
+</div>
+
+<!-- ============ TABLE REPORT VIEWER ============ -->
+<div class="tvOverlay" id="tvOverlay" role="dialog" aria-modal="true" aria-labelledby="tvTitle" onclick="if(event.target===this)closeViewer()">
+  <div class="tv">
+    <div class="tv-hd">
+      <h3 id="tvTitle"></h3><span class="sub" id="tvSub"></span>
+      <div class="right">
+        <input type="search" id="tvSearch" placeholder="Filter rows…" aria-label="Filter rows in this report">
+        <button class="btn" onclick="closeViewer()">✕ Close</button>
+      </div>
+    </div>
+    <div class="tv-tabs" id="tvTabs"></div>
+    <div class="tv-bd" id="tvBody"></div>
+    <div class="tv-ft" id="tvFoot"></div>
+  </div>
+</div>
+
+<!-- ============ ADMIN DRAWER ============ -->
+<div class="drawer" id="drawer">
+  <div class="panel">
+    <div class="panel-hd">
+      <h2>Hub Editor</h2>
+      <span class="dirty" id="dirtyFlag2">● Unpublished changes</span>
+      <button class="btn x" onclick="closePanel()">✕ Close</button>
+    </div>
+    <div class="ptabs" id="ptabs">
+      <button data-t="news" class="on" onclick="showTab('news')">News &amp; Banner</button>
+      <button data-t="events" onclick="showTab('events')">Events</button>
+      <button data-t="comps" onclick="showTab('comps')">Competitions</button>
+      <button data-t="nl" onclick="showTab('nl')">Newsletters</button>
+      <button data-t="reports" onclick="showTab('reports')">Reports</button>
+      <button data-t="resources" onclick="showTab('resources')">Resources</button>
+      <button data-t="board" onclick="showTab('board')">Scoreboard</button>
+      <button data-t="publish" onclick="showTab('publish')">Publish ⚙</button>
+    </div>
+    <div class="panel-bd" id="panelBody"></div>
+    <div class="panel-ft">
+      <button class="btn primary" onclick="publishAll()">Publish to site</button>
+      <button class="btn" id="btnExport" onclick="exportBundle()">Save a backup copy</button>
+      <button class="btn danger" onclick="discardChanges()">Discard changes</button>
+      <span class="pubstat" id="pubStat"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   DISTRICT HUB v1
+   All page content lives in content.json (one folder with this file).
+   The page fetches it fresh on every load; admins edit it through the
+   built-in editor and publish via the GitHub API — no server needed.
+   ===================================================================== */
+
+/* Empty skeleton only. The live page ALWAYS renders content.json; if that
+   fetch fails we show an explicit error rather than quietly falling back to
+   stale or demo data, which would show real agents fabricated numbers. */
+const EMPTY_CONTENT = {
+  updated: "", banner: {active:false, text:"", link:""},
+  news: [], events: [], competitions: [], newsletters: [], reports: [], resources: []
+};
+
+/* =====================================================================
+   PUBLISHING MODE — read this once
+   RECOMMENDED (shared password): deploy the publish helper (worker.js in
+   this folder — SETUP.md Part C walks you through it, ~10 min) and paste
+   its URL below, e.g. "https://district-hub-publish.yourname.workers.dev".
+   Then anyone with the admin password can edit and publish from any
+   computer — no other setup, and the password is checked server-side.
+
+   If PUBLISH_URL is left empty, the hub falls back to per-admin GitHub
+   token setup (Admin → Publish tab). In that mode the editor opens with no
+   password at all — the GitHub token each admin enters is the real key, so
+   there is deliberately no passcode sitting in this public source file.
+   ===================================================================== */
+const PUBLISH_URL = "https://district-hub-publish.conrey-bparks3.workers.dev/";
+const PW_KEY = "d32hub_pw";
+let ADMIN_PW = null;
+
+let CONTENT = null;     // what the page renders
+let EDIT = null;        // working copy while in admin mode
+let STAGED = [];        // files waiting to publish: {path, name, base64, blobUrl}
+let PENDING_DELETE = [];// files to remove from the site on the next publish
+let BASE_REV = null;    // which revision of content.json this session started from
+let adminMode = false;
+let dirty = false;
+
+/* '' in production; '../' when this same file is served as the staging
+   copy at files/hub-preview.html, so content.json and files/* resolve. */
+const ROOT = /\/files\/[^/]*$/.test(location.pathname) ? '../' : '';
+const IS_PREVIEW = ROOT !== '';
+const $ = id => document.getElementById(id);
+const esc = s => String(s??"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone = o => JSON.parse(JSON.stringify(o));
+/* returns escaped text: on an unparseable value it falls back to the raw
+   string, and every caller interpolates the result into innerHTML */
+const fmtDate = d => { if(!d) return ""; const dt=new Date(d+"T12:00:00"); return isNaN(dt)?esc(d):dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
+const uid = () => 'id'+Math.random().toString(36).slice(2,9);
+/* Only ever emit link schemes a browser should follow from this page.
+   Blocks javascript: and data: URLs sneaking in through an edited
+   content.json. Returns '' for anything unrecognised, and callers treat
+   an empty string as "no link". */
+function safeUrl(u){
+  /* strip control characters BEFORE testing the scheme: the URL parser
+     ignores tabs and newlines, so `java<TAB>script:` resolves as
+     javascript: while failing a naive scheme regex */
+  const s = String(u??'').replace(/[\u0000-\u0020\u007f]/g,'');
+  if(!s) return '';
+  if(/^(#|\/|\.\/|\.\.\/)/.test(s)) return s;            // on-page + relative
+  if(/^(https?:|mailto:|tel:)/i.test(s)) return s;       // explicit safe schemes
+  if(/^blob:/i.test(s)) return s;                        // staged-file preview before publish
+  if(/^[a-z][a-z0-9+.-]*:/i.test(s)) return '';          // any other scheme — drop it
+  return s;                                              // bare path like files/x.pdf
+}
+
+if(IS_PREVIEW){
+  $('previewBar').classList.add('on');
+  const m=document.createElement('meta'); m.name='robots'; m.content='noindex,nofollow';
+  document.head.appendChild(m);
+  /* three hrefs are hardcoded in the markup as repo-relative, which
+     resolves to files/files/… from the staging copy */
+  document.querySelectorAll('link[rel=manifest],link[rel=apple-touch-icon]')
+    .forEach(l=>l.setAttribute('href', ROOT+l.getAttribute('href')));
+  const qp=$('toolQuotePlan'); if(qp) qp.setAttribute('href', ROOT+qp.getAttribute('href'));
+}
+
+/* ---------- boot ---------- */
+async function boot(){
+  $('todaybox').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  let failure = '';
+  try{
+    const res = await fetch(ROOT+'content.json?v='+Date.now(), {cache:'no-store'});
+    if(!res.ok) failure = 'The content file returned an error (HTTP '+res.status+').';
+    else{
+      try{
+        CONTENT = await res.json();
+        /* a body of `null` parses fine and leaves CONTENT falsy with no
+           reason recorded; `[]` is worse — truthy, so every section
+           renders empty and no banner appears at all */
+        if(!CONTENT || typeof CONTENT!=='object' || Array.isArray(CONTENT))
+          throw new Error('shape');
+      }
+      catch(e){ CONTENT = null; failure = 'The content file is present but unreadable.'; }
+    }
+  }catch(e){
+    failure = 'The content file could not be reached — you may be offline, or this page was opened directly from a folder instead of the web address.';
+  }
+  /* GitHub Pages can serve a slightly stale content.json for a minute
+     after a publish. If the copy we just fetched is older than the last
+     revision THIS browser published, trust ours — otherwise the admin
+     gets told "someone else published" when that someone was them. */
+  const fetchedRev = CONTENT ? (CONTENT.rev||null) : null;
+  const mine = safeLocal(()=>localStorage.getItem(LAST_REV_KEY), null);
+  BASE_REV = (mine && fetchedRev !== mine) ? mine : fetchedRev;
+  if(!CONTENT){
+    /* Never fall back to sample data: showing real agents invented names and
+       numbers is worse than showing nothing. Say what went wrong instead. */
+    CONTENT = clone(EMPTY_CONTENT);
+    $('loadFailMsg').textContent = failure;
+    $('loadFail').classList.add('on');
+  }
+  renderAll();
+  bootLive();
+}
+
+function data(){ return (adminMode && EDIT) ? EDIT : CONTENT; }
+function markDirty(){ dirty=true; $('dirtyFlag').classList.add('on'); $('dirtyFlag2').classList.add('on'); saveDraft(); renderAll(); }
+
+/* =====================================================================
+   DRAFT PROTECTION
+   Unpublished edits used to live only in memory: closing the tab, a
+   crash, or a stray refresh threw away the whole session with no
+   warning. Text edits are now kept in this browser and offered back on
+   the next visit. Uploaded files can't be stored (they're far too big
+   for browser storage), so the warning says so explicitly.
+   ===================================================================== */
+const DRAFT_KEY='d32hub_draft_v1';
+const LAST_REV_KEY='d32hub_lastrev';
+let draftTimer=null;
+function saveDraft(){
+  clearTimeout(draftTimer);
+  draftTimer=setTimeout(()=>{
+    if(!EDIT) return;
+    safeLocal(()=>localStorage.setItem(DRAFT_KEY, JSON.stringify({at:Date.now(), content:EDIT})));
+  }, 400);
+}
+function clearDraft(){ clearTimeout(draftTimer); safeLocal(()=>localStorage.removeItem(DRAFT_KEY)); }
+function offerDraftRestore(){
+  const d=safeLocal(()=>JSON.parse(localStorage.getItem(DRAFT_KEY)), null);
+  if(!d || !d.content) return;
+  const when=new Date(d.at||Date.now());
+  const ok=confirm('You have unpublished changes from '+when.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+
+    ' that were never published.\n\nOK — carry on editing them.\nCancel — throw them away and start from what is live now.\n\n'+
+    '(Any files you had dropped in will need to be added again.)');
+  if(ok){ EDIT=d.content; dirty=true; $('dirtyFlag').classList.add('on'); $('dirtyFlag2').classList.add('on'); renderAll(); }
+  else clearDraft();
+}
+window.addEventListener('beforeunload', e=>{
+  if(dirty || STAGED.length || PENDING_DELETE.length){ e.preventDefault(); e.returnValue=''; return ''; }
+});
+
+function renderAll(){
+  /* Each section is isolated: a single malformed entry in content.json
+     used to throw and silently leave every section after it blank. */
+  let failed=[];
+  [['banner',renderBanner],['scoreboard',renderBoard],['news',renderNews],['events',renderEvents],
+   ['competitions',renderComps],['newsletter',renderNewsletter],['reports',renderReports],
+   ['resources',renderResources],['folio',renderFolio],['analytics',initAnalytics]].forEach(([name,fn])=>{
+    try{ fn(); }catch(e){ failed.push(name); console.error('District Hub: '+name+' failed to render', e); }
+  });
+  if(failed.length){
+    $('loadFailMsg').textContent='These sections could not be displayed: '+failed.join(', ')+'.';
+    $('loadFail').classList.add('on');
+  }
+  try{ $('lastUpdated').textContent = fmtDate(data().updated) || "—"; }catch(e){}
+  try{ tabCounts(); }catch(e){}
+}
+
+/* =====================================================================
+   FOLIO CLOSE
+   Published annual calendar, so the dates are known in advance and hard-
+   coded rather than fetched. The strip always shows the NEXT close: on
+   the close date itself it reads "closes today", and it rolls to the
+   following month the day after. Add the next year's list here when
+   Farmers publishes it — the strip tells you when it runs out instead
+   of silently disappearing.
+   ===================================================================== */
+const FOLIO_CLOSE = [
+  '2026-01-20','2026-02-18','2026-03-18','2026-04-17','2026-05-19','2026-06-18',
+  '2026-07-17','2026-08-19','2026-09-18','2026-10-19','2026-11-17','2026-12-17'
+];
+function midnight(d){ const x=new Date(d); x.setHours(0,0,0,0); return x; }
+function folioDates(){ return FOLIO_CLOSE.map(s=>midnight(new Date(s+'T12:00:00'))).sort((a,b)=>a-b); }
+function nextFolioClose(today){
+  const t=midnight(today||new Date());
+  return folioDates().find(d=>d.getTime()>=t.getTime()) || null;   // >= so the close day itself still counts
+}
+function renderFolio(today){
+  const chip=$('folioStrip');
+  const now=midnight(today||new Date());
+  const next=nextFolioClose(now);
+  if(!next){
+    /* ran off the end of the published calendar — say so rather than
+       showing nothing, which would look like there is no deadline */
+    chip.className='foliochip on nodata';
+    $('folioDate').textContent='Next year\u2019s dates not posted yet';
+    $('folioCount').textContent='';
+    $('folioUnit').textContent='';
+    const msg='The '+FOLIO_CLOSE[FOLIO_CLOSE.length-1].slice(0,4)+' folio calendar has run out \u2014 ask the district office for next year\u2019s dates.';
+    $('folioNext').textContent=msg; chip.title=msg;
+    return;
+  }
+  const days=Math.round((next-now)/86400000);
+  chip.className='foliochip on'+(days===0?' today':(days<=5?' soon':''));
+  $('folioDate').textContent = next.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+  $('folioCount').textContent = days===0 ? 'Closes today' : String(days);
+  $('folioUnit').textContent = days===0 ? '' : ('day'+(days===1?'':'s')+' left');
+  const after = folioDates().find(d=>d.getTime()>next.getTime());
+  const msg = days===0
+    ? 'Folio closes today \u2014 get business submitted.'
+    : (after ? 'Next close after this one: '+after.toLocaleDateString('en-US',{month:'long',day:'numeric'}) : 'Last published close of the year.');
+  $('folioNext').textContent = msg;
+  chip.title = 'Folio close \u2014 '+next.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})+'. '+msg+' The full close calendar is in Reports & files.';
+}
+/* Re-check on a timer and whenever the tab regains focus, so a page left
+   open overnight rolls over on its own instead of showing a stale date. */
+setInterval(()=>renderFolio(), 10*60*1000);
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) renderFolio(); });
+
+/* ---------- add to home screen ----------
+   Chrome fires beforeinstallprompt and lets us call it. iOS Safari has
+   no equivalent — the only route is the Share sheet — so iOS is told
+   what to tap rather than given a button that cannot work. */
+const A2HS_KEY='d32hub_a2hs_dismissed';
+let deferredInstall=null;
+function isStandalone(){
+  return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone===true;
+}
+function showA2HS(mode){
+  if(isStandalone()) return;
+  if(safeLocal(()=>localStorage.getItem(A2HS_KEY),null)) return;
+  const how=$('a2hsHow'), go=$('a2hsGo');
+  if(mode==='prompt'){
+    how.textContent='Add it to your home screen and your numbers are one tap away.';
+    go.style.display='';
+  }else if(mode==='android'){
+    how.innerHTML='In Chrome: tap <kbd>⋮</kbd> at the top right, then <kbd>Add to Home screen</kbd>.';
+    go.style.display='none';
+  }else{
+    how.innerHTML='On your iPhone: tap <kbd>Share</kbd> at the bottom of Safari, then <kbd>Add to Home Screen</kbd>.';
+    go.style.display='none';
+  }
+  $('a2hs').classList.add('on');
+}
+function hideA2HS(remember){
+  $('a2hs').classList.remove('on');
+  if(remember) safeLocal(()=>localStorage.setItem(A2HS_KEY,'1'));
+}
+window.addEventListener('beforeinstallprompt', e=>{
+  e.preventDefault(); deferredInstall=e; showA2HS('prompt');
+});
+window.addEventListener('appinstalled', ()=>hideA2HS(true));
+$('a2hsNo').addEventListener('click',()=>hideA2HS(true));
+$('a2hsGo').addEventListener('click',async()=>{
+  if(!deferredInstall) return;
+  deferredInstall.prompt();
+  try{ await deferredInstall.userChoice; }catch(e){}
+  deferredInstall=null; hideA2HS(true);
+});
+/* iOS never fires the event, and Chrome's install criteria are not
+   guaranteed from a project subdirectory, so both platforms get real
+   instructions if no prompt has arrived. A button that does nothing is
+   worse than a sentence that works. */
+(function(){
+  const ua=navigator.userAgent||'';
+  const iOS=/iPad|iPhone|iPod/.test(ua) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  const safari=/Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
+  const android=/Android/.test(ua);
+  if(iOS && safari) setTimeout(()=>showA2HS('ios'), 1500);
+  else if(android) setTimeout(()=>{ if(!deferredInstall) showA2HS('android'); }, 2500);
+})();
+
+/* ---------- visitor counts, for the district office ----------
+   Cloudflare Web Analytics: no cookies, no personal data, and nothing
+   loads at all until a beacon token is set in the editor. The token is
+   a public identifier by design — it ships in the script tag on every
+   page that uses it — so keeping it in content.json is fine. */
+function initAnalytics(){
+  const t=(data().analytics||{}).cfBeacon;
+  if(!t || !/^[a-f0-9]{16,64}$/i.test(String(t))) return;
+  if(document.getElementById('cfBeacon')) return;
+  const sc=document.createElement('script');
+  sc.id='cfBeacon'; sc.defer=true;
+  sc.src='https://static.cloudflareinsights.com/beacon.min.js';
+  sc.setAttribute('data-cf-beacon', JSON.stringify({token:String(t)}));
+  document.head.appendChild(sc);
+}
+
+/* ---------- banner ---------- */
+function renderBanner(){
+  const b = data().banner || {};
+  $('banner').classList.toggle('on', !!(b.active && b.text));
+  $('bannerText').textContent = b.text || "";
+  const a = $('bannerLink'), href = safeUrl(b.link);
+  if(href){ a.style.display='inline'; a.href=href; } else { a.style.display='none'; }
+}
+
+/* =====================================================================
+   SCOREBOARD — live from the district Google Sheets
+   The board keeps its position and controls, but the numbers are no
+   longer hand-fed: both districts' published CSV exports are parsed in
+   the browser on every visit. Rows are clickable for a per-person
+   drill-down with day-by-day and week-by-week trends.
+   ===================================================================== */
+const SHEET_CSV_URL_32 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_FOf8EcLIkjobzgh26E0Dcg7CSa2MsETwKvCzQF5oKiRvVUm-zpeExB8w1nipKZjnQjCIZpQMf1QP/pub?gid=0&single=true&output=csv";
+const SHEET_CSV_URL_49 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_FOf8EcLIkjobzgh26E0Dcg7CSa2MsETwKvCzQF5oKiRvVUm-zpeExB8w1nipKZjnQjCIZpQMf1QP/pub?gid=1994705473&single=true&output=csv";
+const LIVE_CACHE_KEY = 'd32hub_live_v1' + (IS_PREVIEW ? '_preview' : '');
+const LIVE_MAX_AGE_MS = 30*60*1000;   // serve cache instantly, refresh in the background past this
+
+const PERIODS = ['daily','weekly','monthly','ytd'];
+const LB = { view:'producer', dist:'all', period:'monthly', metric:'q', staffOnly:true };
+let PEOPLE = [];              // every producer + agency across both districts
+let dataAsOf = null;          // newest date present in the export
+let dailyAsOf = null;         // last complete business day (what "Daily" means)
+let liveLoading = false;
+let staleDistrict = null;
+let skipped = [];   // {d, asOf} when one sheet is lagging the other
+
+/* ---- small helpers (shared with the parser) ---- */
+function initials(name){ return String(name).split(/\s+/).filter(w=>/[A-Za-z]/.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('')||'?'; }
+function isProducer(role){ return /produc/i.test(String(role||'')); }
+function normDistrict(d){ const s=String(d||'').replace(/[^0-9]/g,''); return s.indexOf('49')>=0?'49':'32'; }
+function nameTokens(str){ return String(str||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().split(' ').filter(w=>w&&!/^(insurance|agency|agcy|ins|inc|llc)$/.test(w)); }
+function normName(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+function titleCase(s){ return String(s).toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()); }
+function cleanAgent(s){ s=String(s); const parts=s.split(/\s+-\s+/); const name=(parts.length>1?parts.slice(1).join(' - '):s).trim(); return titleCase(name)||s.trim(); }
+function sameOwner(agentRaw, prodName){
+  const A=nameTokens(cleanAgent(agentRaw)), P=nameTokens(prodName);
+  if(!A.length||!P.length) return false;
+  const sa=new Set(A), sp=new Set(P);
+  return P.every(w=>sa.has(w)) || A.every(w=>sp.has(w));
+}
+function toDate(v){
+  if(v instanceof Date && !isNaN(v)) return v;
+  if(typeof v==='number') return new Date(Math.round((v-25569)*86400*1000));
+  const s=String(v??'').trim();
+  if(!s) return null;
+  /* Date.parse treats a bare YYYY-MM-DD as UTC, which lands on the
+     PREVIOUS day everywhere west of Greenwich — every number and every
+     chart label would shift by a day if the sheet column is ever
+     reformatted to ISO. Parse it as a local date instead. */
+  const iso=/^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+  if(iso){
+    const d=new Date(+iso[1], +iso[2]-1, +iso[3]);
+    /* the constructor happily rolls 2026-08-91 into October — reject it
+       rather than count the row into the wrong month */
+    return (d.getFullYear()===+iso[1] && d.getMonth()===+iso[2]-1 && d.getDate()===+iso[3]) ? d : null;
+  }
+  const t=Date.parse(s); return isNaN(t)?null:new Date(t);
+}
+function parseNum(v){ const x=+String(v??'').replace(/[$,\s]/g,''); return isFinite(x)?x:0; }
+function dayKeyOf(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function blankPeriods(){ return {daily:{actual:0},weekly:{actual:0},monthly:{actual:0},ytd:{actual:0}}; }
+/* Shared by the sheet loader and by CSV files dropped into Reports.
+   Keeps blank rows: the district export uses merged cells, and dropping
+   the blanks would break the carry-down of names and dates. */
+function parseCSV(text){
+  const rows=[]; let row=[], cur='', q=false;
+  text=String(text).replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(q){
+      if(c==='"'){ if(text[i+1]==='"'){ cur+='"'; i++; } else q=false; }
+      else cur+=c;
+    }else{
+      if(c==='"') q=true;
+      else if(c===','){ row.push(cur); cur=''; }
+      else if(c==='\n'){ row.push(cur); rows.push(row); row=[]; cur=''; }
+      else cur+=c;
+    }
+  }
+  if(cur!==''||row.length){ row.push(cur); rows.push(row); }
+  return rows.filter(r=>r.length);
+}
+
+/* ---- parse one district's daily export -----------------------------
+   Column layout: DM | Code - Agent Name | Producer | Calendar Day |
+   NB Cnt, repeated side by side for the quote block. Google exports
+   merged cells as a value on the first row with blanks beneath, so
+   blank name/date cells inherit the last value seen in that column. */
+function detectDistrict(rows){
+  for(let i=0;i<Math.min(rows.length,20);i++){
+    const j=(rows[i]||[]).map(c=>String(c||'').toLowerCase()).join('|');
+    if(/producer/.test(j) && /(nb.?cnt|quote)/.test(j) && /(calendar day|agent)/.test(j)) return i;
+  }
+  return -1;
+}
+/* Returns {people, dataAsOf, dailyAsOf, undated} — never mutates globals,
+   so a district that fails partway can't leave its dates behind. Throws
+   with a plain-language reason rather than returning partial numbers:
+   showing a confidently wrong scoreboard is worse than showing none. */
+function parseDistrictExport(rows){
+  const hr=detectDistrict(rows);
+  if(hr<0) throw new Error('could not find the header row (expected Producer, Calendar Day and NB Cnt / QUOTE columns)');
+  const header=rows[hr].map(c=>String(c||''));
+  /* Date is tested BEFORE quote: a column named "Quote Date" would
+     otherwise be classified as a quote count and silently disable all
+     date logic, turning MTD into all-time. */
+  const roleOf=h=>{ const s=h.toLowerCase().trim();
+    if(/calendar day|^date$|^day$|date$/.test(s)) return 'date';
+    if(/quote.*(cnt|count)|^quotes?$/.test(s)) return 'quote';
+    if(/nb.?(cnt|count)|^nb$|new business/.test(s)) return 'nb';
+    if(/code.*agent|agent name|^agent$|^agency$/.test(s)) return 'agent';
+    if(/producer/.test(s)) return 'producer';
+    return null; };
+  const cols=header.map((h,i)=>({i,role:roleOf(h)}));
+  const agentCols=cols.filter(c=>c.role==='agent').map(c=>c.i);
+  const prodCols =cols.filter(c=>c.role==='producer').map(c=>c.i);
+  const dateCols =cols.filter(c=>c.role==='date').map(c=>c.i);
+  const countCols=cols.filter(c=>c.role==='nb'||c.role==='quote');
+  /* Every dimension is required. Previously only producer + a count were
+     checked, so renaming "Calendar Day" or "Code - Agent Name" in the
+     sheet produced a full-looking board with zeroed or all-time numbers
+     and no error anywhere. */
+  const missing=[];
+  if(!prodCols.length) missing.push('Producer');
+  if(!agentCols.length) missing.push('Code - Agent Name');
+  if(!dateCols.length) missing.push('Calendar Day');
+  if(!countCols.some(c=>c.role==='nb')) missing.push('NB Cnt');
+  if(!countCols.some(c=>c.role==='quote')) missing.push('QUOTE_Cnt_All');
+  if(missing.length) throw new Error('the sheet is missing these columns (or they were renamed): '+missing.join(', '));
+
+  const nearestLeft=(arr,idx)=>{ let best=-1; arr.forEach(x=>{ if(x<idx&&x>best) best=x; }); return best; };
+  const blocks=countCols.map(cc=>({metric:cc.role==='nb'?'n':'q',count:cc.i,
+    agent:nearestLeft(agentCols,cc.i),prod:nearestLeft(prodCols,cc.i),date:nearestLeft(dateCols,cc.i)}));
+
+  /* Only a label cell that IS a total marker disqualifies its own block.
+     The old version tested every cell in the row, so a subtotal in the
+     NB block deleted the live quote data sitting beside it, and an
+     agency legitimately named "Total Care Insurance" vanished. */
+  const isTotalCell = v => /^\s*(grand\s+|sub\s*)?totals?\s*:?\s*$/i.test(String(v||''));
+
+  const recs=[]; let undated=0;
+  const lastProd={}, lastAgent={}, lastDate={};
+  for(let r=hr+1;r<rows.length;r++){
+    const row=rows[r]; if(!row||!row.some(c=>String(c).trim()!=='')) continue;
+    blocks.forEach((b,bi)=>{
+      const rawProd=b.prod>=0?String(row[b.prod]||'').trim():'';
+      const rawAgent=b.agent>=0?String(row[b.agent]||'').trim():'';
+      if(isTotalCell(rawProd)||isTotalCell(rawAgent)) return;
+      let prod=rawProd, agent=rawAgent;
+      let d=b.date>=0?toDate(row[b.date]):null;
+      /* Merged cells export as a value on the first row and blanks
+         below, so blanks inherit. But a NEW agency must reset the
+         producer carry-down, or an agency-level row with a blank
+         producer inherits the last producer from the PREVIOUS agency
+         and is credited to someone who never wrote it. */
+      if(agent){ if(agent!==lastAgent[bi]){ lastProd[bi]=''; lastDate[bi]=null; } lastAgent[bi]=agent; }
+      else if(b.agent>=0) agent=lastAgent[bi]||'';
+      if(prod){ if(prod!==lastProd[bi]) lastDate[bi]=null; lastProd[bi]=prod; }
+      else if(b.prod>=0) prod=lastProd[bi]||'';
+      if(d) lastDate[bi]=d; else if(b.date>=0) d=lastDate[bi]||null;
+      if(!prod && !agent) return;
+      const count=parseNum(row[b.count]);
+      if(!d && count) undated++;
+      recs.push({metric:b.metric,prod,agent,date:d,count});
+    });
+  }
+  if(!recs.length) throw new Error('no data rows were found under the header');
+
+  /* Spread-max blows the argument limit on a large export (Safari gives
+     out around 65k); these files carry one entry per row per count
+     column and grow all year. Reduce instead. */
+  const times=recs.map(x=>x.date).filter(Boolean).map(d=>d.getTime());
+  if(!times.length) throw new Error('no readable dates in the Calendar Day column');
+  /* Never let a date in the future set the reporting window. One typo or
+     one pre-seeded row would otherwise move the cutoff months ahead and
+     empty every period, while the page went on labelling the result as
+     the district total. */
+  const todayEnd = midnight(new Date()).getTime() + 86400000 - 1;
+  const usable = times.filter(t => t <= todayEnd);
+  if(!usable.length) throw new Error('every dated row in this sheet is in the future — check the Calendar Day column');
+  const futureRows = times.length - usable.length;
+  const maxD=new Date(usable.reduce((m,t)=>t>m?t:m, -Infinity));
+  /* The export snapshots in the morning, so its newest date has nothing
+     logged yet. cutoff = the last complete calendar day and is what the
+     page reports as "data through" — reporting maxD claimed a date that
+     contributed nothing to any total. */
+  const cutoff=new Date(maxD); cutoff.setHours(0,0,0,0); cutoff.setDate(cutoff.getDate()-1);
+  const anchor=new Date(cutoff);
+  while(anchor.getDay()===0||anchor.getDay()===6) anchor.setDate(anchor.getDate()-1);
+  const cutoffEnd=cutoff.getTime()+86400000-1;
+  /* Step by calendar days, not fixed milliseconds — the fall DST day is
+     25 hours long and turned "last 7 days" into 6. */
+  const wsD=new Date(cutoff); wsD.setDate(wsD.getDate()-6); wsD.setHours(0,0,0,0);
+  const weekStart=wsD.getTime();
+  const anchorKey=anchor.toDateString();
+  /* Month and year come from the CUTOFF, not the weekday-adjusted
+     anchor. Anchoring them to `anchor` meant that on the first days of a
+     month the tile labelled MTD showed the PREVIOUS month's total. */
+  function periodsFor(d){
+    if(!d) return [];              // undated rows are counted nowhere rather than dumped into MTD and YTD
+    const out=[], t=d.getTime();
+    if(t>cutoffEnd) return out;
+    if(d.getFullYear()===cutoff.getFullYear()) out.push('ytd');
+    if(d.getFullYear()===cutoff.getFullYear() && d.getMonth()===cutoff.getMonth()) out.push('monthly');
+    if(t>=weekStart) out.push('weekly');
+    if(d.toDateString()===anchorKey) out.push('daily');
+    return out;
+  }
+
+  const producers={}, agencies={};
+  const get=(map,key,name,role)=>{ if(!map[key]) map[key]={name,role,q:blankPeriods(),n:blankPeriods()}; return map[key]; };
+  const addHist=(person,rec,hk)=>{
+    if(!hk||!rec.count) return;
+    person.hist=person.hist||{};
+    const h=person.hist[hk]=person.hist[hk]||{q:0,n:0};
+    h[rec.metric]+=rec.count;
+  };
+  recs.forEach(rec=>{
+    const prs=periodsFor(rec.date);
+    const hk=(rec.date && rec.date.getTime()<=cutoffEnd) ? dayKeyOf(rec.date) : null;
+    const agencyName=rec.agent?cleanAgent(rec.agent):'';
+    if(rec.prod){
+      /* Keyed on agency + producer. Keying on the producer name alone
+         merged anyone who writes at two agencies into a single row whose
+         numbers were the sum of both, attributed entirely to whichever
+         agency happened to appear first in the file. */
+      const key=normName(agencyName)+'||'+normName(rec.prod);
+      const p=get(producers,key,titleCase(rec.prod.replace(/\s+/g,' ')),'Producer');
+      if(agencyName && !p.agency) p.agency=agencyName;
+      if(rec.agent && sameOwner(rec.agent, rec.prod)) p.owner=true;
+      prs.forEach(pr=>{ p[rec.metric][pr].actual+=rec.count; });
+      addHist(p,rec,hk);
+    }
+    if(rec.agent){
+      const a=get(agencies,normName(agencyName),agencyName,'Agency');
+      prs.forEach(pr=>{ a[rec.metric][pr].actual+=rec.count; });
+      addHist(a,rec,hk);
+    }
+  });
+  return {people:[...Object.values(producers), ...Object.values(agencies)],
+          dataAsOf:cutoff, dailyAsOf:anchor, undated, futureRows, totalRecs:recs.length};
+}
+
+/* ---- fetch + cache -------------------------------------------------
+   Both exports together are several megabytes, which is a lot to make
+   an agent download on a phone before the page is usable. So: render
+   whatever is cached immediately, then refresh in the background.
+   Cached numbers are never labelled "Live" — they say when they were
+   saved, and past CACHE_HARD_EXPIRY they are dropped rather than shown
+   as if current. */
+const LIVE_TIMEOUT_MS = 25000;
+const CACHE_HARD_EXPIRY_MS = 24*60*60*1000;
+let liveError = '';          // set when a district could not be loaded
+let missingDistrict = null;  // '32' | '49' when only one side loaded
+
+function setLive(msg, kind){
+  const el=$('liveStatus');
+  if(!msg){ el.className='livepill'; el.textContent=''; return; }
+  el.className='livepill on'+(kind?' '+kind:'');
+  el.textContent=msg;
+}
+function safeLocal(fn, fallback){
+  try{ return fn(); }catch(e){ return fallback; }   // private browsing / storage disabled
+}
+function readCache(){
+  return safeLocal(()=>{
+    const c=JSON.parse(localStorage.getItem(LIVE_CACHE_KEY));
+    if(!c||!Array.isArray(c.people)||!c.people.length) return null;
+    if(Date.now()-(c.at||0) > CACHE_HARD_EXPIRY_MS) return null;   // too old to show at all
+    return c;
+  }, null);
+}
+/* The caveats travel with the numbers. A saved copy taken while one
+   district was down used to come back on the next visit labelled
+   "Districts 32 + 49" over one district's totals, with no warning. */
+function writeCache(){
+  safeLocal(()=>localStorage.setItem(LIVE_CACHE_KEY, JSON.stringify({
+    people:PEOPLE, at:Date.now(),
+    missingDistrict,
+    staleDistrict: staleDistrict ? {d:staleDistrict.d, asOf:staleDistrict.asOf.getTime()} : null,
+    dataAsOf:dataAsOf?dataAsOf.getTime():null,
+    dailyAsOf:dailyAsOf?dailyAsOf.getTime():null
+  })), null);
+}
+async function fetchDistrict(url, district){
+  const ctl = typeof AbortController!=='undefined' ? new AbortController() : null;
+  const timer = ctl ? setTimeout(()=>ctl.abort(), LIVE_TIMEOUT_MS) : null;
+  let res;
+  try{
+    res = await fetch(url,{cache:'no-store', signal:ctl?ctl.signal:undefined});
+  }catch(e){
+    throw new Error('District '+district+': '+(e && e.name==='AbortError'
+      ? 'the sheet took too long to respond' : "couldn't reach the sheet"));
+  }finally{ if(timer) clearTimeout(timer); }
+  if(!res.ok) throw new Error('District '+district+': the sheet link returned HTTP '+res.status+' (is it still published to the web?)');
+  const text=await res.text();
+  if(/<html|<!doctype/i.test(text.slice(0,200)))
+    throw new Error('District '+district+": that link returns a web page, not a CSV. Re-share it with File → Share → Publish to web → CSV.");
+  let out;
+  try{ out=parseDistrictExport(parseCSV(text)); }
+  catch(e){ throw new Error('District '+district+': '+e.message); }
+  out.people.forEach(p=>{ p.district=district; });
+  return out;
+}
+async function loadLive(opts){
+  opts=opts||{};
+  if(liveLoading){ if(opts.alert) alert('A refresh is already running — give it a few seconds.'); return; }
+  liveLoading=true;
+  setLive('↻ Loading live data…','busy');
+  renderBoard();                       // show the loading state instead of "no data"
+  try{
+    const settled = await Promise.allSettled([
+      fetchDistrict(SHEET_CSV_URL_32,'32'),
+      fetchDistrict(SHEET_CSV_URL_49,'49')
+    ]);
+    const ok = settled.filter(s=>s.status==='fulfilled').map(s=>s.value);
+    const failures = settled.filter(s=>s.status==='rejected').map(s=>s.reason.message||String(s.reason));
+    if(!ok.length) throw new Error(failures.join('\n'));
+
+    /* One district failing must not throw away the other, but a
+       "Combined" total that is quietly missing a whole district is
+       exactly the kind of wrong number this page must not show — so
+       force the view to the district that did load and say so. */
+    missingDistrict = ok.length===1 ? (ok[0].people[0].district==='32' ? '49' : '32') : null;
+    liveError = failures.join(' · ');
+
+    PEOPLE = ok.flatMap(o=>o.people);
+    dataAsOf  = new Date(Math.max(...ok.map(o=>o.dataAsOf.getTime())));
+    dailyAsOf = new Date(Math.max(...ok.map(o=>o.dailyAsOf.getTime())));
+    /* If the two sheets are stamped different days, combining them ranks
+       people against each other on different periods. Flag it rather
+       than presenting the mix as one number. */
+    /* rows the parser could not place: an unreadable Calendar Day, or a
+       date past today. Small numbers are normal; a spike means the sheet
+       changed shape and the totals are quietly short. */
+    skipped = [];
+    ok.forEach(o=>{
+      const d = o.people[0] && o.people[0].district;
+      if(o.futureRows) skipped.push('District '+d+': '+o.futureRows+' row'+(o.futureRows===1?'':'s')+' dated after today were ignored.');
+      if(o.undated && o.totalRecs && o.undated/o.totalRecs > 0.02)
+        skipped.push('District '+d+': '+o.undated+' rows have an unreadable Calendar Day.');
+    });
+    staleDistrict = null;
+    if(ok.length===2){
+      const gap=Math.abs(ok[0].dataAsOf-ok[1].dataAsOf)/86400000;
+      if(gap>=2){
+        const behind = ok[0].dataAsOf<ok[1].dataAsOf ? ok[0] : ok[1];
+        staleDistrict = {d:behind.people[0].district, asOf:behind.dataAsOf};
+      }
+    }
+    if(missingDistrict && LB.dist==='all'){
+      LB.dist = missingDistrict==='49' ? '32' : '49';
+      const seg=$('segDist');
+      seg.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b.dataset.d===LB.dist));
+    }
+    writeCache();
+    closeDrill();
+    renderBoard();
+    setLive(missingDistrict
+      ? 'D'+missingDistrict+' unavailable'
+      : '● Live · '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),
+      missingDistrict?'err':'');
+    if(opts.alert && failures.length) alert('Some numbers could not be refreshed:\n\n'+failures.join('\n\n'));
+  }catch(e){
+    liveError = e.message||String(e);
+    liveLoading = false;               // before the re-render, or the board still says "Loading…"
+    setLive(PEOPLE.length ? 'Saved copy · refresh failed' : "Couldn't load the numbers",'err');
+    renderBoard();                     // so the board explains itself rather than reading "no data"
+    if(opts.alert) alert("Couldn't refresh from the district sheets.\n\n"+liveError+"\n\nBoth sheets must stay published to the web as CSV.");
+  }finally{
+    liveLoading=false;
+  }
+}
+function bootLive(){
+  const c=readCache();
+  if(c){
+    PEOPLE=c.people;
+    missingDistrict=c.missingDistrict||null;
+    staleDistrict=c.staleDistrict?{d:c.staleDistrict.d,asOf:new Date(c.staleDistrict.asOf)}:null;
+    if(missingDistrict && LB.dist==='all'){
+      LB.dist = missingDistrict==='49' ? '32' : '49';
+      const seg=$('segDist');
+      if(seg) seg.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b.dataset.d===LB.dist));
+    }
+    dataAsOf=c.dataAsOf?new Date(c.dataAsOf):null;
+    dailyAsOf=c.dailyAsOf?new Date(c.dailyAsOf):null;
+    renderBoard();
+    setLive('Saved copy · checking for newer…','busy');
+  }
+  loadLive();                          // always refresh; the cache is a head start, not a substitute
+}
+$('btnRefresh').addEventListener('click',()=>loadLive({alert:true}));
+
+/* ---- board ---- */
+function segWire(id, key, prop){
+  const grp=$(id);
+  grp.setAttribute('role','group');
+  const sync=()=>grp.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed', b.classList.contains('on')?'true':'false'));
+  grp.querySelectorAll('button').forEach(btn=>{
+    btn.onclick = ()=>{ grp.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); LB[prop]=btn.dataset[key]; sync(); renderBoard(); };
+  });
+  sync();
+}
+segWire('segView','v','view'); segWire('segDist','d','dist'); segWire('segPeriod','p','period'); segWire('segMetric','m','metric');
+
+function inScope(p){
+  if(LB.dist!=='all' && normDistrict(p.district)!==LB.dist) return false;
+  const wantProducer = LB.view==='producer';
+  if(isProducer(p.role)!==wantProducer) return false;
+  if(wantProducer && LB.staffOnly && p.owner) return false;
+  return true;
+}
+function agencyProducers(a){
+  return PEOPLE.map((p,i)=>({p,i}))
+    .filter(x=> isProducer(x.p.role) && normDistrict(x.p.district)===normDistrict(a.district) && x.p.agency && normName(x.p.agency)===normName(a.name));
+}
+function periodLabel(){
+  if(LB.period==='daily') return dailyAsOf ? dailyAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric'}) : 'Daily';
+  if(LB.period==='weekly') return 'Last 7 days';
+  return LB.period==='monthly' ? 'MTD' : 'YTD';
+}
+let boardFilter='';
+function boardRows(){
+  const q=boardFilter.toLowerCase();
+  return PEOPLE.map((p,i)=>({p,i})).filter(x=>inScope(x.p)).map(({p,i})=>({
+    idx:i, name:p.name, district:normDistrict(p.district), owner:!!p.owner,
+    sub: isProducer(p.role) ? (p.agency||'') : (()=>{ const n=agencyProducers(p).length; return n?n+' producer'+(n===1?'':'s'):''; })(),
+    q:+p.q[LB.period].actual||0, n:+p.n[LB.period].actual||0
+  })).filter(r=> !q || (r.name+' '+r.sub).toLowerCase().includes(q));
+}
+/* Sums a person's day history between two day keys, inclusive. */
+function histBetween(p, metric, fromKey, toKey){
+  let t=0; const h=p.hist||{};
+  for(const k in h){ if(k>=fromKey && k<=toKey) t += +h[k][metric]||0; }
+  return t;
+}
+function renderMovers(){
+  const wrap=$('moversWrap'), row=$('moversRow');
+  const hide=()=>{ wrap.hidden=true; row.innerHTML=''; };
+  if(!PEOPLE.length || !dataAsOf) return hide();
+
+  const end=midnight(dataAsOf);
+  const startThis=new Date(end); startThis.setDate(startThis.getDate()-6);
+  const endPrev=new Date(startThis); endPrev.setDate(endPrev.getDate()-1);
+  const startPrev=new Date(end); startPrev.setDate(startPrev.getDate()-13);
+
+  /* Without two complete weeks behind the cutoff the comparison is
+     against a window that only partly exists, which would read as a
+     surge for everyone. Show nothing rather than something flattering. */
+  const minK=earliestHistKey();
+  if(!minK || minK > dayKeyOf(startPrev)) return hide();
+
+  const kThisA=dayKeyOf(startThis), kThisB=dayKeyOf(end);
+  const kPrevA=dayKeyOf(startPrev), kPrevB=dayKeyOf(endPrev);
+  const m=LB.metric;
+
+  const rows=[];
+  PEOPLE.forEach((p,i)=>{
+    if(!inScope(p)) return;
+    const now=histBetween(p,m,kThisA,kThisB);
+    const before=histBetween(p,m,kPrevA,kPrevB);
+    if(now-before > 0) rows.push({idx:i, name:p.name,
+      sub: isProducer(p.role) ? (p.agency||'') : '',
+      now, up:now-before});
+  });
+  if(!rows.length) return hide();
+
+  rows.sort((a,b)=> b.up-a.up || b.now-a.now);
+  const mLbl = m==='q' ? 'quotes' : 'new business';
+  $('moversSub').textContent = 'Last 7 days vs the 7 before \u2014 '+mLbl+', '
+    + startThis.toLocaleDateString('en-US',{month:'short',day:'numeric'}) + '\u2013'
+    + end.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  row.innerHTML = rows.slice(0,5).map(r=>
+    `<button type="button" class="mv" data-idx="${r.idx}" aria-label="${esc(r.name)} \u2014 up ${r.up} ${esc(mLbl)} on the previous week. Open trend history.">
+       <span class="who"><b>${esc(r.name)}</b><span>${esc(r.sub)}</span></span>
+       <span class="up">+${r.up.toLocaleString()}</span>
+     </button>`).join('');
+  wrap.hidden=false;
+}
+$('moversRow').addEventListener('click',e=>{
+  const b=e.target.closest('.mv[data-idx]'); if(b) openDrill(+b.dataset.idx);
+});
+
+function boardState(){
+  /* One place decides what the board says when it has nothing to show,
+     so a failed load never reads as "nobody produced anything". */
+  if(!PEOPLE.length && liveLoading) return {b:'Loading the district numbers…', p:'The two district sheets are a few megabytes, so the first load takes a moment.'};
+  if(!PEOPLE.length && liveError) return {b:"Couldn't load the numbers", p:'Rather than show numbers that might be wrong, the board stays empty until it can reach the district sheets. Try ↻ Refresh, or tell the district office.'};
+  if(!PEOPLE.length) return {b:'No numbers loaded yet', p:'Press ↻ Refresh to pull from the district sheets.'};
+  if(boardFilter) return {b:'Nobody matches “'+boardFilter+'”', p:'Check the spelling, or clear the Find box to see everyone.'};
+  return {b:'Nothing to show for this view', p:'Try a different District or Period.'};
+}
+function renderBoard(){
+  $('lbAsOf').textContent = dataAsOf ? ('data through '+dataAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})) : '';
+  $('staffOnlyWrap').style.visibility = LB.view==='producer' ? 'visible' : 'hidden';
+  const perLbl = periodLabel();
+  $('thQ').textContent = perLbl.toUpperCase();
+  $('thN').textContent = perLbl.toUpperCase();
+
+  /* warnings the viewer needs before they trust the numbers */
+  const warn=$('boardWarn');
+  if(missingDistrict){
+    warn.className='boardnote err'; warn.style.display='block';
+    warn.textContent='District '+missingDistrict+' numbers could not be loaded, so Combined totals are switched off — you are seeing District '+(missingDistrict==='49'?'32':'49')+' only.';
+  }else if(skipped.length){
+    warn.className='boardnote warn'; warn.style.display='block';
+    warn.textContent = skipped.join(' ')+' Those rows are not counted in any total on this page.';
+  }else if(staleDistrict){
+    warn.className='boardnote warn'; warn.style.display='block';
+    warn.textContent='District '+staleDistrict.d+"'s sheet was last updated "+staleDistrict.asOf.toLocaleDateString('en-US',{month:'short',day:'numeric'})+', so Combined numbers mix two different dates. Use the D32 and D49 buttons for a like-for-like comparison.';
+  }else{ warn.style.display='none'; }
+
+  const agencies = PEOPLE.filter(p=> !isProducer(p.role));
+  const everyone = agencies.filter(p=> LB.dist==='all'||normDistrict(p.district)===LB.dist);
+  const tot=(list,k)=>list.reduce((s,p)=>s+(+p[k][LB.period].actual||0),0);
+  const tq=tot(everyone,'q'), tn=tot(everyone,'n');
+  const scopeLbl = LB.dist==='all' ? 'Districts 32 + 49' : 'District '+LB.dist;
+
+  /* Nothing loaded is not the same as nothing produced. Show an em dash
+     and say why, rather than a 50px zero the viewer will read as fact. */
+  /* the tiles sum AGENCY rows — if those are missing the answer is
+     "not loaded", not "zero", however many producers came through */
+  const noData = !PEOPLE.length || !everyone.length;
+  const figUnit = noData
+    ? (liveLoading ? 'Waiting on the district sheets\u2026' : 'Not loaded \u2014 press \u21bb Refresh')
+    : scopeLbl+' \u00b7 every agency';
+
+  /* The split is only honest when both districts are in and in scope. */
+  const showSplit = !noData && LB.dist==='all' && !missingDistrict;
+  function split(k){
+    if(!showSplit) return '';
+    const a=tot(agencies.filter(p=>normDistrict(p.district)==='32'),k);
+    const b=tot(agencies.filter(p=>normDistrict(p.district)==='49'),k);
+    if(a<0 || b<0 || !(a+b)) return '';
+    const p32=(a/(a+b)*100).toFixed(1), p49=(b/(a+b)*100).toFixed(1);
+    return `<div class="figsplit">
+      <div class="figbar"><i class="s32" style="width:${p32}%"></i><i class="s49" style="width:${p49}%"></i></div>
+      <div class="figleg"><span><em class="k32"></em>D32 ${a.toLocaleString()}</span><span><em class="k49"></em>D49 ${b.toLocaleString()}</span></div>
+    </div>`;
+  }
+  $('lbTotals').innerHTML = `
+    <div class="fig${noData?' nodata':''}">
+      <div class="figrule"></div>
+      <div class="figlab">Total quotes &middot; ${esc(perLbl)}</div>
+      <div class="fignum">${noData?'&mdash;':tq.toLocaleString()}</div>
+      <div class="figunit">${esc(figUnit)}</div>
+      ${noData?'':'<div class="fignote">Owners and staff producers combined.</div>'+split('q')}
+    </div>
+    <div class="fig red${noData?' nodata':''}">
+      <div class="figrule"></div>
+      <div class="figlab">Total new business &middot; ${esc(perLbl)}</div>
+      <div class="fignum">${noData?'&mdash;':tn.toLocaleString()}</div>
+      <div class="figunit">${esc(figUnit)}</div>
+      ${noData?'':'<div class="fignote">Items written, not premium.</div>'+split('n')}
+    </div>`;
+
+  renderMovers();
+
+  const rows = boardRows().sort((a,b)=> b[LB.metric]-a[LB.metric] || b[LB.metric==='q'?'n':'q']-a[LB.metric==='q'?'n':'q']);
+  const mLbl = LB.metric==='q' ? 'Quotes' : 'New Biz';
+
+  if(!rows.length){
+    const st=boardState();
+    $('podium').innerHTML=`<div class="boardstate" style="grid-column:1/-1;background:var(--surface-1)"><b>${esc(st.b)}</b>${esc(st.p)}</div>`;
+    $('boardBody').innerHTML='';
+    $('boardWrap').style.display='none';   // no ghost header under the message
+  }else{
+    $('boardWrap').style.display='';
+    $('podium').innerHTML = rows.slice(0,3).map((r,i)=>`
+      <div class="pod p${i+1} click" data-idx="${r.idx}" tabindex="0" role="button" title="See ${esc(r.name)}'s trend" aria-label="${esc(r.name)} — open trend history">
+        <div class="medal">${i+1}</div>
+        <div class="who"><b>${esc(r.name)}</b><span>${esc(r.sub||'')}</span></div>
+        <div class="val"><b>${r[LB.metric].toLocaleString()}</b><span>${mLbl} ${esc(perLbl)}</span></div>
+      </div>`).join('');
+    $('boardBody').innerHTML = rows.map((r,i)=>`
+      <tr class="click" data-idx="${r.idx}" tabindex="0" aria-label="${esc(r.name)} — press Enter for their trend history">
+        <td class="rank">${i+1}</td>
+        <td><div class="pname"><span class="avatar">${esc(initials(r.name))}</span><span class="nm"><b>${esc(r.name)}${r.owner?'<span class="ownflag">OWNER</span>':''}</b><span class="sub2"><span class="dchip d${r.district==='49'?'49':'32'}">D${r.district==='49'?'49':'32'}</span>${esc(r.sub||'')}</span></span></div></td>
+        <td class="metric">${r.q.toLocaleString()}</td>
+        <td class="metric">${r.n.toLocaleString()}</td>
+        <td class="chevcell"><span class="rowchev" aria-hidden="true">›</span></td>
+      </tr>`).join('');
+  }
+
+  /* say plainly what the list is showing and what it is leaving out */
+  const bits=[];
+  if(dailyAsOf) bits.push('“Daily” is the last complete business day ('+dailyAsOf.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+').');
+  if(LB.view==='producer' && LB.staffOnly){
+    const hidden = PEOPLE.filter(p=>isProducer(p.role)&&p.owner&&(LB.dist==='all'||normDistrict(p.district)===LB.dist)).length;
+    if(hidden) bits.push('<b>Staff only</b> is on, so '+hidden+' agency owner'+(hidden===1?'’s':'s’')+' own production '+(hidden===1?'is':'are')+' hidden from this list — untick it to include them. The totals above always count everyone.');
+  }
+  $('lbNote').innerHTML = bits.join(' ');
+}
+let boardDebounce;
+$('boardSearch').addEventListener('input', e=>{
+  clearTimeout(boardDebounce);
+  const v=e.target.value;
+  boardDebounce=setTimeout(()=>{ boardFilter=v.trim(); renderBoard(); },120);
+});
+$('boardBody').addEventListener('click',e=>{ const tr=e.target.closest('tr.click'); if(tr) openDrill(+tr.dataset.idx); });
+$('podium').addEventListener('keydown',e=>{
+  if(e.key!=='Enter' && e.key!==' ') return;
+  const el=e.target.closest('.pod[data-idx]'); if(!el) return;
+  e.preventDefault(); openDrill(+el.dataset.idx);
+});
+$('boardBody').addEventListener('keydown',e=>{
+  if(e.key!=='Enter' && e.key!==' ') return;
+  const tr=e.target.closest('tr.click'); if(!tr) return;
+  e.preventDefault(); openDrill(+tr.dataset.idx);
+});
+$('podium').addEventListener('click',e=>{ const el=e.target.closest('.pod.click'); if(el) openDrill(+el.dataset.idx); });
+
+/* =====================================================================
+   DRILL-DOWN — per-person history and trends
+   ===================================================================== */
+let drillStack=[], drillView='weekly';
+function openDrill(idx){ if(!PEOPLE[idx]) return; drillStack=[idx]; renderDrill(); $('drillModal').classList.add('open'); document.body.style.overflow='hidden'; captureFocus('drillModal','#drillClose'); }
+function drillInto(idx){ drillStack.push(idx); renderDrill(); }
+function drillBack(){ if(drillStack.length>1){ drillStack.pop(); renderDrill(); } }
+function closeDrill(){ $('drillModal').classList.remove('open'); document.body.style.overflow=''; drillStack=[]; releaseFocus('drillModal'); }
+function drillPerson(){ return PEOPLE[drillStack[drillStack.length-1]]; }
+$('drillClose').addEventListener('click',closeDrill);
+$('drillBackBtn').addEventListener('click',drillBack);
+$('drillModal').addEventListener('click',e=>{ if(e.target.id==='drillModal') closeDrill(); });
+$('drillSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  drillView=b.dataset.v; syncDrillSeg();
+  const p=drillPerson(); if(p) renderDrillChart(p);
+});
+function syncDrillSeg(){
+  $('drillSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.v===drillView ? 'true':'false')); [...$('drillSeg').children].forEach(x=>x.classList.toggle('active',x.dataset.v===drillView)); }
+
+function renderDrill(){
+  const p=drillPerson(); if(!p) return;
+  const isP=isProducer(p.role);
+  $('drillBackBtn').style.display = drillStack.length>1 ? '' : 'none';
+  $('drillAv').textContent = initials(p.name);
+  $('drillName').textContent = p.name;
+  const bits=[isP?'Producer':'Agency'];
+  if(isP && p.agency) bits.push(p.agency);
+  if(isP && p.owner) bits.push('Agency owner');
+  bits.push('District '+normDistrict(p.district));
+  $('drillSub').textContent = bits.join(' · ');
+  const dLbl=dailyAsOf ? dailyAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase() : 'LAST DAY';
+  const chips=[['daily',dLbl],['weekly','LAST 7 DAYS'],['monthly','THIS MONTH'],['ytd','YTD']];
+  $('drillChips').innerHTML = chips.map(([pr,lab])=>
+    `<div class="chip"><div class="cl">${lab}</div><div class="cv"><b class="cq">${+p.q[pr].actual||0}<small>QUOTES</small></b><b class="cn">${+p.n[pr].actual||0}<small>NEW BIZ</small></b></div></div>`).join('');
+  syncDrillSeg();
+  renderDrillChart(p);
+  renderDrillProds(p);
+}
+function histAnchor(p){
+  if(dailyAsOf instanceof Date && !isNaN(dailyAsOf)) return new Date(dailyAsOf);
+  const ks=Object.keys(p.hist||{}).sort();
+  return ks.length ? new Date(ks[ks.length-1]+'T00:00:00') : null;
+}
+function earliestHistKey(){
+  let min=null;
+  PEOPLE.forEach(p=>{ Object.keys(p.hist||{}).forEach(k=>{ if(min===null||k<min) min=k; }); });
+  return min;
+}
+function dailySeries(p,nDays){
+  const a=histAnchor(p); if(!a) return [];
+  const minK=earliestHistKey();
+  const out=[]; const d=new Date(a); d.setHours(0,0,0,0);
+  let guard=0;
+  while(out.length<nDays && guard++<nDays*4){
+    if(d.getDay()!==0 && d.getDay()!==6){
+      const k=dayKeyOf(d);
+      if(minK && k<minK) break;
+      const h=(p.hist||{})[k]||{};
+      out.unshift({label:d.toLocaleDateString('en-US',{month:'numeric',day:'numeric'}),
+                   full:d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}),
+                   q:+h.q||0, n:+h.n||0});
+    }
+    d.setDate(d.getDate()-1);
+  }
+  return out;
+}
+function weekStartOf(d){ const x=new Date(d); x.setHours(0,0,0,0); const dow=(x.getDay()+6)%7; x.setDate(x.getDate()-dow); return x; }
+function weeklySeries(p,nWeeks){
+  const a=histAnchor(p); if(!a) return [];
+  const buckets={};
+  Object.keys(p.hist||{}).forEach(k=>{
+    const wk=dayKeyOf(weekStartOf(new Date(k+'T00:00:00')));
+    const b=buckets[wk]=buckets[wk]||{q:0,n:0};
+    const v=p.hist[k]; b.q+=+v.q||0; b.n+=+v.n||0;
+  });
+  const minK=earliestHistKey();
+  const minWk=minK?dayKeyOf(weekStartOf(new Date(minK+'T00:00:00'))):null;
+  const ws=weekStartOf(a);
+  const out=[];
+  for(let i=nWeeks-1;i>=0;i--){
+    const w=new Date(ws); w.setDate(w.getDate()-7*i);
+    const k=dayKeyOf(w);
+    if(minWk && k<minWk) continue;
+    const b=buckets[k]||{q:0,n:0};
+    const we=new Date(w); we.setDate(we.getDate()+4);
+    const partial = i===0 && a.getTime()<we.getTime();
+    out.push({label:w.toLocaleDateString('en-US',{month:'numeric',day:'numeric'}),
+              full:'Week of '+w.toLocaleDateString('en-US',{month:'short',day:'numeric'})+'–'+we.toLocaleDateString('en-US',{month:'short',day:'numeric'})+(partial?' (in progress)':''),
+              q:b.q, n:b.n, partial});
+  }
+  return out;
+}
+function axisScale(maxData){
+  maxData=Math.max(1,maxData);
+  for(let e=0;e<7;e++){
+    const p=Math.pow(10,e);
+    for(const c of [1,2,5]){
+      const st=c*p, n=Math.ceil(maxData/st);
+      if(n<=5) return {max:st*Math.max(2,n), ticks:Array.from({length:Math.max(2,n)+1},(_,i)=>st*i)};
+    }
+  }
+  return {max:maxData,ticks:[0,maxData]};
+}
+function renderDrillChart(p){
+  const host=$('drillChart');
+  if(!(p.hist && Object.keys(p.hist).length)){
+    host.innerHTML = `<div class="trend-empty">No day-by-day history for this ${isProducer(p.role)?'producer':'agency'} yet.</div>`;
+    return;
+  }
+  const narrow = window.innerWidth < 560;
+  const s = drillView==='daily' ? dailySeries(p, narrow?10:15) : weeklySeries(p, narrow?7:10);
+  if(!s.length){ host.innerHTML = `<div class="trend-empty">Not enough dated history to chart yet.</div>`; return; }
+  /* a phone-width chart needs a taller aspect or the plot collapses to a
+     sliver once the SVG scales down to the screen */
+  const W = narrow?380:680, H = narrow?260:228;
+  const padL=36,padR=10,padT=12,padB=26;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const sc=axisScale(Math.max(...s.map(x=>Math.max(x.q,x.n))));
+  const maxV=sc.max;
+  const y=v=>padT+plotH*(1-v/maxV);
+  const step=plotW/s.length;
+  const cx=i=>padL+step*(i+0.5);
+  const barW=Math.max(6,Math.min(26,step*0.55));
+  const INK=getComputedStyle(document.documentElement);
+  const cGrid=INK.getPropertyValue('--grid').trim()||'#eef1f6';
+  const cAxis=INK.getPropertyValue('--axis').trim()||'#d7dbe4';
+  const cMuted=INK.getPropertyValue('--muted').trim()||'#9aa3b2';
+  const cQ=INK.getPropertyValue('--s1').trim()||'#2a529c';
+  const cN=INK.getPropertyValue('--s2').trim()||'#d60028';
+  const cSurf=INK.getPropertyValue('--surface-1').trim()||'#fff';
+  let g='';
+  sc.ticks.forEach(t=>{ g+=`<line x1="${padL}" y1="${y(t)}" x2="${W-padR}" y2="${y(t)}" stroke="${cGrid}" stroke-width="1"/>`
+    +`<text x="${padL-7}" y="${y(t)+3.5}" text-anchor="end" font-size="10" fill="${cMuted}">${t}</text>`; });
+  let bars='';
+  s.forEach((d,i)=>{
+    if(d.q<=0) return;
+    const x0=cx(i)-barW/2, y0=y(d.q), y1=y(0), r=Math.min(4,barW/2,y1-y0);
+    bars+=`<path d="M${x0},${y1} L${x0},${y0+r} Q${x0},${y0} ${x0+r},${y0} L${x0+barW-r},${y0} Q${x0+barW},${y0} ${x0+barW},${y0+r} L${x0+barW},${y1} Z" fill="${cQ}"${d.partial?' fill-opacity=".45"':''}/>`;
+  });
+  const pts=s.map((d,i)=>`${cx(i)},${y(d.n)}`).join(' ');
+  let line = s.length>1 ? `<polyline points="${pts}" fill="none" stroke="${cN}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>` : '';
+  s.forEach((d,i)=>{ line+=`<circle cx="${cx(i)}" cy="${y(d.n)}" r="3.5" fill="${cN}" stroke="${cSurf}" stroke-width="2"/>`; });
+  const every=Math.ceil(s.length/8);
+  let xl='';
+  s.forEach((d,i)=>{ if((s.length-1-i)%every===0) xl+=`<text x="${cx(i)}" y="${H-8}" text-anchor="middle" font-size="10" fill="${cMuted}">${d.label}</text>`; });
+  let hov='';
+  s.forEach((d,i)=>{ hov+=`<rect class="hov" data-i="${i}" x="${padL+step*i}" y="${padT}" width="${step}" height="${plotH}" rx="6"/>`; });
+  host.innerHTML =
+    `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(p.name)} ${drillView} trend">`+
+    `<line x1="${padL}" y1="${y(0)}" x2="${W-padR}" y2="${y(0)}" stroke="${cAxis}" stroke-width="1"/>`+
+    g+bars+line+xl+hov+`</svg><div class="ctip" id="drillTip"></div>`;
+  const svg=host.querySelector('svg'), tip=host.querySelector('#drillTip');
+  host.querySelectorAll('rect.hov').forEach(r=>{
+    const show=()=>{
+      const i=+r.dataset.i, d=s[i];
+      tip.innerHTML=`${esc(d.full)}<br><span class="tq">${d.q}</span> quotes · <span class="tn">${d.n}</span> new business`;
+      const sr=svg.getBoundingClientRect(), hr=host.getBoundingClientRect();
+      tip.style.left=(sr.left-hr.left+cx(i)*sr.width/W)+'px';
+      tip.style.top =(sr.top-hr.top+Math.min(y(d.q),y(d.n))*sr.height/H)+'px';
+      tip.style.display='block';
+    };
+    const hide=()=>{ tip.style.display='none'; };
+    r.addEventListener('mouseenter',show);
+    r.addEventListener('mouseleave',hide);
+    r.addEventListener('touchstart',show,{passive:true});
+    r.addEventListener('touchend',()=>setTimeout(hide,2200),{passive:true});
+  });
+}
+function renderDrillProds(p){
+  const host=$('drillProds');
+  if(isProducer(p.role)){ host.innerHTML=''; return; }
+  const kids=agencyProducers(p);
+  if(!kids.length){ host.innerHTML=''; return; }
+  const perLbl=periodLabel();
+  const rows=kids.map(x=>({i:x.i,p:x.p,q:+x.p.q[LB.period].actual||0,n:+x.p.n[LB.period].actual||0}))
+    .sort((a,b)=> LB.metric==='q' ? (b.q-a.q || b.n-a.n) : (b.n-a.n || b.q-a.q));
+  host.innerHTML = `<div class="prodlist">
+    <div class="pl-hd">PRODUCERS <span>· ${esc(perLbl)} — click one to see their trend</span></div>
+    <div class="plcols"><div></div><div>QUOTES</div><div>NEW BIZ</div><div></div></div>
+    ${rows.map(r=>`<div class="plrow" data-pi="${r.i}" tabindex="0" role="button" aria-label="${esc(r.p.name)} — open trend history">
+      <div class="who2"><div class="av2">${esc(initials(r.p.name))}</div><div class="nm2">${esc(r.p.name)}${r.p.owner?'<span class="ownflag">OWNER</span>':''}</div></div>
+      <div class="pv q">${r.q}</div><div class="pv n">${r.n}</div><div class="chev2">›</div>
+    </div>`).join('')}
+  </div>`;
+  host.querySelectorAll('.plrow').forEach(el=>{
+    el.addEventListener('click',()=>drillInto(+el.dataset.pi));
+    el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); drillInto(+el.dataset.pi); } });
+  });
+}
+
+/* ---------- news ---------- */
+function renderNews(){
+  /* Coerce pinned to 0/1 first: subtracting an undefined pinned flag yields
+     NaN, which silently drops the item back into plain date order. */
+  const rank = v => v ? 1 : 0;
+  const items = (data().news||[]).slice()
+    .sort((a,b)=> (rank(b.pinned)-rank(a.pinned)) || String(b.date||'').localeCompare(String(a.date||'')));
+  $('newsList').innerHTML = items.map(n=>{
+    const href = safeUrl(n.link);
+    const ext = href && !href.startsWith('#');
+    const title = href
+      ? `<a href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''}>${esc(n.title)}</a>`
+      : esc(n.title);
+    const tag = /^(news|promo|recognition|update)$/.test(n.tag||'') ? n.tag : 'news';
+    return `<div class="newsitem">
+      <div class="meta"><span class="tag ${tag}">${tag}</span><time>${fmtDate(n.date)}</time>${n.pinned?'<span class="pin">Pinned</span>':''}</div>
+      <h3>${title}</h3>
+      <p>${esc(n.body||'')}</p>
+      ${href?`<a class="more" href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''}>Read more →</a>`:''}
+    </div>`;
+  }).join('') || '<div class="empty">Nothing posted yet.</div>';
+}
+
+/* ---------- events ---------- */
+function renderEvents(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const items = (data().events||[]).filter(e=>{ const d=new Date(e.date+"T23:59:59"); return !isNaN(d) && d>=today; })
+    .sort((a,b)=> String(a.date||'').localeCompare(String(b.date||''))).slice(0,6);
+  $('eventList').innerHTML = items.map(e=>{
+    const d = new Date(e.date+"T12:00:00");
+    const mo = isNaN(d)?'':d.toLocaleDateString('en-US',{month:'short'});
+    const dy = isNaN(d)?'':d.getDate();
+    return `<div class="eventrow">
+      <div class="datebadge"><span class="m">${mo}</span><span class="d">${dy}</span></div>
+      <div class="info">
+        <b>${esc(e.title)}</b>
+        <span class="where">${esc([e.time,e.location].filter(Boolean).join(' · '))}</span>
+        ${e.description?`<p>${esc(e.description)}</p>`:''}
+        ${safeUrl(e.link)?`<p><a class="filelink" style="padding:3px 9px;display:inline-block;margin-top:5px" href="${esc(safeUrl(e.link))}" target="_blank" rel="noopener">Join / details</a></p>`:''}
+      </div>
+    </div>`;
+  }).join('') || '<div class="empty">No upcoming events.</div>';
+}
+
+/* ---------- competitions ---------- */
+function renderComps(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const items = (data().competitions||[]).filter(c=>c.active);
+  $('compList').innerHTML = items.map(c=>{
+    let days='', ended=false;
+    if(c.ends){
+      const e=new Date(c.ends+"T23:59:59");
+      if(!isNaN(e)){
+        /* compare midnight to midnight: ceil() against an end-of-day
+           timestamp read one day long at both ends of the promo */
+        const n=Math.round((midnight(e)-today)/86400000);
+        ended = n<0;
+        /* an expired contest used to sit on "0 days left" forever, which
+           reads as "closing today" every day after it finished */
+        days = ended ? `<div class="days ended"><b>✓</b><span>ended</span></div>`
+             : `<div class="days"><b>${n===0?'Today':n}</b><span>${n===0?'last day':'day'+(n===1?'':'s')+' left'}</span></div>`;
+      }
+    }
+    const st = (c.standings||[]).slice(0,5);
+    const lbl = (ended?'Final':'Current')+' standings'+(c.metricLabel?' — '+esc(c.metricLabel):'');
+    return `<div class="comp${ended?' isended':''}">
+      <div class="hd"><div class="left"><b>${esc(c.title)}</b><span>${esc(c.period||'')}</span></div>${days}</div>
+      <div class="bd"><div class="ctext">${esc(c.description||'')}</div>
+        ${c.prize?`<div class="prize">🏆 ${esc(c.prize)}</div>`:''}
+      </div>
+      ${st.length?`<div class="standings"><div class="lbl">${lbl}</div>
+        ${st.map((s,i)=>`<div class="srow"><span class="r">${i+1}</span><b>${esc(s.name)}</b><span class="v">${esc(String(s.value))}</span></div>`).join('')}
+      </div>`:''}
+    </div>`;
+  }).join('') || '<div class="empty">No competitions running right now.</div>';
+}
+
+/* ---------- newsletter ---------- */
+function fileHref(f){
+  const st = STAGED.find(s=>s.path===f);
+  if(st) return st.blobUrl;
+  /* content.json stores repo-relative paths like files/x.pdf */
+  return (f && !/^(https?:|blob:|data:|mailto:|tel:|#|\/)/i.test(f)) ? ROOT+f : f;
+}
+let nlFilter = '';
+function nlRow(n){
+  return `<div class="frow">
+        <div class="fico"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill-opacity=".45"/></svg></div>
+        <div class="fi"><b>${esc(n.title)}</b><span>${fmtDate(n.date)}</span></div>
+        <a class="filelink open" href="${esc(safeUrl(fileHref(n.file||''))||'#')}" target="_blank" rel="noopener" aria-label="Open ${esc(n.title)}">Open</a>
+      </div>`;
+}
+function renderNewsletter(){
+  const all = (data().newsletters||[]).slice().sort((a,b)=> String(b.date||'').localeCompare(String(a.date||'')));
+  if(!all.length){ $('nlArea').innerHTML='<div class="empty">No newsletters yet.</div>'; return; }
+
+  /* While a library search is running this card has to answer the search
+     like the other two, or a full list of issues reads as three matches. */
+  const q = nlFilter.toLowerCase();
+  if(q){
+    const hits = all.filter(n=> [n.title, n.date, fmtDate(n.date)].filter(Boolean).join(' ').toLowerCase().includes(q));
+    $('nlArea').innerHTML = hits.length
+      ? `<div class="filelist">${hits.map(nlRow).join('')}</div>`
+      : `<div class="empty">No newsletters match &ldquo;${esc(nlFilter)}&rdquo;.</div>`;
+    return;
+  }
+
+  const latest = all[0], rest = all.slice(1);
+  const latestHref = safeUrl(fileHref(latest.file||''));
+  $('nlArea').innerHTML = `
+    <div class="latestnl">
+      <div class="nlthumb"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6 2h9l5 5v15H6z" opacity=".95"/><path d="M14 2v6h6" fill="#89b7ff"/></svg></div>
+      <div class="info"><b>${esc(latest.title)}</b><span>${fmtDate(latest.date)} · Latest issue</span></div>
+      ${latestHref?`<a class="btn primary open" href="${esc(latestHref)}" target="_blank" rel="noopener">Read it →</a>`
+                  :`<span class="btn open" style="pointer-events:none;opacity:.55">File missing</span>`}
+    </div>
+    ${rest.length?`<div class="cat" style="margin-top:14px">Past issues</div>
+    <div class="filelist">${rest.map(nlRow).join('')}</div>`:''}`;
+}
+
+/* ---------- reports ----------
+   Grouped newest-year-first. The current year shows expanded with its
+   categories in a fixed order; earlier years collapse into an archive so
+   the library is still usable after three years of monthly reports. */
+const CAT_ORDER = ['Production','Life','Trackers','Programs','Other'];
+const CAT_STYLE = {Life:{cls:'red'}, Trackers:{cls:'gold'}};
+let repFilter = '';
+const openYears = new Set();
+
+function reportRow(r){
+  const cat = r.category||'Other';
+  const st = CAT_STYLE[cat] || {cls:''};
+  const action = r.type==='table'
+    ? `<button class="filelink open" type="button" data-view="${esc(r.id)}" aria-label="View ${esc(r.title)} as a table">View table</button>`
+    : `<a class="filelink open" href="${esc(safeUrl(fileHref(r.file||r.link||'')) || '#')}" target="_blank" rel="noopener" aria-label="Open ${esc(r.title)}">Open</a>`;
+  return `<div class="frow">
+    <div class="fico ${st.cls}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="11" width="3" height="9"/><rect x="10" y="6" width="3" height="14"/><rect x="16" y="9" width="3" height="11"/></svg></div>
+    <div class="fi"><b>${esc(r.title)}</b><span>${fmtDate(r.date)}${r.note?' · '+esc(r.note):''}</span></div>
+    ${action}
+  </div>`;
+}
+function byCategory(list){
+  const cats = {};
+  list.forEach(r=>{ const c=r.category||'Other'; (cats[c]=cats[c]||[]).push(r); });
+  return Object.keys(cats)
+    .sort((a,b)=>{
+      const ia=CAT_ORDER.indexOf(a), ib=CAT_ORDER.indexOf(b);
+      return (ia<0?99:ia)-(ib<0?99:ib) || a.localeCompare(b);
+    })
+    .map(c=>`<div class="cat">${esc(c)}</div>${cats[c].map(reportRow).join('')}`).join('');
+}
+function renderReports(){
+  const all = (data().reports||[]).slice()
+    .sort((a,b)=> String(b.date||'').localeCompare(String(a.date||'')));
+  const box = $('reportList');
+  if(!all.length){ box.innerHTML='<div class="empty">No reports posted yet.</div>'; return; }
+
+  const q = repFilter.toLowerCase();
+  const items = q
+    ? all.filter(r=> [r.title,r.category,r.note,r.date].filter(Boolean).join(' ').toLowerCase().includes(q))
+    : all;
+  if(!items.length){ box.innerHTML=`<div class="empty">No reports match “${esc(repFilter)}”.</div>`; return; }
+
+  /* while filtering, skip the year chrome entirely — the user is hunting
+     for one document, not browsing */
+  if(q){ box.innerHTML = byCategory(items); return; }
+
+  const years = {};
+  items.forEach(r=>{ const y=(String(r.date||'').slice(0,4))||'Undated'; (years[y]=years[y]||[]).push(r); });
+  /* 'Undated' sorts above '2026' alphabetically, which made a single
+     dateless report the expanded top section and pushed this year into
+     the collapsed archive */
+  const keys = Object.keys(years).sort((a,b)=> (a==='Undated')-(b==='Undated') || b.localeCompare(a));
+
+  /* one year of reports needs no year chrome at all */
+  if(keys.length===1){ box.innerHTML = byCategory(years[keys[0]]); return; }
+
+  box.innerHTML = keys.map((y,i)=>{
+    if(i===0) return `<div class="yearhd static">${esc(y)}<span class="count">${years[y].length} report${years[y].length===1?'':'s'}</span></div>${byCategory(years[y])}`;
+    const open = openYears.has(y);
+    return `<button class="yearhd" type="button" data-year="${esc(y)}" aria-expanded="${open}" aria-controls="yr-${esc(y)}">
+        <span class="chev">▶</span>${esc(y)} archive<span class="count">${years[y].length} report${years[y].length===1?'':'s'}</span>
+      </button>
+      <div class="yearbody" id="yr-${esc(y)}" ${open?'':'hidden'}>${byCategory(years[y])}</div>`;
+  }).join('');
+}
+
+/* =====================================================================
+   ADMIN
+   ===================================================================== */
+async function adminToggle(){
+  if(adminMode){
+    if(dirty && !confirm("You have unpublished changes. Lock admin mode anyway? (Changes stay staged in this tab.)")) return;
+    adminMode=false; $('adminbar').classList.remove('on'); $('btnAdmin').textContent='Admin'; closePanel(); renderAll(); return;
+  }
+  if(PUBLISH_URL){
+    let pw = safeLocal(()=>localStorage.getItem(PW_KEY), null), prompted = false;
+    if(!pw){
+      pw = prompt("Enter the admin password:");
+      if(pw===null || !pw.trim()) return;
+      pw = pw.trim(); prompted = true;
+    }
+    const btn=$('btnAdmin'); btn.textContent='Checking…'; btn.disabled=true;
+    const ok = await verifyPw(pw);
+    btn.textContent='Admin'; btn.disabled=false;
+    if(ok===null){ alert("Can't reach the publish service right now — check your internet connection and try again."); return; }
+    if(!ok){
+      safeLocal(()=>localStorage.removeItem(PW_KEY));
+      alert(prompted ? "Incorrect password." : "Your saved password is no longer valid (it may have been changed). Click Admin to sign in again.");
+      return;
+    }
+    ADMIN_PW = pw; safeLocal(()=>localStorage.setItem(PW_KEY, pw));
+  }
+  /* Fallback mode (no PUBLISH_URL) opens the editor without a passcode on
+     purpose: any passcode checked in this file would be readable by anyone
+     viewing source, so it would protect nothing. Nothing can be published
+     until the admin supplies their own GitHub token in the Publish tab. */
+  adminMode=true;
+  if(!EDIT){ EDIT = clone(CONTENT); offerDraftRestore(); }
+  $('adminbar').classList.add('on'); $('btnAdmin').textContent='Admin •';
+  renderAll();
+}
+async function verifyPw(pw){
+  try{
+    const r = await fetch(PUBLISH_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'verify', password:pw})});
+    if(r.ok) return true;
+    if(r.status===401) return false;
+    return null;
+  }catch(e){ return null; }
+}
+function signOutDevice(){
+  if(!confirm("Sign out on this computer?\n\nYou'll need the admin password again to make edits here"+(dirty||STAGED.length?", and anything you haven't published will be lost.":"."))) return;
+  safeLocal(()=>localStorage.removeItem(PW_KEY)); ADMIN_PW=null;
+  adminMode=false; $('adminbar').classList.remove('on'); $('btnAdmin').textContent='Admin'; closePanel(); renderAll();
+}
+function openPanel(){ $('drawer').classList.add('on'); showTab(currentTab); captureFocus('drawer'); }
+function closePanel(){ $('drawer').classList.remove('on'); releaseFocus('drawer'); }
+function discardChanges(){
+  if(!confirm("Throw away all unpublished changes?")) return;
+  EDIT = clone(CONTENT); STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
+  PENDING_DELETE=[]; clearDraft(); openEdit=null; dirty=false; $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
+  renderAll(); showTab(currentTab);
+}
+
+/* ---------- generic collection editors ---------- */
+const EDITORS = {
+  news: { list:'news', label:'News item', fields:[
+    {k:'date', label:'Date', t:'date'},
+    {k:'tag', label:'Tag', t:'select', opts:['news','promo','recognition','update']},
+    {k:'title', label:'Headline', full:1},
+    {k:'body', label:'Body', t:'textarea', full:1},
+    {k:'link', label:'Link (URL, or #newsletter / #reports / #competitions to jump on-page)', full:1},
+    {k:'pinned', label:'Pin to top', t:'check'}
+  ], sum:i=>({b:i.title, s:fmtDate(i.date)+' · '+(i.tag||'news')}) },
+  events: { list:'events', label:'Event', fields:[
+    {k:'date', label:'Date', t:'date'},
+    {k:'time', label:'Time (e.g. 9:00 AM CT)'},
+    {k:'title', label:'Title', full:1},
+    {k:'location', label:'Location'},
+    {k:'link', label:'Link (optional)'},
+    {k:'description', label:'Description', t:'textarea', full:1}
+  ], sum:i=>({b:i.title, s:fmtDate(i.date)+(i.location?' · '+i.location:'')}) },
+  comps: { list:'competitions', label:'Competition', fields:[
+    {k:'title', label:'Title'},
+    {k:'period', label:'Period (e.g. Jul 1 – Sep 30)'},
+    {k:'ends', label:'End date', t:'date'},
+    {k:'prize', label:'Prize'},
+    {k:'metricLabel', label:'Standings metric label'},
+    {k:'active', label:'Active (visible on hub)', t:'check'},
+    {k:'description', label:'Description', t:'textarea', full:1},
+    {k:'standings', label:'Standings — one per line: Name, number', t:'standings', full:1}
+  ], sum:i=>({b:i.title, s:(i.period||'')+(i.active?'':' · hidden')}) },
+  nl: { list:'newsletters', label:'Newsletter', fields:[
+    {k:'title', label:'Title'},
+    {k:'date', label:'Issue date', t:'date'}
+  ], sum:i=>({b:i.title, s:fmtDate(i.date)+' · '+(i.file||'')}), upload:{folder:'files/', accept:'.pdf', hint:'Drop the newsletter PDF here (or click to choose). It will be added as the latest issue.'} },
+  reports: { list:'reports', label:'Report', fields:[
+    {k:'title', label:'Title'},
+    {k:'date', label:'Report date', t:'date'},
+    {k:'category', label:'Category', t:'select', opts:['Production','Life','Trackers','Programs','Other']},
+    {k:'note', label:'Note (e.g. As of 7/2/26)'}
+  ], sum:i=>({b:i.title, s:(i.category||'Other')+' · '+fmtDate(i.date)+(i.type==='table'?' · interactive table':'')}), upload:{folder:'files/', accept:'.pdf,.xlsx,.xls,.csv,.png,.jpg', hint:'Drop an Excel/CSV here and it becomes an interactive on-brand table (matrixes, producer reports, life results…). PDFs and images post as openable files. Fill in title & category after it appears.'} },
+  resources: { list:'resources', label:'Resource', fields:[
+    {k:'title', label:'Title'},
+    {k:'category', label:'Category', t:'select', opts:['Recruiting','Training','Agency Setup','Programs','Forms','Other']},
+    {k:'note', label:'Short description'},
+    {k:'date', label:'Date added', t:'date'}
+  ], sum:i=>({b:i.title, s:(i.category||'Other')+(i.note?' · '+i.note:'')}), upload:{folder:'files/', accept:'.pdf,.docx,.xlsx,.pptx,.png,.jpg,.html', hint:'Drop any PDF or document agents should be able to download — playbooks, program one-pagers, forms. Set the title and category after it appears.'} }
+};
+
+let currentTab = 'news';
+function showTab(t){
+  currentTab = t;
+  document.querySelectorAll('#ptabs button').forEach(b=>b.classList.toggle('on', b.dataset.t===t));
+  if(t==='publish') return renderPublishTab();
+  if(t==='board') return renderBoardTab();
+  renderCollectionTab(t);
+}
+
+function renderCollectionTab(t){
+  const ed = EDITORS[t];
+  const items = EDIT[ed.list] || (EDIT[ed.list]=[]);
+  let html = '';
+  if(t==='news'){
+    const b = EDIT.banner || (EDIT.banner={active:false,text:'',link:''});
+    html += `<fieldset class="box"><legend>Announcement banner</legend>
+      <div class="frm">
+        <div class="full"><label>Banner text</label><input type="text" id="bnText" value="${esc(b.text)}"></div>
+        <div><label>Link (optional, e.g. #newsletter)</label><input type="text" id="bnLink" value="${esc(b.link||'')}"></div>
+        <div style="display:flex;align-items:end;padding-bottom:6px"><label class="switch"><input type="checkbox" id="bnActive" ${b.active?'checked':''}> Show banner</label></div>
+      </div>
+      <p style="margin:10px 0 0"><button class="btn sm primary" onclick="saveBanner()">Apply banner</button></p>
+    </fieldset>`;
+  }
+  if(ed.upload){
+    html += `<div class="drop" id="dropzone">📄 <b>Drag &amp; drop</b> — ${esc(ed.upload.hint)}<input type="file" id="dropInput" accept="${ed.upload.accept}" style="display:none" multiple></div>
+      <div id="stagedChips">${STAGED.filter(s=>(EDIT[ed.list]||[]).some(it=>it.file===s.path)).map(s=>`<span class="stagechip">✓ ${esc(s.name)} ready to publish<button type="button" class="chipx" title="Remove this file and its ${esc(ed.label.toLowerCase())} entry" aria-label="Remove ${esc(s.name)}" data-unstage="${esc(s.path)}">✕</button></span>`).join('')}</div>
+      <div style="height:14px"></div>`;
+  }
+  html += `<fieldset class="box"><legend>${esc(ed.label)}s</legend><div id="itemList"></div>
+    ${ed.upload
+      ? `<p class="hint" style="margin:6px 0 0">To add a ${esc(ed.label.toLowerCase())}, drop the file in the box above — that's the only way to get a working link.</p>`
+      : `<button class="btn sm" onclick="addItem('${t}')">+ Add ${esc(ed.label.toLowerCase())}</button>`}</fieldset>
+    <div id="itemForm"></div>`;
+  $('panelBody').innerHTML = html;
+  drawItemList(t);
+  if(ed.upload) wireDropzone(t);
+}
+
+function drawItemList(t){
+  const ed = EDITORS[t];
+  const items = EDIT[ed.list]||[];
+  $('itemList').innerHTML = items.map((it,i)=>{
+    const s = ed.sum(it);
+    const ordered = t==='comps';   // every other list is sorted by date or pin on the page, so arrows would do nothing
+    const noFile = ed.upload && !it.file && !it.link;
+    return `<div class="itemrow${noFile?' broken':''}">
+      <div class="t"><b>${esc(s.b||'(untitled)')}${it.pinned?' <span class="pinflag">PINNED</span>':''}</b><span>${noFile?'<span class="nofile">⚠ No file attached — this link won\'t work</span>':esc(s.s||'')}</span></div>
+      ${ordered?`<button class="btn sm" aria-label="Move up" title="Move up" onclick="moveItem('${t}',${i},-1)" ${i===0?'disabled':''}>↑</button>
+      <button class="btn sm" aria-label="Move down" title="Move down" onclick="moveItem('${t}',${i},1)" ${i===items.length-1?'disabled':''}>↓</button>`:''}
+      <button class="btn sm" onclick="editItem('${t}',${i})">Edit</button>
+      <button class="btn sm danger" aria-label="Delete ${esc(s.b||'this item')}" title="Delete" onclick="delItem('${t}',${i})">✕</button>
+    </div>`;
+  }).join('') || '<p class="hint">Nothing here yet.</p>';
+}
+
+function saveBanner(){
+  EDIT.banner = {active:$('bnActive').checked, text:$('bnText').value.trim(), link:$('bnLink').value.trim()};
+  markDirty();
+}
+function moveItem(t,i,dir){
+  const list = EDIT[EDITORS[t].list];
+  const j=i+dir; if(j<0||j>=list.length) return;
+  [list[i],list[j]]=[list[j],list[i]];
+  $('itemForm').innerHTML='';   // the open form was bound to the old position
+  markDirty(); drawItemList(t);
+}
+function delItem(t,i){
+  const ed=EDITORS[t], list=EDIT[ed.list], it=list[i];
+  const title=(ed.sum(it).b||'(untitled)');
+  if(!confirm(`Delete the ${ed.label.toLowerCase()} "${title}"?\n\nThis can't be undone once you publish.`)) return;
+  /* Removing the entry only hides it from the page — the file itself
+     stays at its web address unless we explicitly take it down. */
+  const file=it.file;
+  if(file){
+    const staged=STAGED.findIndex(x=>x.path===file);
+    if(staged>=0){
+      URL.revokeObjectURL(STAGED[staged].blobUrl); STAGED.splice(staged,1);   // never published, nothing to remove
+    }else if(!PENDING_DELETE.includes(file)){
+      const alsoFile=confirm(`Also take the file itself off the site?\n\nOK — anyone with the old link gets "not found".\nCancel — the entry disappears from the page but the file stays reachable at its address.`);
+      if(alsoFile) PENDING_DELETE.push(file);
+    }
+  }
+  list.splice(i,1); openEdit=null; markDirty(); drawItemList(t); $('itemForm').innerHTML='';
+}
+function addItem(t){
+  const ed=EDITORS[t], list=EDIT[ed.list];
+  const it={id:uid(), _new:true};
+  ed.fields.forEach(f=>{ it[f.k] = f.t==='check'?false : f.t==='standings'?[] : ''; });
+  if(t==='comps') it.active=true;
+  list.unshift(it);
+  drawItemList(t); editItem(t,0);
+}
+/* Cancel on a never-saved item removes it, so clicking Add by mistake
+   doesn't leave an empty card that publishes to the live page. */
+function cancelEdit(t,i){
+  const list=EDIT[EDITORS[t].list], it=list[i];
+  if(it && it._new){ list.splice(i,1); drawItemList(t); }
+  openEdit=null; $('itemForm').innerHTML='';
+}
+let openEdit=null;   // {t,i} of the edit form currently on screen
+function editItem(t,i){
+  const ed=EDITORS[t], it=EDIT[ed.list][i];
+  openEdit={t,i};
+  $('itemForm').innerHTML = `<fieldset class="box"><legend>Edit ${esc(ed.label.toLowerCase())}</legend>
+    <div class="frm">
+      ${ed.fields.map(f=>{
+        const v = it[f.k];
+        const wrap = c => `<div class="${f.full?'full':''}"><label>${esc(f.label)}</label>${c}</div>`;
+        if(f.t==='textarea') return wrap(`<textarea data-k="${f.k}">${esc(v)}</textarea>`);
+        if(f.t==='select') return wrap(`<select data-k="${f.k}">${f.opts.map(o=>`<option ${o===v?'selected':''}>${o}</option>`).join('')}</select>`);
+        if(f.t==='check') return `<div style="display:flex;align-items:end;padding-bottom:6px"><label class="switch"><input type="checkbox" data-k="${f.k}" ${v?'checked':''}> ${esc(f.label)}</label></div>`;
+        if(f.t==='standings') return wrap(`<textarea data-k="${f.k}" placeholder="Maria Delgado, 62">${esc((v||[]).map(s=>s.name+', '+s.value).join('\n'))}</textarea>`);
+        return wrap(`<input type="${f.t==='date'?'date':'text'}" data-k="${f.k}" value="${esc(v)}">`);
+      }).join('')}
+    </div>
+    <p style="margin:11px 0 0;display:flex;gap:8px">
+      <button class="btn sm primary" onclick="saveItem('${t}',${i})">Save ${esc(ed.label.toLowerCase())}</button>
+      <button class="btn sm" onclick="cancelEdit('${t}',${i})">Cancel</button>
+    </p></fieldset>`;
+  $('itemForm').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function saveItem(t,i){
+  const ed=EDITORS[t], it=EDIT[ed.list][i];
+  $('itemForm').querySelectorAll('[data-k]').forEach(el=>{
+    const f = ed.fields.find(x=>x.k===el.dataset.k);
+    if(f.t==='check') it[f.k]=el.checked;
+    else if(f.t==='standings'){
+      /* Accept comma, pipe, tab or dash, and ANY trailing value — the old
+         pattern demanded a number, so "Maria Delgado, 1st" silently
+         became one long name with a blank score. */
+      const bad=[];
+      it[f.k]=el.value.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{
+        const m=l.match(/^(.*\S)\s*(?:[,|\t]|\s[-–—]\s)\s*(\S.*)$/);
+        if(!m){ bad.push(l); return {name:l, value:''}; }
+        return {name:m[1].trim(), value:m[2].trim()};
+      });
+      if(bad.length) alert('These lines had no score, so they were saved with a blank one:\n\n'+bad.slice(0,5).join('\n')+'\n\nUse "Name, score" — for example "Maria Delgado, 62" or "Maria Delgado, 1st".');
+    }
+    else it[f.k]=el.value.trim();
+  });
+  delete it._new;
+  openEdit=null;
+  markDirty(); drawItemList(t); $('itemForm').innerHTML='';
+}
+
+/* Commit anything typed but not yet "saved" before publishing. Without
+   this, an admin who fills in a form and goes straight for the big blue
+   Publish button loses that text and is told the publish succeeded. */
+function flushOpenForm(){
+  if($('bnText') && EDIT.banner){
+    const t=$('bnText').value.trim(), l=$('bnLink').value.trim(), a=$('bnActive').checked;
+    if(t!==(EDIT.banner.text||'') || l!==(EDIT.banner.link||'') || a!==!!EDIT.banner.active) saveBanner();
+  }
+  if(openEdit && $('itemForm') && $('itemForm').querySelector('[data-k]')){
+    const {t,i}=openEdit;
+    if(EDIT[EDITORS[t].list] && EDIT[EDITORS[t].list][i]) saveItem(t,i);
+  }
+}
+
+/* ---------- drag & drop uploads ---------- */
+function wireDropzone(t){
+  const dz=$('dropzone'), inp=$('dropInput');
+  dz.onclick=()=>inp.click();
+  inp.onchange=()=>{ [...inp.files].forEach(f=>stageFile(t,f)); inp.value=''; };
+  ['dragover','dragenter'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('hover');}));
+  ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('hover');}));
+  dz.addEventListener('drop',e=>{ [...e.dataTransfer.files].forEach(f=>stageFile(t,f)); });
+}
+/* Drop a staged file before it is published, and remove whatever list entry
+   was auto-created for it. Previously the only way out of a mis-drop was
+   Discard changes, which threw away every other unpublished edit too. */
+function unstageFile(path){
+  const i = STAGED.findIndex(s=>s.path===path);
+  if(i<0) return;
+  if(!confirm(`Remove "${STAGED[i].name}" and the entry that goes with it?`)) return;
+  const form=$('itemForm'); if(form) form.innerHTML='';
+  URL.revokeObjectURL(STAGED[i].blobUrl);
+  STAGED.splice(i,1);
+  ['newsletters','reports','resources'].forEach(list=>{
+    if(Array.isArray(EDIT[list])) EDIT[list] = EDIT[list].filter(it=>it.file!==path);
+  });
+  markDirty(); renderCollectionTab(currentTab);
+}
+$('panelBody').addEventListener('click', e=>{
+  const b = e.target.closest('[data-unstage]');
+  if(b) unstageFile(b.dataset.unstage);
+});
+/* "2026-07_D32_newsletter_FINAL_v2.pdf" -> "2026 07 D32 Newsletter FINAL V2"
+   so the public title is never a raw filename. */
+function prettyTitle(name){
+  return name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim()
+    .replace(/\b\w/g, c=>c.toUpperCase()) || 'Untitled';
+}
+function slugify(name){
+  const dot=name.lastIndexOf('.');
+  const base=(dot>0?name.slice(0,dot):name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60)||'file';
+  const ext=dot>0?name.slice(dot).toLowerCase():'';
+  return base+ext;
+}
+const MAX_UPLOAD_MB = 20;
+function stageFile(t, file){
+  const ed=EDITORS[t];
+  const ext=(file.name.toLowerCase().match(/\.([a-z0-9]+)$/)||[])[1]||'';
+  /* Dropped files bypass the file picker's accept filter entirely, so
+     everything is checked here in plain language before it can be
+     published as a broken link. */
+  if(!file.size && !file.type){
+    alert('That looks like a folder. Drop the individual files instead.');
+    return;
+  }
+  const allowed=(ed.upload.accept||'').split(',').map(x=>x.trim().replace(/^\./,'').toLowerCase()).filter(Boolean);
+  if(allowed.length && !allowed.includes(ext)){
+    alert(`"${file.name}" is a .${ext||'?'} file.\n\nThis section takes: ${allowed.map(a=>'.'+a).join(', ')}.\n\nIf it's a Word or Pages document, save it as a PDF first.`);
+    return;
+  }
+  if(file.size > MAX_UPLOAD_MB*1024*1024){
+    alert(`"${file.name}" is ${(file.size/1048576).toFixed(1)} MB.\n\nThe limit is ${MAX_UPLOAD_MB} MB, and anything over about 3 MB is slow for agents on their phones.\n\nCompress the PDF and try again.`);
+    return;
+  }
+  if(t==='reports' && ['xlsx','xls','csv'].includes(ext)) return stageTableFile(file);
+  const reader=new FileReader();
+  reader.onerror=()=>alert(`Couldn't read "${file.name}". If it's on a shared or network drive, copy it to your desktop first and try again.`);
+  reader.onload=()=>{
+    const b64=reader.result.split(',')[1];
+    let path=ed.upload.folder+slugify(file.name);
+    if(STAGED.some(s=>s.path===path) || JSON.stringify(EDIT).includes('"'+path+'"')) path=ed.upload.folder+Date.now()+'-'+slugify(file.name);
+    STAGED.push({path, name:file.name, base64:b64, blobUrl:URL.createObjectURL(file)});
+    const today=new Date().toISOString().slice(0,10);
+    const nice=prettyTitle(file.name);
+    if(t==='nl') EDIT.newsletters.unshift({id:uid(), title:nice, date:today, file:path});
+    if(t==='reports') EDIT.reports.unshift({id:uid(), title:nice, date:today, category:'Other', note:'', file:path});
+    if(t==='resources') EDIT.resources.unshift({id:uid(), title:nice, date:today, category:'Other', note:'', file:path});
+    markDirty(); renderCollectionTab(t);
+    editItem(t,0);   // put the title/category form on screen instead of hoping they notice
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ---------- Excel / CSV → interactive table reports ---------- */
+function loadSheetJS(){
+  /* the reader ships with the site (xlsx.full.min.js in the repo) and only
+     loads when an admin drops a spreadsheet — viewers never download it.
+     CDN is a fallback in case the local copy is missing. */
+  const tryLoad = src => new Promise((res,rej)=>{
+    const s=document.createElement('script');
+    s.src=src; s.onload=()=>res(); s.onerror=()=>{ s.remove(); rej(); };
+    document.head.appendChild(s);
+  });
+  if(window.XLSX) return Promise.resolve();
+  return tryLoad('xlsx.full.min.js')
+    .catch(()=>tryLoad('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'))
+    .catch(()=>{ throw new Error('could not load the spreadsheet reader — check your internet connection and try again'); });
+}
+function trimRows(rows){
+  rows = rows.map(r=>(r||[]).map(c=> typeof c==='string' ? c.trim() : (c==null?'':String(c)) ));
+  while(rows.length && rows[rows.length-1].every(c=>c==='')) rows.pop();
+  while(rows.length && rows[0].every(c=>c==='')) rows.shift();
+  let truncated=false;
+  if(rows.length>3000){ rows=rows.slice(0,3000); truncated=true; }
+  const maxc=Math.min(60, Math.max(1,...rows.map(r=>r.length)));
+  rows=rows.map(r=>{ const a=r.slice(0,maxc); while(a.length<maxc) a.push(''); return a; });
+  return {rows, truncated};
+}
+async function stageTableFile(file){
+  try{
+    let sheets=[];
+    if(/\.csv$/i.test(file.name)){
+      sheets=[{name:'Data', rows:parseCSV(await file.text())}];
+    }else{
+      await loadSheetJS();
+      const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});
+      sheets=wb.SheetNames.map(n=>({name:n, rows:XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,raw:false,defval:''})}));
+    }
+    let anyTrunc=false;
+    sheets=sheets.map(s=>{ const t=trimRows(s.rows); anyTrunc=anyTrunc||t.truncated; return {name:s.name, rows:t.rows}; }).filter(s=>s.rows.length);
+    if(!sheets.length) throw new Error('no data rows found in that file');
+    const title=file.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').trim();
+    const json=JSON.stringify({title, sheets});
+    let path='files/'+slugify(file.name).replace(/\.(xlsx|xls|csv)$/,'')+'.json';
+    if(STAGED.some(s=>s.path===path) || JSON.stringify(EDIT).includes('"'+path+'"')) path='files/'+Date.now()+'-'+slugify(file.name).replace(/\.(xlsx|xls|csv)$/,'')+'.json';
+    STAGED.push({path, name:file.name, base64: btoa(unescape(encodeURIComponent(json))), blobUrl: URL.createObjectURL(new Blob([json],{type:'application/json'}))});
+    EDIT.reports.unshift({id:uid(), title, date:new Date().toISOString().slice(0,10), category:'Other', note:'', type:'table', file:path});
+    markDirty(); renderCollectionTab('reports');
+    if(anyTrunc) alert('Heads up: that sheet was longer than 3,000 rows, so it was trimmed. The hub is built for report-sized tables, not raw data dumps.');
+  }catch(err){
+    alert('Could not read that spreadsheet: '+err.message);
+  }
+}
+
+/* ---------- table viewer ---------- */
+const TV={data:null, sheet:0};
+async function openViewer(rid){
+  const r=(data().reports||[]).find(x=>x.id===rid); if(!r) return;
+  $('tvTitle').textContent=r.title;
+  $('tvSub').textContent=[fmtDate(r.date), r.note].filter(Boolean).join(' · ');
+  $('tvTabs').innerHTML=''; $('tvFoot').textContent='';
+  $('tvBody').innerHTML='<div class="empty">Loading…</div>';
+  $('tvSearch').value='';
+  $('tvOverlay').classList.add('on'); document.body.style.overflow='hidden'; captureFocus('tvOverlay','#tvSearch');
+  try{
+    const res=await fetch(fileHref(r.file),{cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const d=await res.json();
+    if(!d || !Array.isArray(d.sheets) || !d.sheets.length) throw new Error('unexpected file shape');
+    TV.data=d; TV.sheet=0;
+    renderViewer();
+  }catch(e){
+    $('tvBody').innerHTML='<div class="empty">Could not load this report.</div>';
+  }
+}
+function renderViewer(){
+  const d=TV.data; if(!d) return;
+  $('tvTabs').innerHTML = d.sheets.length>1
+    ? d.sheets.map((s,i)=>`<button class="${i===TV.sheet?'on':''}" aria-pressed="${i===TV.sheet}" onclick="TV.sheet=${i};renderViewer()">${esc(s.name)}</button>`).join('') : '';
+  const all=d.sheets[TV.sheet].rows;
+  /* These exports carry a title and blank rows above the real header, so
+     row 0 is often not the headings — find the first row that looks like
+     one (mostly non-empty, mostly non-numeric). */
+  let hi=0;
+  for(let i=0;i<Math.min(all.length,15);i++){
+    const r=all[i]||[], filled=r.filter(c=>String(c).trim()!=='');
+    if(filled.length>=Math.max(2,Math.ceil(r.length*0.5)) && filled.filter(c=>/^-?[\d.,$%]+$/.test(String(c).trim())).length<=filled.length/2){ hi=i; break; }
+  }
+  const rows=all.slice(hi);
+  const head=rows[0]||[];
+  const filter=$('tvSearch').value.toLowerCase().trim();
+  const body=rows.slice(1).filter(r=> !filter || r.some(c=>String(c).toLowerCase().includes(filter)));
+  const isNum=v=>/^\(?\s*[-+]?[$]?[\d,]+(\.\d+)?\s*[%)]?\s*$/.test(String(v)) && /\d/.test(String(v));
+  $('tvBody').innerHTML=`<table class="datatable">
+    <thead><tr>${head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead>
+    <tbody>${body.map(r=>`<tr>${r.map(c=>`<td class="${isNum(c)?'num':''}">${esc(c)}</td>`).join('')}</tr>`).join('') || `<tr><td colspan="${head.length||1}"><div class="empty">No matching rows.</div></td></tr>`}</tbody>
+  </table>`;
+  const bd=$('tvBody');
+  const clipped = bd.scrollWidth > bd.clientWidth + 2;
+  $('tvFoot').textContent=`${body.length} row${body.length===1?'':'s'}${filter?' matching "'+$('tvSearch').value+'"':''} · ${d.sheets[TV.sheet].name} · ${head.length} column${head.length===1?'':'s'}${clipped?' — scroll sideways for the rest':''}`;
+}
+function closeViewer(){ $('tvOverlay').classList.remove('on'); document.body.style.overflow=''; TV.data=null; releaseFocus('tvOverlay'); }
+
+/* ---------- focus management for the overlays ----------
+   Each of these declares aria-modal, which tells a screen reader that
+   nothing outside it exists. That is only true if focus actually goes
+   in and stays in. Keeps a small stack so a dialog opened over another
+   returns to the right place. */
+const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select,textarea,[tabindex]:not([tabindex="-1"])';
+const focusReturn = {};
+function captureFocus(id, firstSel){
+  const box = $(id); if(!box) return;
+  focusReturn[id] = document.activeElement;
+  const first = (firstSel && box.querySelector(firstSel)) || box.querySelector(FOCUSABLE);
+  if(first) setTimeout(()=>{ try{ first.focus({preventScroll:true}); }catch(e){ first.focus(); } }, 0);
+}
+function releaseFocus(id){
+  const prev = focusReturn[id];
+  focusReturn[id] = null;
+  if(prev && document.contains(prev)) { try{ prev.focus({preventScroll:true}); }catch(e){ prev.focus(); } }
+}
+function openOverlayId(){
+  if($('tvOverlay').classList.contains('on')) return 'tvOverlay';
+  if($('drillModal').classList.contains('open')) return 'drillModal';
+  if($('drawer').classList.contains('on')) return 'drawer';
+  return null;
+}
+/* Tab cycles inside whichever overlay is open. Without this, Tab walks
+   straight out of the dialog into the page underneath it. */
+document.addEventListener('keydown', e=>{
+  if(e.key !== 'Tab') return;
+  const id = openOverlayId(); if(!id) return;
+  const box = $(id);
+  const items = [...box.querySelectorAll(FOCUSABLE)]
+    .filter(el => el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+  if(!items.length) return;
+  const first = items[0], last = items[items.length-1];
+  if(!box.contains(document.activeElement)){ e.preventDefault(); first.focus(); return; }
+  if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+});
+let tvDebounce;
+$('tvSearch').addEventListener('input',()=>{ clearTimeout(tvDebounce); tvDebounce=setTimeout(renderViewer,140); });
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape') return;
+  if($('tvOverlay').classList.contains('on')) closeViewer();
+  else if($('drillModal').classList.contains('open')) closeDrill();
+  else if($('drawer').classList.contains('on')) closePanel();
+});
+/* the chart is drawn at a different aspect below 560px, so a rotate
+   needs a redraw or the plot stays squashed */
+let rotTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(rotTimer);
+  rotTimer=setTimeout(()=>{ const p=drillPerson(); if(p && $('drillModal').classList.contains('open')) renderDrillChart(p); },200);
+});
+
+/* ---------- district resources ----------
+   Same shape as the reports library but for evergreen documents —
+   playbooks, program one-pagers, forms. No year archiving: these are
+   reference material, not dated snapshots. */
+const RES_ORDER = ['Recruiting','Training','Agency Setup','Programs','Forms','Other'];
+let resFilter = '';
+function renderResources(){
+  const all = (data().resources||[]).slice()
+    .sort((a,b)=> String(b.date||'').localeCompare(String(a.date||'')));
+  const box = $('resourceList');
+  if(!all.length){ box.innerHTML='<div class="empty">No resources posted yet.</div>'; return; }
+  const q = resFilter.toLowerCase();
+  const items = q
+    ? all.filter(r=> [r.title,r.category,r.note].filter(Boolean).join(' ').toLowerCase().includes(q))
+    : all;
+  if(!items.length){ box.innerHTML=`<div class="empty">No resources match &ldquo;${esc(resFilter)}&rdquo;.</div>`; return; }
+  const cats={};
+  items.forEach(r=>{ const c=r.category||'Other'; (cats[c]=cats[c]||[]).push(r); });
+  box.innerHTML = Object.keys(cats)
+    .sort((a,b)=>{ const ia=RES_ORDER.indexOf(a), ib=RES_ORDER.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib) || a.localeCompare(b); })
+    .map(c=>`<div class="cat">${esc(c)}</div>${cats[c].map(resourceRow).join('')}`).join('');
+}
+function resourceRow(r){
+  /* same order as reportRow — date first, then the note */
+  const meta = [fmtDate(r.date), r.note].filter(Boolean).map(esc).join(' · ');
+  /* an .html resource is a page, not a download — forcing the download
+     attribute on it drops a raw file in Downloads instead of opening it */
+  const isPage = /\.html?(?:[?#]|$)/i.test(r.file||r.link||'');
+  return `<div class="frow">
+    <div class="fico"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6" fill-opacity=".45"/></svg></div>
+    <div class="fi"><b>${esc(r.title)}</b><span>${meta}</span></div>
+    <a class="filelink open" href="${esc(safeUrl(fileHref(r.file||r.link||'')) || '#')}" target="_blank" rel="noopener"${isPage?'':' download'} aria-label="${isPage?'Open':'Download'} ${esc(r.title)}">${isPage?'Open':'Download'}</a>
+  </div>`;
+}
+let resDebounce;
+/* replaced by the unified library search — see LIBRARY SEARCH below */
+
+/* ---------- reports library wiring ----------
+   Delegated so report ids never get interpolated into inline handlers. */
+$('reportList').addEventListener('click', e=>{
+  const view = e.target.closest('[data-view]');
+  if(view){ openViewer(view.dataset.view); return; }
+  const yr = e.target.closest('[data-year]');
+  if(yr){
+    const y = yr.dataset.year;
+    if(openYears.has(y)) openYears.delete(y); else openYears.add(y);
+    renderReports();
+  }
+});
+let repDebounce;
+let libDebounce;
+$('libSearch').addEventListener('input', e=>{
+  clearTimeout(libDebounce);
+  const v=e.target.value;
+  libDebounce=setTimeout(()=>{ repFilter=v.trim(); resFilter=v.trim(); nlFilter=v.trim();
+    renderReports(); renderResources(); renderNewsletter(); },120);
+});
+
+/* ---------- scoreboard tab ---------- */
+/* ---------- scoreboard tab (read-only: the board is sheet-driven now) ---------- */
+function renderBoardTab(){
+  const when = dataAsOf ? dataAsOf.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}) : 'not loaded yet';
+  const prods = PEOPLE.filter(p=>isProducer(p.role)).length;
+  const ags = PEOPLE.filter(p=>!isProducer(p.role)).length;
+  $('panelBody').innerHTML = `
+    <fieldset class="box"><legend>Where the scoreboard gets its numbers</legend>
+      <p class="hint" style="margin:0">The scoreboard is fed <b>live from the two district Quote &amp; Sales Google Sheets</b> &#8212; nothing here to edit and nothing to publish. To change what the board shows, change the sheet; the hub picks it up on the next visit, or when someone hits <b>&#8635; Refresh</b>.</p>
+      <p class="hint">Currently loaded: <b>${prods}</b> producers and <b>${ags}</b> agencies across both districts, with data through <b>${esc(when)}</b>.</p>
+      <p style="margin:11px 0 0"><button class="btn sm primary" type="button" onclick="loadLive({alert:true})">&#8635; Refresh from the sheets now</button></p>
+    </fieldset>
+    <fieldset class="box"><legend>Good to know</legend>
+      <p class="hint" style="margin:0">&#8220;Daily&#8221; means the <b>last complete business day</b>, not today &#8212; the export snapshots each morning, so its newest date has no production logged yet. Agency owners&#8217; personal production rows are detected automatically (producer name matches the agency name) and hidden from the producer board while <b>Staff only</b> is on. The totals at the top always include them.</p>
+    </fieldset>`;
+}
+
+/* ---------- publish tab + GitHub API ---------- */
+const GH_KEY='d32hub_gh';
+function ghCfg(){ try{ return JSON.parse(localStorage.getItem(GH_KEY))||{}; }catch(e){ return {}; } }
+function renderPublishTab(){
+  if(PUBLISH_URL){
+    $('panelBody').innerHTML = `
+      <fieldset class="box"><legend>Publishing — nothing to set up</legend>
+        <p class="hint" style="margin:0">This hub publishes through the district's shared publish service. You signed in with the admin password, and it's remembered on this device — just make your changes and hit <b>🚀 Publish to site</b>.</p>
+        <p style="margin:11px 0 0"><button class="btn sm" onclick="signOutDevice()">Sign out on this device</button></p>
+      </fieldset>
+      <fieldset class="box"><legend>What will publish</legend>
+        <p class="hint" style="margin:0">${dirty?'Content changes':'No content changes yet'}${STAGED.length?` + ${STAGED.length} new file(s): ${STAGED.map(s=>'<code>'+esc(s.name)+'</code>').join(', ')}`:''}.</p>
+        ${PENDING_DELETE.length?`<p class="hint" style="color:var(--red);font-weight:700">${PENDING_DELETE.length} file(s) will be taken off the site: ${PENDING_DELETE.map(p=>'<code>'+esc(p.replace('files/',''))+'</code>').join(', ')}</p>`:''}
+      </fieldset>
+      <fieldset class="box"><legend>Visitor counts</legend>
+        <p class="hint" style="margin:0 0 10px">Nothing is measured and no outside script loads until you put a token here. Cloudflare Web Analytics is free, sets no cookies, and records page views rather than people \u2014 it cannot tell you <i>who</i> visited.</p>
+        <p class="hint" style="margin:0 0 10px"><b>To get one:</b> Cloudflare dashboard \u2192 Analytics &amp; Logs \u2192 Web Analytics \u2192 <b>Add a site</b> \u2192 hostname <code>districtthirtytwo.github.io</code>. It shows you a snippet; the token is the long hex string inside it. Paste just that string below and publish.</p>
+        <div class="frm"><div><label for="cfTok">Cloudflare Web Analytics token</label>
+          <input type="text" id="cfTok" value="${esc((EDIT.analytics||{}).cfBeacon||'')}" placeholder="blank = no tracking at all"></div></div>
+        <p style="margin:11px 0 0"><button class="btn sm primary" onclick="saveAnalytics()">Save token</button></p>
+        <div class="msg" id="cfMsg"></div>
+      </fieldset>
+      <fieldset class="box"><legend>Good to know</legend>
+        <p class="hint" style="margin:0">Changes stage in <b>this browser</b> until you publish — if two admins edit at the same time, the last publish wins, so don't update simultaneously. If the password ever changes (done in Cloudflare by the hub owner), everyone just signs in again with the new one.</p>
+      </fieldset>`;
+    return;
+  }
+  const c=ghCfg();
+  $('panelBody').innerHTML = `
+    <fieldset class="box"><legend>Where this site lives (one-time setup)</legend>
+      <div class="frm">
+        <div><label>GitHub username / org</label><input type="text" id="ghOwner" value="${esc(c.owner||'')}" placeholder="e.g. conreyguy"></div>
+        <div><label>Repository</label><input type="text" id="ghRepo" value="${esc(c.repo||'')}" placeholder="e.g. district-hub"></div>
+        <div><label>Branch</label><input type="text" id="ghBranch" value="${esc(c.branch||'main')}"></div>
+        <div><label>Fine-grained token (Contents: read/write)</label><input type="password" id="ghToken" value="${esc(c.token||'')}" placeholder="github_pat_..."></div>
+      </div>
+      <p style="margin:11px 0 0"><button class="btn sm primary" onclick="saveGh()">Save settings (this browser only)</button></p>
+      <p class="hint">The token is stored only in <b>your</b> browser — it never appears in the published site. See SETUP.md for how to create it in about 3 minutes.</p>
+      <div class="msg" id="ghMsg"></div>
+    </fieldset>
+    <fieldset class="box"><legend>What will publish</legend>
+      <p class="hint" style="margin:0">${dirty?'Content changes to <code>content.json</code>':'No content changes yet'}${STAGED.length?` + ${STAGED.length} new file(s): ${STAGED.map(s=>'<code>'+esc(s.path)+'</code>').join(', ')}`:''}.</p>
+    </fieldset>
+    <fieldset class="box"><legend>No-GitHub fallback</legend>
+      <p class="hint" style="margin:0">If you ever need to update the site by hand: click <b>Export content.json</b> (bottom bar), then upload that file — plus anything you dropped in — to the repo on github.com (Add file → Upload files). Same result, just manual.</p>
+    </fieldset>`;
+}
+function saveAnalytics(){
+  const v=$('cfTok').value.trim(), m=$('cfMsg');
+  if(v && !/^[a-f0-9]{16,64}$/i.test(v)){
+    m.className='msg err';
+    m.textContent='That is not a beacon token. Copy only the long hex string from inside the Cloudflare snippet \u2014 not the whole <script> tag.';
+    return;
+  }
+  EDIT.analytics = EDIT.analytics || {};
+  EDIT.analytics.cfBeacon = v;
+  markDirty();
+  m.className='msg ok';
+  m.textContent = v ? 'Saved. Hit Publish to switch it on.' : 'Cleared. Hit Publish to switch it off.';
+}
+function saveGh(){
+  localStorage.setItem(GH_KEY, JSON.stringify({owner:$('ghOwner').value.trim(), repo:$('ghRepo').value.trim(), branch:$('ghBranch').value.trim()||'main', token:$('ghToken').value.trim()}));
+  const m=$('ghMsg'); m.className='msg ok'; m.textContent='Saved.';
+}
+async function ghPut(cfg, path, base64, message){
+  const url=`https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
+  const headers={Authorization:'Bearer '+cfg.token, Accept:'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28'};
+  let sha;
+  const get=await fetch(url+'?ref='+cfg.branch,{headers});
+  if(get.ok){ sha=(await get.json()).sha; }
+  const res=await fetch(url,{method:'PUT',headers,body:JSON.stringify({message,branch:cfg.branch,content:base64,...(sha?{sha}:{})})});
+  if(!res.ok){ const e=await res.json().catch(()=>({})); throw new Error(path+': '+(e.message||res.status)); }
+}
+function brokenItems(){
+  const out=[];
+  ['nl','reports','resources'].forEach(t=>{
+    const ed=EDITORS[t];
+    (EDIT[ed.list]||[]).forEach(it=>{ if(!it.file && !it.link) out.push(ed.label+': '+(it.title||'(untitled)')); });
+  });
+  return out;
+}
+async function publishAll(){
+  flushOpenForm();
+  if(!dirty && !STAGED.length && !PENDING_DELETE.length){ $('pubStat').textContent='Nothing has changed yet — make an edit first.'; return; }
+  const broken=brokenItems();
+  if(broken.length && !confirm('These items have no file attached, so their link will not work on the site:\n\n'+broken.join('\n')+'\n\nPublish anyway?')) return;
+  const n=STAGED.length;
+  if(!confirm('Publish to the live site?\n\n'+(n?n+' new file'+(n===1?'':'s')+' and the ':'The ')+'page content will go live for everyone within a minute or two.')) return;
+  if(PUBLISH_URL) return publishViaHelper();
+  const cfg=ghCfg();
+  if(!cfg.owner||!cfg.repo||!cfg.token){ showTab('publish'); const m=$('ghMsg'); m.className='msg err'; m.textContent='Fill in the GitHub settings above first.'; return; }
+  const stat=$('pubStat');
+  try{
+    let n=0, total=STAGED.length+1;
+    for(const s of STAGED){ n++; stat.textContent=`Publishing ${n}/${total}: ${s.name}…`; await ghPut(cfg, s.path, s.base64, 'Hub: add '+s.name); }
+    stat.textContent=`Publishing ${total}/${total}: content.json…`;
+    EDIT.updated=new Date().toISOString().slice(0,10);
+    const json=JSON.stringify(EDIT,null,2);
+    await ghPut(cfg, 'content.json', btoa(unescape(encodeURIComponent(json))), 'Hub: update content');
+    CONTENT=clone(EDIT);
+    STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
+    dirty=false; clearDraft(); $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
+    renderAll();
+    stat.textContent='✅ Published! Live for everyone within a minute or two.';
+  }catch(err){
+    stat.textContent='❌ '+err.message;
+  }
+}
+async function publishViaHelper(){
+  const stat=$('pubStat');
+  if(!ADMIN_PW){ stat.textContent='Sign in again (click Admin) before publishing.'; return; }
+  try{
+    stat.textContent='Publishing… (larger PDFs can take a moment)';
+    EDIT.updated=new Date().toISOString().slice(0,10);
+    EDIT.rev = 'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+    const files=[
+      ...STAGED.map(s=>({path:s.path, base64:s.base64})),
+      {path:'content.json', base64: btoa(unescape(encodeURIComponent(JSON.stringify(EDIT,null,2))))}
+    ];
+    const r=await fetch(PUBLISH_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'publish', password:ADMIN_PW, baseRev:BASE_REV, message:'Hub update via admin panel', files})});
+    const res=await r.json().catch(()=>({}));
+    if(r.status===401){ safeLocal(()=>localStorage.removeItem(PW_KEY)); ADMIN_PW=null; throw new Error('Password no longer valid — click Admin to sign in again.'); }
+    if(r.status===429) throw new Error(res.error||'Too many attempts — wait a few minutes.');
+    if(r.status===409 || res.conflict) throw new Error((res.error||'Someone else published while you were editing.')+' Nothing was overwritten.');
+    if(!r.ok || !res.ok){ const er=new Error(res.error || ('HTTP '+r.status)); er.published=res.published; throw er; }
+    BASE_REV = EDIT.rev;
+    safeLocal(()=>localStorage.setItem(LAST_REV_KEY, EDIT.rev));
+
+    /* Files come down AFTER the page stops referencing them, so nobody
+       can ever hit a link to a file that is already gone. */
+    if(PENDING_DELETE.length){
+      stat.textContent='Taking removed files off the site…';
+      const dr=await fetch(PUBLISH_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({action:'delete', password:ADMIN_PW, message:'Hub: remove file', paths:PENDING_DELETE})});
+      const dres=await dr.json().catch(()=>({}));
+      if(dr.ok && dres.ok){ PENDING_DELETE=[]; }
+      else if(dr.status===400){
+        /* the deployed helper predates delete support */
+        alert('Your changes published, but this hub\'s publish helper is an older version that cannot remove files.\n\nThe entries are gone from the page, but the files are still reachable at their old addresses. Ask whoever set up the hub to paste the latest worker.js into Cloudflare — SETUP.md Part C.');
+      }else{
+        alert('Your changes published, but the files could not be removed:\n\n'+(dres.error||('HTTP '+dr.status))+'\n\nThe entries are off the page; try Publish again to retry the removal.');
+      }
+    }
+    CONTENT=clone(EDIT);
+    STAGED.forEach(s=>URL.revokeObjectURL(s.blobUrl)); STAGED=[];
+    dirty=false; clearDraft(); $('dirtyFlag').classList.remove('on'); $('dirtyFlag2').classList.remove('on');
+    renderAll();
+    stat.textContent='✅ Published! Live for everyone within a minute or two.';
+  }catch(err){
+    /* say which files did make it, so a retry isn't a mystery */
+    const partial = err.published && err.published.length;
+    stat.textContent='❌ '+err.message + (partial?' — some files uploaded but the page content did not. Press Publish again to finish.':'');
+  }
+}
+function exportBundle(){
+  EDIT.updated=new Date().toISOString().slice(0,10);
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(EDIT,null,2)],{type:'application/json'}));
+  a.download='content.json'; a.click();
+  if(STAGED.length) alert('Also upload these staged files to the repo '+STAGED.map(s=>s.path).join(', '));
+}
+
+boot();
+
+/* =====================================================================
+   VIEW ROUTER
+   The hub is four screens, not one 2,200px scroll. Every view stays in
+   the DOM (so every render function keeps its target element and a tab
+   switch costs nothing); only visibility changes.
+
+   Legacy fragment links from content.json — #reports, #newsletter,
+   #events and so on — still resolve, because they are mapped onto the
+   view that now contains them.
+   ===================================================================== */
+const VIEWS = ['board','reports','comps','news'];
+const HASH_TO_VIEW = {
+  '':'board', 'scoreboard':'board', 'board':'board', 'leaderboard':'board',
+  'reports':'reports', 'newsletter':'reports', 'resources':'reports', 'library':'reports', 'files':'reports',
+  'competitions':'comps', 'comps':'comps', 'promos':'comps', 'programs':'comps',
+  'news':'news', 'events':'news', 'bulletin':'news'
+};
+let currentView = 'board';
+
+function showView(v, opts){
+  if(VIEWS.indexOf(v)<0) v = 'board';
+  currentView = v;
+  VIEWS.forEach(k=>{
+    const sec=$('view-'+k), tab=$('tab-'+k);
+    const on = k===v;
+    sec.classList.toggle('on', on);
+    if(on) sec.removeAttribute('hidden'); else sec.setAttribute('hidden','');
+    if(on) tab.setAttribute('aria-current','page'); else tab.removeAttribute('aria-current');
+  });
+  document.title = (v==='board' ? 'District Hub' : ({reports:'Reports & Files',comps:'Competitions',news:'News & Events'}[v]+' — District Hub'))
+                 + (v==='board' ? ' — Farmers Districts 32 & 49' : '');
+  if(IS_PREVIEW) document.title = '[Preview] '+document.title;
+  if(!(opts&&opts.keepScroll)) window.scrollTo(0,0);
+  /* on a phone the tab row is a scroller — keep the active tab in view */
+  const t=$('tab-'+v);
+  if(t && t.scrollIntoView) try{ t.scrollIntoView({block:'nearest',inline:'nearest'}); }catch(e){}
+}
+function viewFromHash(){
+  const h = (location.hash||'').replace(/^#/,'').toLowerCase();
+  return HASH_TO_VIEW[h] || (VIEWS.indexOf(h)>=0 ? h : 'board');
+}
+window.addEventListener('hashchange', ()=>showView(viewFromHash()));
+document.addEventListener('click', e=>{
+  const a = e.target.closest('a[href^="#"]');
+  if(!a || a.classList.contains('skip')) return;
+  const h = a.getAttribute('href').slice(1).toLowerCase();
+  /* HASH_TO_VIEW maps '' to the board so a bare address lands somewhere.
+     That also made href="#" — the fallback for a library entry whose file
+     is missing — throw the reader out of the library and onto the
+     Scoreboard. A dead action is not a route. */
+  if(!h) return;
+  const v = HASH_TO_VIEW[h];
+  if(!v) return;                       // not a section link — leave it alone
+  e.preventDefault();
+  if(location.hash.replace(/^#/,'').toLowerCase() === h) showView(v);
+  else location.hash = h;              // hashchange does the rest, so back works
+});
+showView(viewFromHash());
+
+/* ---- counts on the tabs, so the sections advertise themselves ---- */
+function tabCounts(){
+  const d = data()||{};
+  const set=(id,n)=>{ const el=$(id); if(el) el.textContent = n>0 ? String(n) : ''; };
+  set('nReports', (d.reports||[]).length + (d.resources||[]).length + (d.newsletters||[]).length);
+  set('nComps', (d.competitions||[]).filter(c=>c.active).length);
+  const today=new Date(); today.setHours(0,0,0,0);
+  const ev=(d.events||[]).filter(e=>{ const x=new Date(e.date+'T23:59:59'); return !isNaN(x)&&x>=today; }).length;
+  set('nNews', (d.news||[]).length + ev);
+}
+
+/* =====================================================================
+   THEME
+   Three states: follow the operating system (default), forced light,
+   forced dark. The button always names the mode it will switch you to,
+   the same way the Quote Plan's does.
+   ===================================================================== */
+const THEME_KEY='d32hub_theme';
+function systemDark(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
+function effectiveDark(){
+  const t=document.documentElement.getAttribute('data-theme');
+  return t ? t==='dark' : systemDark();
+}
+function paintThemeBtn(){
+  const b=$('btnTheme'); if(!b) return;
+  const dark=effectiveDark();
+  b.textContent = dark ? 'Light' : 'Dark';
+  b.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+}
+$('btnTheme').addEventListener('click', ()=>{
+  const next = effectiveDark() ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  safeLocal(()=>localStorage.setItem(THEME_KEY, next));
+  paintThemeBtn();
+  /* the trend chart is drawn with resolved colours, so it has to be
+     redrawn rather than restyled */
+  if(drillStack.length) renderDrill();
+});
+if(window.matchMedia) try{
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paintThemeBtn);
+}catch(e){}
+paintThemeBtn();
+
+</script>
+</body>
+</html>
