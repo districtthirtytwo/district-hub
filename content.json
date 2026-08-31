@@ -2,10 +2,19 @@
   "updated": "2026-08-31",
   "banner": {
     "active": true,
-    "text": "Two agents have qualified for Jamaica \u2014 Steven Tindell and Jeffrey Pechacek. Standings as of August 30 are posted.",
+    "text": "Two September competitions start Sept 1 \u2014 \u201cAll In\u201d for Life and Steak or Burgers. Rules are on the Competitions tab; All-In ante is due Sept 4.",
     "link": "#competitions"
   },
   "news": [
+    {
+      "id": "n12",
+      "date": "2026-08-31",
+      "tag": "news",
+      "title": "Two September competitions \u2014 \u201cAll In\u201d for Life and Steak or Burgers",
+      "body": "September 1 kicks off two district competitions, both running through September 30. \u201cAll In\u201d for Life is back: a $50 ante and 3 written life apps earns a seat at the Texas Hold \u2018Em table, with a district pot contribution of $1,000 that rises to $2,500 at 85 written apps \u2014 commit and pay by September 4. The Steak or Burgers team battle moves to points: 1 point per quote and 5 per new business policy at the agency level, two teams, and the winners eat Prime steak. Full rules are in Competitions.",
+      "pinned": true,
+      "link": "#competitions"
+    },
     {
       "id": "n11",
       "date": "2026-08-31",
@@ -57,7 +66,7 @@
       "tag": "update",
       "title": "July District Matrix is posted",
       "body": "The District Performance Matrix through August folio is up in Reports, now as a sortable table you can search by name. Ranked on Personal Lines, Life, Business and Prime Score. June's edition stays available underneath it.",
-      "pinned": true,
+      "pinned": false,
       "link": "#reports"
     },
     {
@@ -98,6 +107,15 @@
   ],
   "events": [
     {
+      "id": "e3",
+      "date": "2026-09-04",
+      "time": "",
+      "title": "\u201cAll In\u201d for Life \u2014 commitment and $50 ante due",
+      "location": "",
+      "link": "",
+      "description": "Last day to commit and pay the ante for the Texas Hold \u2018Em life promo. Checks payable to Brandon Parks at the district office."
+    },
+    {
       "id": "e1",
       "date": "2026-09-30",
       "time": "",
@@ -117,6 +135,28 @@
     }
   ],
   "competitions": [
+    {
+      "id": "c-allin26",
+      "active": true,
+      "title": "\u201cAll In\u201d for Life \u2014 Texas Hold \u2018Em Life Promo",
+      "period": "Sep 1 \u2013 Sep 30, 2026",
+      "ends": "2026-09-30",
+      "prize": "Cash pot \u2014 top five hands paid",
+      "metricLabel": "Life apps written \u00b7 Sep 1\u201330",
+      "description": "A $50 ante and 3 written life apps earns your seat at the table, and every life app written earns an additional playing card \u2014 the more apps you write, the better your odds of a great poker hand. We play one hand of Texas Hold \u2018Em: best hand takes 40% of the pot, then 25%, 20%, 10% and 5% for second through fifth. Antes go straight into the pot and the district office adds $1,000, rising to $2,500 once the district writes 85 total apps. Write your 3 apps and take none of the pot and your $50 ante is refunded. Apps must show on the Life Performance Tracker and be written September 1\u201330 to count. Commitment and ante are due by September 4 \u2014 checks payable to Brandon Parks at the district office, 213A Old Hewitt Road, Waco, TX 76712. Disputes are settled at the District Manager\u2019s discretion.",
+      "standings": []
+    },
+    {
+      "id": "c-steakburgers",
+      "active": true,
+      "title": "Steak or Burgers \u2014 Team Quote & NB Battle",
+      "period": "Sep 1 \u2013 Sep 30, 2026",
+      "ends": "2026-09-30",
+      "prize": "Prime steak for the winning team; burgers for the rest",
+      "metricLabel": "Team points \u00b7 quote = 1 \u00b7 NB policy = 5",
+      "description": "Every agency is on one of two teams for September, and scoring is by points at the agency level: each quote is worth 1 point and each new business policy is worth 5, counted for September 1\u201330. The team with the most points eats Prime steak; the other team gets burgers. Teams are being drawn to be as evenly matched as possible and will be posted here along with standings once September scoring is underway.",
+      "standings": []
+    },
     {
       "id": "c-jamaica",
       "active": true,
@@ -306,7 +346,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r6c03048bca901cf880dfhub",
+  "rev": "r21e96c408bb1af115615hub",
   "analytics": {
     "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
   }
