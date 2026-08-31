@@ -384,7 +384,10 @@
   table.board tr.click{cursor:pointer;}
   table.board tr.click:hover td{background:var(--hover);}
   .rank{font-weight:600;color:var(--muted);width:38px;font-variant-numeric:tabular-nums;}
-  .avatar{width:29px;height:29px;border-radius:8px;background:var(--wash);color:var(--ord-3);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-right:10px;flex:none;}
+  .avatar{width:29px;height:29px;border-radius:8px;background:var(--wash);color:var(--ord-3);display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:.02em;margin-right:10px;flex:none;}
+  .avatar.d49,.drill-hd .av.d49,.plrow .av2.d49{background:var(--wash2);color:var(--str-2);}
+  :root[data-theme="dark"] .avatar.d49,:root[data-theme="dark"] .drill-hd .av.d49,:root[data-theme="dark"] .plrow .av2.d49{color:var(--str-2);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .avatar.d49,:root:not([data-theme="light"]) .drill-hd .av.d49,:root:not([data-theme="light"]) .plrow .av2.d49{color:var(--str-2);}}
   :root[data-theme="dark"] .avatar{color:var(--ord-1);}
   @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .avatar{color:var(--ord-1);}}
   .pname{display:flex;align-items:center;min-width:0;}
@@ -569,7 +572,7 @@
   .modal.open{display:flex;}
   .modal .sheet{background:var(--surface-1);border-radius:16px;max-width:880px;width:100%;padding:22px;box-shadow:var(--shadow-lg);}
   .drill-hd{display:flex;align-items:center;gap:13px;margin-bottom:4px;flex-wrap:wrap;}
-  .drill-hd .av{width:44px;height:44px;border-radius:11px;background:var(--wash);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:var(--ord-3);flex:none;}
+  .drill-hd .av{width:44px;height:44px;border-radius:11px;background:var(--wash);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;letter-spacing:.02em;color:var(--ord-3);flex:none;}
   :root[data-theme="dark"] .drill-hd .av{color:var(--ord-1);}
   @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .drill-hd .av{color:var(--ord-1);}}
   .drill-hd h2{margin:0;font-size:20px;font-weight:660;letter-spacing:-.015em;}
@@ -606,7 +609,7 @@
   .plrow{display:grid;grid-template-columns:1fr 74px 74px 16px;gap:8px;align-items:center;padding:10px 16px;border-top:1px solid var(--grid);cursor:pointer;}
   .plrow:hover{background:var(--hover);}
   .plrow .who2{display:flex;align-items:center;gap:11px;min-width:0;}
-  .plrow .av2{width:29px;height:29px;border-radius:8px;background:var(--wash);color:var(--ord-3);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;}
+  .plrow .av2{width:29px;height:29px;border-radius:8px;background:var(--wash);color:var(--ord-3);font-size:10px;font-weight:700;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;flex:none;}
   :root[data-theme="dark"] .plrow .av2{color:var(--ord-1);}
   @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .plrow .av2{color:var(--ord-1);}}
   .plrow .nm2{font-weight:620;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -849,7 +852,7 @@
     .chevcell{padding-right:4px!important;}
     table.board th,table.board td{padding:9px 6px;}
     /* on a 390px screen the name has to win the argument with the avatar */
-    table.board .pname .avatar{display:none;}
+    table.board .pname .avatar{width:26px;height:26px;font-size:9px;margin-right:7px;}
     .fignum{font-size:36px;}
     a.filelink,button.filelink{padding:5px 10px;font-size:12px;}
     .datebadge{width:42px;}
@@ -1486,6 +1489,8 @@ let metricLastByDist = {};   // {d, asOf} when one sheet is lagging the other
 function initials(name){ return String(name).split(/\s+/).filter(w=>/[A-Za-z]/.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('')||'?'; }
 function isProducer(role){ return /produc/i.test(String(role||'')); }
 function normDistrict(d){ const s=String(d||'').replace(/[^0-9]/g,''); return s.indexOf('49')>=0?'49':'32'; }
+function distTag(d){ return 'D'+normDistrict(d); }
+function distCls(d){ return 'd'+normDistrict(d); }
 function nameTokens(str){ return String(str||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().split(' ').filter(w=>w&&!/^(insurance|agency|agcy|ins|inc|llc)$/.test(w)); }
 function normName(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
 function titleCase(s){ return String(s).toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()); }
@@ -2166,7 +2171,7 @@ function renderBoard(){
     $('boardBody').innerHTML = rows.map((r,i)=>`
       <tr class="click" data-idx="${r.idx}" tabindex="0" aria-label="${esc(r.name)} — press Enter for their trend history">
         <td class="rank">${i+1}</td>
-        <td><div class="pname"><span class="avatar">${esc(initials(r.name))}</span><span class="nm"><b>${esc(r.name)}${r.owner?'<span class="ownflag">OWNER</span>':''}</b><span class="sub2"><span class="dchip d${r.district==='49'?'49':'32'}">D${r.district==='49'?'49':'32'}</span>${esc(r.sub||'')}</span></span></div></td>
+        <td><div class="pname"><span class="avatar ${distCls(r.district)}" title="District ${normDistrict(r.district)}">${distTag(r.district)}</span><span class="nm"><b>${esc(r.name)}${r.owner?'<span class="ownflag">OWNER</span>':''}</b><span class="sub2">${esc(r.sub||'')}</span></span></div></td>
         <td class="metric">${emptyQ?'&mdash;':r.q.toLocaleString()}</td>
         <td class="metric">${emptyN?'&mdash;':r.n.toLocaleString()}</td>
         <td class="chevcell"><span class="rowchev" aria-hidden="true">›</span></td>
@@ -2229,7 +2234,7 @@ function renderDrill(){
   const p=drillPerson(); if(!p) return;
   const isP=isProducer(p.role);
   $('drillBackBtn').style.display = drillStack.length>1 ? '' : 'none';
-  $('drillAv').textContent = initials(p.name);
+  $('drillAv').textContent = distTag(p.district); $('drillAv').className = 'av '+distCls(p.district);
   $('drillName').textContent = p.name;
   const bits=[isP?'Producer':'Agency'];
   if(isP && p.agency) bits.push(p.agency);
@@ -2386,7 +2391,7 @@ function renderDrillProds(p){
     <div class="pl-hd">PRODUCERS <span>· ${esc(perLbl)} — click one to see their trend</span></div>
     <div class="plcols"><div></div><div>QUOTES</div><div>NEW BIZ</div><div></div></div>
     ${rows.map(r=>`<div class="plrow" data-pi="${r.i}" tabindex="0" role="button" aria-label="${esc(r.p.name)} — open trend history">
-      <div class="who2"><div class="av2">${esc(initials(r.p.name))}</div><div class="nm2">${esc(r.p.name)}${r.p.owner?'<span class="ownflag">OWNER</span>':''}</div></div>
+      <div class="who2"><div class="av2 ${distCls(r.p.district)}">${distTag(r.p.district)}</div><div class="nm2">${esc(r.p.name)}${r.p.owner?'<span class="ownflag">OWNER</span>':''}</div></div>
       <div class="pv q">${r.q}</div><div class="pv n">${r.n}</div><div class="chev2">›</div>
     </div>`).join('')}
   </div>`;
