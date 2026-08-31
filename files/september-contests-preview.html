@@ -103,6 +103,18 @@ try{var t=localStorage.getItem('d32hub_theme');if(t==='dark'||t==='light')docume
     background:var(--warning); color:#241a00;
     font-size:13px; font-weight:600; text-align:center; padding:7px 14px;
   }
+  .demobar{
+    background:var(--surface-1); border-bottom:1px solid var(--border);
+    padding:8px 14px; display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap;
+  }
+  .demobar .dl{font-size:12px; color:var(--muted); font-weight:600; letter-spacing:.3px; text-transform:uppercase}
+  .demobar button{
+    font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+    border:1px solid var(--border); border-radius:999px; padding:5px 14px;
+    background:var(--surface-2); color:var(--text-secondary);
+  }
+  .demobar button.on{background:var(--navy); border-color:var(--navy); color:var(--on-navy)}
+  .demobar button:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
 
   /* ---- layout ---- */
   main{max-width:1080px; margin:0 auto; padding:18px 16px 40px}
@@ -257,7 +269,13 @@ try{var t=localStorage.getItem('d32hub_theme');if(t==='dark'||t==='light')docume
 </header>
 
 <div class="sample" id="sampleBar" hidden>
-  SAMPLE DATA &mdash; names and numbers below are placeholders for layout review. Real standings post once September scoring begins.
+  TESTING COPY &mdash; not published to agents. Rosters are final; numbers are simulated. Use the buttons below to demo the month.
+</div>
+<div class="demobar" id="demoBar" hidden>
+  <span class="dl">Demo:</span>
+  <button id="d0" class="on" type="button">Day one</button>
+  <button id="d1" type="button">Mid-month</button>
+  <button id="d2" type="button">Final stretch</button>
 </div>
 
 <main>
@@ -333,7 +351,7 @@ try{var t=localStorage.getItem('d32hub_theme');if(t==='dark'||t==='light')docume
         <span class="pts tB num" id="vsPtsB"></span>
       </div>
     </div>
-    <div class="vsfoot">Points = quotes + 5 &times; NB policies &middot; agency level</div>
+    <div class="vsfoot">Points = quotes + 5 &times; NB policies &middot; agency level &middot; headcount is 14 v 15</div>
 
     <div class="teams" id="teams"></div>
   </section>
@@ -353,61 +371,91 @@ try{var t=localStorage.getItem('d32hub_theme');if(t==='dark'||t==='light')docume
    sample:true shows the amber banner. `updated` is the data as-of date.
    ========================================================================= */
 const DATA = {
-  sample: true,
+  sample: true,            // true = testing copy: banner + demo controls
   updated: "2026-08-31",
   start: "2026-09-01",
   ends:  "2026-09-30",
 
   allin: {
-    potBase: 1000,          // district office contribution
-    potBoost: 2500,         // contribution once boostAt apps are written
-    boostAt: 85,            // district apps that trigger the boost
-    ante: 50,
+    potBase: 1000, potBoost: 2500, boostAt: 85, ante: 50,
     payoutPct: [40,25,20,10,5],
-    /* one row per agent: apps = life apps written Sep 1–30; anted = ante received */
+    /* apps = life apps written Sep 1-30 (Life Performance Tracker); anted = ante received */
     players: [
-      {name:"Sample Agent Adams",   apps:7, anted:true},
-      {name:"Sample Agent Baker",   apps:6, anted:true},
-      {name:"Sample Agent Carter",  apps:5, anted:true},
-      {name:"Sample Agent Dawson",  apps:4, anted:true},
-      {name:"Sample Agent Ellis",   apps:4, anted:true},
-      {name:"Sample Agent Foster",  apps:3, anted:true},
-      {name:"Sample Agent Grant",   apps:3, anted:true},
-      {name:"Sample Agent Hayes",   apps:2, anted:true},
-      {name:"Sample Agent Irwin",   apps:2, anted:true},
-      {name:"Sample Agent Jordan",  apps:1, anted:true},
-      {name:"Sample Agent Keller",  apps:1, anted:true},
-      {name:"Sample Agent Lawson",  apps:0, anted:true},
-      {name:"Sample Agent Monroe",  apps:0, anted:false},
-      {name:"Sample Agent Norris",  apps:0, anted:false}
+      {name:"Matt Hodges", apps:0, anted:false},
+      {name:"Christopher Gutierrez", apps:0, anted:false},
+      {name:"Maricela Herrera", apps:0, anted:false},
+      {name:"Ravi R Sriram", apps:0, anted:false},
+      {name:"J Fred Youmans", apps:0, anted:false},
+      {name:"Jeff Holder", apps:0, anted:false},
+      {name:"Leslie Ann Walker", apps:0, anted:false},
+      {name:"Glenn N Cannon", apps:0, anted:false},
+      {name:"Derrick Herbert Bayer", apps:0, anted:false},
+      {name:"David Scott Gloff", apps:0, anted:false},
+      {name:"Caleb Alexander Milne", apps:0, anted:false},
+      {name:"William Kenneth Knight", apps:0, anted:false},
+      {name:"Jimmy Ward", apps:0, anted:false},
+      {name:"Darren Hayes", apps:0, anted:false},
+      {name:"Vernon Sweeney", apps:0, anted:false},
+      {name:"Jeffrey P Pechacek", apps:0, anted:false},
+      {name:"Jason Kirk", apps:0, anted:false},
+      {name:"David L Dickerson", apps:0, anted:false},
+      {name:"Luke William Franks", apps:0, anted:false},
+      {name:"Steven Tindell", apps:0, anted:false},
+      {name:"Christian Daiel Crosby Ford", apps:0, anted:false},
+      {name:"Dennis Polian", apps:0, anted:false},
+      {name:"Dennis Keith Bruington", apps:0, anted:false},
+      {name:"Eva Marie Greenup", apps:0, anted:false},
+      {name:"Lonnie Eugene Pittman", apps:0, anted:false},
+      {name:"Travis Ryne Veselka", apps:0, anted:false},
+      {name:"Aaron Michael Vicknair", apps:0, anted:false},
+      {name:"Krystal Lee Hawk", apps:0, anted:false},
+      {name:"Stephanie Burns", apps:0, anted:false}
     ]
   },
 
+  /* quotes/nb = September actuals (start at 0). bq/bnb = Jun 1 - Aug 28 baseline,
+     used only to scale the demo simulation - never displayed. */
   steak: {
     teams: [
-      {name:"Team A (TBD)", agencies:[
-        {name:"Sample Agency One",   quotes:112, nb:21},
-        {name:"Sample Agency Two",   quotes: 96, nb:18},
-        {name:"Sample Agency Three", quotes: 88, nb:12},
-        {name:"Sample Agency Four",  quotes: 74, nb:15},
-        {name:"Sample Agency Five",  quotes: 63, nb: 9},
-        {name:"Sample Agency Six",   quotes: 55, nb: 7},
-        {name:"Sample Agency Seven", quotes: 41, nb: 6},
-        {name:"Sample Agency Eight", quotes: 28, nb: 3}
+      {name:"Team Alan", agencies:[
+        {name:"Matt Hodges",            bq:271,  bnb:52,  quotes:0, nb:0},
+        {name:"Christopher Gutierrez",  bq:1111, bnb:47,  quotes:0, nb:0},
+        {name:"Maricela Herrera",       bq:73,   bnb:21,  quotes:0, nb:0},
+        {name:"Ravi R Sriram",          bq:8,    bnb:6,   quotes:0, nb:0},
+        {name:"J Fred Youmans",         bq:139,  bnb:21,  quotes:0, nb:0},
+        {name:"Jeff Holder",            bq:107,  bnb:25,  quotes:0, nb:0},
+        {name:"Leslie Ann Walker",      bq:83,   bnb:17,  quotes:0, nb:0},
+        {name:"Glenn N Cannon",         bq:82,   bnb:14,  quotes:0, nb:0},
+        {name:"Derrick Herbert Bayer",  bq:296,  bnb:47,  quotes:0, nb:0},
+        {name:"David Scott Gloff",      bq:182,  bnb:23,  quotes:0, nb:0},
+        {name:"Caleb Alexander Milne",  bq:1183, bnb:231, quotes:0, nb:0},
+        {name:"William Kenneth Knight", bq:334,  bnb:34,  quotes:0, nb:0},
+        {name:"Jimmy Ward",             bq:149,  bnb:57,  quotes:0, nb:0},
+        {name:"Darren Hayes",           bq:312,  bnb:60,  quotes:0, nb:0}
       ]},
-      {name:"Team B (TBD)", agencies:[
-        {name:"Sample Agency Nine",     quotes:105, nb:19},
-        {name:"Sample Agency Ten",      quotes: 99, nb:14},
-        {name:"Sample Agency Eleven",   quotes: 81, nb:16},
-        {name:"Sample Agency Twelve",   quotes: 70, nb:11},
-        {name:"Sample Agency Thirteen", quotes: 66, nb:10},
-        {name:"Sample Agency Fourteen", quotes: 49, nb: 8},
-        {name:"Sample Agency Fifteen",  quotes: 38, nb: 4},
-        {name:"Sample Agency Sixteen",  quotes: 25, nb: 5}
+      {name:"Team Conrey", agencies:[
+        {name:"Vernon Sweeney",              bq:23,   bnb:7,   quotes:0, nb:0},
+        {name:"Jeffrey P Pechacek",          bq:125,  bnb:58,  quotes:0, nb:0},
+        {name:"Jason Kirk",                  bq:147,  bnb:18,  quotes:0, nb:0},
+        {name:"David L Dickerson",           bq:506,  bnb:103, quotes:0, nb:0},
+        {name:"Luke William Franks",         bq:88,   bnb:48,  quotes:0, nb:0},
+        {name:"Steven Tindell",              bq:394,  bnb:84,  quotes:0, nb:0},
+        {name:"Christian Daiel Crosby Ford", bq:97,   bnb:33,  quotes:0, nb:0},
+        {name:"Dennis Polian",               bq:221,  bnb:38,  quotes:0, nb:0},
+        {name:"Dennis Keith Bruington",      bq:196,  bnb:17,  quotes:0, nb:0},
+        {name:"Eva Marie Greenup",           bq:85,   bnb:23,  quotes:0, nb:0},
+        {name:"Lonnie Eugene Pittman",       bq:665,  bnb:90,  quotes:0, nb:0},
+        {name:"Travis Ryne Veselka",         bq:143,  bnb:11,  quotes:0, nb:0},
+        {name:"Aaron Michael Vicknair",      bq:1165, bnb:74,  quotes:0, nb:0},
+        {name:"Krystal Lee Hawk",            bq:375,  bnb:29,  quotes:0, nb:0},
+        {name:"Stephanie Burns",             bq:101,  bnb:21,  quotes:0, nb:0}
       ]}
     ]
   }
 };
+
+/* LIVE is what the renderers read; demo modes rebuild it from DATA. */
+let LIVE = JSON.parse(JSON.stringify(DATA));
 
 /* ========================================================================= */
 
@@ -437,7 +485,7 @@ function fmtDate(d){
 
 /* ---------------- All In ---------------- */
 function renderAllin(){
-  const A = DATA.allin;
+  const A = LIVE.allin;
   const players = A.players.slice().sort((a,b)=> b.apps-a.apps || a.name.localeCompare(b.name));
   const anteCount = players.filter(p=>p.anted).length;
   const seated = players.filter(p=>p.anted && p.apps>=3).length;
@@ -500,7 +548,7 @@ function hand(apps){
 function pts(a){ return a.quotes + 5*a.nb; }
 
 function renderSteak(){
-  const T = DATA.steak.teams;
+  const T = LIVE.steak.teams;
   const tot = T.map(t => t.agencies.reduce((s,a)=>s+pts(a),0));
   const sum = tot[0]+tot[1];
 
@@ -537,9 +585,57 @@ function renderSteak(){
   }).join('');
 }
 
+/* ---------------- demo simulation (testing copy only) ---------------- */
+function mulberry32(seed){
+  return function(){
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+/* f = fraction of the month elapsed. Seeded so each mode is stable. */
+function simulate(f, seed){
+  LIVE = JSON.parse(JSON.stringify(DATA));
+  if (f > 0){
+    const rnd = mulberry32(seed);
+    LIVE.steak.teams.forEach(t => t.agencies.forEach(a => {
+      a.quotes = Math.round(a.bq/3 * f * (0.75 + rnd()*0.5));
+      a.nb     = Math.round(a.bnb/3 * f * (0.6 + rnd()*0.8));
+    }));
+    LIVE.allin.players.forEach(p => {
+      p.anted = rnd() < 0.72;
+      if (p.anted){
+        const r = rnd();
+        const base = r < 0.3 ? r*4 : r < 0.75 ? 2 + r*4 : 4 + r*6;
+        p.apps = Math.round(base * (0.3 + 0.7*f));
+      } else {
+        p.apps = rnd() < 0.2 ? 1 : 0;
+      }
+    });
+  }
+  renderAllin();
+  renderSteak();
+}
+
+function setDemo(mode){
+  ['d0','d1','d2'].forEach((id,i)=>$(id).classList.toggle('on', i===mode));
+  if (mode===0) simulate(0, 0);
+  if (mode===1) simulate(0.45, 32);
+  if (mode===2) simulate(0.93, 49);
+  $('asof').textContent = mode===0 ? 'as of ' + fmtDate(DATA.updated) : 'simulated demo';
+}
+
 /* ---------------- boot ---------------- */
 $('asof').textContent = 'as of ' + fmtDate(DATA.updated);
-if (DATA.sample) $('sampleBar').hidden = false;
+if (DATA.sample){
+  $('sampleBar').hidden = false;
+  $('demoBar').hidden = false;
+  $('d0').addEventListener('click', ()=>setDemo(0));
+  $('d1').addEventListener('click', ()=>setDemo(1));
+  $('d2').addEventListener('click', ()=>setDemo(2));
+}
 daysChip($('allinDays'));
 daysChip($('steakDays'));
 renderAllin();
