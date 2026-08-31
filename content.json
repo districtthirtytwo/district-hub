@@ -2,17 +2,26 @@
   "updated": "2026-08-31",
   "banner": {
     "active": true,
-    "text": "Two September competitions start Sept 1 \u2014 \u201cAll In\u201d for Life and Steak or Burgers. Rules are on the Competitions tab; All-In ante is due Sept 4.",
-    "link": "#competitions"
+    "text": "September competitions are live \u2014 follow the All-In pot and the Team Alan v Team Conrey score on the new dashboard. All-In ante is due Sept 4.",
+    "link": "files/september-contests.html"
   },
   "news": [
+    {
+      "id": "n13",
+      "date": "2026-08-31",
+      "tag": "update",
+      "pinned": true,
+      "title": "September Competitions dashboard is live",
+      "body": "One page now tracks both September competitions. For \u201cAll In\u201d for Life: who\u2019s seated, everyone\u2019s playing cards, the district app count, and the pot \u2014 including the district office\u2019s contribution jumping to $2,500 at 85 apps. For Steak or Burgers: the Team Alan v Team Conrey score and every agency\u2019s quotes, new business, and points. The teams are final \u2014 14 agencies with Alan, 15 with Conrey. Standings update as numbers are posted through the month.",
+      "link": "files/september-contests.html"
+    },
     {
       "id": "n12",
       "date": "2026-08-31",
       "tag": "news",
       "title": "Two September competitions \u2014 \u201cAll In\u201d for Life and Steak or Burgers",
       "body": "September 1 kicks off two district competitions, both running through September 30. \u201cAll In\u201d for Life is back: a $50 ante and 3 written life apps earns a seat at the Texas Hold \u2018Em table, with a district pot contribution of $1,000 that rises to $2,500 at 85 written apps \u2014 commit and pay by September 4. The Steak or Burgers team battle moves to points: 1 point per quote and 5 per new business policy at the agency level, two teams, and the winners eat Prime steak. Full rules are in Competitions.",
-      "pinned": true,
+      "pinned": false,
       "link": "#competitions"
     },
     {
@@ -143,7 +152,7 @@
       "ends": "2026-09-30",
       "prize": "Cash pot \u2014 top five hands paid",
       "metricLabel": "Life apps written \u00b7 Sep 1\u201330",
-      "description": "A $50 ante and 3 written life apps earns your seat at the table, and every life app written earns an additional playing card \u2014 the more apps you write, the better your odds of a great poker hand. We play one hand of Texas Hold \u2018Em: best hand takes 40% of the pot, then 25%, 20%, 10% and 5% for second through fifth. Antes go straight into the pot and the district office adds $1,000, rising to $2,500 once the district writes 85 total apps. Write your 3 apps and take none of the pot and your $50 ante is refunded. Apps must show on the Life Performance Tracker and be written September 1\u201330 to count. Commitment and ante are due by September 4 \u2014 checks payable to Brandon Parks at the district office, 213A Old Hewitt Road, Waco, TX 76712. Disputes are settled at the District Manager\u2019s discretion.",
+      "description": "A $50 ante and 3 written life apps earns your seat at the table, and every life app written earns an additional playing card \u2014 the more apps you write, the better your odds of a great poker hand. We play one hand of Texas Hold \u2018Em: best hand takes 40% of the pot, then 25%, 20%, 10% and 5% for second through fifth. Antes go straight into the pot and the district office adds $1,000, rising to $2,500 once the district writes 85 total apps. Write your 3 apps and take none of the pot and your $50 ante is refunded. Apps must show on the Life Performance Tracker and be written September 1\u201330 to count. Commitment and ante are due by September 4 \u2014 checks payable to Brandon Parks at the district office, 213A Old Hewitt Road, Waco, TX 76712. Disputes are settled at the District Manager\u2019s discretion. Live seats, the pot, and everyone\u2019s cards are on the September Competitions dashboard \u2014 open it from Resources.",
       "standings": []
     },
     {
@@ -154,7 +163,7 @@
       "ends": "2026-09-30",
       "prize": "Prime steak for the winning team; burgers for the rest",
       "metricLabel": "Team points \u00b7 quote = 1 \u00b7 NB policy = 5",
-      "description": "Every agency is on one of two teams for September, and scoring is by points at the agency level: each quote is worth 1 point and each new business policy is worth 5, counted for September 1\u201330. The team with the most points eats Prime steak; the other team gets burgers. Teams are being drawn to be as evenly matched as possible and will be posted here along with standings once September scoring is underway. The cookout happens after the October district meeting.",
+      "description": "Every agency is on one of two teams for September, and scoring is by points at the agency level: each quote is worth 1 point and each new business policy is worth 5, counted for September 1\u201330. The team with the most points eats Prime steak; the other team gets burgers. The teams are set: Team Alan (14 agencies) takes on Team Conrey (15), drawn to be as evenly matched as possible on summer production. Full rosters and live team scores are on the September Competitions dashboard \u2014 open it from Resources or the news post below. The cookout happens after the October district meeting.",
       "standings": []
     },
     {
@@ -322,6 +331,14 @@
   ],
   "resources": [
     {
+      "id": "res-sept-contests",
+      "title": "September Competitions \u2014 Live Standings Dashboard",
+      "category": "Programs",
+      "note": "\u201cAll In\u201d for Life seats, cards and pot, plus the Steak or Burgers team battle. Updates as numbers are posted.",
+      "date": "2026-08-31",
+      "file": "files/september-contests.html"
+    },
+    {
       "id": "res-tech-stack",
       "title": "Recommended Technology Stack \u2014 Sales Team",
       "category": "Agency Setup",
@@ -346,7 +363,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r0c4488320c860cf0a2a8hub",
+  "rev": "r2323c0f943b5a3ff676ehub",
   "analytics": {
     "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
   }
