@@ -345,8 +345,8 @@
   .boardnote.warn{background:var(--wash3);color:var(--text-primary);border:1px solid var(--gold);}
   .boardnote.err{background:var(--wash2);color:var(--text-primary);border:1px solid var(--str-2);}
 
-  .podium{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;}
-  .pod{background:var(--surface-1);padding:14px 16px;display:flex;align-items:center;gap:12px;}
+  .podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;}
+  .pod{background:var(--surface-1);padding:14px 16px;display:flex;align-items:center;gap:12px;min-width:0;}
   .pod.click{cursor:pointer;}
   .pod.click:hover{background:var(--hover);}
   /* gold / silver / bronze, so the ordering is legible without reading */
@@ -355,7 +355,7 @@
   .pod.p2 .medal{background:#8f9bb0;}
   .pod.p3 .medal{background:var(--serious);}
   .pod .who{min-width:0;}
-  .pod .who b{display:block;font-size:14px;font-weight:640;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pod .who b{display:block;font-size:14px;font-weight:640;overflow-wrap:anywhere;}
   .pod .who span{font-size:11.5px;color:var(--muted);}
   .pod .val{margin-left:auto;text-align:right;flex:none;}
   .pod .val b{font-size:22px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
@@ -737,7 +737,7 @@
     /* Name is the slack column at every width now that the bar is gone;
        the metrics just get tighter. */
     table.board thead th:nth-child(3),table.board thead th:nth-child(4){width:108px;}
-    .podium{grid-template-columns:1fr;}
+    .podium{grid-template-columns:minmax(0,1fr);}
     /* the four tabs plus a right-aligned tool chip stop fitting at about
        810px; measured on the rendered bar. Below that the chip leads the
        scroller instead of being clipped against the right edge. */
