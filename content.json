@@ -363,8 +363,333 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r2323c0f943b5a3ff676ehub",
+  "rev": "rae38cc1b700551eb6c20hub",
   "analytics": {
     "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
+  },
+  "contests": {
+    "updated": "2026-08-31",
+    "start": "2026-09-01",
+    "ends": "2026-09-30",
+    "allin": {
+      "potBase": 1000,
+      "potBoost": 2500,
+      "boostAt": 85,
+      "ante": 50,
+      "anteDue": "2026-09-04",
+      "payoutPct": [
+        40,
+        25,
+        20,
+        10,
+        5
+      ],
+      "players": [
+        {
+          "name": "Matt Hodges",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Christopher Gutierrez",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Maricela Herrera",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Ravi R Sriram",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "J Fred Youmans",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Jeff Holder",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Leslie Ann Walker",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Glenn N Cannon",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Derrick Herbert Bayer",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "David Scott Gloff",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Caleb Alexander Milne",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "William Kenneth Knight",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Jimmy Ward",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Darren Hayes",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Vernon Sweeney",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Jeffrey P Pechacek",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Jason Kirk",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "David L Dickerson",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Luke William Franks",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Steven Tindell",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Christian Daiel Crosby Ford",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Dennis Polian",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Dennis Keith Bruington",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Eva Marie Greenup",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Lonnie Eugene Pittman",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Travis Ryne Veselka",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Aaron Michael Vicknair",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Krystal Lee Hawk",
+          "apps": 0,
+          "anted": false
+        },
+        {
+          "name": "Stephanie Burns",
+          "apps": 0,
+          "anted": false
+        }
+      ]
+    },
+    "steak": {
+      "teams": [
+        {
+          "name": "Team Alan",
+          "agencies": [
+            {
+              "name": "Matt Hodges",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Christopher Gutierrez",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Maricela Herrera",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Ravi R Sriram",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "J Fred Youmans",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Jeff Holder",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Leslie Ann Walker",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Glenn N Cannon",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Derrick Herbert Bayer",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "David Scott Gloff",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Caleb Alexander Milne",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "William Kenneth Knight",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Jimmy Ward",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Darren Hayes",
+              "quotes": 0,
+              "nb": 0
+            }
+          ]
+        },
+        {
+          "name": "Team Conrey",
+          "agencies": [
+            {
+              "name": "Vernon Sweeney",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Jeffrey P Pechacek",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Jason Kirk",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "David L Dickerson",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Luke William Franks",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Steven Tindell",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Christian Daiel Crosby Ford",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Dennis Polian",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Dennis Keith Bruington",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Eva Marie Greenup",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Lonnie Eugene Pittman",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Travis Ryne Veselka",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Aaron Michael Vicknair",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Krystal Lee Hawk",
+              "quotes": 0,
+              "nb": 0
+            },
+            {
+              "name": "Stephanie Burns",
+              "quotes": 0,
+              "nb": 0
+            }
+          ]
+        }
+      ]
+    }
   }
 }
