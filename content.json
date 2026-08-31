@@ -154,7 +154,7 @@
       "ends": "2026-09-30",
       "prize": "Prime steak for the winning team; burgers for the rest",
       "metricLabel": "Team points \u00b7 quote = 1 \u00b7 NB policy = 5",
-      "description": "Every agency is on one of two teams for September, and scoring is by points at the agency level: each quote is worth 1 point and each new business policy is worth 5, counted for September 1\u201330. The team with the most points eats Prime steak; the other team gets burgers. Teams are being drawn to be as evenly matched as possible and will be posted here along with standings once September scoring is underway.",
+      "description": "Every agency is on one of two teams for September, and scoring is by points at the agency level: each quote is worth 1 point and each new business policy is worth 5, counted for September 1\u201330. The team with the most points eats Prime steak; the other team gets burgers. Teams are being drawn to be as evenly matched as possible and will be posted here along with standings once September scoring is underway. The cookout happens after the October district meeting.",
       "standings": []
     },
     {
@@ -346,7 +346,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r21e96c408bb1af115615hub",
+  "rev": "r0c4488320c860cf0a2a8hub",
   "analytics": {
     "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
   }
