@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>September Competitions — District 32</title>
+<link rel="icon" href="hub-icon-192.png">
+<script>
+/* Match the hub's stored theme before first paint. */
+try{var t=localStorage.getItem('d32hub_theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}
+</script>
+<style>
+  :root{
+    color-scheme: light;
+    --navy:#12306a; --navy-2:#0e2652; --navy-3:#0a1c3f;
+    --on-navy:#ffffff; --on-navy-soft:#c9dcf7;
+    --on-navy-blue:#89b7ff; --on-navy-red:#ff8a91;
+    --surface-1:#ffffff; --surface-2:#f7f9fc; --plane:#eef3fa;
+    --text-primary:#0d1117; --text-secondary:#4c535f; --muted:#737b88;
+    --grid:#e4e9f0; --axis:#c1cad8; --border:rgba(18,48,106,0.13);
+    --s1:#2a529c; --ord-1:#719def; --ord-2:#466fbc; --ord-3:#1c428b;
+    --s2:#d60028; --str-1:#ff4750; --str-2:#cb001d;
+    --inert:#c6cfdd;
+    --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b;
+    --gold:#b07d09; --gold-ink:#7a5a05;
+    --wash:rgba(28,66,139,0.09);
+    --wash2:rgba(203,0,29,0.08);
+    --wash3:rgba(176,125,9,0.10);
+    --washg:rgba(12,163,12,0.10);
+    --hover:rgba(18,48,106,0.045);
+    --focus:#2a529c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --surface-1:#141a26; --surface-2:#1a2130; --plane:#0a1120;
+      --text-primary:#ffffff; --text-secondary:#b9c1cd; --muted:#8a92a0;
+      --grid:#262e3c; --axis:#38414f; --border:rgba(255,255,255,0.11);
+      --s1:#5a84d4; --ord-1:#89b7ff; --ord-2:#5d88d7; --ord-3:#325aa6;
+      --s2:#f73743; --str-1:#ff5e62; --str-2:#e11631;
+      --inert:#313a4a;
+      --good:#3ec93e; --warning:#ffc94a; --critical:#ff6b6b;
+      --gold:#e0ae3d; --gold-ink:#e8bd5c;
+      --wash:rgba(90,132,212,0.16);
+      --wash2:rgba(247,55,67,0.14);
+      --wash3:rgba(224,174,61,0.14);
+      --washg:rgba(62,201,62,0.14);
+      --hover:rgba(255,255,255,0.045);
+      --focus:#89b7ff;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --surface-1:#141a26; --surface-2:#1a2130; --plane:#0a1120;
+    --text-primary:#ffffff; --text-secondary:#b9c1cd; --muted:#8a92a0;
+    --grid:#262e3c; --axis:#38414f; --border:rgba(255,255,255,0.11);
+    --s1:#5a84d4; --ord-1:#89b7ff; --ord-2:#5d88d7; --ord-3:#325aa6;
+    --s2:#f73743; --str-1:#ff5e62; --str-2:#e11631;
+    --inert:#313a4a;
+    --good:#3ec93e; --warning:#ffc94a; --critical:#ff6b6b;
+    --gold:#e0ae3d; --gold-ink:#e8bd5c;
+    --wash:rgba(90,132,212,0.16);
+    --wash2:rgba(247,55,67,0.14);
+    --wash3:rgba(224,174,61,0.14);
+    --washg:rgba(62,201,62,0.14);
+    --hover:rgba(255,255,255,0.045);
+    --focus:#89b7ff;
+  }
+
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--plane); color:var(--text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:15px; line-height:1.45;
+  }
+  a{color:var(--s1)}
+  .sronly{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* ---- app bar ---- */
+  .bar{
+    position:sticky; top:0; z-index:20; background:var(--navy); color:var(--on-navy);
+    border-top:4px solid var(--s2);
+  }
+  .bar .in{
+    max-width:1080px; margin:0 auto; padding:10px 16px;
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  }
+  .bar .id{min-width:0}
+  .bar h1{font-size:16px; margin:0; line-height:1.2; letter-spacing:.2px}
+  .bar .sub{font-size:12px; color:var(--on-navy-soft); margin-top:1px}
+  .bar .asof{
+    margin-left:auto; flex:none; font-size:12px; color:var(--on-navy-soft);
+    border:1px solid rgba(255,255,255,.28); border-radius:999px; padding:4px 10px;
+    font-variant-numeric:tabular-nums;
+  }
+  .bar .backlink{color:var(--on-navy-soft); font-size:12px; text-decoration:none; flex:none}
+  .bar .backlink:hover{color:var(--on-navy)}
+
+  /* ---- sample banner ---- */
+  .sample{
+    background:var(--warning); color:#241a00;
+    font-size:13px; font-weight:600; text-align:center; padding:7px 14px;
+  }
+  .demobar{
+    background:var(--surface-1); border-bottom:1px solid var(--border);
+    padding:8px 14px; display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap;
+  }
+  .demobar .dl{font-size:12px; color:var(--muted); font-weight:600; letter-spacing:.3px; text-transform:uppercase}
+  .demobar button{
+    font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+    border:1px solid var(--border); border-radius:999px; padding:5px 14px;
+    background:var(--surface-2); color:var(--text-secondary);
+  }
+  .demobar button.on{background:var(--navy); border-color:var(--navy); color:var(--on-navy)}
+  .demobar button:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
+
+  /* ---- layout ---- */
+  main{max-width:1080px; margin:0 auto; padding:18px 16px 40px}
+  section.card{
+    background:var(--surface-1); border:1px solid var(--border); border-radius:14px;
+    padding:18px 18px 14px; margin:0 0 18px;
+  }
+  .shead{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px}
+  .shead h2{
+    font-size:18px; margin:0; padding-left:10px; border-left:3px solid var(--ord-3);
+    line-height:1.25;
+  }
+  .shead .period{color:var(--text-secondary); font-size:13px}
+  .shead .days{
+    margin-left:auto; flex:none; font-size:12px; font-weight:600; border-radius:999px;
+    padding:3px 10px; background:var(--wash); color:var(--s1);
+    font-variant-numeric:tabular-nums;
+  }
+  .shead .days.ended{background:var(--wash2); color:var(--s2)}
+  .rules{color:var(--text-secondary); font-size:13px; margin:8px 0 14px; max-width:70ch}
+
+  .num{font-variant-numeric:tabular-nums}
+
+  /* ---- stat tiles ---- */
+  .tiles{
+    display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:1px; background:var(--border); border:1px solid var(--border);
+    border-radius:10px; overflow:hidden; margin-bottom:14px;
+  }
+  .tile{background:var(--surface-2); padding:10px 12px; min-width:0}
+  .tile .l{font-size:11px; letter-spacing:.4px; text-transform:uppercase; color:var(--muted)}
+  .tile .v{font-size:22px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1.2; overflow-wrap:anywhere}
+  .tile .d{font-size:12px; color:var(--text-secondary)}
+
+  /* ---- pot meter ---- */
+  .meter{margin:2px 0 16px}
+  .meter .mlab{display:flex; justify-content:space-between; font-size:12px; color:var(--text-secondary); margin-bottom:4px}
+  .meter .mlab b{color:var(--text-primary)}
+  .track{position:relative; height:14px; border-radius:999px; background:var(--wash); border:1px solid var(--border); overflow:hidden}
+  .track .fill{position:absolute; inset:0 auto 0 0; background:var(--s1); border-radius:999px 0 0 999px}
+  .track .goal{position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--gold)}
+  .meter .mfoot{font-size:12px; color:var(--muted); margin-top:4px}
+  .meter .mfoot b{color:var(--gold-ink)}
+
+  /* ---- payouts strip ---- */
+  .payouts{
+    display:grid; grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:1px; background:var(--border); border:1px solid var(--border);
+    border-radius:10px; overflow:hidden; margin-bottom:16px;
+  }
+  .pay{background:var(--surface-2); padding:8px 10px; text-align:center; min-width:0}
+  .pay .pl{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.3px}
+  .pay .pv{font-weight:700; font-variant-numeric:tabular-nums}
+  .pay .pp{font-size:11px; color:var(--text-secondary)}
+  .pay.first{background:var(--wash3)}
+  .pay.first .pv{color:var(--gold-ink)}
+
+  /* ---- tables ---- */
+  .twrap{overflow-x:auto}
+  table{border-collapse:collapse; width:100%}
+  th{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.4px;
+    color:var(--muted); font-weight:600; padding:6px 8px; border-bottom:1px solid var(--grid);
+    white-space:nowrap;
+  }
+  td{padding:7px 8px; border-bottom:1px solid var(--grid); vertical-align:middle}
+  tr:last-child td{border-bottom:0}
+  tbody tr:nth-child(even) td{background:var(--hover)}
+  th.r, td.r{text-align:right; font-variant-numeric:tabular-nums}
+  td.who{min-width:96px}
+  td.who .nm{font-weight:600}
+  tfoot td{font-weight:700; border-top:2px solid var(--axis); border-bottom:0; background:none !important}
+
+  /* seat status */
+  .chip{display:inline-block; font-size:11px; font-weight:600; border-radius:999px; padding:2px 8px; white-space:nowrap}
+  .chip.seated{background:var(--washg); color:var(--good)}
+  .chip.close{background:var(--wash3); color:var(--gold-ink)}
+  .chip.out{background:var(--wash2); color:var(--s2)}
+
+  /* mini playing cards */
+  .hand{display:inline-flex; gap:2px; align-items:center; white-space:nowrap}
+  .pcard{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:15px; height:21px; border-radius:3px;
+    background:var(--surface-1); border:1px solid var(--axis);
+    font-size:10px; line-height:1;
+  }
+  .pcard.rd{color:var(--s2)} .pcard.bk{color:var(--text-primary)}
+  .hand .more{font-size:11px; color:var(--muted); margin-left:2px; font-variant-numeric:tabular-nums}
+  .hand .none{font-size:12px; color:var(--muted)}
+
+  /* ---- team battle ---- */
+  .vsbar{margin:4px 0 4px}
+  .vslab{display:flex; justify-content:space-between; gap:10px; font-size:13px; margin-bottom:4px}
+  .vslab .tA{color:var(--s1); font-weight:700}
+  .vslab .tB{color:var(--gold-ink); font-weight:700}
+  .vslab .pts{font-variant-numeric:tabular-nums; font-weight:700}
+  .vstrack{display:flex; height:20px; border-radius:999px; overflow:hidden; border:1px solid var(--border)}
+  .vstrack .a{background:var(--s1)}
+  .vstrack .b{background:var(--gold); border-left:2px solid var(--surface-1)}
+  .vsfoot{font-size:12px; color:var(--muted); margin:4px 0 14px}
+  .lead{font-size:13px; margin:0 0 12px; color:var(--text-secondary)}
+  .lead b{color:var(--text-primary)}
+
+  .teams{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px}
+  .team{border:1px solid var(--border); border-radius:10px; overflow:hidden; min-width:0}
+  .team .thead{padding:8px 12px; font-weight:700; font-size:14px; display:flex; justify-content:space-between; align-items:baseline; gap:8px}
+  .team.ta .thead{background:var(--wash); color:var(--s1)}
+  .team.tb .thead{background:var(--wash3); color:var(--gold-ink)}
+  .team .thead .tp{font-variant-numeric:tabular-nums}
+  .team .twrap{padding:0 4px}
+
+  footer{
+    max-width:1080px; margin:0 auto; padding:0 16px 30px;
+    color:var(--muted); font-size:12px;
+  }
+  footer p{margin:4px 0}
+
+  @media (max-width:560px){
+    .c-cards{display:none}
+  }
+  @media (max-width:620px){
+    .tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .tile .v{font-size:18px}
+    .payouts{grid-template-columns:repeat(5,minmax(0,1fr))}
+    .pay{padding:6px 4px}
+    .teams{grid-template-columns:minmax(0,1fr)}
+    .shead .days{margin-left:0}
+    th,td{padding-left:6px;padding-right:6px}
+  }
+  @media (max-width:400px){
+    .pcard{width:13px;height:18px;font-size:9px}
+    td.who{min-width:84px}
+    .tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .tile{padding:8px 8px}
+    .tile .v{font-size:16px}
+    .pay .pv{font-size:13px}
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="in">
+    <div class="id">
+      <h1>September Competitions</h1>
+      <div class="sub">District 32 &middot; Waco, TX</div>
+    </div>
+    <span class="asof" id="asof">as of —</span>
+    <a class="backlink" href="../index.html#competitions">&larr; District Hub</a>
+  </div>
+</header>
+
+<div class="sample" id="sampleBar" hidden>
+  TESTING COPY &mdash; not published to agents. Rosters are final; numbers are simulated. Use the buttons below to demo the month.
+</div>
+<div class="demobar" id="demoBar" hidden>
+  <span class="dl">Demo:</span>
+  <button id="d0" class="on" type="button">Day one</button>
+  <button id="d1" type="button">Mid-month</button>
+  <button id="d2" type="button">Final stretch</button>
+</div>
+
+<main>
+
+  <!-- ======================= ALL IN FOR LIFE ======================= -->
+  <section class="card" aria-labelledby="h-allin">
+    <div class="shead">
+      <h2 id="h-allin">&ldquo;All In&rdquo; for Life</h2>
+      <span class="period">Texas Hold &lsquo;Em life promo &middot; Sep 1 &ndash; 30</span>
+      <span class="days num" id="allinDays"></span>
+    </div>
+    <p class="rules">
+      $50 ante + <b>3 written life apps</b> earns your seat. Every app written earns another playing
+      card for the one hand of Hold &lsquo;Em we play at the end &mdash; more apps, better odds.
+      Apps count when they show on the Life Performance Tracker, written Sep 1&ndash;30.
+    </p>
+
+    <div class="tiles" id="allinTiles"></div>
+
+    <div class="meter">
+      <div class="mlab"><span><b id="potNow">$—</b> current pot</span><span class="num" id="appsNow">— district apps</span></div>
+      <div class="track" role="img" aria-label="District app progress toward the pot boost">
+        <div class="fill" id="appsFill" style="width:0%"></div>
+        <div class="goal" id="goalMark" style="left:0%"></div>
+      </div>
+      <div class="mfoot" id="boostFoot"></div>
+    </div>
+
+    <div class="payouts" id="payouts" aria-label="Payout split"></div>
+
+    <div class="twrap">
+      <table aria-labelledby="h-allin">
+        <thead>
+          <tr>
+            <th class="r">#</th>
+            <th>Agent</th>
+            <th class="r">Apps</th>
+            <th class="c-cards">Cards earned</th>
+            <th>Seat</th>
+          </tr>
+        </thead>
+        <tbody id="allinRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ======================= STEAK OR BURGERS ======================= -->
+  <section class="card" aria-labelledby="h-steak">
+    <div class="shead">
+      <h2 id="h-steak">Steak or Burgers</h2>
+      <span class="period">Team quote &amp; NB battle &middot; Sep 1 &ndash; 30</span>
+      <span class="days num" id="steakDays"></span>
+    </div>
+    <p class="rules">
+      Two teams, points at the agency level: <b>1 quote = 1 point &middot; 1 NB policy = 5 points</b>,
+      counted Sep 1&ndash;30. The winning team eats Prime steak at the cookout after the October
+      district meeting; the other team gets burgers.
+    </p>
+
+    <p class="lead" id="steakLead"></p>
+
+    <div class="vsbar">
+      <div class="vslab">
+        <span class="tA" id="vsNameA"></span>
+        <span class="tB" id="vsNameB"></span>
+      </div>
+      <div class="vstrack" role="img" aria-label="Team points split">
+        <div class="a" id="vsA" style="width:50%"></div>
+        <div class="b" id="vsB" style="width:50%"></div>
+      </div>
+      <div class="vslab" style="margin-top:4px">
+        <span class="pts tA num" id="vsPtsA"></span>
+        <span class="pts tB num" id="vsPtsB"></span>
+      </div>
+    </div>
+
+    <div class="teams" id="teams"></div>
+  </section>
+
+</main>
+
+<footer>
+  <p><b>Sources:</b> All-In app counts come from the Life Performance Tracker; Steak or Burgers quote and NB counts are agency-level figures supplied by the district office. Standings update as new numbers are posted &mdash; the &ldquo;as of&rdquo; date above is the data date.</p>
+  <p>Questions or corrections: contact the district office.</p>
+</footer>
+
+<script>
+'use strict';
+
+/* =========================================================================
+   DATA — replace this object (or the file) to update the dashboard.
+   sample:true shows the amber banner. `updated` is the data as-of date.
+   ========================================================================= */
+const DATA = {
+  sample: false,           // true = testing copy: banner + demo controls
+  updated: "2026-08-31",
+  start: "2026-09-01",
+  ends:  "2026-09-30",
+
+  allin: {
+    potBase: 1000, potBoost: 2500, boostAt: 85, ante: 50,
+    anteDue: "2026-09-04",
+    payoutPct: [40,25,20,10,5],
+    /* apps = life apps written Sep 1-30 (Life Performance Tracker); anted = ante received */
+    players: [
+      {name:"Matt Hodges", apps:0, anted:false},
+      {name:"Christopher Gutierrez", apps:0, anted:false},
+      {name:"Maricela Herrera", apps:0, anted:false},
+      {name:"Ravi R Sriram", apps:0, anted:false},
+      {name:"J Fred Youmans", apps:0, anted:false},
+      {name:"Jeff Holder", apps:0, anted:false},
+      {name:"Leslie Ann Walker", apps:0, anted:false},
+      {name:"Glenn N Cannon", apps:0, anted:false},
+      {name:"Derrick Herbert Bayer", apps:0, anted:false},
+      {name:"David Scott Gloff", apps:0, anted:false},
+      {name:"Caleb Alexander Milne", apps:0, anted:false},
+      {name:"William Kenneth Knight", apps:0, anted:false},
+      {name:"Jimmy Ward", apps:0, anted:false},
+      {name:"Darren Hayes", apps:0, anted:false},
+      {name:"Vernon Sweeney", apps:0, anted:false},
+      {name:"Jeffrey P Pechacek", apps:0, anted:false},
+      {name:"Jason Kirk", apps:0, anted:false},
+      {name:"David L Dickerson", apps:0, anted:false},
+      {name:"Luke William Franks", apps:0, anted:false},
+      {name:"Steven Tindell", apps:0, anted:false},
+      {name:"Christian Daiel Crosby Ford", apps:0, anted:false},
+      {name:"Dennis Polian", apps:0, anted:false},
+      {name:"Dennis Keith Bruington", apps:0, anted:false},
+      {name:"Eva Marie Greenup", apps:0, anted:false},
+      {name:"Lonnie Eugene Pittman", apps:0, anted:false},
+      {name:"Travis Ryne Veselka", apps:0, anted:false},
+      {name:"Aaron Michael Vicknair", apps:0, anted:false},
+      {name:"Krystal Lee Hawk", apps:0, anted:false},
+      {name:"Stephanie Burns", apps:0, anted:false}
+    ]
+  },
+
+  /* quotes/nb = September actuals (start at 0). bq/bnb = Jun 1 - Aug 28 baseline,
+     used only to scale the demo simulation - never displayed. */
+  steak: {
+    teams: [
+      {name:"Team Alan", agencies:[
+        {name:"Matt Hodges",            bq:271,  bnb:52,  quotes:0, nb:0},
+        {name:"Christopher Gutierrez",  bq:1111, bnb:47,  quotes:0, nb:0},
+        {name:"Maricela Herrera",       bq:73,   bnb:21,  quotes:0, nb:0},
+        {name:"Ravi R Sriram",          bq:8,    bnb:6,   quotes:0, nb:0},
+        {name:"J Fred Youmans",         bq:139,  bnb:21,  quotes:0, nb:0},
+        {name:"Jeff Holder",            bq:107,  bnb:25,  quotes:0, nb:0},
+        {name:"Leslie Ann Walker",      bq:83,   bnb:17,  quotes:0, nb:0},
+        {name:"Glenn N Cannon",         bq:82,   bnb:14,  quotes:0, nb:0},
+        {name:"Derrick Herbert Bayer",  bq:296,  bnb:47,  quotes:0, nb:0},
+        {name:"David Scott Gloff",      bq:182,  bnb:23,  quotes:0, nb:0},
+        {name:"Caleb Alexander Milne",  bq:1183, bnb:231, quotes:0, nb:0},
+        {name:"William Kenneth Knight", bq:334,  bnb:34,  quotes:0, nb:0},
+        {name:"Jimmy Ward",             bq:149,  bnb:57,  quotes:0, nb:0},
+        {name:"Darren Hayes",           bq:312,  bnb:60,  quotes:0, nb:0}
+      ]},
+      {name:"Team Conrey", agencies:[
+        {name:"Vernon Sweeney",              bq:23,   bnb:7,   quotes:0, nb:0},
+        {name:"Jeffrey P Pechacek",          bq:125,  bnb:58,  quotes:0, nb:0},
+        {name:"Jason Kirk",                  bq:147,  bnb:18,  quotes:0, nb:0},
+        {name:"David L Dickerson",           bq:506,  bnb:103, quotes:0, nb:0},
+        {name:"Luke William Franks",         bq:88,   bnb:48,  quotes:0, nb:0},
+        {name:"Steven Tindell",              bq:394,  bnb:84,  quotes:0, nb:0},
+        {name:"Christian Daiel Crosby Ford", bq:97,   bnb:33,  quotes:0, nb:0},
+        {name:"Dennis Polian",               bq:221,  bnb:38,  quotes:0, nb:0},
+        {name:"Dennis Keith Bruington",      bq:196,  bnb:17,  quotes:0, nb:0},
+        {name:"Eva Marie Greenup",           bq:85,   bnb:23,  quotes:0, nb:0},
+        {name:"Lonnie Eugene Pittman",       bq:665,  bnb:90,  quotes:0, nb:0},
+        {name:"Travis Ryne Veselka",         bq:143,  bnb:11,  quotes:0, nb:0},
+        {name:"Aaron Michael Vicknair",      bq:1165, bnb:74,  quotes:0, nb:0},
+        {name:"Krystal Lee Hawk",            bq:375,  bnb:29,  quotes:0, nb:0},
+        {name:"Stephanie Burns",             bq:101,  bnb:21,  quotes:0, nb:0}
+      ]}
+    ]
+  }
+};
+
+/* LIVE is what the renderers read; demo modes rebuild it from DATA. */
+let LIVE = JSON.parse(JSON.stringify(DATA));
+let DEMO_ACTIVE = false;
+
+/* ========================================================================= */
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const money = n => '$' + n.toLocaleString('en-US');
+const SUITS = [['♠','bk'],['♥','rd'],['♣','bk'],['♦','rd']];
+
+function midnight(d){ const p=d.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+function daysChip(el){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const s = midnight(DATA.start), e = midnight(DATA.ends);
+  if (today < s){
+    const n = Math.round((s-today)/864e5);
+    el.textContent = n===1 ? 'Starts tomorrow' : 'Starts in '+n+' days';
+  } else if (today <= e){
+    const n = Math.round((e-today)/864e5);
+    el.textContent = n===0 ? 'Final day' : n+' days left';
+  } else {
+    el.textContent = 'Ended'; el.classList.add('ended');
+  }
+}
+
+function fmtDate(d){
+  return midnight(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+}
+
+/* ---------------- All In ---------------- */
+function pastAnteDue(){
+  if (DEMO_ACTIVE) return true;   // simulated mid-month/final stretch: deadline has passed
+  const today = new Date(); today.setHours(0,0,0,0);
+  return today > midnight(DATA.allin.anteDue);
+}
+function anteDueLabel(){
+  return 'Ante due ' + midnight(DATA.allin.anteDue).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+
+function renderAllin(){
+  const A = LIVE.allin;
+  const players = A.players.slice().sort((a,b)=> b.apps-a.apps || a.name.localeCompare(b.name));
+  const anteCount = players.filter(p=>p.anted).length;
+  const seated = players.filter(p=>p.anted && p.apps>=3).length;
+  const totApps = players.reduce((s,p)=>s+p.apps,0);
+  const boost = totApps >= A.boostAt;
+  const pot = anteCount*A.ante + (boost ? A.potBoost : A.potBase);
+
+  $('allinTiles').innerHTML =
+    tile('Players anted', anteCount, money(anteCount*A.ante)+' in antes') +
+    tile('Seated (3+ apps)', seated, 'of '+anteCount+' anted') +
+    tile('District apps', totApps, boost ? 'pot boost unlocked' : (A.boostAt-totApps)+' to the pot boost');
+
+  $('potNow').textContent = money(pot);
+  $('appsNow').textContent = totApps + ' district apps';
+  const scaleMax = Math.max(A.boostAt, totApps) * 1.1;
+  $('appsFill').style.width = Math.min(100, totApps/scaleMax*100).toFixed(1)+'%';
+  $('goalMark').style.left = (A.boostAt/scaleMax*100).toFixed(1)+'%';
+  $('boostFoot').innerHTML = boost
+    ? 'District contribution raised to <b>'+money(A.potBoost)+'</b> — '+A.boostAt+' apps written.'
+    : 'District office adds '+money(A.potBase)+' now — rises to <b>'+money(A.potBoost)+'</b> at '+A.boostAt+' district apps.';
+
+  $('payouts').innerHTML = A.payoutPct.map((pct,i)=>
+    '<div class="pay'+(i===0?' first':'')+'"><div class="pl">'+ordinal(i+1)+'</div>'+
+    '<div class="pv num">'+money(Math.round(pot*pct/100))+'</div>'+
+    '<div class="pp num">'+pct+'%</div></div>'
+  ).join('');
+
+  $('allinRows').innerHTML = players.map((p,i)=>{
+    let seatChip;
+    if (p.anted && p.apps>=3) seatChip = '<span class="chip seated">Seated</span>';
+    else if (p.anted) seatChip = '<span class="chip close">'+(3-p.apps)+' more app'+(3-p.apps===1?'':'s')+'</span>';
+    else seatChip = pastAnteDue()
+      ? '<span class="chip out">Not participating</span>'
+      : '<span class="chip close">'+anteDueLabel()+'</span>';
+    return '<tr>'+
+      '<td class="r num">'+(i+1)+'</td>'+
+      '<td class="who"><span class="nm">'+esc(p.name)+'</span></td>'+
+      '<td class="r num">'+p.apps+'</td>'+
+      '<td class="c-cards">'+hand(p.apps)+'</td>'+
+      '<td>'+seatChip+'</td>'+
+    '</tr>';
+  }).join('');
+}
+
+function tile(l,v,d){
+  return '<div class="tile"><div class="l">'+l+'</div><div class="v">'+v+'</div><div class="d">'+d+'</div></div>';
+}
+function ordinal(n){ return n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:Math.min(n%10,4)]||'th'); }
+function hand(apps){
+  if (!apps) return '<span class="hand"><span class="none">&mdash;</span></span>';
+  const shown = Math.min(apps,4);
+  let out = '<span class="hand" aria-label="'+apps+' cards earned">';
+  for (let i=0;i<shown;i++){
+    const s = SUITS[i%4];
+    out += '<span class="pcard '+s[1]+'">'+s[0]+'</span>';
+  }
+  if (apps>shown) out += '<span class="more">+'+(apps-shown)+'</span>';
+  return out+'</span>';
+}
+
+/* ---------------- Steak or Burgers ---------------- */
+function pts(a){ return a.quotes + 5*a.nb; }
+
+function renderSteak(){
+  const T = LIVE.steak.teams;
+  const tot = T.map(t => t.agencies.reduce((s,a)=>s+pts(a),0));
+  const sum = tot[0]+tot[1];
+
+  $('vsNameA').textContent = T[0].name;
+  $('vsNameB').textContent = T[1].name;
+  $('vsPtsA').textContent = tot[0].toLocaleString('en-US')+' pts';
+  $('vsPtsB').textContent = tot[1].toLocaleString('en-US')+' pts';
+  const aPct = sum ? tot[0]/sum*100 : 50;
+  $('vsA').style.width = aPct.toFixed(1)+'%';
+  $('vsB').style.width = (100-aPct).toFixed(1)+'%';
+
+  const lead = $('steakLead');
+  if (tot[0]===tot[1]) lead.innerHTML = 'Dead even at <b>'+tot[0].toLocaleString('en-US')+' points</b> apiece.';
+  else {
+    const w = tot[0]>tot[1]?0:1;
+    lead.innerHTML = '<b>'+esc(T[w].name)+'</b> leads by <b>'+
+      Math.abs(tot[0]-tot[1]).toLocaleString('en-US')+' points</b>.';
+  }
+
+  $('teams').innerHTML = T.map((t,ti)=>{
+    const rows = t.agencies.slice().sort((a,b)=>pts(b)-pts(a));
+    const tq = rows.reduce((s,a)=>s+a.quotes,0), tn = rows.reduce((s,a)=>s+a.nb,0);
+    return '<div class="team '+(ti===0?'ta':'tb')+'">'+
+      '<div class="thead"><span>'+esc(t.name)+'</span><span class="tp num">'+tot[ti].toLocaleString('en-US')+' pts</span></div>'+
+      '<div class="twrap"><table>'+
+      '<thead><tr><th>Agency</th><th class="r">Quotes</th><th class="r">NB</th><th class="r">Pts</th></tr></thead>'+
+      '<tbody>'+rows.map(a=>
+        '<tr><td class="who"><span class="nm">'+esc(a.name)+'</span></td>'+
+        '<td class="r num">'+a.quotes+'</td><td class="r num">'+a.nb+'</td>'+
+        '<td class="r num"><b>'+pts(a)+'</b></td></tr>').join('')+
+      '</tbody>'+
+      '<tfoot><tr><td>Team total</td><td class="r num">'+tq+'</td><td class="r num">'+tn+'</td><td class="r num">'+tot[ti].toLocaleString('en-US')+'</td></tr></tfoot>'+
+      '</table></div></div>';
+  }).join('');
+}
+
+/* ---------------- demo simulation (testing copy only) ---------------- */
+function mulberry32(seed){
+  return function(){
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+/* f = fraction of the month elapsed. Seeded so each mode is stable. */
+function simulate(f, seed){
+  LIVE = JSON.parse(JSON.stringify(DATA));
+  DEMO_ACTIVE = f > 0;
+  if (f > 0){
+    const rnd = mulberry32(seed);
+    LIVE.steak.teams.forEach(t => t.agencies.forEach(a => {
+      a.quotes = Math.round(a.bq/3 * f * (0.75 + rnd()*0.5));
+      a.nb     = Math.round(a.bnb/3 * f * (0.6 + rnd()*0.8));
+    }));
+    LIVE.allin.players.forEach(p => {
+      p.anted = rnd() < 0.72;
+      if (p.anted){
+        const r = rnd();
+        const base = r < 0.3 ? r*4 : r < 0.75 ? 2 + r*4 : 4 + r*6;
+        p.apps = Math.round(base * (0.3 + 0.7*f));
+      } else {
+        p.apps = rnd() < 0.2 ? 1 : 0;
+      }
+    });
+  }
+  renderAllin();
+  renderSteak();
+}
+
+function setDemo(mode){
+  ['d0','d1','d2'].forEach((id,i)=>$(id).classList.toggle('on', i===mode));
+  if (mode===0) simulate(0, 0);
+  if (mode===1) simulate(0.45, 32);
+  if (mode===2) simulate(0.93, 49);
+  $('asof').textContent = mode===0 ? 'as of ' + fmtDate(DATA.updated) : 'simulated demo';
+}
+
+/* ---------------- boot ---------------- */
+$('asof').textContent = 'as of ' + fmtDate(DATA.updated);
+if (DATA.sample){
+  $('sampleBar').hidden = false;
+  $('demoBar').hidden = false;
+  $('d0').addEventListener('click', ()=>setDemo(0));
+  $('d1').addEventListener('click', ()=>setDemo(1));
+  $('d2').addEventListener('click', ()=>setDemo(2));
+}
+daysChip($('allinDays'));
+daysChip($('steakDays'));
+renderAllin();
+renderSteak();
+</script>
+</body>
+</html>
