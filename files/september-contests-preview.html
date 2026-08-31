@@ -192,7 +192,7 @@ try{var t=localStorage.getItem('d32hub_theme');if(t==='dark'||t==='light')docume
   .chip{display:inline-block; font-size:11px; font-weight:600; border-radius:999px; padding:2px 8px; white-space:nowrap}
   .chip.seated{background:var(--washg); color:var(--good)}
   .chip.close{background:var(--wash3); color:var(--gold-ink)}
-  .chip.out{background:var(--wash); color:var(--muted)}
+  .chip.out{background:var(--wash2); color:var(--s2)}
 
   /* mini playing cards */
   .hand{display:inline-flex; gap:2px; align-items:center; white-space:nowrap}
@@ -351,7 +351,6 @@ try{var t=localStorage.getItem('d32hub_theme');if(t==='dark'||t==='light')docume
         <span class="pts tB num" id="vsPtsB"></span>
       </div>
     </div>
-    <div class="vsfoot">Points = quotes + 5 &times; NB policies &middot; agency level &middot; headcount is 14 v 15</div>
 
     <div class="teams" id="teams"></div>
   </section>
@@ -517,7 +516,7 @@ function renderAllin(){
     let seatChip;
     if (p.anted && p.apps>=3) seatChip = '<span class="chip seated">Seated</span>';
     else if (p.anted) seatChip = '<span class="chip close">'+(3-p.apps)+' more app'+(3-p.apps===1?'':'s')+'</span>';
-    else seatChip = '<span class="chip out">No ante yet</span>';
+    else seatChip = '<span class="chip out">Not participating</span>';
     return '<tr>'+
       '<td class="r num">'+(i+1)+'</td>'+
       '<td class="who"><span class="nm">'+esc(p.name)+'</span></td>'+
