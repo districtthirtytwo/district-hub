@@ -20,7 +20,7 @@
       "date": "2026-08-31",
       "tag": "update",
       "title": "Quote & Sales Tracker and YTD Life Results are posted",
-      "body": "The 2026 Quote & Sales Tracker through August 14 and YTD Life Results as of August 23 and August 30 are in Reports. Caleb Milne leads YTD NBNH at 372 with Steven Tindell close behind at 368. On life, the district is at 233 I&P and $263,701.",
+      "body": "The 2026 Quote & Sales Tracker through August 14 and YTD Life Results as of August 30 are in Reports. Caleb Milne leads YTD NBNH at 372 with Steven Tindell close behind at 368. On life, the district is at 233 I&P and $263,701.",
       "pinned": false,
       "link": "#reports"
     },
@@ -223,28 +223,12 @@
       "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 233 I&P / $263,701"
     },
     {
-      "id": "r-life-0823",
-      "title": "YTD Life Results",
-      "date": "2026-08-23",
-      "category": "Life",
-      "file": "files/ytd-life-results-2026-08-23.pdf",
-      "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 228 I&P / $261,722"
-    },
-    {
       "id": "r-qst-0814",
       "title": "2026 Quote & Sales Tracker",
       "date": "2026-08-14",
       "category": "Trackers",
       "file": "files/quote-sales-tracker-2026-08-14.pdf",
       "note": "Thru Aug 14 \u2014 quotes per day, YTD quotes, NBNH and business mix by agent"
-    },
-    {
-      "id": "r-life-0809",
-      "title": "YTD Life Results",
-      "date": "2026-08-09",
-      "category": "Life",
-      "file": "files/ytd-life-results-2026-08-09.pdf",
-      "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 210 I&P / $247,011"
     },
     {
       "id": "r-prod-0807",
@@ -322,7 +306,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r9d76e184d98fb5faa3cdhub",
+  "rev": "r6c03048bca901cf880dfhub",
   "analytics": {
     "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
   }
