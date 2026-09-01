@@ -2561,9 +2561,14 @@ const CB_ART = {
 function cbMidnight(s){ const p=String(s||'').split('-'); const d=new Date(+p[0], +p[1]-1, +p[2]); d.setHours(0,0,0,0); return d; }
 function cbMoney(n){ return '$'+Math.round(n).toLocaleString('en-US'); }
 function cbOrd(n){ return n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:Math.min(n%10,4)]||'th'); }
-function cbDays(C){
+function cbRange(a,b){
+  const s=cbMidnight(a), e=cbMidnight(b); if(isNaN(s)||isNaN(e)) return '';
+  const M=d=>d.toLocaleDateString('en-US',{month:'short'});
+  return s.getMonth()===e.getMonth() ? M(s)+' '+s.getDate()+'–'+e.getDate() : M(s)+' '+s.getDate()+' – '+M(e)+' '+e.getDate();
+}
+function cbDays(start, ends){
   const today=new Date(); today.setHours(0,0,0,0);
-  const s=cbMidnight(C.start), e=cbMidnight(C.ends);
+  const s=cbMidnight(start), e=cbMidnight(ends);
   if(isNaN(s)||isNaN(e)) return '';
   if(today<s){ const n=Math.round((s-today)/864e5); return '<span class="cb-days">'+(n===1?'Starts tomorrow':'Starts in '+n+' days')+'</span>'; }
   if(today<=e){ const n=Math.round((e-today)/864e5); return '<span class="cb-days">'+(n===0?'Final day':n+' days left')+'</span>'; }
@@ -2591,12 +2596,13 @@ function cbAllin(C){
   const dueLbl=due&&!isNaN(due)?'Ante due '+due.toLocaleDateString('en-US',{month:'short',day:'numeric'}):'Ante due';
   const scale=Math.max(boostAt,tot,1)*1.1;
   const pct=(A.payoutPct||[40,25,20,10,5]);
+  const st=A.start||C.start, en=A.ends||C.ends, rng=cbRange(st,en);
   const tile=(l,v,d)=>'<div class="cb-tile"><div class="l">'+l+'</div><div class="v">'+v+'</div><div class="d">'+d+'</div></div>';
   return '<section class="cb-board" aria-labelledby="cbAllinH">'
-    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbAllinH">“All In” for Life</h3><span class="cb-sub">Texas Hold ‘Em life promo · Sep 1–30</span></div>'
-    +'<div class="cb-art">'+CB_ART.allin+'</div>'+cbDays(C)+'</div>'
+    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbAllinH">“All In” for Life</h3><span class="cb-sub">Texas Hold ‘Em life promo · '+rng+'</span></div>'
+    +'<div class="cb-art">'+CB_ART.allin+'</div>'+cbDays(st,en)+'</div>'
     +'<div class="cb-bd">'
-    +'<p class="cb-rules">$50 ante + <b>3 written life apps</b> earns your seat. Every app written earns another playing card for the one hand of Hold ‘Em we play at the end — more apps, better odds. Apps count when they show on the Life Performance Tracker, written Sep 1–30.</p>'
+    +'<p class="cb-rules">$50 ante + <b>3 written life apps</b> earns your seat. Every app written earns another playing card for the one hand of Hold ‘Em we play at the end — more apps, better odds. Apps count when they show on the Life Performance Tracker, written '+rng+'.</p>'
     +'<div class="cb-tiles">'+tile('Players anted',anteCount,cbMoney(anteCount*ante)+' in antes')
       +tile('Seated (3+ apps)',seated,'of '+anteCount+' anted')
       +tile('District apps',tot,boost?'pot boost unlocked':(boostAt-tot)+' to the pot boost')+'</div>'
@@ -2621,14 +2627,15 @@ function cbSteak(C){
   const pts=a=>(+a.quotes||0)+5*(+a.nb||0);
   const tot=T.map(t=>(t.agencies||[]).reduce((s,a)=>s+pts(a),0));
   const sum=tot[0]+tot[1]; const aPct=sum?tot[0]/sum*100:50;
+  const st=S.start||C.start, en=S.ends||C.ends, rng=cbRange(st,en);
   let lead;
   if(tot[0]===tot[1]) lead='Dead even at <b>'+tot[0].toLocaleString('en-US')+' points</b> apiece.';
   else { const w=tot[0]>tot[1]?0:1; lead='<b>'+esc(T[w].name)+'</b> leads by <b>'+Math.abs(tot[0]-tot[1]).toLocaleString('en-US')+' points</b>.'; }
   return '<section class="cb-board" aria-labelledby="cbSteakH">'
-    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbSteakH">Steak or Burgers</h3><span class="cb-sub">Team quote &amp; NB battle · Sep 1–30</span></div>'
-    +'<div class="cb-art">'+CB_ART.steak+'</div>'+cbDays(C)+'</div>'
+    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbSteakH">Steak or Burgers</h3><span class="cb-sub">Team quote &amp; NB battle · '+rng+'</span></div>'
+    +'<div class="cb-art">'+CB_ART.steak+'</div>'+cbDays(st,en)+'</div>'
     +'<div class="cb-bd">'
-    +'<p class="cb-rules">Two teams, points at the agency level: <b>1 quote = 1 point · 1 NB policy = 5 points</b>, counted Sep 1–30. The winning team eats Prime steak at the cookout after the October district meeting; the other team gets burgers.</p>'
+    +'<p class="cb-rules">Two teams, points at the agency level: <b>1 quote = 1 point · 1 NB policy = 5 points</b>, counted '+rng+'. The winning team eats Prime steak at the cookout after the October district meeting; the other team gets burgers.</p>'
     +'<p class="cb-lead">'+lead+'</p>'
     +'<div class="cb-vs"><div class="vl"><span class="ta">'+esc(T[0].name)+'</span><span class="tb">'+esc(T[1].name)+'</span></div>'
     +'<div class="vt" role="img" aria-label="Team points split"><div class="a" style="width:'+aPct.toFixed(1)+'%"></div><div class="b" style="width:'+(100-aPct).toFixed(1)+'%"></div></div>'
