@@ -198,6 +198,18 @@
   }
   .toolchip:hover{background:var(--on-navy-soft);}
   .toolchip .g{font-weight:400;opacity:.65;}
+  /* ---- block 30: Competitions tab as a red button during the promo ---- */
+  .tab.hot{background:var(--s2);color:#fff;border-radius:9px;padding:8px 14px;margin:6px 3px 6px 5px;border-bottom:0;line-height:1.25;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+  .tab.hot:hover{background:var(--str-2);color:#fff;}
+  .tab.hot[aria-current="page"]{color:#fff;box-shadow:0 0 0 2px #fff inset,0 2px 8px rgba(0,0,0,.25);}
+  .tab.hot .n{background:rgba(255,255,255,.28);color:#fff;}
+  .tab.hot[aria-current="page"] .n{background:rgba(255,255,255,.35);color:#fff;}
+  .tab.hot .tro{margin-right:6px;}
+  /* on a phone the tab row scrolls and the third tab sits past the right
+     edge on the landing view — the button leads the row there instead */
+  @media(max-width:900px){ .tab.hot{order:-2;position:sticky;left:0;z-index:2;margin-left:0;box-shadow:6px 0 0 var(--navy),0 2px 8px rgba(0,0,0,.25);} .bar2{scroll-padding-left:190px;} }
+  @media(max-width:760px){ .tab.hot{padding:7px 11px;} .tab.hot .n{display:none;} .bar2{scroll-padding-left:160px;} }
+  @media(max-width:360px){ .tab.hot .tro{display:none;} }
 
   /* ===================================================================
      VIEWS
@@ -476,6 +488,83 @@
   .eventrow .info .where{font-size:11.5px;color:var(--muted);font-weight:600;}
   .eventrow .info p{margin:4px 0 0;font-size:12.5px;color:var(--text-secondary);line-height:1.5;white-space:pre-line;}
 
+
+  /* ---------- contest boards (block 29) ---------- */
+  .cb-boards{display:grid;gap:18px;margin:0 0 22px;}
+  .cb-board{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface-1);}
+  .cb-hero{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--surface-2);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+  .cb-hero .cb-t{min-width:0;flex:1 1 220px;}
+  .cb-hero h3{margin:0;font-size:19px;line-height:1.2;color:var(--ord-3);font-weight:680;letter-spacing:-.01em;}
+  :root[data-theme="dark"] .cb-hero h3{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .cb-hero h3{color:var(--ord-1);} }
+  .cb-hero .cb-sub{display:block;margin-top:2px;font-size:13px;color:var(--text-secondary);}
+  .cb-art{flex:none;height:64px;display:flex;align-items:center;}
+  .cb-art svg{height:64px;width:auto;display:block;}
+  .cb-days{flex:none;font-size:12px;font-weight:650;border-radius:999px;padding:4px 11px;background:var(--wash);color:var(--s1);font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .cb-days.ended{background:var(--wash2);color:var(--s2);}
+  .cb-bd{padding:14px 18px 12px;}
+  .cb-rules{margin:0 0 12px;font-size:13px;color:var(--text-secondary);max-width:72ch;line-height:1.45;}
+  .cb-rules b{color:var(--text-primary);}
+  .cb-num{font-variant-numeric:tabular-nums;}
+  .cb-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+  .cb-tile{background:var(--surface-2);padding:9px 12px;min-width:0;}
+  .cb-tile .l{font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);}
+  .cb-tile .v{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2;overflow-wrap:anywhere;}
+  .cb-tile .d{font-size:12px;color:var(--text-secondary);}
+  .cb-meter{margin:2px 0 14px;}
+  .cb-meter .ml{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--text-secondary);margin-bottom:4px;}
+  .cb-meter .ml b{color:var(--text-primary);}
+  .cb-track{position:relative;height:14px;border-radius:999px;background:var(--wash);border:1px solid var(--border);overflow:hidden;}
+  .cb-track .fill{position:absolute;top:0;bottom:0;left:0;background:var(--s1);border-radius:999px 0 0 999px;}
+  .cb-track .goal{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--gold);}
+  .cb-meter .mf{font-size:12px;color:var(--muted);margin-top:4px;}
+  .cb-meter .mf b{color:var(--gold-ink);}
+  .cb-pay{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px;}
+  .cb-pay > div{background:var(--surface-2);padding:7px 6px;text-align:center;min-width:0;}
+  .cb-pay .pl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;}
+  .cb-pay .pv{font-weight:700;font-variant-numeric:tabular-nums;}
+  .cb-pay .pp{font-size:11px;color:var(--text-secondary);}
+  .cb-pay .first{background:var(--wash3);}
+  .cb-pay .first .pv{color:var(--gold-ink);}
+  .cb-twrap{overflow-x:auto;}
+  .cb-table{border-collapse:collapse;width:100%;}
+  .cb-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--grid);white-space:nowrap;}
+  .cb-table td{padding:6px 8px;border-bottom:1px solid var(--grid);vertical-align:middle;font-size:14px;}
+  .cb-table tr:last-child td{border-bottom:0;}
+  .cb-table tbody tr:nth-child(even) td{background:var(--hover);}
+  .cb-table th.r,.cb-table td.r{text-align:right;font-variant-numeric:tabular-nums;}
+  .cb-table td.who{min-width:96px;}
+  .cb-table td.who b{font-weight:600;}
+  .cb-table tfoot td{font-weight:700;border-top:2px solid var(--axis);border-bottom:0;background:none !important;}
+  .cb-seat{display:inline-block;font-size:11px;font-weight:600;border-radius:999px;padding:2px 8px;white-space:nowrap;}
+  .cb-seat.in{background:var(--washg);color:var(--good);}
+  .cb-seat.close{background:var(--wash3);color:var(--gold-ink);}
+  .cb-seat.out{background:var(--wash2);color:var(--s2);}
+  .cb-hand{display:inline-flex;gap:2px;align-items:center;white-space:nowrap;}
+  .cb-pc{display:inline-flex;align-items:center;justify-content:center;width:15px;height:21px;border-radius:3px;background:var(--surface-1);border:1px solid var(--axis);font-size:10px;line-height:1;}
+  .cb-pc.rd{color:var(--s2);} .cb-pc.bk{color:var(--text-primary);}
+  .cb-hand .more{font-size:11px;color:var(--muted);margin-left:2px;font-variant-numeric:tabular-nums;}
+  .cb-hand .none{font-size:12px;color:var(--muted);}
+  .cb-lead{font-size:13px;margin:0 0 10px;color:var(--text-secondary);}
+  .cb-lead b{color:var(--text-primary);}
+  .cb-vs .vl{display:flex;justify-content:space-between;gap:10px;font-size:13px;margin-bottom:4px;}
+  .cb-vs .ta{color:var(--s1);font-weight:700;} .cb-vs .tb{color:var(--gold-ink);font-weight:700;}
+  .cb-vs .vt{display:flex;height:20px;border-radius:999px;overflow:hidden;border:1px solid var(--border);}
+  .cb-vs .vt .a{background:var(--s1);} .cb-vs .vt .b{background:var(--gold);border-left:2px solid var(--surface-1);}
+  .cb-teams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px;}
+  .cb-team{border:1px solid var(--border);border-radius:10px;overflow:hidden;min-width:0;}
+  .cb-team .th{padding:8px 12px;font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+  .cb-team.ta .th{background:var(--wash);color:var(--s1);} .cb-team.tb .th{background:var(--wash3);color:var(--gold-ink);}
+  .cb-team .cb-twrap{padding:0 4px;}
+  .cb-foot{margin-top:10px;font-size:12px;color:var(--muted);}
+  @media (max-width:620px){
+    .cb-teams{grid-template-columns:minmax(0,1fr);}
+    .cb-tile .v{font-size:18px;}
+    .cb-art{height:52px;} .cb-art svg{height:52px;}
+    .cb-table th,.cb-table td{padding-left:6px;padding-right:6px;}
+  }
+  @media (max-width:560px){ .cb-cards{display:none;} }
+  @media (max-width:400px){ .cb-bd{padding:12px 10px 10px;} .cb-hero{padding:12px;} .cb-tile{padding:8px;} .cb-tile .v{font-size:16px;} .cb-pc{width:13px;height:18px;font-size:9px;} .cb-table td.who{min-width:84px;} .cb-rank{display:none;} .cb-seat{font-size:10.5px;padding:2px 6px;} .cb-table th,.cb-table td{padding-left:5px;padding-right:5px;} }
   /* ---------- competitions ---------- */
   .comps{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;align-items:start;}
   .comp{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface-1);display:flex;flex-direction:column;}
@@ -897,7 +986,7 @@
     <nav class="bar2" id="tabbar" aria-label="Sections">
       <a class="tab" id="tab-board"   href="#scoreboard">Scoreboard</a>
       <a class="tab" id="tab-reports" href="#reports">Reports &amp; Files<span class="n" id="nReports"></span></a>
-      <a class="tab" id="tab-comps"   href="#competitions">Competitions<span class="n" id="nComps"></span></a>
+      <a class="tab hot" id="tab-comps"   href="#competitions"><span class="tro" aria-hidden="true">🏆</span>Competitions<span class="n" id="nComps"></span></a>
       <a class="tab" id="tab-news"    href="#news">News &amp; Events<span class="n" id="nNews"></span></a>
       <a class="toolchip" id="toolQuotePlan" href="files/nb-accelerator-quote-plan.html" target="_blank" rel="noopener">Quote Plan <span class="g" aria-hidden="true">&#8599;</span></a>
     </nav>
@@ -1061,6 +1150,7 @@
       <h2>Competitions &amp; promos</h2>
       <p>What is running now, what it pays, and where the district currently stands.</p>
     </div>
+    <div class="cb-boards" id="contestBoards"></div>
     <div id="competitions"><div class="comps" id="compList"></div></div>
   </section>
 
@@ -1321,7 +1411,7 @@ function renderAll(){
      used to throw and silently leave every section after it blank. */
   let failed=[];
   [['banner',renderBanner],['scoreboard',renderBoard],['news',renderNews],['events',renderEvents],
-   ['competitions',renderComps],['newsletter',renderNewsletter],['reports',renderReports],
+   ['competitions',renderComps],['contests',renderContests],['newsletter',renderNewsletter],['reports',renderReports],
    ['resources',renderResources],['folio',renderFolio],['analytics',initAnalytics]].forEach(([name,fn])=>{
     try{ fn(); }catch(e){ failed.push(name); console.error('District Hub: '+name+' failed to render', e); }
   });
@@ -2443,6 +2533,129 @@ function renderEvents(){
       </div>
     </div>`;
   }).join('') || '<div class="empty">No upcoming events.</div>';
+}
+
+/* ---------- contest boards (block 29) ----------
+   Two live boards for the September competitions, rendered from
+   content.json `contests` so automation publishes update them without a
+   page edit. Absent key -> empty container, no error. Everything shown
+   is computed from the raw counts (pot, payouts, seats, points). */
+const CB_SUITS = [['♠','bk'],['♥','rd'],['♣','bk'],['♦','rd']];
+const CB_ART = {
+  allin: '<svg viewBox="0 0 284 100" aria-hidden="true">'
+    + '<g transform="translate(0 6)"><circle cx="44" cy="44" r="42" style="fill:var(--s1)"/><circle cx="44" cy="44" r="36" fill="none" style="stroke:var(--surface-1)" stroke-width="9" stroke-dasharray="12.6 6.3"/><circle cx="44" cy="44" r="25" style="fill:var(--surface-1)"/><circle cx="44" cy="44" r="23" fill="none" style="stroke:var(--s1)" stroke-width="1.5"/></g>'
+    + '<g transform="translate(60 14)"><circle cx="38" cy="38" r="36" style="fill:var(--s2)"/><circle cx="38" cy="38" r="31" fill="none" style="stroke:var(--surface-1)" stroke-width="8" stroke-dasharray="10.8 5.4"/><circle cx="38" cy="38" r="21.5" style="fill:var(--surface-1)"/><circle cx="38" cy="38" r="19.8" fill="none" style="stroke:var(--s2)" stroke-width="1.4"/></g>'
+    + '<g transform="translate(104 26)"><circle cx="32" cy="32" r="30" style="fill:var(--gold)"/><circle cx="32" cy="32" r="25.8" fill="none" style="stroke:var(--surface-1)" stroke-width="6.6" stroke-dasharray="9 4.5"/><circle cx="32" cy="32" r="18" style="fill:var(--surface-1)"/><circle cx="32" cy="32" r="16.5" fill="none" style="stroke:var(--gold)" stroke-width="1.2"/></g>'
+    + '<g transform="translate(150 8)" font-family="system-ui,sans-serif" font-size="15" font-weight="700">'
+    + '<g transform="rotate(-14 20 60)"><rect x="4" y="14" width="38" height="54" rx="4" style="fill:var(--surface-1);stroke:var(--axis)"/><text x="9" y="31" style="fill:var(--text-primary)">A♠</text></g>'
+    + '<g transform="rotate(-5 48 60)"><rect x="32" y="8" width="38" height="54" rx="4" style="fill:var(--surface-1);stroke:var(--axis)"/><text x="37" y="25" style="fill:var(--s2)">A♥</text></g>'
+    + '<g transform="rotate(5 76 60)"><rect x="60" y="8" width="38" height="54" rx="4" style="fill:var(--surface-1);stroke:var(--axis)"/><text x="65" y="25" style="fill:var(--s2)">A♦</text></g>'
+    + '<g transform="rotate(14 104 60)"><rect x="88" y="14" width="38" height="54" rx="4" style="fill:var(--surface-1);stroke:var(--axis)"/><text x="93" y="31" style="fill:var(--text-primary)">A♣</text></g>'
+    + '</g></svg>',
+  steak: '<svg viewBox="0 0 300 100" aria-hidden="true">'
+    + '<g transform="translate(0 6)"><path d="M14 46 C8 26 26 12 48 14 C72 16 92 26 90 44 C88 62 70 76 46 76 C26 76 20 62 14 46 Z" style="fill:var(--s2)"/><path d="M22 44 C18 30 32 20 48 22 C68 24 82 31 81 43 C80 56 66 68 46 68 C31 68 26 56 22 44 Z" style="fill:var(--surface-1)" fill-opacity=".22"/><path d="M30 38 C40 34 60 34 72 42 M28 50 C40 46 58 47 70 54" style="stroke:var(--surface-1)" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="50" cy="46" r="7" style="fill:var(--surface-1)"/><circle cx="50" cy="46" r="4.4" style="fill:var(--s2)" fill-opacity=".35"/></g>'
+    + '<g transform="translate(100 4)"><path d="M14 38 C14 20 32 10 50 10 C68 10 86 20 86 38 L14 38 Z" style="fill:var(--s1)"/><circle cx="34" cy="24" r="2.4" style="fill:var(--surface-1)"/><circle cx="50" cy="19" r="2.4" style="fill:var(--surface-1)"/><circle cx="66" cy="24" r="2.4" style="fill:var(--surface-1)"/><path d="M12 44 L88 44 L82 52 L74 46 L66 53 L58 46 L50 53 L42 46 L34 53 L26 46 L18 52 Z" style="fill:var(--gold)"/><rect x="14" y="56" width="72" height="10" rx="5" style="fill:var(--s1)"/><path d="M16 70 L84 70 C84 79 76 84 50 84 C24 84 16 79 16 70 Z" style="fill:var(--s1)"/></g>'
+    + '<g transform="translate(200 4)"><path d="M50 2 C54 9 59 12 60 18 C61 22 58 24 57 22 C56 20 55 18 54 19 C56 24 55 29 50 31 C45 29 43 25 44 21 C45 17 47 15 46 12 C44 15 41 17 40 21 C38 15 42 10 45 7 C47 5 49 4 50 2 Z" style="fill:var(--s2)"/><path d="M18 38 L82 38 C82 56 68 66 50 66 C32 66 18 56 18 38 Z" style="fill:var(--ord-2)"/><path d="M26 38 L74 38 M24 46 L76 46 M28 54 L72 54" style="stroke:var(--surface-1)" stroke-width="2.6"/><path d="M36 66 L28 88 M64 66 L72 88 M50 66 L50 88" style="stroke:var(--ord-2)" stroke-width="4" stroke-linecap="round"/></g>'
+    + '</svg>'
+};
+function cbMidnight(s){ const p=String(s||'').split('-'); const d=new Date(+p[0], +p[1]-1, +p[2]); d.setHours(0,0,0,0); return d; }
+function cbMoney(n){ return '$'+Math.round(n).toLocaleString('en-US'); }
+function cbOrd(n){ return n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:Math.min(n%10,4)]||'th'); }
+function cbRange(a,b){
+  const s=cbMidnight(a), e=cbMidnight(b); if(isNaN(s)||isNaN(e)) return '';
+  const M=d=>d.toLocaleDateString('en-US',{month:'short'});
+  return s.getMonth()===e.getMonth() ? M(s)+' '+s.getDate()+'–'+e.getDate() : M(s)+' '+s.getDate()+' – '+M(e)+' '+e.getDate();
+}
+function cbDays(start, ends){
+  const today=new Date(); today.setHours(0,0,0,0);
+  const s=cbMidnight(start), e=cbMidnight(ends);
+  if(isNaN(s)||isNaN(e)) return '';
+  if(today<s){ const n=Math.round((s-today)/864e5); return '<span class="cb-days">'+(n===1?'Starts tomorrow':'Starts in '+n+' days')+'</span>'; }
+  if(today<=e){ const n=Math.round((e-today)/864e5); return '<span class="cb-days">'+(n===0?'Final day':n+' days left')+'</span>'; }
+  return '<span class="cb-days ended">Ended</span>';
+}
+function cbHand(apps){
+  if(!apps) return '<span class="cb-hand"><span class="none">—</span></span>';
+  const shown=Math.min(apps,4); let out='<span class="cb-hand" aria-label="'+apps+' cards earned">';
+  for(let i=0;i<shown;i++){ const s=CB_SUITS[i%4]; out+='<span class="cb-pc '+s[1]+'">'+s[0]+'</span>'; }
+  if(apps>shown) out+='<span class="more">+'+(apps-shown)+'</span>';
+  return out+'</span>';
+}
+function cbAllin(C){
+  const A=C.allin; if(!A||!Array.isArray(A.players)) return '';
+  const players=A.players.slice().sort((a,b)=>(b.apps||0)-(a.apps||0)||String(a.name).localeCompare(String(b.name)));
+  const ante=+A.ante||50, base=+A.potBase||0, boostAmt=+A.potBoost||base, boostAt=+A.boostAt||0;
+  const anteCount=players.filter(p=>p.anted).length;
+  const seated=players.filter(p=>p.anted&&(p.apps||0)>=3).length;
+  const tot=players.reduce((s,p)=>s+(+p.apps||0),0);
+  const boost=boostAt>0&&tot>=boostAt;
+  const pot=anteCount*ante+(boost?boostAmt:base);
+  const today=new Date(); today.setHours(0,0,0,0);
+  const due=A.anteDue?cbMidnight(A.anteDue):null;
+  const pastDue=!due||isNaN(due)||today>due;
+  const dueLbl=due&&!isNaN(due)?'Ante due '+due.toLocaleDateString('en-US',{month:'short',day:'numeric'}):'Ante due';
+  const scale=Math.max(boostAt,tot,1)*1.1;
+  const pct=(A.payoutPct||[40,25,20,10,5]);
+  const st=A.start||C.start, en=A.ends||C.ends, rng=cbRange(st,en);
+  const tile=(l,v,d)=>'<div class="cb-tile"><div class="l">'+l+'</div><div class="v">'+v+'</div><div class="d">'+d+'</div></div>';
+  return '<section class="cb-board" aria-labelledby="cbAllinH">'
+    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbAllinH">“All In” for Life</h3><span class="cb-sub">Texas Hold ‘Em life promo · '+rng+'</span></div>'
+    +'<div class="cb-art">'+CB_ART.allin+'</div>'+cbDays(st,en)+'</div>'
+    +'<div class="cb-bd">'
+    +'<p class="cb-rules">$50 ante + <b>3 written life apps</b> earns your seat. Every app written earns another playing card for the one hand of Hold ‘Em we play at the end — more apps, better odds. Apps count when they show on the Life Performance Tracker, written '+rng+'.</p>'
+    +'<div class="cb-tiles">'+tile('Players anted',anteCount,cbMoney(anteCount*ante)+' in antes')
+      +tile('Seated (3+ apps)',seated,'of '+anteCount+' anted')
+      +tile('District apps',tot,boost?'pot boost unlocked':(boostAt-tot)+' to the pot boost')+'</div>'
+    +'<div class="cb-meter"><div class="ml"><span><b>'+cbMoney(pot)+'</b> current pot</span><span class="cb-num">'+tot+' district apps</span></div>'
+    +'<div class="cb-track" role="img" aria-label="District app progress toward the pot boost"><div class="fill" style="width:'+Math.min(100,tot/scale*100).toFixed(1)+'%"></div><div class="goal" style="left:'+(boostAt/scale*100).toFixed(1)+'%"></div></div>'
+    +'<div class="mf">'+(boost?'District contribution raised to <b>'+cbMoney(boostAmt)+'</b> — '+boostAt+' apps written.':'District office adds '+cbMoney(base)+' now — rises to <b>'+cbMoney(boostAmt)+'</b> at '+boostAt+' district apps.')+'</div></div>'
+    +'<div class="cb-pay" aria-label="Payout split">'+pct.map((p,i)=>'<div class="'+(i===0?'first':'')+'"><div class="pl">'+cbOrd(i+1)+'</div><div class="pv">'+cbMoney(pot*p/100)+'</div><div class="pp cb-num">'+p+'%</div></div>').join('')+'</div>'
+    +'<div class="cb-twrap"><table class="cb-table"><thead><tr><th class="r cb-rank">#</th><th>Agent</th><th class="r">Apps</th><th class="cb-cards">Cards earned</th><th>Seat</th></tr></thead><tbody>'
+    +players.map((p,i)=>{
+        const apps=+p.apps||0; let seat;
+        if(p.anted&&apps>=3) seat='<span class="cb-seat in">Seated</span>';
+        else if(p.anted) seat='<span class="cb-seat close">'+(3-apps)+' more app'+(3-apps===1?'':'s')+'</span>';
+        else seat=pastDue?'<span class="cb-seat out">Not participating</span>':'<span class="cb-seat close">'+esc(dueLbl)+'</span>';
+        return '<tr><td class="r cb-num cb-rank">'+(i+1)+'</td><td class="who"><b>'+esc(p.name)+'</b></td><td class="r cb-num">'+apps+'</td><td class="cb-cards">'+cbHand(apps)+'</td><td>'+seat+'</td></tr>';
+      }).join('')
+    +'</tbody></table></div>'
+    +'</div></section>';
+}
+function cbSteak(C){
+  const S=C.steak; if(!S||!Array.isArray(S.teams)||S.teams.length<2) return '';
+  const T=S.teams.slice(0,2);
+  const pts=a=>(+a.quotes||0)+5*(+a.nb||0);
+  const tot=T.map(t=>(t.agencies||[]).reduce((s,a)=>s+pts(a),0));
+  const sum=tot[0]+tot[1]; const aPct=sum?tot[0]/sum*100:50;
+  const st=S.start||C.start, en=S.ends||C.ends, rng=cbRange(st,en);
+  let lead;
+  if(tot[0]===tot[1]) lead='Dead even at <b>'+tot[0].toLocaleString('en-US')+' points</b> apiece.';
+  else { const w=tot[0]>tot[1]?0:1; lead='<b>'+esc(T[w].name)+'</b> leads by <b>'+Math.abs(tot[0]-tot[1]).toLocaleString('en-US')+' points</b>.'; }
+  return '<section class="cb-board" aria-labelledby="cbSteakH">'
+    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbSteakH">Steak or Burgers</h3><span class="cb-sub">Team quote &amp; NB battle · '+rng+'</span></div>'
+    +'<div class="cb-art">'+CB_ART.steak+'</div>'+cbDays(st,en)+'</div>'
+    +'<div class="cb-bd">'
+    +'<p class="cb-rules">Two teams, points at the agency level: <b>1 quote = 1 point · 1 NB policy = 5 points</b>, counted '+rng+'. The winning team eats Prime steak at the cookout after the October district meeting; the other team gets burgers.</p>'
+    +'<p class="cb-lead">'+lead+'</p>'
+    +'<div class="cb-vs"><div class="vl"><span class="ta">'+esc(T[0].name)+'</span><span class="tb">'+esc(T[1].name)+'</span></div>'
+    +'<div class="vt" role="img" aria-label="Team points split"><div class="a" style="width:'+aPct.toFixed(1)+'%"></div><div class="b" style="width:'+(100-aPct).toFixed(1)+'%"></div></div>'
+    +'<div class="vl" style="margin-top:4px"><span class="ta cb-num">'+tot[0].toLocaleString('en-US')+' pts</span><span class="tb cb-num">'+tot[1].toLocaleString('en-US')+' pts</span></div></div>'
+    +'<div class="cb-teams">'+T.map((t,ti)=>{
+        const rows=(t.agencies||[]).slice().sort((a,b)=>pts(b)-pts(a));
+        const tq=rows.reduce((s,a)=>s+(+a.quotes||0),0), tn=rows.reduce((s,a)=>s+(+a.nb||0),0);
+        return '<div class="cb-team '+(ti===0?'ta':'tb')+'"><div class="th"><span>'+esc(t.name)+'</span><span class="cb-num">'+tot[ti].toLocaleString('en-US')+' pts</span></div>'
+          +'<div class="cb-twrap"><table class="cb-table"><thead><tr><th>Agency</th><th class="r">Quotes</th><th class="r">NB</th><th class="r">Pts</th></tr></thead><tbody>'
+          +rows.map(a=>'<tr><td class="who"><b>'+esc(a.name)+'</b></td><td class="r cb-num">'+(+a.quotes||0)+'</td><td class="r cb-num">'+(+a.nb||0)+'</td><td class="r cb-num"><b>'+pts(a)+'</b></td></tr>').join('')
+          +'</tbody><tfoot><tr><td>Team total</td><td class="r cb-num">'+tq+'</td><td class="r cb-num">'+tn+'</td><td class="r cb-num">'+tot[ti].toLocaleString('en-US')+'</td></tr></tfoot></table></div></div>';
+      }).join('')+'</div>'
+    +'</div></section>';
+}
+function renderContests(){
+  const box=$('contestBoards'); if(!box) return;
+  const C=data().contests;
+  if(!C||typeof C!=='object'){ box.innerHTML=''; return; }
+  const foot=C.updated?'<div class="cb-foot">Standings as of '+fmtDate(C.updated)+' · All-In app counts from the Life Performance Tracker; Steak or Burgers from agency-level quote and NB counts posted by the district office.</div>':'';
+  box.innerHTML = cbAllin(C)+cbSteak(C)+foot;
 }
 
 /* ---------- competitions ---------- */
