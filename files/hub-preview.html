@@ -356,6 +356,11 @@
   .boardnote{margin:14px 22px 0;padding:10px 14px;border-radius:10px;font-size:12.5px;font-weight:500;line-height:1.5;}
   .boardnote.warn{background:var(--wash3);color:var(--text-primary);border:1px solid var(--gold);}
   .boardnote.err{background:var(--wash2);color:var(--text-primary);border:1px solid var(--str-2);}
+  /* block 32: content-driven notice (content.json boardNotice) */
+  .boardnote.info{background:var(--wash);color:var(--text-primary);border:1px solid var(--s1);display:none;flex-wrap:wrap;align-items:center;gap:8px 14px;}
+  .boardnote.info.on{display:flex;}
+  .boardnote.info .bn-t{flex:1 1 260px;min-width:0;}
+  .boardnote.info .bn-act{flex:none;}
 
   .podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;}
   .pod{background:var(--surface-1);padding:14px 16px;display:flex;align-items:center;gap:12px;min-width:0;}
@@ -1057,6 +1062,7 @@
         <h2>Quotes &amp; New Business leaderboard</h2>
       </div>
       <p class="cap">Live from the district quote &amp; sales sheets. Tap any row for that person's day-by-day and week-by-week trend.</p>
+      <div class="boardnote info" id="boardNotice" role="note"></div>
       <div class="filterbar">
         <div class="fgroup">
           <span class="flabel">View</span>
@@ -1969,7 +1975,7 @@ function segWire(id, key, prop){
   grp.setAttribute('role','group');
   const sync=()=>grp.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed', b.classList.contains('on')?'true':'false'));
   grp.querySelectorAll('button').forEach(btn=>{
-    btn.onclick = ()=>{ grp.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); LB[prop]=btn.dataset[key]; sync(); renderBoard(); };
+    btn.onclick = ()=>{ grp.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); LB[prop]=btn.dataset[key]; if(prop==='view') LB.viewTouched=true; sync(); renderBoard(); };
   });
   sync();
 }
@@ -2118,6 +2124,31 @@ function boardState(){
   return {b:'Nothing to show for this view', p:'Try a different District or Period.'};
 }
 function renderBoard(){
+  /* block 32: editorial notice from content.json. Plain text, escaped.
+     Optional one-tap switch to the Agencies view, optional default view
+     (never overrides a View the viewer picked), optional podium
+     suppression in the Producers view while it is active. */
+  const BN = (data()||{}).boardNotice;
+  const bnOn = !!(BN && BN.active && BN.text);
+  if(bnOn && BN.defaultView && !LB.viewTouched){
+    const want = BN.defaultView==='agency' ? 'agency' : 'producer';
+    if(LB.view!==want){
+      LB.view = want;
+      $('segView').querySelectorAll('button').forEach(b=>{ const on=b.dataset.v===want; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on?'true':'false'); });
+    }
+  }
+  const bn=$('boardNotice');
+  if(bn){
+    if(bnOn){
+      const showAct = BN.action==='agencies' && LB.view!=='agency';
+      bn.innerHTML = '<span class="bn-t">'+esc(BN.text)+'</span>'
+        + (showAct ? '<button type="button" class="btn sm primary bn-act" id="bnAgencies">Show agencies</button>' : '');
+      bn.classList.add('on');
+      const b=$('bnAgencies');
+      if(b) b.onclick=()=>{ const t=document.querySelector('#segView button[data-v="agency"]'); if(t) t.click(); };
+    }else{ bn.classList.remove('on'); bn.innerHTML=''; }
+  }
+  const bnHidePodium = bnOn && !!BN.hidePodium && LB.view==='producer';
   if(dataAsOf){
     const parts = ['data through '+dataAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})];
     ['q','n'].forEach(m=>{ const st=metricStale(m);
@@ -2237,6 +2268,7 @@ function renderBoard(){
   const emptyQ = emptyMetric('q'), emptyN = emptyMetric('n');
   const podDead = LB.metric==='q' ? emptyQ : emptyN;
 
+  $('podium').style.display = (bnHidePodium && rows.length) ? 'none' : '';
   if(!rows.length){
     const st=boardState();
     $('podium').innerHTML=`<div class="boardstate" style="grid-column:1/-1;background:var(--surface-1)"><b>${esc(st.b)}</b>${esc(st.p)}</div>`;
