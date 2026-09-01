@@ -2602,7 +2602,7 @@ function cbAllin(C){
     +'<div class="cb-hero"><div class="cb-t"><h3 id="cbAllinH">“All In” for Life</h3><span class="cb-sub">Texas Hold ‘Em life promo · '+rng+'</span></div>'
     +'<div class="cb-art">'+CB_ART.allin+'</div>'+cbDays(st,en)+'</div>'
     +'<div class="cb-bd">'
-    +'<p class="cb-rules">$50 ante + <b>3 written life apps</b> earns your seat. Every app written earns another playing card for the one hand of Hold ‘Em we play at the end — more apps, better odds. Apps count when they show on the Life Performance Tracker, written '+rng+'.</p>'
+    +'<p class="cb-rules">'+(A.rules ? esc(A.rules) : '$50 ante + <b>3 written life apps</b> earns your seat. Every app written earns another playing card for the one hand of Hold ‘Em we play at the end — more apps, better odds. Apps count when they show on the Life Performance Tracker, written '+rng+'. <b>Reminder:</b> ante in and write 3 or more life apps without taking a share of the pot, and your $50 ante comes back to you.')+'</p>'
     +'<div class="cb-tiles">'+tile('Players anted',anteCount,cbMoney(anteCount*ante)+' in antes')
       +tile('Seated (3+ apps)',seated,'of '+anteCount+' anted')
       +tile('District apps',tot,boost?'pot boost unlocked':(boostAt-tot)+' to the pot boost')+'</div>'
@@ -2635,7 +2635,7 @@ function cbSteak(C){
     +'<div class="cb-hero"><div class="cb-t"><h3 id="cbSteakH">Steak or Burgers</h3><span class="cb-sub">Team quote &amp; NB battle · '+rng+'</span></div>'
     +'<div class="cb-art">'+CB_ART.steak+'</div>'+cbDays(st,en)+'</div>'
     +'<div class="cb-bd">'
-    +'<p class="cb-rules">Two teams, points at the agency level: <b>1 quote = 1 point · 1 NB policy = 5 points</b>, counted '+rng+'. The winning team eats Prime steak at the cookout after the October district meeting; the other team gets burgers.</p>'
+    +'<p class="cb-rules">'+(S.rules ? esc(S.rules) : 'Two teams, points at the agency level: <b>1 quote = 1 point · 1 NB policy = 5 points</b>, counted '+rng+'. The winning team eats Prime steak at the cookout after the October district meeting; the other team gets burgers.')+'</p>'
     +'<p class="cb-lead">'+lead+'</p>'
     +'<div class="cb-vs"><div class="vl"><span class="ta">'+esc(T[0].name)+'</span><span class="tb">'+esc(T[1].name)+'</span></div>'
     +'<div class="vt" role="img" aria-label="Team points split"><div class="a" style="width:'+aPct.toFixed(1)+'%"></div><div class="b" style="width:'+(100-aPct).toFixed(1)+'%"></div></div>'
