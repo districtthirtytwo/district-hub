@@ -361,6 +361,24 @@
   .boardnote.info.on{display:flex;}
   .boardnote.info .bn-t{flex:1 1 260px;min-width:0;}
   .boardnote.info .bn-act{flex:none;}
+  /* block 34: custom date range */
+  .rangebar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:12px 22px;border-bottom:1px solid var(--grid);background:var(--surface-2);}
+  .rangebar[hidden]{display:none;}
+  .rangebar label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);}
+  .rangebar input[type="date"]{font:inherit;font-size:13px;font-variant-numeric:tabular-nums;padding:6px 9px;border:1px solid var(--border);border-radius:8px;background:var(--surface-1);color:var(--text-primary);color-scheme:light;}
+  :root[data-theme="dark"] .rangebar input[type="date"]{color-scheme:dark;}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .rangebar input[type="date"]{color-scheme:dark;} }
+  .rangebar .rinfo{font-size:12.5px;color:var(--text-secondary);}
+  @media(max-width:620px){ .rangebar{padding:10px 16px;gap:8px 12px;} .rangebar .rinfo{flex-basis:100%;} }
+  @media(max-width:430px){ #segPeriod button{padding:7px 4px;font-size:11.5px;} .rangebar label{gap:5px;} .rangebar input[type="date"]{font-size:12px;padding:5px 6px;} }
+  /* below ~400px the filterbar's two grid columns have always run past the
+     card edge (their min-content is 346px against a 290px card at 320) and
+     the card clipped them; a click on the Custom button scroll-revealed the
+     cut-off region and shifted the whole filter row. One column restores
+     full visibility where two stop fitting; 400px and up is untouched. The
+     .card prefix is for specificity — the phone grid rule sits later in
+     the sheet and would win a plain-class tie. */
+  @media(max-width:400px){ .card .filterbar{grid-template-columns:minmax(0,1fr);} }
 
   .podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;}
   .pod{background:var(--surface-1);padding:14px 16px;display:flex;align-items:center;gap:12px;min-width:0;}
@@ -1086,6 +1104,7 @@
             <button data-p="weekly">Weekly</button>
             <button data-p="monthly" class="on">MTD</button>
             <button data-p="ytd">YTD</button>
+            <button data-p="custom">Custom</button>
           </div>
         </div>
         <div class="fgroup">
@@ -1103,6 +1122,11 @@
           <span class="flabel">Find</span>
           <input type="search" class="searchbox sm" id="boardSearch" placeholder="Your name…" aria-label="Find a producer or agency">
         </div>
+      </div>
+      <div class="rangebar" id="rangeBar" hidden>
+        <label>From <input type="date" id="rangeFrom" aria-label="Range start date"></label>
+        <label>To <input type="date" id="rangeTo" aria-label="Range end date"></label>
+        <span class="rinfo" id="rangeInfo"></span>
       </div>
       <div class="boardnote" id="boardWarn" style="display:none"></div>
       <div class="card-bd">
@@ -1571,7 +1595,7 @@ const LIVE_CACHE_KEY = 'd32hub_live_v1' + (IS_PREVIEW ? '_preview' : '');
 const LIVE_MAX_AGE_MS = 30*60*1000;   // serve cache instantly, refresh in the background past this
 
 const PERIODS = ['daily','weekly','monthly','ytd'];
-const LB = { view:'producer', dist:'all', period:'monthly', metric:'q', staffOnly:true };
+const LB = { view:'producer', dist:'all', period:'monthly', metric:'q', staffOnly:true, rangeFrom:null, rangeTo:null };
 let PEOPLE = [];              // every producer + agency across both districts
 let dataAsOf = null;          // newest date present in the export
 let dailyAsOf = null;         // last complete business day (what "Daily" means)
@@ -1980,6 +2004,16 @@ function segWire(id, key, prop){
   sync();
 }
 segWire('segView','v','view'); segWire('segDist','d','dist'); segWire('segPeriod','p','period'); segWire('segMetric','m','metric');
+['rangeFrom','rangeTo'].forEach(id=>{
+  $(id).addEventListener('change',()=>{
+    const v=$(id).value;
+    if(v) LB[id==='rangeFrom'?'rangeFrom':'rangeTo']=v;
+    if(LB.rangeFrom && LB.rangeTo && LB.rangeFrom>LB.rangeTo){
+      if(id==='rangeFrom') LB.rangeTo=LB.rangeFrom; else LB.rangeFrom=LB.rangeTo;
+    }
+    renderBoard();
+  });
+});
 
 function inScope(p){
   if(LB.dist!=='all' && normDistrict(p.district)!==LB.dist) return false;
@@ -2041,7 +2075,25 @@ const shortDay = d => d.toLocaleDateString('en-US',{month:'short',day:'numeric'}
 function periodLabel(){
   if(LB.period==='daily') return dailyAsOf ? dailyAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric'}) : 'Daily';
   if(LB.period==='weekly') return 'Last 7 days';
+  if(LB.period==='custom') return rangeLabel();
   return LB.period==='monthly' ? 'MTD' : 'YTD';
+}
+/* block 34 */
+function rangeLabel(){
+  if(!LB.rangeFrom || !LB.rangeTo) return 'Custom range';
+  const f=new Date(LB.rangeFrom+'T00:00:00'), t=new Date(LB.rangeTo+'T00:00:00');
+  const M=d=>d.toLocaleDateString('en-US',{month:'short'});
+  if(LB.rangeFrom===LB.rangeTo) return M(f)+' '+f.getDate();
+  return (f.getMonth()===t.getMonth() && f.getFullYear()===t.getFullYear())
+    ? M(f)+' '+f.getDate()+'\u2013'+t.getDate()
+    : M(f)+' '+f.getDate()+' \u2013 '+M(t)+' '+t.getDate();
+}
+/* One accessor for "this person's number in the selected period", so the
+   hero tiles, split bar, rows, podium and drill roster can never disagree
+   about what the Custom period means. */
+function perVal(p,m){
+  if(LB.period!=='custom') return +p[m][LB.period].actual||0;
+  return (LB.rangeFrom && LB.rangeTo) ? histBetween(p, m, LB.rangeFrom, LB.rangeTo) : 0;
 }
 let boardFilter='';
 function boardRows(){
@@ -2049,7 +2101,7 @@ function boardRows(){
   return PEOPLE.map((p,i)=>({p,i})).filter(x=>inScope(x.p)).map(({p,i})=>({
     idx:i, name:p.name, district:normDistrict(p.district), owner:!!p.owner,
     sub: isProducer(p.role) ? (p.agency||'') : (()=>{ const n=agencyProducers(p).length; return n?n+' producer'+(n===1?'':'s'):''; })(),
-    q:+p.q[LB.period].actual||0, n:+p.n[LB.period].actual||0
+    q:perVal(p,'q'), n:perVal(p,'n')
   })).filter(r=> !q || (r.name+' '+r.sub).toLowerCase().includes(q));
 }
 /* Sums a person's day history between two day keys, inclusive. */
@@ -2157,8 +2209,42 @@ function renderBoard(){
   }else $('lbAsOf').textContent = '';
   $('staffOnlyWrap').style.visibility = LB.view==='producer' ? 'visible' : 'hidden';
   const perLbl = periodLabel();
-  $('thQ').textContent = perLbl.toUpperCase();
-  $('thN').textContent = perLbl.toUpperCase();
+  const thLbl = LB.period==='custom' ? 'RANGE' : perLbl.toUpperCase();
+  $('thQ').textContent = thLbl;
+  $('thN').textContent = thLbl;
+
+  /* block 34: the range bar appears with the Custom period. Bounds come
+     from the data itself — the earliest day any history covers through
+     the reporting cutoff — and the chosen range is clamped inside them,
+     with from<=to enforced. Defaults to the cutoff's month so the first
+     tap shows something recognisable (MTD, but editable). */
+  const rb=$('rangeBar');
+  if(rb){
+    rb.hidden = LB.period!=='custom';
+    if(LB.period==='custom'){
+      const minK = earliestHistKey();
+      const maxK = dataAsOf ? dayKeyOf(midnight(dataAsOf)) : null;
+      if(minK && maxK){
+        if(!LB.rangeFrom || !LB.rangeTo){
+          const mStart = maxK.slice(0,8)+'01';
+          LB.rangeFrom = mStart>minK ? mStart : minK;
+          LB.rangeTo = maxK;
+        }
+        if(LB.rangeFrom<minK) LB.rangeFrom=minK;
+        if(LB.rangeTo>maxK) LB.rangeTo=maxK;
+        if(LB.rangeFrom>LB.rangeTo) LB.rangeFrom=LB.rangeTo;
+        const fi=$('rangeFrom'), ti=$('rangeTo');
+        fi.min=minK; fi.max=maxK; ti.min=minK; ti.max=maxK;
+        if(fi.value!==LB.rangeFrom) fi.value=LB.rangeFrom;
+        if(ti.value!==LB.rangeTo) ti.value=LB.rangeTo;
+        const days=Math.round((new Date(LB.rangeTo+'T00:00:00')-new Date(LB.rangeFrom+'T00:00:00'))/864e5)+1;
+        $('rangeInfo').textContent = days+' day'+(days===1?'':'s')+' \u00b7 sheet data runs '
+          + shortDay(new Date(minK+'T00:00:00'))+' \u2013 '+shortDay(new Date(maxK+'T00:00:00'));
+      }else{
+        $('rangeInfo').textContent = liveLoading ? 'Waiting on the district sheets\u2026' : 'No sheet data loaded \u2014 press \u21bb Refresh';
+      }
+    }
+  }
 
   /* warnings the viewer needs before they trust the numbers */
   /* More than one of these can be true at once, and hiding the second
@@ -2195,7 +2281,7 @@ function renderBoard(){
 
   const agencies = PEOPLE.filter(p=> !isProducer(p.role));
   const everyone = agencies.filter(p=> LB.dist==='all'||normDistrict(p.district)===LB.dist);
-  const tot=(list,k)=>list.reduce((s,p)=>s+(+p[k][LB.period].actual||0),0);
+  const tot=(list,k)=>list.reduce((s,p)=>s+perVal(p,k),0);
   const tq=tot(everyone,'q'), tn=tot(everyone,'n');
   const scopeLbl = LB.dist==='all' ? 'Districts 32 + 49' : 'District '+LB.dist;
 
@@ -2214,9 +2300,24 @@ function renderBoard(){
   /* Stale feed AND nothing in the period means the period has no data,
      not that the districts wrote nothing. Show the same em dash the
      load-failure state uses rather than a 50px zero. */
-  const dash = m => !noData && !(m==='q'?tq:tn) && !!metricStale(m);
+  const rangeGap = m => {
+    if(LB.period!=='custom' || !LB.rangeFrom) return null;
+    const last = metricLastFor(m);
+    if(!last) return null;
+    return dayKeyOf(midnight(last)) < LB.rangeFrom ? {last} : null;
+  };
+  const dash = m => !noData && !(m==='q'?tq:tn) && !!(LB.period==='custom' ? rangeGap(m) : metricStale(m));
 
   function staleNote(m){
+    if(LB.period==='custom'){
+      const g = rangeGap(m);
+      if(g) return `<div class="fignote stale">&#9888; No ${esc(metricPlain(m))} reported after ${esc(shortDay(g.last))}, before this range begins</div>`;
+      const stc = metricStale(m);
+      const lastc = metricLastFor(m);
+      if(stc && lastc && LB.rangeTo && dayKeyOf(midnight(lastc)) < LB.rangeTo)
+        return `<div class="fignote stale">&#9888; ${esc(metricNoun(m))} stop at ${esc(shortDay(lastc))} &mdash; not the full range</div>`;
+      return '';
+    }
     const st = metricStale(m);
     if(!st) return '';
     if(dash(m)) return `<div class="fignote stale">&#9888; No ${esc(metricPlain(m))} reported since ${esc(shortDay(st.last))}</div>`;
@@ -2264,7 +2365,7 @@ function renderBoard(){
 
   /* A stopped feed and not one nonzero row means this column is absent,
      not zero. Rank nobody on it and print the em dash instead of 0. */
-  const emptyMetric = m => !!metricStale(m) && !rows.some(r => r[m]);
+  const emptyMetric = m => (LB.period==='custom' ? !!rangeGap(m) : !!metricStale(m)) && !rows.some(r => r[m]);
   const emptyQ = emptyMetric('q'), emptyN = emptyMetric('n');
   const podDead = LB.metric==='q' ? emptyQ : emptyN;
 
@@ -2277,11 +2378,13 @@ function renderBoard(){
   }else{
     $('boardWrap').style.display='';
     if(podDead){
-      const st = metricStale(LB.metric);
+      const gp = LB.period==='custom' ? rangeGap(LB.metric) : null;
+      const st = gp || metricStale(LB.metric);
       $('podium').innerHTML = `<div class="boardstate" style="grid-column:1/-1;background:var(--surface-1)">`
-        + `<b>Nothing to rank.</b>` + esc(metricNoun(LB.metric)+' stop at '+shortDay(st.last)+', so every '
-        + 'producer in this view sits at zero for '+perLbl+'. Switch Rank by to '
-        + (LB.metric==='q'?'New Biz':'Quotes')+', or widen the period to YTD.')
+        + `<b>Nothing to rank.</b>` + esc(metricNoun(LB.metric)+' stop at '+shortDay(st.last)+', '
+        + (gp ? 'before this range begins, so every row in this view sits at zero. Move the dates on or before '+shortDay(st.last)+', or switch Rank by to '
+              : 'so every producer in this view sits at zero for '+perLbl+'. Switch Rank by to ')
+        + (LB.metric==='q'?'New Biz':'Quotes')+(gp?'.':', or widen the period to YTD.'))
         + `</div>`;
     }else
     $('podium').innerHTML = rows.slice(0,3).map((r,i)=>`
@@ -2507,7 +2610,7 @@ function renderDrillProds(p){
   const kids=agencyProducers(p);
   if(!kids.length){ host.innerHTML=''; return; }
   const perLbl=periodLabel();
-  const rows=kids.map(x=>({i:x.i,p:x.p,q:+x.p.q[LB.period].actual||0,n:+x.p.n[LB.period].actual||0}))
+  const rows=kids.map(x=>({i:x.i,p:x.p,q:perVal(x.p,'q'),n:perVal(x.p,'n')}))
     .sort((a,b)=> LB.metric==='q' ? (b.q-a.q || b.n-a.n) : (b.n-a.n || b.q-a.q));
   host.innerHTML = `<div class="prodlist">
     <div class="pl-hd">PRODUCERS <span>· ${esc(perLbl)} — click one to see their trend</span></div>
