@@ -355,7 +355,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rf2d50781d25a9bbf6f3ahub",
+  "rev": "rf063f02e2d9efa7e5635hub",
   "analytics": {
     "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
   },
@@ -687,5 +687,12 @@
       "start": "2026-09-01",
       "ends": "2026-09-30"
     }
+  },
+  "boardNotice": {
+    "active": true,
+    "text": "Heads up: the district tracker is currently reporting quotes and new business at the agency level only \u2014 producer-level data still isn\u2019t coming through. The district totals above and the Agencies view are complete; the Producers list and podium are missing most of what was written in August.",
+    "action": "agencies",
+    "defaultView": null,
+    "hidePodium": false
   }
 }
