@@ -285,13 +285,13 @@ try{var t=localStorage.getItem('d32hub_theme');if(t==='dark'||t==='light')docume
   <section class="card" aria-labelledby="h-allin">
     <div class="shead">
       <h2 id="h-allin">&ldquo;All In&rdquo; for Life</h2>
-      <span class="period">Texas Hold &lsquo;Em life promo &middot; Sep 1 &ndash; 30</span>
+      <span class="period">Texas Hold &lsquo;Em life promo &middot; Aug 31 &ndash; Sep 30</span>
       <span class="days num" id="allinDays"></span>
     </div>
     <p class="rules">
       $50 ante + <b>3 written life apps</b> earns your seat. Every app written earns another playing
       card for the one hand of Hold &lsquo;Em we play at the end &mdash; more apps, better odds.
-      Apps count when they show on the Life Performance Tracker, written Sep 1&ndash;30.
+      Apps count when they show on the Life Performance Tracker, written Aug 31&ndash;Sep 30.
     </p>
 
     <div class="tiles" id="allinTiles"></div>
@@ -378,9 +378,10 @@ const DATA = {
 
   allin: {
     potBase: 1000, potBoost: 2500, boostAt: 85, ante: 50,
+    start: "2026-08-31",   // All-In opens a day before Steak or Burgers
     anteDue: "2026-09-04",
     payoutPct: [40,25,20,10,5],
-    /* apps = life apps written Sep 1-30 (Life Performance Tracker); anted = ante received */
+    /* apps = life apps written Aug 31 - Sep 30 (Life Performance Tracker); anted = ante received */
     players: [
       {name:"Matt Hodges", apps:0, anted:false},
       {name:"Christopher Gutierrez", apps:0, anted:false},
@@ -467,9 +468,9 @@ const money = n => '$' + n.toLocaleString('en-US');
 const SUITS = [['♠','bk'],['♥','rd'],['♣','bk'],['♦','rd']];
 
 function midnight(d){ const p=d.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
-function daysChip(el){
+function daysChip(el, start){
   const today = new Date(); today.setHours(0,0,0,0);
-  const s = midnight(DATA.start), e = midnight(DATA.ends);
+  const s = midnight(start || DATA.start), e = midnight(DATA.ends);
   if (today < s){
     const n = Math.round((s-today)/864e5);
     el.textContent = n===1 ? 'Starts tomorrow' : 'Starts in '+n+' days';
@@ -650,7 +651,7 @@ if (DATA.sample){
   $('d1').addEventListener('click', ()=>setDemo(1));
   $('d2').addEventListener('click', ()=>setDemo(2));
 }
-daysChip($('allinDays'));
+daysChip($('allinDays'), DATA.allin.start);
 daysChip($('steakDays'));
 renderAllin();
 renderSteak();
