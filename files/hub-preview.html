@@ -198,6 +198,18 @@
   }
   .toolchip:hover{background:var(--on-navy-soft);}
   .toolchip .g{font-weight:400;opacity:.65;}
+  /* ---- block 30: Competitions tab as a red button during the promo ---- */
+  .tab.hot{background:var(--s2);color:#fff;border-radius:9px;padding:8px 14px;margin:6px 3px 6px 5px;border-bottom:0;line-height:1.25;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+  .tab.hot:hover{background:var(--str-2);color:#fff;}
+  .tab.hot[aria-current="page"]{color:#fff;box-shadow:0 0 0 2px #fff inset,0 2px 8px rgba(0,0,0,.25);}
+  .tab.hot .n{background:rgba(255,255,255,.28);color:#fff;}
+  .tab.hot[aria-current="page"] .n{background:rgba(255,255,255,.35);color:#fff;}
+  .tab.hot .tro{margin-right:6px;}
+  /* on a phone the tab row scrolls and the third tab sits past the right
+     edge on the landing view — the button leads the row there instead */
+  @media(max-width:900px){ .tab.hot{order:-2;position:sticky;left:0;z-index:2;margin-left:0;box-shadow:6px 0 0 var(--navy),0 2px 8px rgba(0,0,0,.25);} .bar2{scroll-padding-left:190px;} }
+  @media(max-width:760px){ .tab.hot{padding:7px 11px;} .tab.hot .n{display:none;} .bar2{scroll-padding-left:160px;} }
+  @media(max-width:360px){ .tab.hot .tro{display:none;} }
 
   /* ===================================================================
      VIEWS
@@ -974,7 +986,7 @@
     <nav class="bar2" id="tabbar" aria-label="Sections">
       <a class="tab" id="tab-board"   href="#scoreboard">Scoreboard</a>
       <a class="tab" id="tab-reports" href="#reports">Reports &amp; Files<span class="n" id="nReports"></span></a>
-      <a class="tab" id="tab-comps"   href="#competitions">Competitions<span class="n" id="nComps"></span></a>
+      <a class="tab hot" id="tab-comps"   href="#competitions"><span class="tro" aria-hidden="true">🏆</span>Competitions<span class="n" id="nComps"></span></a>
       <a class="tab" id="tab-news"    href="#news">News &amp; Events<span class="n" id="nNews"></span></a>
       <a class="toolchip" id="toolQuotePlan" href="files/nb-accelerator-quote-plan.html" target="_blank" rel="noopener">Quote Plan <span class="g" aria-hidden="true">&#8599;</span></a>
     </nav>
