@@ -150,6 +150,24 @@
       "location": "",
       "link": "",
       "description": "Final day to reach $45,000 life premium and 20 I&P for the 2026 Annual Life Promo."
+    },
+    {
+      "id": "e4",
+      "date": "2026-09-22",
+      "time": "",
+      "title": "Boot Camp \u2014 Day 1 of 2",
+      "location": "District office",
+      "link": "",
+      "description": "Two-day District 32 Boot Camp at the district office: the P&C Game, the 10 Rules of Selling, the sales process, and product training across Life, Auto and Homeowners."
+    },
+    {
+      "id": "e5",
+      "date": "2026-09-23",
+      "time": "",
+      "title": "Boot Camp \u2014 Day 2 of 2",
+      "location": "District office",
+      "link": "",
+      "description": "Second day of Boot Camp at the district office."
     }
   ],
   "competitions": [
@@ -364,7 +382,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rb3b35dbfd7e71923318ehub",
+  "rev": "rd2fabb92eb9f7362df1bhub",
   "analytics": {
     "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
   },
