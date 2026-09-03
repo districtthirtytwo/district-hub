@@ -1,9 +1,9 @@
 {
   "updated": "2026-09-03",
   "banner": {
-    "active": false,
-    "text": "September competitions are live \u2014 follow the All-In pot and the Team Alan v Team Conrey score on the new dashboard. All-In ante is due Sept 4.",
-    "link": "files/september-contests.html"
+    "active": true,
+    "text": "September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions. All-In commitment and $50 ante are due Friday, Sept 4.",
+    "link": "#competitions"
   },
   "news": [
     {
@@ -364,7 +364,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rfe17e68d70b04e7152cehub",
+  "rev": "rb3b35dbfd7e71923318ehub",
   "analytics": {
     "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
   },
@@ -698,10 +698,10 @@
     }
   },
   "boardNotice": {
-    "active": true,
+    "active": false,
     "text": "Heads up: the district tracker is currently reporting quotes and new business at the agency level only \u2014 producer-level data still isn\u2019t coming through. The district totals above and the Agencies view are complete; the Producers list and podium are missing most of what was written in August.",
     "action": "agencies",
-    "defaultView": "agency",
-    "hidePodium": true
+    "defaultView": null,
+    "hidePodium": false
   }
 }
