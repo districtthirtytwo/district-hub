@@ -2853,7 +2853,7 @@ function cbAllin(C){
   const st=A.start||C.start, en=A.ends||C.ends, rng=cbRange(st,en);
   const tile=(l,v,d)=>'<div class="cb-tile"><div class="l">'+l+'</div><div class="v">'+v+'</div><div class="d">'+d+'</div></div>';
   return '<section class="cb-board" aria-labelledby="cbAllinH">'
-    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbAllinH">“All In” for Life</h3><span class="cb-sub">Texas Hold ‘Em life promo · '+rng+'</span></div>'
+    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbAllinH">“All In” for Life</h3><span class="cb-sub">District 32 · Texas Hold ‘Em life promo · '+rng+'</span></div>'
     +'<div class="cb-art">'+CB_ART.allin+'</div>'+cbDays(st,en)+'</div>'
     +'<div class="cb-bd">'
     +'<p class="cb-rules">'+(A.rules ? esc(A.rules) : '$50 ante + <b>3 written life apps</b> earns your seat. Every app written earns another playing card for the one hand of Hold ‘Em we play at the end — more apps, better odds. Apps count when they show on the Life Performance Tracker, written '+rng+'. <b>Reminder:</b> ante in and write 3 or more life apps without taking a share of the pot, and your $50 ante comes back to you.')+'</p>'
@@ -2886,7 +2886,7 @@ function cbSteak(C){
   if(tot[0]===tot[1]) lead='Dead even at <b>'+tot[0].toLocaleString('en-US')+' points</b> apiece.';
   else { const w=tot[0]>tot[1]?0:1; lead='<b>'+esc(T[w].name)+'</b> leads by <b>'+Math.abs(tot[0]-tot[1]).toLocaleString('en-US')+' points</b>.'; }
   return '<section class="cb-board" aria-labelledby="cbSteakH">'
-    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbSteakH">Steak or Burgers</h3><span class="cb-sub">Team quote &amp; NB battle · '+rng+'</span></div>'
+    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbSteakH">Steak or Burgers</h3><span class="cb-sub">District 32 · Team quote &amp; NB battle · '+rng+'</span></div>'
     +'<div class="cb-art">'+CB_ART.steak+'</div>'+cbDays(st,en)+'</div>'
     +'<div class="cb-bd">'
     +'<p class="cb-rules">'+(S.rules ? esc(S.rules) : 'Two teams, points at the agency level: <b>1 quote = 1 point · 1 NB policy = 5 points</b>, counted '+rng+'. The winning team eats Prime steak at the cookout after the October district meeting; the other team gets burgers.')+'</p>'
