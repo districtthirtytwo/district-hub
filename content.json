@@ -2,7 +2,7 @@
   "updated": "2026-09-03",
   "banner": {
     "active": true,
-    "text": "September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions. All-In commitment and $50 ante are due Friday, Sept 4.",
+    "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions. All-In commitment and $50 ante are due Friday, Sept 4.",
     "link": "#competitions"
   },
   "news": [
@@ -174,23 +174,23 @@
     {
       "id": "c-allin26",
       "active": true,
-      "title": "\u201cAll In\u201d for Life \u2014 Texas Hold \u2018Em Life Promo",
+      "title": "\u201cAll In\u201d for Life \u2014 District 32 Texas Hold \u2018Em Life Promo",
       "period": "Aug 31 \u2013 Sep 30, 2026",
       "ends": "2026-09-30",
       "prize": "Cash pot \u2014 top five hands paid",
       "metricLabel": "Life apps written \u00b7 Aug 31\u2013Sep 30",
-      "description": "A $50 ante and 3 written life apps earns your seat at the table, and every life app written earns an additional playing card \u2014 the more apps you write, the better your odds of a great poker hand. We play one hand of Texas Hold \u2018Em: best hand takes 40% of the pot, then 25%, 20%, 10% and 5% for second through fifth. Antes go straight into the pot and the district office adds $1,000, rising to $2,500 once the district writes 85 total apps. Write your 3 apps and take none of the pot and your $50 ante is refunded. Apps must show on the Life Performance Tracker and be written August 31 \u2013 September 30 to count. Commitment and ante are due by September 4 \u2014 checks payable to Brandon Parks at the district office, 213A Old Hewitt Road, Waco, TX 76712. Disputes are settled at the District Manager\u2019s discretion. Live seats, the pot, and everyone\u2019s cards are on the September Competitions dashboard \u2014 open it from Resources.",
+      "description": "A District 32 promo. A $50 ante and 3 written life apps earns your seat at the table, and every life app written earns an additional playing card \u2014 the more apps you write, the better your odds of a great poker hand. We play one hand of Texas Hold \u2018Em: best hand takes 40% of the pot, then 25%, 20%, 10% and 5% for second through fifth. Antes go straight into the pot and the district office adds $1,000, rising to $2,500 once the district writes 85 total apps. Write your 3 apps and take none of the pot and your $50 ante is refunded. Apps must show on the Life Performance Tracker and be written August 31 \u2013 September 30 to count. Commitment and ante are due by September 4 \u2014 checks payable to Brandon Parks at the district office, 213A Old Hewitt Road, Waco, TX 76712. Disputes are settled at the District Manager\u2019s discretion. Live seats, the pot, and everyone\u2019s cards are on the September Competitions dashboard \u2014 open it from Resources.",
       "standings": []
     },
     {
       "id": "c-steakburgers",
       "active": true,
-      "title": "Steak or Burgers \u2014 Team Quote & NB Battle",
+      "title": "Steak or Burgers \u2014 District 32 Team Quote & NB Battle",
       "period": "Sep 1 \u2013 Sep 30, 2026",
       "ends": "2026-09-30",
       "prize": "Prime steak for the winning team; burgers for the rest",
       "metricLabel": "Team points \u00b7 quote = 1 \u00b7 NB policy = 5",
-      "description": "Every agency is on one of two teams for September, and scoring is by points at the agency level: each quote is worth 1 point and each new business policy is worth 5, counted for September 1\u201330. The team with the most points eats Prime steak; the other team gets burgers. The teams are set: Team Alan (14 agencies) takes on Team Conrey (15), drawn to be as evenly matched as possible on summer production. Full rosters and live team scores are on the September Competitions dashboard \u2014 open it from Resources or the news post below. The cookout happens after the October district meeting.",
+      "description": "Every District 32 agency is on one of two teams for September, and scoring is by points at the agency level: each quote is worth 1 point and each new business policy is worth 5, counted for September 1\u201330. The team with the most points eats Prime steak; the other team gets burgers. The teams are set: Team Alan (14 agencies) takes on Team Conrey (15), drawn to be as evenly matched as possible on summer production. Full rosters and live team scores are on the September Competitions dashboard \u2014 open it from Resources or the news post below. The cookout happens after the October district meeting.",
       "standings": []
     },
     {
@@ -382,7 +382,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rd2fabb92eb9f7362df1bhub",
+  "rev": "r7d64fa89023dee75a2edhub",
   "analytics": {
     "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
   },
