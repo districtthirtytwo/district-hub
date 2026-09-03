@@ -382,12 +382,12 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r6762dbd218a6a5810bf3hub",
+  "rev": "rec89311576cb2b275ca7hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
   "contests": {
-    "updated": "2026-09-02",
+    "updated": "2026-09-03",
     "start": "2026-09-01",
     "ends": "2026-09-30",
     "allin": {
@@ -566,17 +566,17 @@
             {
               "name": "Christopher Gutierrez",
               "quotes": 0,
-              "nb": 0
+              "nb": 1
             },
             {
               "name": "Maricela Herrera",
               "quotes": 0,
-              "nb": 0
+              "nb": 1
             },
             {
               "name": "Ravi R Sriram",
               "quotes": 0,
-              "nb": 0
+              "nb": 1
             },
             {
               "name": "J Fred Youmans",
@@ -611,12 +611,12 @@
             {
               "name": "Caleb Alexander Milne",
               "quotes": 0,
-              "nb": 0
+              "nb": 6
             },
             {
               "name": "William Kenneth Knight",
               "quotes": 0,
-              "nb": 0
+              "nb": 1
             },
             {
               "name": "Jimmy Ward",
@@ -626,7 +626,7 @@
             {
               "name": "Darren Hayes",
               "quotes": 0,
-              "nb": 0
+              "nb": 1
             }
           ]
         },
@@ -641,7 +641,7 @@
             {
               "name": "Jeffrey P Pechacek",
               "quotes": 0,
-              "nb": 0
+              "nb": 1
             },
             {
               "name": "Jason Kirk",
@@ -651,27 +651,27 @@
             {
               "name": "David L Dickerson",
               "quotes": 0,
-              "nb": 0
+              "nb": 2
             },
             {
               "name": "Luke William Franks",
               "quotes": 0,
-              "nb": 0
+              "nb": 2
             },
             {
               "name": "Steven Tindell",
               "quotes": 0,
-              "nb": 0
+              "nb": 2
             },
             {
               "name": "Christian Daiel Crosby Ford",
               "quotes": 0,
-              "nb": 0
+              "nb": 1
             },
             {
               "name": "Dennis Polian",
               "quotes": 0,
-              "nb": 0
+              "nb": 1
             },
             {
               "name": "Dennis Keith Bruington",
@@ -681,12 +681,12 @@
             {
               "name": "Eva Marie Greenup",
               "quotes": 0,
-              "nb": 0
+              "nb": 1
             },
             {
               "name": "Lonnie Eugene Pittman",
               "quotes": 0,
-              "nb": 0
+              "nb": 2
             },
             {
               "name": "Travis Ryne Veselka",
@@ -701,7 +701,7 @@
             {
               "name": "Krystal Lee Hawk",
               "quotes": 0,
-              "nb": 0
+              "nb": 1
             },
             {
               "name": "Stephanie Burns",
