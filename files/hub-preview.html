@@ -465,6 +465,56 @@
   .card.navy .livepill.err{color:var(--on-navy-red);}
   .card.navy .livepill.busy{color:var(--on-navy-soft);opacity:.7;}
 
+  /* block 36: the leaderboard card on navy. White-alpha surfaces and the
+     on-navy text family; theme-independent by construction. */
+  #scoreboard.navy .cap{color:var(--on-navy-soft);}
+  #scoreboard.navy .filterbar{background:var(--navy-2);border-top-color:rgba(255,255,255,.14);border-bottom-color:rgba(255,255,255,.14);}
+  #scoreboard.navy .flabel{color:var(--on-navy-soft);opacity:.85;}
+  #scoreboard.navy .seg{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.26);}
+  #scoreboard.navy .seg button{color:var(--on-navy-soft);}
+  #scoreboard.navy .seg button:hover{background:rgba(255,255,255,.12);}
+  #scoreboard.navy .seg button.on{background:#fff;color:var(--navy);}
+  #scoreboard.navy #segMetric button.on{background:#fff;color:var(--navy);}
+  #scoreboard.navy #segMetric button[data-m="n"].on{background:var(--on-navy-red);color:var(--navy);}
+  #scoreboard.navy .switch{color:var(--on-navy-soft);}
+  #scoreboard.navy .switch input{accent-color:var(--on-navy-blue);}
+  #scoreboard.navy .searchbox{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.26);color:var(--on-navy);}
+  #scoreboard.navy .searchbox::placeholder{color:var(--on-navy-soft);opacity:.75;}
+  #scoreboard.navy .searchbox:focus{border-color:var(--on-navy-blue);box-shadow:0 0 0 3px rgba(137,183,255,.28);}
+  #scoreboard.navy .rangebar{background:var(--navy-2);border-bottom-color:rgba(255,255,255,.14);}
+  #scoreboard.navy .rangebar label{color:var(--on-navy-soft);}
+  #scoreboard.navy .rangebar .rinfo{color:var(--on-navy-soft);}
+  #scoreboard.navy .rangebar input[type="date"]{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.26);color:var(--on-navy);color-scheme:dark;}
+  #scoreboard.navy .btn.primary{background:#fff;color:var(--navy);border-color:#fff;}
+  #scoreboard.navy .btn.primary:hover{background:var(--on-navy-soft);}
+  #scoreboard.navy .podium{background:rgba(255,255,255,.16);border-color:transparent;}
+  #scoreboard.navy .pod{background:var(--navy-2);color:var(--on-navy);}
+  #scoreboard.navy .pod.click:hover{background:var(--navy-3);}
+  #scoreboard.navy .pod .medal{color:var(--navy);}
+  #scoreboard.navy .pod .who span,#scoreboard.navy .pod .val span{color:var(--on-navy-soft);}
+  #scoreboard.navy .boardstate{background:var(--navy-2)!important;color:var(--on-navy-soft);}
+  #scoreboard.navy .boardstate b{color:var(--on-navy);}
+  #scoreboard.navy .boardwrap{border-color:rgba(255,255,255,.18);}
+  #scoreboard.navy table.board th{background:var(--navy);color:var(--on-navy-soft);border-bottom-color:rgba(255,255,255,.28);}
+  #scoreboard.navy .thper{color:var(--on-navy-soft);opacity:.8;}
+  #scoreboard.navy table.board td{border-bottom-color:rgba(255,255,255,.1);color:var(--on-navy);}
+  #scoreboard.navy table.board tbody tr:nth-child(even) td{background:rgba(255,255,255,.06);}
+  #scoreboard.navy table.board tr.click:hover td{background:rgba(255,255,255,.12);}
+  #scoreboard.navy .rank{color:var(--on-navy-soft);}
+  /* district tag: white text for contrast on the tinted rows, the district
+     colour carried by a ring (inset shadow, so no layout change) */
+  #scoreboard.navy .avatar{background:rgba(255,255,255,.08);color:var(--on-navy);box-shadow:inset 0 0 0 1.5px var(--on-navy-blue);}
+  #scoreboard.navy .avatar.d49{background:rgba(255,255,255,.08);color:var(--on-navy);box-shadow:inset 0 0 0 1.5px var(--on-navy-red);}
+  #scoreboard.navy .pname .nm b{color:var(--on-navy);}
+  #scoreboard.navy .pname .nm span{color:var(--on-navy-soft);}
+  #scoreboard.navy .metric{color:var(--on-navy);}
+  #scoreboard.navy .rowchev{color:rgba(255,255,255,.45);}
+  #scoreboard.navy tr.click:hover .rowchev{color:var(--on-navy-blue);}
+  #scoreboard.navy .ownflag{background:rgba(255,255,255,.16);color:#ffd98a;}
+  #scoreboard.navy .hint{color:var(--on-navy-soft);opacity:.9;}
+  #scoreboard.navy .hint code{background:rgba(255,255,255,.14);color:var(--on-navy);}
+  #scoreboard.navy .empty{color:var(--on-navy-soft);}
+
   /* ===================================================================
      TWO-COLUMN CONTENT (news + events, newsletter + resources)
      =================================================================== */
@@ -918,7 +968,8 @@
     table.board .pname .nm .sub2 .dchip{margin-right:6px;vertical-align:1px;}
     /* the flag, the text and the link each get their own line rather than
        the link floating beside a six-line paragraph */
-    .strip,.strip.on{display:block;padding:12px 15px;}
+    .strip{padding:12px 15px;}
+    .strip.on{display:block;}
     .strip .flag{display:inline-block;margin-bottom:8px;}
     .strip a{display:inline-block;margin-left:0;margin-top:8px;}
     .cols2{grid-template-columns:1fr;gap:14px;}
@@ -1075,7 +1126,7 @@
       <div class="mvrow" id="moversRow"></div>
     </div>
 
-    <div class="card flush" id="scoreboard">
+    <div class="card flush navy" id="scoreboard">
       <div class="card-hd">
         <h2>Quotes &amp; New Business leaderboard</h2>
       </div>
