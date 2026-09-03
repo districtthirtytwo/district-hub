@@ -1,11 +1,20 @@
 {
-  "updated": "2026-09-02",
+  "updated": "2026-09-03",
   "banner": {
     "active": false,
     "text": "September competitions are live \u2014 follow the All-In pot and the Team Alan v Team Conrey score on the new dashboard. All-In ante is due Sept 4.",
     "link": "files/september-contests.html"
   },
   "news": [
+    {
+      "id": "n14",
+      "date": "2026-09-03",
+      "tag": "update",
+      "pinned": false,
+      "title": "Quote & Sales Tracker and Producer Report are posted",
+      "body": "The 2026 Quote & Sales Tracker through August 21 and the 2026 Producer Report as of August 28 are in Reports. Caleb Milne leads YTD NBNH at 396, with Steven Tindell at 376 and David Dickerson at 349. On the Producer Report, Walt Beayrd (Tindell) leads POY year-to-date at $258,242, and Alvaro Gutierrez (Milne) leads the Q3 quarter at $89,754.",
+      "link": "#reports"
+    },
     {
       "id": "n13",
       "date": "2026-08-31",
@@ -264,28 +273,28 @@
   ],
   "reports": [
     {
+      "id": "r-qst-0821",
+      "title": "2026 Quote & Sales Tracker",
+      "date": "2026-08-21",
+      "category": "Trackers",
+      "file": "files/quote-sales-tracker-2026-08-21.pdf",
+      "note": "Thru Aug 21 \u2014 quotes per day, YTD quotes, NBNH and business mix by agent"
+    },
+    {
+      "id": "r-prod-0828",
+      "title": "2026 Producer Report",
+      "date": "2026-08-28",
+      "category": "Production",
+      "file": "files/producer-report-2026-08-28.pdf",
+      "note": "As of 8/28/26 \u2014 PL NB premium by producer: Aug, Sept and Oct folios, Q1\u2013Q3 and POY year-to-date"
+    },
+    {
       "id": "r-life-0830",
       "title": "YTD Life Results",
       "date": "2026-08-30",
       "category": "Life",
       "file": "files/ytd-life-results-2026-08-30.pdf",
       "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 233 I&P / $263,701"
-    },
-    {
-      "id": "r-qst-0814",
-      "title": "2026 Quote & Sales Tracker",
-      "date": "2026-08-14",
-      "category": "Trackers",
-      "file": "files/quote-sales-tracker-2026-08-14.pdf",
-      "note": "Thru Aug 14 \u2014 quotes per day, YTD quotes, NBNH and business mix by agent"
-    },
-    {
-      "id": "r-prod-0807",
-      "title": "2026 Producer Report",
-      "date": "2026-08-07",
-      "category": "Production",
-      "file": "files/producer-report-2026-08-07.pdf",
-      "note": "PL NB premium by producer \u2014 Q1/Q2/Q3 and POY year-to-date"
     },
     {
       "id": "r-matrix-jul26",
@@ -355,7 +364,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r8944fcfc004f14825e4bhub",
+  "rev": "rfe17e68d70b04e7152cehub",
   "analytics": {
     "cfBeacon": "aaf7d40794754eb1a5c6918535c2d26c"
   },
