@@ -520,6 +520,25 @@
      =================================================================== */
   .cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;align-items:start;}
   .cols2 .card{margin-bottom:0;}
+  /* block 37: the Scoreboard right rail. One column until 1100px, where a
+     340px rail sits beside the hero + leaderboard. */
+  .boardgrid{display:grid;grid-template-columns:minmax(0,1fr);align-items:start;}
+  .boardmain,.boardrail{min-width:0;}
+  .boardrail .card{margin-bottom:18px;}
+  .boardrail .card-hd{padding:15px 18px 0;}
+  .boardrail .card-hd .all{margin-left:auto;font-size:12.5px;font-weight:640;color:var(--s1);text-decoration:none;white-space:nowrap;}
+  .boardrail .card-hd .all:hover{text-decoration:underline;}
+  .boardrail .card-bd{padding:4px 18px 12px;}
+  .boardrail .newsitem{padding:11px 0;}
+  .boardrail .newsitem h3{font-size:13.5px;}
+  .boardrail .newsitem p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:12.5px;}
+  .boardrail .eventrow{padding:11px 0;gap:11px;}
+  .boardrail .eventrow .info b{font-size:13.5px;}
+  .boardrail .eventrow .info p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .boardrail .datebadge{width:44px;}
+  @media(min-width:1100px){
+    .boardgrid{grid-template-columns:minmax(0,1fr) 340px;gap:18px;}
+  }
   /* News runs far longer than the events list beside it; let the events
      card follow the reader instead of stranding it at the top. */
   @media(min-width:761px){
@@ -1094,6 +1113,8 @@
        VIEW 1 — SCOREBOARD (default)
        ================================================================= -->
   <section class="view on" id="view-board" tabindex="-1">
+   <div class="boardgrid">
+   <div class="boardmain">
 
     <div class="card navy">
       <div class="card-hd">
@@ -1191,6 +1212,18 @@
         <p class="hint" id="lbNote"></p>
       </div>
     </div>
+   </div>
+   <aside class="boardrail" id="boardRail" aria-label="Announcements and upcoming events">
+    <div class="card" id="railNewsCard">
+      <div class="card-hd"><h2>Announcements</h2><a class="all" href="#news">All news &rarr;</a></div>
+      <div class="card-bd" id="railNews"></div>
+    </div>
+    <div class="card" id="railEventsCard">
+      <div class="card-hd"><h2>Upcoming events</h2><a class="all" href="#events">All events &rarr;</a></div>
+      <div class="card-bd" id="railEvents"></div>
+    </div>
+   </aside>
+   </div>
   </section>
 
   <!-- =================================================================
@@ -1491,7 +1524,7 @@ function renderAll(){
   /* Each section is isolated: a single malformed entry in content.json
      used to throw and silently leave every section after it blank. */
   let failed=[];
-  [['banner',renderBanner],['scoreboard',renderBoard],['news',renderNews],['events',renderEvents],
+  [['banner',renderBanner],['scoreboard',renderBoard],['news',renderNews],['events',renderEvents],['rail',renderRail],
    ['competitions',renderComps],['contests',renderContests],['newsletter',renderNewsletter],['reports',renderReports],
    ['resources',renderResources],['folio',renderFolio],['analytics',initAnalytics]].forEach(([name,fn])=>{
     try{ fn(); }catch(e){ failed.push(name); console.error('District Hub: '+name+' failed to render', e); }
@@ -2717,6 +2750,41 @@ function renderEvents(){
         ${e.description?`<p>${esc(e.description)}</p>`:''}
         ${safeUrl(e.link)?`<p><a class="filelink" style="padding:3px 9px;display:inline-block;margin-top:5px" href="${esc(safeUrl(e.link))}" target="_blank" rel="noopener">Join / details</a></p>`:''}
       </div>
+    </div>`;
+  }).join('') || '<div class="empty">No upcoming events.</div>';
+}
+
+/* ---------- Scoreboard right rail (block 37) ----------
+   The three latest announcements (pinned first) and the next four events,
+   from the same content the News & Events view renders. */
+function renderRail(){
+  const nl=$('railNews'), el=$('railEvents');
+  if(!nl||!el) return;
+  const rank = v => v ? 1 : 0;
+  const news = (data().news||[]).slice()
+    .sort((a,b)=> (rank(b.pinned)-rank(a.pinned)) || String(b.date||'').localeCompare(String(a.date||''))).slice(0,3);
+  nl.innerHTML = news.map(n=>{
+    const href = safeUrl(n.link);
+    const ext = href && !href.startsWith('#');
+    const tag = /^(news|promo|recognition|update)$/.test(n.tag||'') ? n.tag : 'news';
+    const title = href ? `<a href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''}>${esc(n.title)}</a>` : esc(n.title);
+    return `<div class="newsitem">
+      <div class="meta"><span class="tag ${tag}">${tag}</span><time>${fmtDate(n.date)}</time>${n.pinned?'<span class="pin">Pinned</span>':''}</div>
+      <h3>${title}</h3>
+      <p>${esc(n.body||'')}</p>
+    </div>`;
+  }).join('') || '<div class="empty">Nothing posted yet.</div>';
+  const today = new Date(); today.setHours(0,0,0,0);
+  const ev = (data().events||[]).filter(e=>{ const d=new Date(e.date+"T23:59:59"); return !isNaN(d) && d>=today; })
+    .sort((a,b)=> String(a.date||'').localeCompare(String(b.date||''))).slice(0,4);
+  el.innerHTML = ev.map(e=>{
+    const d = new Date(e.date+"T12:00:00");
+    const mo = isNaN(d)?'':d.toLocaleDateString('en-US',{month:'short'});
+    const dy = isNaN(d)?'':d.getDate();
+    const where = [e.time,e.location].filter(Boolean).join(' \u00b7 ');
+    return `<div class="eventrow">
+      <div class="datebadge"><span class="m">${mo}</span><span class="d">${dy}</span></div>
+      <div class="info"><b>${esc(e.title)}</b>${where?`<span class="where">${esc(where)}</span>`:''}${e.description?`<p>${esc(e.description)}</p>`:''}</div>
     </div>`;
   }).join('') || '<div class="empty">No upcoming events.</div>';
 }
