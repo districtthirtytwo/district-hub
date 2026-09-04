@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-03",
+  "updated": "2026-09-04",
   "banner": {
     "active": true,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions. All-In commitment and $50 ante are due Friday, Sept 4.",
@@ -382,12 +382,12 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rec89311576cb2b275ca7hub",
+  "rev": "r8adc66296a2ca0d3c2f6hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
   "contests": {
-    "updated": "2026-09-03",
+    "updated": "2026-09-04",
     "start": "2026-09-01",
     "ends": "2026-09-30",
     "allin": {
@@ -560,17 +560,17 @@
           "agencies": [
             {
               "name": "Matt Hodges",
-              "quotes": 0,
+              "quotes": 7,
               "nb": 0
             },
             {
               "name": "Christopher Gutierrez",
-              "quotes": 0,
-              "nb": 1
+              "quotes": 12,
+              "nb": 2
             },
             {
               "name": "Maricela Herrera",
-              "quotes": 0,
+              "quotes": 2,
               "nb": 1
             },
             {
@@ -580,17 +580,17 @@
             },
             {
               "name": "J Fred Youmans",
-              "quotes": 0,
+              "quotes": 8,
               "nb": 0
             },
             {
               "name": "Jeff Holder",
-              "quotes": 0,
+              "quotes": 1,
               "nb": 0
             },
             {
               "name": "Leslie Ann Walker",
-              "quotes": 0,
+              "quotes": 2,
               "nb": 0
             },
             {
@@ -600,32 +600,32 @@
             },
             {
               "name": "Derrick Herbert Bayer",
-              "quotes": 0,
-              "nb": 0
+              "quotes": 18,
+              "nb": 1
             },
             {
               "name": "David Scott Gloff",
               "quotes": 0,
-              "nb": 0
+              "nb": 2
             },
             {
               "name": "Caleb Alexander Milne",
-              "quotes": 0,
-              "nb": 6
+              "quotes": 26,
+              "nb": 8
             },
             {
               "name": "William Kenneth Knight",
-              "quotes": 0,
-              "nb": 1
+              "quotes": 7,
+              "nb": 3
             },
             {
               "name": "Jimmy Ward",
-              "quotes": 0,
-              "nb": 0
+              "quotes": 3,
+              "nb": 1
             },
             {
               "name": "Darren Hayes",
-              "quotes": 0,
+              "quotes": 7,
               "nb": 1
             }
           ]
@@ -635,77 +635,77 @@
           "agencies": [
             {
               "name": "Vernon Sweeney",
-              "quotes": 0,
+              "quotes": 3,
               "nb": 0
             },
             {
               "name": "Jeffrey P Pechacek",
-              "quotes": 0,
+              "quotes": 2,
               "nb": 1
             },
             {
               "name": "Jason Kirk",
-              "quotes": 0,
+              "quotes": 3,
               "nb": 0
             },
             {
               "name": "David L Dickerson",
-              "quotes": 0,
-              "nb": 2
+              "quotes": 15,
+              "nb": 5
             },
             {
               "name": "Luke William Franks",
-              "quotes": 0,
+              "quotes": 2,
               "nb": 2
             },
             {
               "name": "Steven Tindell",
-              "quotes": 0,
+              "quotes": 2,
               "nb": 2
             },
             {
               "name": "Christian Daiel Crosby Ford",
-              "quotes": 0,
+              "quotes": 4,
               "nb": 1
             },
             {
               "name": "Dennis Polian",
-              "quotes": 0,
+              "quotes": 4,
               "nb": 1
             },
             {
               "name": "Dennis Keith Bruington",
-              "quotes": 0,
+              "quotes": 2,
               "nb": 0
             },
             {
               "name": "Eva Marie Greenup",
-              "quotes": 0,
+              "quotes": 2,
               "nb": 1
             },
             {
               "name": "Lonnie Eugene Pittman",
-              "quotes": 0,
-              "nb": 2
+              "quotes": 11,
+              "nb": 4
             },
             {
               "name": "Travis Ryne Veselka",
-              "quotes": 0,
-              "nb": 0
+              "quotes": 7,
+              "nb": 1
             },
             {
               "name": "Aaron Michael Vicknair",
-              "quotes": 0,
+              "quotes": 19,
               "nb": 0
             },
             {
               "name": "Krystal Lee Hawk",
-              "quotes": 0,
-              "nb": 1
+              "quotes": 6,
+              "nb": 3
             },
             {
               "name": "Stephanie Burns",
-              "quotes": 0,
+              "quotes": 5,
               "nb": 0
             }
           ]
