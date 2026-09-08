@@ -382,7 +382,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r15ab841812929f8bd677hub",
+  "rev": "r75569ffa62558e598261hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
@@ -502,7 +502,7 @@
         {
           "name": "Steven Tindell",
           "apps": 1,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Christian Daiel Crosby Ford",
