@@ -382,7 +382,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r51246e7eaf0de660ae8fhub",
+  "rev": "r43652c376e049116830ahub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
@@ -560,73 +560,73 @@
           "agencies": [
             {
               "name": "Matt Hodges",
-              "quotes": 7,
-              "nb": 0
+              "quotes": 34,
+              "nb": 1
             },
             {
               "name": "Christopher Gutierrez",
-              "quotes": 12,
+              "quotes": 24,
               "nb": 2
             },
             {
               "name": "Maricela Herrera",
-              "quotes": 2,
-              "nb": 1
+              "quotes": 6,
+              "nb": 2
             },
             {
               "name": "Ravi R Sriram",
-              "quotes": 0,
+              "quotes": 1,
               "nb": 1
             },
             {
               "name": "J Fred Youmans",
-              "quotes": 8,
+              "quotes": 17,
               "nb": 0
             },
             {
               "name": "Jeff Holder",
-              "quotes": 1,
+              "quotes": 8,
               "nb": 0
             },
             {
               "name": "Leslie Ann Walker",
-              "quotes": 2,
+              "quotes": 16,
               "nb": 0
             },
             {
               "name": "Glenn N Cannon",
-              "quotes": 0,
+              "quotes": 4,
               "nb": 0
             },
             {
               "name": "Derrick Herbert Bayer",
-              "quotes": 18,
-              "nb": 1
-            },
-            {
-              "name": "David Scott Gloff",
-              "quotes": 0,
-              "nb": 2
-            },
-            {
-              "name": "Caleb Alexander Milne",
-              "quotes": 26,
-              "nb": 8
-            },
-            {
-              "name": "William Kenneth Knight",
-              "quotes": 7,
+              "quotes": 46,
               "nb": 3
             },
             {
-              "name": "Jimmy Ward",
+              "name": "David Scott Gloff",
               "quotes": 3,
-              "nb": 1
+              "nb": 4
+            },
+            {
+              "name": "Caleb Alexander Milne",
+              "quotes": 73,
+              "nb": 14
+            },
+            {
+              "name": "William Kenneth Knight",
+              "quotes": 44,
+              "nb": 4
+            },
+            {
+              "name": "Jimmy Ward",
+              "quotes": 13,
+              "nb": 5
             },
             {
               "name": "Darren Hayes",
-              "quotes": 7,
-              "nb": 1
+              "quotes": 28,
+              "nb": 3
             }
           ]
         },
@@ -640,72 +640,72 @@
             },
             {
               "name": "Jeffrey P Pechacek",
-              "quotes": 2,
-              "nb": 1
+              "quotes": 11,
+              "nb": 2
             },
             {
               "name": "Jason Kirk",
-              "quotes": 3,
+              "quotes": 5,
               "nb": 0
             },
             {
               "name": "David L Dickerson",
-              "quotes": 15,
-              "nb": 5
+              "quotes": 42,
+              "nb": 6
             },
             {
               "name": "Luke William Franks",
-              "quotes": 2,
+              "quotes": 3,
               "nb": 2
             },
             {
               "name": "Steven Tindell",
-              "quotes": 2,
-              "nb": 2
+              "quotes": 16,
+              "nb": 3
             },
             {
               "name": "Christian Daiel Crosby Ford",
-              "quotes": 4,
-              "nb": 1
+              "quotes": 10,
+              "nb": 2
             },
             {
               "name": "Dennis Polian",
-              "quotes": 4,
-              "nb": 1
-            },
-            {
-              "name": "Dennis Keith Bruington",
-              "quotes": 2,
-              "nb": 0
-            },
-            {
-              "name": "Eva Marie Greenup",
-              "quotes": 2,
-              "nb": 1
-            },
-            {
-              "name": "Lonnie Eugene Pittman",
-              "quotes": 11,
-              "nb": 4
-            },
-            {
-              "name": "Travis Ryne Veselka",
               "quotes": 7,
               "nb": 1
             },
             {
+              "name": "Dennis Keith Bruington",
+              "quotes": 5,
+              "nb": 1
+            },
+            {
+              "name": "Eva Marie Greenup",
+              "quotes": 5,
+              "nb": 2
+            },
+            {
+              "name": "Lonnie Eugene Pittman",
+              "quotes": 39,
+              "nb": 8
+            },
+            {
+              "name": "Travis Ryne Veselka",
+              "quotes": 32,
+              "nb": 3
+            },
+            {
               "name": "Aaron Michael Vicknair",
-              "quotes": 19,
-              "nb": 0
+              "quotes": 65,
+              "nb": 10
             },
             {
               "name": "Krystal Lee Hawk",
-              "quotes": 6,
+              "quotes": 10,
               "nb": 3
             },
             {
               "name": "Stephanie Burns",
-              "quotes": 5,
+              "quotes": 22,
               "nb": 0
             }
           ]
