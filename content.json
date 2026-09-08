@@ -382,7 +382,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "ra6d739493588d325ea44hub",
+  "rev": "r715b83225b534a9e5464hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
@@ -437,7 +437,7 @@
         {
           "name": "Leslie Ann Walker",
           "apps": 0,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Glenn N Cannon",
