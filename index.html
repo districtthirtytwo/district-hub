@@ -2769,16 +2769,17 @@ function cbHand(apps){
 }
 function cbAllin(C){
   const A=C.allin; if(!A||!Array.isArray(A.players)) return '';
-  const players=A.players.slice().sort((a,b)=>(b.apps||0)-(a.apps||0)||String(a.name).localeCompare(String(b.name)));
+  const today=new Date(); today.setHours(0,0,0,0);
+  const due=A.anteDue?cbMidnight(A.anteDue):null;
+  const pastDue=!due||isNaN(due)||today>due;
+  // block 38: after the ante deadline, participants first (anted, then apps desc, then name); non-participants sink to the bottom
+  const players=A.players.slice().sort((a,b)=>(pastDue?((b.anted?1:0)-(a.anted?1:0)):0)||(b.apps||0)-(a.apps||0)||String(a.name).localeCompare(String(b.name)));
   const ante=+A.ante||50, base=+A.potBase||0, boostAmt=+A.potBoost||base, boostAt=+A.boostAt||0;
   const anteCount=players.filter(p=>p.anted).length;
   const seated=players.filter(p=>p.anted&&(p.apps||0)>=3).length;
   const tot=players.reduce((s,p)=>s+(+p.apps||0),0);
   const boost=boostAt>0&&tot>=boostAt;
   const pot=anteCount*ante+(boost?boostAmt:base);
-  const today=new Date(); today.setHours(0,0,0,0);
-  const due=A.anteDue?cbMidnight(A.anteDue):null;
-  const pastDue=!due||isNaN(due)||today>due;
   const dueLbl=due&&!isNaN(due)?'Ante due '+due.toLocaleDateString('en-US',{month:'short',day:'numeric'}):'Ante due';
   const scale=Math.max(boostAt,tot,1)*1.1;
   const pct=(A.payoutPct||[40,25,20,10,5]);
