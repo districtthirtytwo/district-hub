@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04",
+  "updated": "2026-09-08",
   "banner": {
     "active": true,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions. All-In commitment and $50 ante are due Friday, Sept 4.",
@@ -382,12 +382,12 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r8adc66296a2ca0d3c2f6hub",
+  "rev": "ra6d739493588d325ea44hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
   "contests": {
-    "updated": "2026-09-04",
+    "updated": "2026-09-08",
     "start": "2026-09-01",
     "ends": "2026-09-30",
     "allin": {
@@ -412,12 +412,12 @@
         {
           "name": "Christopher Gutierrez",
           "apps": 1,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Maricela Herrera",
           "apps": 0,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Ravi R Sriram",
@@ -447,7 +447,7 @@
         {
           "name": "Derrick Herbert Bayer",
           "apps": 0,
-          "anted": false
+          "anted": true
         },
         {
           "name": "David Scott Gloff",
@@ -457,7 +457,7 @@
         {
           "name": "Caleb Alexander Milne",
           "apps": 0,
-          "anted": false
+          "anted": true
         },
         {
           "name": "William Kenneth Knight",
@@ -482,7 +482,7 @@
         {
           "name": "Jeffrey P Pechacek",
           "apps": 0,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Jason Kirk",
@@ -517,7 +517,7 @@
         {
           "name": "Dennis Keith Bruington",
           "apps": 0,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Eva Marie Greenup",
@@ -527,7 +527,7 @@
         {
           "name": "Lonnie Eugene Pittman",
           "apps": 0,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Travis Ryne Veselka",
@@ -547,7 +547,7 @@
         {
           "name": "Stephanie Burns",
           "apps": 0,
-          "anted": false
+          "anted": true
         }
       ],
       "start": "2026-08-31",
