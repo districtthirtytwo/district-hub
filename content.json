@@ -382,7 +382,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r6a40794e7a47680ab854hub",
+  "rev": "r15ab841812929f8bd677hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
@@ -407,7 +407,7 @@
         {
           "name": "Matt Hodges",
           "apps": 3,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Christopher Gutierrez",
@@ -472,7 +472,7 @@
         {
           "name": "Darren Hayes",
           "apps": 2,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Vernon Sweeney",
@@ -492,7 +492,7 @@
         {
           "name": "David L Dickerson",
           "apps": 2,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Luke William Franks",
@@ -522,7 +522,7 @@
         {
           "name": "Eva Marie Greenup",
           "apps": 2,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Lonnie Eugene Pittman",
@@ -537,7 +537,7 @@
         {
           "name": "Aaron Michael Vicknair",
           "apps": 0,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Krystal Lee Hawk",
