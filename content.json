@@ -382,7 +382,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r715b83225b534a9e5464hub",
+  "rev": "r51246e7eaf0de660ae8fhub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
@@ -467,7 +467,7 @@
         {
           "name": "Jimmy Ward",
           "apps": 0,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Darren Hayes",
