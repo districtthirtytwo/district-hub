@@ -1,11 +1,20 @@
 {
-  "updated": "2026-09-08",
+  "updated": "2026-09-09",
   "banner": {
     "active": true,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions. All-In commitment and $50 ante are due Friday, Sept 4.",
     "link": "#competitions"
   },
   "news": [
+    {
+      "id": "n15",
+      "date": "2026-09-09",
+      "tag": "update",
+      "pinned": false,
+      "title": "YTD Life Results, Quote & Sales Tracker and Producer Report are posted",
+      "body": "The YTD Life Results as of September 6, the 2026 Quote & Sales Tracker through August 28 and the 2026 Producer Report as of 9/4 are in Reports. The district stands at 238 I&P and $273,642 in life premium; Steven Tindell leads at $68,380. Caleb Milne leads YTD NBNH at 410, and on the Producer Report Walt Beayrd (Tindell) leads POY year-to-date at $264,554 with Alvaro Gutierrez (Milne) leading the Q3 quarter at $95,275.",
+      "link": "#reports"
+    },
     {
       "id": "n14",
       "date": "2026-09-03",
@@ -200,12 +209,12 @@
       "period": "Jan 1 \u2013 Dec 31, 2026",
       "ends": "2026-12-31",
       "prize": "4 nights all-inclusive, agent + guest",
-      "metricLabel": "YTD life as of Aug 30 \u00b7 qualifiers first, then premium",
-      "description": "Qualify with $45,000 life premium and 20 I&P. Agents who I&P $70,000 in life premium also bring an agency producer and their guest. Travel likely Jan/Feb 2027. Standings are year-to-date issued-and-paid premium and counts from the district's YTD Life Results as of August 30, listed with qualifiers first and then by premium. Steven Tindell and Jeffrey Pechacek have cleared both bars; Tindell is $5,298 from the $70,000 producer-and-guest tier. Matt Hodges has the premium and is 5 I&P away. FNWL reports are the official source for tracking and disputes are settled at the District Manager's discretion. No cash in lieu, no refunds or credits if the trip is not taken, and the agent must be in good standing with Farmers at the time of travel.",
+      "metricLabel": "YTD life as of Sep 6 \u00b7 qualifiers first, then premium",
+      "description": "Qualify with $45,000 life premium and 20 I&P. Agents who I&P $70,000 in life premium also bring an agency producer and their guest. Travel likely Jan/Feb 2027. Standings are year-to-date issued-and-paid premium and counts from the district's YTD Life Results as of September 6, listed with qualifiers first and then by premium. Steven Tindell and Jeffrey Pechacek have cleared both bars; Tindell is $1,620 from the $70,000 producer-and-guest tier. Matt Hodges has the premium and is 2 I&P away. FNWL reports are the official source for tracking and disputes are settled at the District Manager's discretion. No cash in lieu, no refunds or credits if the trip is not taken, and the agent must be in good standing with Farmers at the time of travel.",
       "standings": [
         {
           "name": "Steven Tindell",
-          "value": "$64,702 \u00b7 45 I&P \u2713"
+          "value": "$68,380 \u00b7 46 I&P \u2713"
         },
         {
           "name": "Jeffrey Pechacek",
@@ -213,7 +222,7 @@
         },
         {
           "name": "Matt Hodges",
-          "value": "$49,589 \u00b7 15 I&P"
+          "value": "$52,714 \u00b7 18 I&P"
         },
         {
           "name": "Jason Kirk",
@@ -291,12 +300,28 @@
   ],
   "reports": [
     {
-      "id": "r-qst-0821",
+      "id": "r-prod-0904",
+      "title": "2026 Producer Report",
+      "date": "2026-09-04",
+      "category": "Production",
+      "file": "files/producer-report-2026-09-04.pdf",
+      "note": "As of 9/4/26 \u2014 PL NB premium by producer: Aug, Sept and Oct folios, Q1\u2013Q3 and POY year-to-date"
+    },
+    {
+      "id": "r-qst-0828",
       "title": "2026 Quote & Sales Tracker",
-      "date": "2026-08-21",
+      "date": "2026-08-28",
       "category": "Trackers",
-      "file": "files/quote-sales-tracker-2026-08-21.pdf",
-      "note": "Thru Aug 21 \u2014 quotes per day, YTD quotes, NBNH and business mix by agent"
+      "file": "files/quote-sales-tracker-2026-08-28.pdf",
+      "note": "Thru Aug 28 \u2014 quotes per day, YTD quotes, NBNH and business mix by agent"
+    },
+    {
+      "id": "r-life-0906",
+      "title": "YTD Life Results",
+      "date": "2026-09-06",
+      "category": "Life",
+      "file": "files/ytd-life-results-2026-09-06.pdf",
+      "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 238 I&P / $273,642"
     },
     {
       "id": "r-prod-0828",
@@ -382,7 +407,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r75569ffa62558e598261hub",
+  "rev": "rb046ee09c5731b005f0chub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
