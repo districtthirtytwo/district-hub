@@ -433,12 +433,12 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r3b68af79cc8dfe53f753hub",
+  "rev": "r6bb8c19ba526ccc444f3hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
   "contests": {
-    "updated": "2026-09-09",
+    "updated": "2026-09-10",
     "start": "2026-09-01",
     "ends": "2026-09-30",
     "allin": {
@@ -493,7 +493,7 @@
         {
           "name": "Glenn N Cannon",
           "apps": 0,
-          "anted": false
+          "anted": true
         },
         {
           "name": "Derrick Herbert Bayer",
@@ -522,7 +522,7 @@
         },
         {
           "name": "Darren Hayes",
-          "apps": 2,
+          "apps": 3,
           "anted": true
         },
         {
@@ -532,7 +532,7 @@
         },
         {
           "name": "Jeffrey P Pechacek",
-          "apps": 2,
+          "apps": 3,
           "anted": true
         },
         {
@@ -582,7 +582,7 @@
         },
         {
           "name": "Travis Ryne Veselka",
-          "apps": 0,
+          "apps": 1,
           "anted": false
         },
         {
