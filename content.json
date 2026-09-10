@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-09",
+  "updated": "2026-09-10",
   "banner": {
     "active": true,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions. All-In commitment and $50 ante are due Friday, Sept 4.",
@@ -181,6 +181,18 @@
   ],
   "competitions": [
     {
+      "id": "c-allin49",
+      "active": true,
+      "district": "49",
+      "title": "\u201cAll In\u201d for New Business \u2014 District 49 Texas Hold \u2018Em Promo",
+      "period": "Sep 14 \u2013 Oct 16, 2026",
+      "ends": "2026-10-16",
+      "prize": "$1,000 pot, cash only \u2014 40% / 25% / 20% / 10% / 5%",
+      "metricLabel": "Cards earned \u00b7 quotes + NB \u00b7 Sep 14\u2013Oct 16",
+      "description": "Five weeks to build your hand, September 14 through October 16. Two bars to clear for a seat at the table: 40 quotes every week (or 250 total across the five weeks) and 20 NB policies \u2014 policies, not units. Each bar is one card, so clearing both deals you two. Then every additional 50 quotes past 250 earns another card and every additional 5 NB policies past 20 earns another, with no limit \u2014 350 quotes and 32 policies is six cards. No ante and no buy-in: the district office funds the full $1,000 pot and cash is the only prize. We play one hand of Texas Hold \u2018Em at the showdown on Thursday, October 22, at happy hour in the district office right after the 1:00\u20134:00 district meeting; you do not need to be there to win. Best five-card hand from your own cards plus the five community cards takes 40% of the pot, then 25%, 20%, 10% and 5% for second through fifth. The DM Performance Tracker is the official report; disputes are settled at the District Manager\u2019s discretion. Live cards and seats are on the District 49 board above.",
+      "standings": []
+    },
+    {
       "id": "c-allin26",
       "active": true,
       "title": "\u201cAll In\u201d for Life \u2014 District 32 Texas Hold \u2018Em Life Promo",
@@ -189,7 +201,8 @@
       "prize": "Cash pot \u2014 top five hands paid",
       "metricLabel": "Life apps written \u00b7 Aug 31\u2013Sep 30",
       "description": "A District 32 promo. A $50 ante and 3 written life apps earns your seat at the table, and every life app written earns an additional playing card \u2014 the more apps you write, the better your odds of a great poker hand. We play one hand of Texas Hold \u2018Em: best hand takes 40% of the pot, then 25%, 20%, 10% and 5% for second through fifth. Antes go straight into the pot and the district office adds $1,000, rising to $2,500 once the district writes 85 total apps. Write your 3 apps and take none of the pot and your $50 ante is refunded. Apps must show on the Life Performance Tracker and be written August 31 \u2013 September 30 to count. Commitment and ante are due by September 4 \u2014 checks payable to Brandon Parks at the district office, 213A Old Hewitt Road, Waco, TX 76712. Disputes are settled at the District Manager\u2019s discretion. Live seats, the pot, and everyone\u2019s cards are on the September Competitions dashboard \u2014 open it from Resources.",
-      "standings": []
+      "standings": [],
+      "district": "32"
     },
     {
       "id": "c-steakburgers",
@@ -200,7 +213,8 @@
       "prize": "Prime steak for the winning team; burgers for the rest",
       "metricLabel": "Team points \u00b7 quote = 1 \u00b7 NB policy = 5",
       "description": "Every District 32 agency is on one of two teams for September, and scoring is by points at the agency level: each quote is worth 1 point and each new business policy is worth 5, counted for September 1\u201330. The team with the most points eats Prime steak; the other team gets burgers. The teams are set: Team Alan (14 agencies) takes on Team Conrey (15), drawn to be as evenly matched as possible on summer production. Full rosters and live team scores are on the September Competitions dashboard \u2014 open it from Resources or the news post below. The cookout happens after the October district meeting.",
-      "standings": []
+      "standings": [],
+      "district": "32"
     },
     {
       "id": "c-jamaica",
@@ -232,7 +246,8 @@
           "name": "Dennis Bruington",
           "value": "$10,428 \u00b7 11 I&P"
         }
-      ]
+      ],
+      "district": "32"
     },
     {
       "id": "c-producercup",
@@ -264,18 +279,20 @@
           "name": "Breanna Ashley \u2014 Chris Gutierrez Agency",
           "value": "5th"
         }
-      ]
+      ],
+      "district": "32"
     },
     {
       "id": "c-summer",
       "active": true,
-      "title": "Summer Surprise",
-      "period": "On hold",
-      "ends": "",
-      "prize": "To be announced",
-      "metricLabel": "",
-      "description": "The district office is holding the Summer Surprise promo until the quotes and NB tracker data is reporting correctly. They expect to resume shortly and will confirm here once it restarts. Nothing to do in the meantime \u2014 qualification will be announced with the restart.",
-      "standings": []
+      "title": "Summer Surprise \u2014 District 49 Weekly Cash Promo",
+      "period": "Sep 12 \u2013 Nov 27, 2026",
+      "ends": "2026-11-27",
+      "prize": "Venmo cash to the week's top 5 \u2014 $100 / $60 / $40 / $25 / $25",
+      "metricLabel": "Weekly top 5 \u00b7 quotes or NB",
+      "description": "The Summer Surprise resumes September 12 and runs through November 27 (Saturday-to-Friday reporting weeks). Each week the district office announces the top 5 producers for the week by quotes or by NB policies. Eight of the promo's thirteen weeks pay immediate Venmo cash \u2014 $100, $60, $40, $25 and $25 for first through fifth \u2014 and the rest are \u201catta boy\u201d weeks. Nobody knows which weeks pay or whether the week is scored on quotes or NB until it is announced, by the Wednesday after the week closes, so hustle every week. Policies must be written in the producer code and during the promo period; results come from the PL NBA Producer Report; Foremost PAR commissions credit as received; only P&C licensed and appointed staff are eligible; disputes are settled by the District Manager. Live weekly top-5 lists by quotes and by NB are on the District 49 board above.",
+      "standings": [],
+      "district": "49"
     }
   ],
   "newsletters": [
@@ -407,7 +424,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r60ee3936f258126e604ehub",
+  "rev": "r1593f17bc9c6bfce2649hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
@@ -738,6 +755,41 @@
       ],
       "start": "2026-09-01",
       "ends": "2026-09-30"
+    },
+    "allin49": {
+      "start": "2026-09-14",
+      "ends": "2026-10-16",
+      "pot": 1000,
+      "payoutPct": [
+        40,
+        25,
+        20,
+        10,
+        5
+      ],
+      "weekQuotes": 40,
+      "totalQuotes": 250,
+      "minNb": 20,
+      "quoteStep": 50,
+      "nbStep": 5,
+      "showdown": "2026-10-22",
+      "exclude": [
+        "Brandon Wade Parks"
+      ]
+    },
+    "surprise49": {
+      "start": "2026-09-12",
+      "ends": "2026-11-27",
+      "top": 5,
+      "prizes": [
+        100,
+        60,
+        40,
+        25,
+        25
+      ],
+      "resumedFrom": "2026-07-04",
+      "results": []
     }
   },
   "boardNotice": {
