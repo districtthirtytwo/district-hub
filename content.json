@@ -7,6 +7,15 @@
   },
   "news": [
     {
+      "id": "n16",
+      "date": "2026-09-10",
+      "tag": "promo",
+      "pinned": false,
+      "title": "District 49 promos are on the hub: \u201cAll In\u201d for New Business and the Summer Surprise",
+      "body": "Competitions now has a District 32 tab and a District 49 tab. District 49\u2019s \u201cAll In\u201d for New Business (Sep 14 \u2013 Oct 16, $1,000 pot, cards from quotes and NB) and the resumed Summer Surprise weekly cash promo (Sep 12 \u2013 Nov 27) each have a live board that reads the district tracker sheet, so cards, seats and each week\u2019s top 5 update as production posts.",
+      "link": "#competitions-49"
+    },
+    {
       "id": "n15",
       "date": "2026-09-09",
       "tag": "update",
@@ -424,7 +433,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r1593f17bc9c6bfce2649hub",
+  "rev": "r3b68af79cc8dfe53f753hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
