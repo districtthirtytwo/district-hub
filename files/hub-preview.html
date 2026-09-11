@@ -2877,15 +2877,19 @@ function renderContests(){
   const box=$('contestBoards'); if(!box) return;
   const C=data().contests;
   if(!C||typeof C!=='object'){ box.innerHTML=''; return; }
+  const liveFoot=(d,lead)=>{
+    const L=cbLive(d);
+    const thru=m=>{ const x=L&&L[m]; return x?x.toLocaleDateString('en-US',{month:'short',day:'numeric'}):'—'; };
+    return '<div class="cb-foot">'+lead+' computed live from the District '+d+' tracker sheet (DM Performance Tracker) · quotes through '+thru('lastQ')+' · new business through '+thru('lastN')+'. Summer Surprise payouts are decided from the PL NBA Producer Report, which can differ from the tracker.</div>';
+  };
   if(COMP.dist==='49'){
-    const L=cbLive49();
-    const thru=m=>{ const d=L&&L[m]; return d?d.toLocaleDateString('en-US',{month:'short',day:'numeric'}):'—'; };
-    const foot=(C.allin49||C.surprise49)?'<div class="cb-foot">Computed live from the District 49 tracker sheet (DM Performance Tracker) · quotes through '+thru('lastQ')+' · new business through '+thru('lastN')+'. Summer Surprise payouts are decided from the PL NBA Producer Report, which can differ from the tracker.</div>':'';
-    box.innerHTML = cbAllin49(C)+cbSurprise49(C)+foot;
+    const foot=(C.allin49||C.surprise49)?liveFoot('49','“All In” and Summer Surprise are'):'';
+    box.innerHTML = cbAllin49(C)+cbSurprise(C,'49')+foot;
     return;
   }
-  const foot=C.updated?'<div class="cb-foot">Standings as of '+fmtDate(C.updated)+' · All-In app counts from the Life Performance Tracker; Steak or Burgers from agency-level quote and NB counts posted by the district office.</div>':'';
-  box.innerHTML = cbAllin(C)+cbSteak(C)+foot;
+  const foot=(C.updated?'<div class="cb-foot">Standings as of '+fmtDate(C.updated)+' · All-In app counts from the Life Performance Tracker; Steak or Burgers from agency-level quote and NB counts posted by the district office.</div>':'')
+    +(C.surprise32?liveFoot('32','Summer Surprise is'):'');
+  box.innerHTML = cbAllin(C)+cbSteak(C)+cbSurprise(C,'32')+foot;
 }
 
 /* ---------- District 32 / District 49 switch (block 39) ---------- */
@@ -2918,12 +2922,14 @@ const CB_ART49 = {
     + '<g transform="rotate(10 90 60)"><rect x="64" y="10" width="52" height="72" rx="6" style="fill:var(--surface-1);stroke:var(--axis)"/><text x="90" y="58" text-anchor="middle" font-size="40" style="fill:var(--s2)">?</text></g></g>'
     + '</svg>'
 };
-function cbLive49(){
-  const people=PEOPLE.filter(p=>p.district==='49');
+function cbLive(d){
+  d = d==='49' ? '49' : '32';
+  const people=PEOPLE.filter(p=>p.district===d);
   if(!people.length) return null;
-  const ml=metricLastByDist['49']||{};
+  const ml=metricLastByDist[d]||{};
   return { people, lastQ: ml.q?new Date(ml.q):null, lastN: ml.n?new Date(ml.n):null };
 }
+function cbLive49(){ return cbLive('49'); }
 /* consecutive `len`-day weeks from start, the last one clipped at ends */
 function cbWeeks(start, ends, len){
   const out=[]; let s=cbMidnight(start); const e=cbMidnight(ends);
@@ -2932,10 +2938,11 @@ function cbWeeks(start, ends, len){
   return out;
 }
 function cbShort(d){ return d.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
-function cbNoLive(L, board){
+function cbNoLive(L, board, d){
   if(L) return '';
-  const failed = missingDistrict==='49' || (!liveLoading && liveError);
-  return '<div class="cb-state">'+(failed ? 'The District 49 tracker sheet could not be loaded, so there are no '+board+' standings to show right now.' : liveLoading ? 'Loading the District 49 tracker sheet…' : 'No District 49 tracker data has loaded yet — use Refresh on the Scoreboard.')+'</div>';
+  d = d==='49' ? '49' : '32';
+  const failed = missingDistrict===d || (!liveLoading && liveError);
+  return '<div class="cb-state">'+(failed ? 'The District '+d+' tracker sheet could not be loaded, so there are no '+board+' standings to show right now.' : liveLoading ? 'Loading the District '+d+' tracker sheet…' : 'No District '+d+' tracker data has loaded yet — use Refresh on the Scoreboard.')+'</div>';
 }
 function cbAllin49(C){
   const A=C.allin49; if(!A||typeof A!=='object') return '';
@@ -2948,7 +2955,7 @@ function cbAllin49(C){
   const weeks=cbWeeks(st,en,7);
   const startD=cbMidnight(st);
   let body='';
-  if(!L) body=cbNoLive(L,'“All In”');
+  if(!L) body=cbNoLive(L,'“All In”','49');
   else if(!L.lastQ||!L.lastN||L.lastQ<startD||L.lastN<startD){
     body='<div class="cb-state">Standings appear once the tracker carries production from '+cbShort(startD)+' — quotes are through '+(L.lastQ?cbShort(L.lastQ):'—')+' and new business through '+(L.lastN?cbShort(L.lastN):'—')+'.</div>';
   } else {
@@ -2994,12 +3001,15 @@ function cbAllin49(C){
     +body
     +'</div></section>';
 }
-function cbSurprise49(C){
-  const S=C.surprise49; if(!S||typeof S!=='object') return '';
+function cbSurprise49(C){ return cbSurprise(C,'49'); }
+function cbSurprise(C,d){
+  d = d==='49' ? '49' : '32';
+  const S=C['surprise'+d]; if(!S||typeof S!=='object') return '';
   const st=S.start||'2026-09-12', en=S.ends||'2026-11-27', rng=cbRange(st,en);
   const top=+S.top||5, prizes=S.prizes||[100,60,40,25,25];
+  const firstWeek=Math.max(1,parseInt(S.firstWeek,10)||1);   // week numbers as the district office counts them
   const results=Array.isArray(S.results)?S.results:[];
-  const L=cbLive49();
+  const L=cbLive(d);
   const weeks=cbWeeks(st,en,7);
   const staff=L?L.people.filter(p=>p.role==='Producer' && !p.owner):[];
   const topList=(w,m)=>{
@@ -3021,7 +3031,7 @@ function cbSurprise49(C){
       +'</tbody></table></div>';
   };
   let body='';
-  if(!L) body=cbNoLive(L,'Summer Surprise');
+  if(!L) body=cbNoLive(L,'Summer Surprise',d);
   else {
     const started=weeks.map((w,i)=>({w,i,q:topList(w,'q'),n:topList(w,'n')})).filter(x=>x.q||x.n);
     if(!started.length){
@@ -3029,21 +3039,21 @@ function cbSurprise49(C){
     } else {
       started.reverse();   // latest week first
       body=started.map((x,idx)=>{
-        const res=results.find(r=>+r.week===x.i+1);
+        const res=results.find(r=>+r.week===x.i+firstWeek);
         const badge=res?(res.paid==='q'?'<span class="wp">Paid on quotes</span>':res.paid==='n'?'<span class="wp">Paid on NB</span>':'<span class="wp none">Atta-boy week</span>'):'';
         const done=(x.q&&x.q.done)&&(x.n&&x.n.done);
-        const head='<b>Week '+(x.i+1)+'</b><span class="ws">'+cbRange(dayKeyOf(x.w.s),dayKeyOf(x.w.e))+(done?' · final':' · in progress')+'</span>'+badge;
+        const head='<b>Week '+(x.i+firstWeek)+'</b><span class="ws">'+cbRange(dayKeyOf(x.w.s),dayKeyOf(x.w.e))+(done?' · final':' · in progress')+'</span>'+badge;
         const inner='<div class="cb-top">'+listHtml(x.q,'Top '+top+' by quotes')+listHtml(x.n,'Top '+top+' by new business')+'</div>';
         return idx===0 ? '<div class="cb-week"><div class="wh">'+head+'</div>'+inner+'</div>'
                        : '<details class="cb-week"><summary>'+head+'</summary>'+inner+'</details>';
       }).join('');
     }
   }
-  return '<section class="cb-board" aria-labelledby="cbSurpriseH">'
-    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbSurpriseH">Summer Surprise</h3><span class="cb-sub">District 49 · Weekly cash promo · '+rng+'</span></div>'
+  return '<section class="cb-board" aria-labelledby="cbSurpriseH'+d+'">'
+    +'<div class="cb-hero"><div class="cb-t"><h3 id="cbSurpriseH'+d+'">Summer Surprise</h3><span class="cb-sub">District '+d+' · Weekly cash promo · '+rng+'</span></div>'
     +'<div class="cb-art">'+CB_ART49.surprise+'</div>'+cbDays(st,en)+'</div>'
     +'<div class="cb-bd">'
-    +'<p class="cb-rules">'+(S.rules ? esc(S.rules) : 'Each Saturday-to-Friday week, the <b>top '+top+' producers</b> by weekly quotes <b>or</b> NB policies are announced. Some weeks pay Venmo cash — <b>'+prizes.map((p,i)=>cbOrd(i+1)+' '+cbMoney(p)).join(' · ')+'</b> — and some are “atta boy” weeks; which weeks pay, and whether on quotes or NB, is the district office’s surprise, announced by the Wednesday after the week closes. Resumed from the July 4 start; runs '+rng+'. Licensed and appointed staff only — agency owners are not ranked here. Official results come from the PL NBA Producer Report.')+'</p>'
+    +'<p class="cb-rules">'+(S.rules ? esc(S.rules) : 'Each Saturday-to-Friday week, the <b>top '+top+' producers</b> by weekly quotes <b>or</b> NB policies are announced. Some weeks pay Venmo cash — <b>'+prizes.map((p,i)=>cbOrd(i+1)+' '+cbMoney(p)).join(' · ')+'</b> — and some are “atta boy” weeks; which weeks pay, and whether on quotes or NB, is the district office’s surprise, announced by the Wednesday after the week closes. '+(firstWeek>1?'Weeks 1–'+(firstWeek-1)+' ran in July before the pause; the promo picks up at week '+firstWeek+' and runs ':'Runs ')+rng+'. Licensed and appointed staff only — agency owners are not ranked here. Official results come from the PL NBA Producer Report.')+'</p>'
     +body
     +'</div></section>';
 }
