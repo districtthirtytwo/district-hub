@@ -7,6 +7,15 @@
   },
   "news": [
     {
+      "id": "n17",
+      "date": "2026-09-11",
+      "tag": "promo",
+      "pinned": false,
+      "title": "Summer Surprise comes to District 32 — weekly top 5 by quotes or NB, Sep 12 – Nov 27",
+      "body": "District 32 joins the Summer Surprise on the same calendar as District 49: Saturday-to-Friday weeks from September 12 through November 27, with the week’s top 5 producers by quotes or by NB announced each week and Venmo cash on the weeks that pay. The District 32 tab under Competitions now carries a live board that reads the district tracker sheet, so each week’s top 5 by quotes and by NB update as production posts.",
+      "link": "#competitions-32"
+    },
+    {
       "id": "n16",
       "date": "2026-09-10",
       "tag": "promo",
@@ -445,7 +454,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rf25e0111a46190e4694dhub",
+  "rev": "redf54c6aec9e67a10adahub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
