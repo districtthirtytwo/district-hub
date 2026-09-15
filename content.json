@@ -1,11 +1,20 @@
 {
-  "updated": "2026-09-14",
+  "updated": "2026-09-15",
   "banner": {
     "active": true,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions. All-In commitment and $50 ante are due Friday, Sept 4.",
     "link": "#competitions"
   },
   "news": [
+    {
+      "id": "n18",
+      "date": "2026-09-15",
+      "tag": "news",
+      "pinned": false,
+      "title": "October district meeting \u2014 Thursday, October 8, 1\u20134 PM at the Hilton Garden Inn, Waco",
+      "body": "The next District 32 meeting is Thursday, October 8 from 1:00 to 4:00 PM at the Hilton Garden Inn in Waco. Afterwards, everyone heads to Brandon\u2019s house for the Steak or Burgers cookout \u2014 the winning team eats steak, the rest eat burgers \u2014 and the \u201cAll In\u201d for Life payout to the seated players.",
+      "link": "#news"
+    },
     {
       "id": "n17",
       "date": "2026-09-11",
@@ -195,6 +204,15 @@
       "location": "District office",
       "link": "",
       "description": "Second day of Boot Camp at the district office."
+    },
+    {
+      "id": "e6",
+      "date": "2026-10-08",
+      "time": "1:00 \u2013 4:00 PM",
+      "title": "District 32 meeting \u2014 Hilton Garden Inn, Waco",
+      "location": "Hilton Garden Inn, Waco",
+      "link": "#news",
+      "description": "October district meeting, 1\u20134 PM at the Hilton Garden Inn in Waco. Afterwards the Steak or Burgers cookout and the \u201cAll In\u201d for Life payout follow at Brandon\u2019s house."
     }
   ],
   "competitions": [
@@ -454,7 +472,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r93202ed2ad5b34ecfc8chub",
+  "rev": "r6a859c467fcff676ad54hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
