@@ -213,7 +213,7 @@
      The right fade sits in its own 28px at the end of the row; the left one takes no space and only shows once the row has scrolled. */
   @media(max-width:900px){
     .bar2::after{content:"";flex:none;width:28px;align-self:stretch;position:sticky;right:0;pointer-events:none;background:linear-gradient(to right,rgba(18,48,106,0),var(--navy));}
-    .bar2::before{content:"";flex:none;width:34px;margin-right:-34px;align-self:stretch;position:sticky;left:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .15s;background:linear-gradient(to left,rgba(18,48,106,0),var(--navy) 65%);}
+    .bar2::before{content:"";order:-3;flex:none;width:34px;margin-right:-34px;align-self:stretch;position:sticky;left:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .15s;background:linear-gradient(to left,rgba(18,48,106,0),var(--navy) 65%);}
     .bar2.scrolled::before{opacity:1;}
   }
   /* on the narrowest phones the first three items fit without scrolling once the padding gives a little */
