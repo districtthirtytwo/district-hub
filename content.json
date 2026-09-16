@@ -2,8 +2,9 @@
   "updated": "2026-09-16",
   "banner": {
     "active": true,
-    "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions. All-In commitment and $50 ante are due Friday, Sept 4.",
-    "link": "#competitions"
+    "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions.",
+    "link": "#competitions",
+    "until": "2026-09-30"
   },
   "news": [
     {
@@ -169,15 +170,6 @@
     }
   ],
   "events": [
-    {
-      "id": "e3",
-      "date": "2026-09-04",
-      "time": "",
-      "title": "\u201cAll In\u201d for Life \u2014 commitment and $50 ante due",
-      "location": "",
-      "link": "",
-      "description": "Last day to commit and pay the ante for the Texas Hold \u2018Em life promo. Checks payable to Brandon Parks at the district office."
-    },
     {
       "id": "e1",
       "date": "2026-09-30",
@@ -498,7 +490,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r699beef218862198d220hub",
+  "rev": "r9f85f43db445c51e74a5hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
