@@ -207,8 +207,17 @@
   .tab.hot .tro{margin-right:6px;}
   /* on a phone the tab row scrolls and the third tab sits past the right
      edge on the landing view — the button leads the row there instead */
-  @media(max-width:900px){ .tab.hot{order:-2;position:sticky;left:0;z-index:2;margin-left:0;box-shadow:6px 0 0 var(--navy),0 2px 8px rgba(0,0,0,.25);} .bar2{scroll-padding-left:190px;} }
-  @media(max-width:760px){ .tab.hot{padding:7px 11px;} .tab.hot .n{display:none;} .bar2{scroll-padding-left:160px;} }
+  @media(max-width:900px){ .tab.hot{order:-2;margin-left:0;} .bar2{scroll-padding:0 8px;} }
+  @media(max-width:760px){ .tab.hot{padding:7px 11px;} .tab.hot .n{display:none;} }
+  /* block 42: the scroller's edges fade so a half-visible tab reads as "more this way", never as cut off.
+     The right fade sits in its own 28px at the end of the row; the left one takes no space and only shows once the row has scrolled. */
+  @media(max-width:900px){
+    .bar2::after{content:"";flex:none;width:28px;align-self:stretch;position:sticky;right:0;pointer-events:none;background:linear-gradient(to right,rgba(18,48,106,0),var(--navy));}
+    .bar2::before{content:"";order:-3;flex:none;width:34px;margin-right:-34px;align-self:stretch;position:sticky;left:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .15s;background:linear-gradient(to left,rgba(18,48,106,0),var(--navy) 65%);}
+    .bar2.scrolled::before{opacity:1;}
+  }
+  /* on the narrowest phones the first three items fit without scrolling once the padding gives a little */
+  @media(max-width:430px){ .bar2{gap:2px;} .bar2 .tab{padding:11px 7px;font-size:12.5px;} .bar2 .tab.hot{padding:7px 8px;margin:6px 2px 6px 0;} .bar2 .toolchip{padding:6px 8px;font-size:12px;} }
   @media(max-width:360px){ .tab.hot .tro{display:none;} }
 
   /* ===================================================================
@@ -327,6 +336,9 @@
   .switch{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-secondary);font-weight:600;cursor:pointer;user-select:none;height:33px;}
   .switch input{accent-color:var(--s1);}
   #staffOnlyWrap .switch{padding:0 2px;}
+  .linkbtn{background:none;border:0;padding:0;margin:0;font:inherit;color:var(--ord-3);font-weight:640;text-decoration:underline;cursor:pointer;}
+  .linkbtn:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px;}
+  #scoreboard.navy .linkbtn{color:var(--on-navy-blue);}
   .searchbox{
     font:inherit;font-size:13px;border:1px solid var(--border);border-radius:9px;
     padding:7px 11px;color:var(--text-primary);background:var(--surface-1);width:190px;max-width:100%;
@@ -1658,9 +1670,18 @@ function initAnalytics(){
 }
 
 /* ---------- banner ---------- */
+/* block 42: a banner says when it stops being news. Optional from/until
+   (ISO dates); outside the window it is off, however `active` reads. */
+function bannerLive(b){
+  if(!(b && b.active && b.text)) return false;
+  const now = new Date();
+  if(b.from){ const f = new Date(String(b.from).slice(0,10)+'T00:00:00'); if(!isNaN(f) && now < f) return false; }
+  if(b.until){ const u = new Date(String(b.until).slice(0,10)+'T23:59:59'); if(!isNaN(u) && now > u) return false; }
+  return true;
+}
 function renderBanner(){
   const b = data().banner || {};
-  $('banner').classList.toggle('on', !!(b.active && b.text));
+  $('banner').classList.toggle('on', bannerLive(b));
   $('bannerText').textContent = b.text || "";
   const a = $('bannerLink'), href = safeUrl(b.link);
   if(href){ a.style.display='inline'; a.href=href; } else { a.style.display='none'; }
@@ -1679,7 +1700,8 @@ const LIVE_CACHE_KEY = 'd32hub_live_v1' + (IS_PREVIEW ? '_preview' : '');
 const LIVE_MAX_AGE_MS = 30*60*1000;   // serve cache instantly, refresh in the background past this
 
 const PERIODS = ['daily','weekly','monthly','ytd'];
-const LB = { view:'producer', dist:'all', period:'monthly', metric:'q', staffOnly:true, rangeFrom:null, rangeTo:null };
+const LB = { view:'producer', dist:'all', period:'monthly', metric:'q', staffOnly:true, rangeFrom:null, rangeTo:null, showIdle:false };
+const IDLE_MONTHS = 1;   // block 43: a producer with no quotes or NB for over a month is hidden from the list
 let PEOPLE = [];              // every producer + agency across both districts
 let dataAsOf = null;          // newest date present in the export
 let dailyAsOf = null;         // last complete business day (what "Daily" means)
@@ -2102,11 +2124,37 @@ segWire('segView','v','view'); segWire('segDist','d','dist'); segWire('segPeriod
   });
 });
 
+/* block 43: the last day a person logged a quote or a policy, as a day key
+   (hist only holds nonzero days), or null when they never have. */
+function lastActiveKey(p){
+  let k=null; const h=p.hist||{};
+  for(const d in h){ if(((+h[d].q)||0)+((+h[d].n)||0) > 0 && (k===null || d>k)) k=d; }
+  return k;
+}
+/* The day before which "no activity" means hidden: IDLE_MONTHS before the
+   reporting cutoff. Null when there is no cutoff to measure from. */
+function idleCutoffKey(){
+  if(!dataAsOf) return null;
+  const d = midnight(dataAsOf); d.setMonth(d.getMonth()-IDLE_MONTHS);
+  return dayKeyOf(d);
+}
+function isIdle(p){
+  const ck = idleCutoffKey(); if(!ck) return false;
+  const lk = lastActiveKey(p);
+  return lk===null || lk < ck;
+}
+/* Would the idle rule empty the Producers list for this district scope?
+   Then it does not apply — an empty board is never the right answer. */
+function idleRuleApplies(){
+  if(LB.view!=='producer' || LB.showIdle || !idleCutoffKey()) return false;
+  return PEOPLE.some(p=> isProducer(p.role) && (LB.dist==='all'||normDistrict(p.district)===LB.dist) && !(LB.staffOnly&&p.owner) && !isIdle(p));
+}
 function inScope(p){
   if(LB.dist!=='all' && normDistrict(p.district)!==LB.dist) return false;
   const wantProducer = LB.view==='producer';
   if(isProducer(p.role)!==wantProducer) return false;
   if(wantProducer && LB.staffOnly && p.owner) return false;
+  if(wantProducer && idleRuleApplies() && isIdle(p)) return false;
   return true;
 }
 function agencyProducers(a){
@@ -2501,7 +2549,16 @@ function renderBoard(){
     const hidden = PEOPLE.filter(p=>isProducer(p.role)&&p.owner&&(LB.dist==='all'||normDistrict(p.district)===LB.dist)).length;
     if(hidden) bits.push('<b>Staff only</b> is on, so '+hidden+' agency owner'+(hidden===1?'’s':'s’')+' own production '+(hidden===1?'is':'are')+' hidden from this list — untick it to include them. The totals above always count everyone.');
   }
+  if(LB.view==='producer'){
+    const ck = idleCutoffKey();
+    const idle = ck ? PEOPLE.filter(p=> isProducer(p.role) && (LB.dist==='all'||normDistrict(p.district)===LB.dist) && !(LB.staffOnly&&p.owner) && isIdle(p)).length : 0;
+    const since = ck ? shortDay(new Date(ck+'T00:00:00')) : '';
+    if(idle && idleRuleApplies()) bits.push('<b>'+idle+' producer'+(idle===1?'':'s')+' with no quotes or new business since '+esc(since)+'</b> '+(idle===1?'is':'are')+' hidden from this list. <button type="button" class="linkbtn" id="showIdleBtn">Show them</button>'+((LB.staffOnly && bits.some(x=>x.indexOf('Staff only')>=0)) ? '' : ' The totals above always count everyone.'));
+    else if(idle && LB.showIdle) bits.push('Showing '+idle+' producer'+(idle===1?'':'s')+' with no quotes or new business since '+esc(since)+'. <button type="button" class="linkbtn" id="hideIdleBtn">Hide them</button>');
+  }
   $('lbNote').innerHTML = bits.join(' ');
+  const sb=$('showIdleBtn'); if(sb) sb.onclick=()=>{ LB.showIdle=true; renderBoard(); };
+  const hb=$('hideIdleBtn'); if(hb) hb.onclick=()=>{ LB.showIdle=false; renderBoard(); };
 }
 let boardDebounce;
 $('boardSearch').addEventListener('input', e=>{
@@ -3323,6 +3380,7 @@ function renderCollectionTab(t){
       <div class="frm">
         <div class="full"><label>Banner text</label><input type="text" id="bnText" value="${esc(b.text)}"></div>
         <div><label>Link (optional, e.g. #newsletter)</label><input type="text" id="bnLink" value="${esc(b.link||'')}"></div>
+        <div><label>Show until (optional — the banner switches itself off after this day)</label><input type="date" id="bnUntil" value="${esc(String(b.until||'').slice(0,10))}"></div>
         <div style="display:flex;align-items:end;padding-bottom:6px"><label class="switch"><input type="checkbox" id="bnActive" ${b.active?'checked':''}> Show banner</label></div>
       </div>
       <p style="margin:10px 0 0"><button class="btn sm primary" onclick="saveBanner()">Apply banner</button></p>
@@ -3361,7 +3419,11 @@ function drawItemList(t){
 }
 
 function saveBanner(){
-  EDIT.banner = {active:$('bnActive').checked, text:$('bnText').value.trim(), link:$('bnLink').value.trim()};
+  const keep = Object.assign({}, EDIT.banner||{});
+  keep.active = $('bnActive').checked; keep.text = $('bnText').value.trim(); keep.link = $('bnLink').value.trim();
+  const u = $('bnUntil') ? $('bnUntil').value.trim() : '';
+  if(u) keep.until = u; else delete keep.until;
+  EDIT.banner = keep;
   markDirty();
 }
 function moveItem(t,i,dir){
@@ -3456,7 +3518,8 @@ function saveItem(t,i){
 function flushOpenForm(){
   if($('bnText') && EDIT.banner){
     const t=$('bnText').value.trim(), l=$('bnLink').value.trim(), a=$('bnActive').checked;
-    if(t!==(EDIT.banner.text||'') || l!==(EDIT.banner.link||'') || a!==!!EDIT.banner.active) saveBanner();
+    const u=$('bnUntil') ? $('bnUntil').value.trim() : '';
+    if(t!==(EDIT.banner.text||'') || l!==(EDIT.banner.link||'') || a!==!!EDIT.banner.active || u!==String(EDIT.banner.until||'').slice(0,10)) saveBanner();
   }
   if(openEdit && $('itemForm') && $('itemForm').querySelector('[data-k]')){
     const {t,i}=openEdit;
@@ -3981,6 +4044,7 @@ function viewFromHash(){
   return HASH_TO_VIEW[h] || (VIEWS.indexOf(h)>=0 ? h : 'board');
 }
 window.addEventListener('hashchange', ()=>showView(viewFromHash()));
+(function(){ const bar=$('tabbar'); if(!bar) return; const f=()=>bar.classList.toggle('scrolled', bar.scrollLeft>2); bar.addEventListener('scroll', f, {passive:true}); f(); })();
 document.addEventListener('click', e=>{
   const a = e.target.closest('a[href^="#"]');
   if(!a || a.classList.contains('skip')) return;
