@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17",
+  "updated": "2026-09-18",
   "banner": {
     "active": true,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions.",
@@ -490,12 +490,12 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r1981111058a493b0cd98hub",
+  "rev": "r8a4be5fe9d9f02db019bhub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
   "contests": {
-    "updated": "2026-09-17",
+    "updated": "2026-09-18",
     "start": "2026-09-01",
     "ends": "2026-09-30",
     "allin": {
@@ -574,7 +574,7 @@
         },
         {
           "name": "Jimmy Ward",
-          "apps": 0,
+          "apps": 1,
           "anted": true
         },
         {
@@ -609,7 +609,7 @@
         },
         {
           "name": "Steven Tindell",
-          "apps": 3,
+          "apps": 4,
           "anted": true
         },
         {
