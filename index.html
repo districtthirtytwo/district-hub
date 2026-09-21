@@ -1702,6 +1702,29 @@ const LIVE_MAX_AGE_MS = 30*60*1000;   // serve cache instantly, refresh in the b
 const PERIODS = ['daily','weekly','monthly','ytd'];
 const LB = { view:'producer', dist:'all', period:'monthly', metric:'q', staffOnly:true, rangeFrom:null, rangeTo:null, showIdle:false };
 const IDLE_MONTHS = 1;   // block 43: a producer with no quotes or NB for over a month is hidden from the list
+/* block 44: people an admin has hidden from the lists (content.json.hidden).
+   Keys mirror the parser's: district|agency for a whole agency,
+   district|agency|producer for one person. Cached per hidden[] array. */
+let _hidCache = {src:null, set:null};
+function hiddenSet(){
+  const H = (data()||{}).hidden;
+  if(_hidCache.src === H && _hidCache.set) return _hidCache.set;
+  const s = new Set();
+  if(Array.isArray(H)) H.forEach(h=>{
+    if(!h || !h.agency) return;
+    const a = normName(h.agency); if(!a) return;
+    const d = normDistrict(h.district);
+    s.add(h.name ? d+'|'+a+'|'+normName(h.name) : d+'|'+a);
+  });
+  _hidCache = {src:H, set:s};
+  return s;
+}
+function isHidden(p){
+  const S = hiddenSet(); if(!S.size || !p) return false;
+  const d = normDistrict(p.district);
+  if(isProducer(p.role)){ const a = normName(p.agency||''); return S.has(d+'|'+a) || S.has(d+'|'+a+'|'+normName(p.name)); }
+  return S.has(d+'|'+normName(p.name));
+}
 let PEOPLE = [];              // every producer + agency across both districts
 let dataAsOf = null;          // newest date present in the export
 let dailyAsOf = null;         // last complete business day (what "Daily" means)
@@ -2147,9 +2170,10 @@ function isIdle(p){
    Then it does not apply — an empty board is never the right answer. */
 function idleRuleApplies(){
   if(LB.view!=='producer' || LB.showIdle || !idleCutoffKey()) return false;
-  return PEOPLE.some(p=> isProducer(p.role) && (LB.dist==='all'||normDistrict(p.district)===LB.dist) && !(LB.staffOnly&&p.owner) && !isIdle(p));
+  return PEOPLE.some(p=> isProducer(p.role) && !isHidden(p) && (LB.dist==='all'||normDistrict(p.district)===LB.dist) && !(LB.staffOnly&&p.owner) && !isIdle(p));
 }
 function inScope(p){
+  if(isHidden(p)) return false;                                   // block 44
   if(LB.dist!=='all' && normDistrict(p.district)!==LB.dist) return false;
   const wantProducer = LB.view==='producer';
   if(isProducer(p.role)!==wantProducer) return false;
@@ -2159,7 +2183,7 @@ function inScope(p){
 }
 function agencyProducers(a){
   return PEOPLE.map((p,i)=>({p,i}))
-    .filter(x=> isProducer(x.p.role) && normDistrict(x.p.district)===normDistrict(a.district) && x.p.agency && normName(x.p.agency)===normName(a.name));
+    .filter(x=> isProducer(x.p.role) && !isHidden(x.p) && normDistrict(x.p.district)===normDistrict(a.district) && x.p.agency && normName(x.p.agency)===normName(a.name));
 }
 /* The newest day the CURRENT SCOPE has data for, per metric. Takes the
    earliest across the districts in view — "current through" must never
@@ -2551,7 +2575,7 @@ function renderBoard(){
   }
   if(LB.view==='producer'){
     const ck = idleCutoffKey();
-    const idle = ck ? PEOPLE.filter(p=> isProducer(p.role) && (LB.dist==='all'||normDistrict(p.district)===LB.dist) && !(LB.staffOnly&&p.owner) && isIdle(p)).length : 0;
+    const idle = ck ? PEOPLE.filter(p=> isProducer(p.role) && !isHidden(p) && (LB.dist==='all'||normDistrict(p.district)===LB.dist) && !(LB.staffOnly&&p.owner) && isIdle(p)).length : 0;
     const since = ck ? shortDay(new Date(ck+'T00:00:00')) : '';
     if(idle && idleRuleApplies()) bits.push('<b>'+idle+' producer'+(idle===1?'':'s')+' with no quotes or new business since '+esc(since)+'</b> '+(idle===1?'is':'are')+' hidden from this list. <button type="button" class="linkbtn" id="showIdleBtn">Show them</button>'+((LB.staffOnly && bits.some(x=>x.indexOf('Staff only')>=0)) ? '' : ' The totals above always count everyone.'));
     else if(idle && LB.showIdle) bits.push('Showing '+idle+' producer'+(idle===1?'':'s')+' with no quotes or new business since '+esc(since)+'. <button type="button" class="linkbtn" id="hideIdleBtn">Hide them</button>');
@@ -2981,7 +3005,7 @@ const CB_ART49 = {
 };
 function cbLive(d){
   d = d==='49' ? '49' : '32';
-  const people=PEOPLE.filter(p=>p.district===d);
+  const people=PEOPLE.filter(p=>p.district===d && !isHidden(p));   // block 44
   if(!people.length) return null;
   const ml=metricLastByDist[d]||{};
   return { people, lastQ: ml.q?new Date(ml.q):null, lastN: ml.n?new Date(ml.n):null };
@@ -3820,19 +3844,74 @@ $('libSearch').addEventListener('input', e=>{
 
 /* ---------- scoreboard tab ---------- */
 /* ---------- scoreboard tab (read-only: the board is sheet-driven now) ---------- */
+/* block 44: the Hidden people editor. Lives on the Scoreboard tab; writes
+   EDIT.hidden and publishes with everything else. The search runs over the
+   loaded roster, so the sheets must have loaded once on this device. */
+let hidQuery = '';
+function hidLabel(h){ return '<b>'+esc(h.name ? h.name : h.agency)+'</b><span>' + (h.name ? esc(h.agency)+' · producer' : 'whole agency') + ' · D' + normDistrict(h.district) + '</span>'; }
+function hidCandidates(q){
+  q = String(q||'').trim().toLowerCase();
+  if(!q) return [];
+  const out = [];
+  PEOPLE.forEach((p,i)=>{
+    if(isHidden(p)) return;
+    const prod = isProducer(p.role);
+    const hay = (p.name+' '+(prod ? (p.agency||'') : '')).toLowerCase();
+    if(hay.indexOf(q) < 0) return;
+    out.push({i, p, prod});
+  });
+  out.sort((a,b)=> (a.prod?1:0)-(b.prod?1:0) || String(a.p.name).localeCompare(String(b.p.name)));
+  return out.slice(0, 30);
+}
+function hidDraw(){
+  const H = EDIT.hidden || (EDIT.hidden = []);
+  const list = $('hidList'), res = $('hidResults'); if(!list || !res) return;
+  list.innerHTML = H.length ? H.map((h,i)=>`<div class="itemrow"><div class="t">${hidLabel(h)}</div>
+      <button type="button" class="btn sm" onclick="hidRemove(${i})">Show again</button></div>`).join('')
+    : '<p class="hint" style="margin:0">Nobody is hidden.</p>';
+  const c = hidCandidates(hidQuery);
+  res.innerHTML = !PEOPLE.length ? '<p class="hint" style="margin:0">The roster has not loaded yet &#8212; open the Scoreboard tab on the page first, or hit Refresh below.</p>'
+    : !hidQuery.trim() ? ''
+    : !c.length ? '<p class="hint" style="margin:0">No agency or producer matches that.</p>'
+    : c.map(x=>`<div class="itemrow"><div class="t"><b>${esc(x.p.name)}${x.p.owner?' <span class="ownflag">OWNER</span>':''}</b><span>${x.prod ? esc(x.p.agency||'')+' · producer' : (agencyProducers(x.p).length+' producers · whole agency')} · ${distTag(x.p.district)}</span></div>
+      <button type="button" class="btn sm danger" onclick="hidAdd(${x.i})">Hide</button></div>`).join('');
+}
+function hidAdd(i){
+  const p = PEOPLE[i]; if(!p || !EDIT) return;
+  const H = EDIT.hidden || (EDIT.hidden = []);
+  const e = isProducer(p.role) ? {district:normDistrict(p.district), agency:p.agency||'', name:p.name} : {district:normDistrict(p.district), agency:p.name};
+  if(!e.agency) return;
+  H.push(e);
+  markDirty(); hidDraw();
+}
+function hidRemove(i){
+  if(!EDIT || !Array.isArray(EDIT.hidden)) return;
+  EDIT.hidden.splice(i,1);
+  markDirty(); hidDraw();
+}
 function renderBoardTab(){
   const when = dataAsOf ? dataAsOf.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}) : 'not loaded yet';
   const prods = PEOPLE.filter(p=>isProducer(p.role)).length;
   const ags = PEOPLE.filter(p=>!isProducer(p.role)).length;
   $('panelBody').innerHTML = `
+    <fieldset class="box"><legend>Hidden from the lists</legend>
+      <p class="hint" style="margin:0 0 10px">Hide an agency or a producer from the Producers and Agencies lists, the podium, Biggest gains, the agency roster and the live contest boards. Hiding an agency hides its producers too. <b>Totals never change</b> &#8212; the district and agency figures still count everyone on the sheet. Takes effect when you publish.</p>
+      <div class="frm"><div class="full"><label for="hidSearch">Find an agency or producer</label><input type="text" id="hidSearch" value="${esc(hidQuery)}" placeholder="Start typing a name" autocomplete="off"></div></div>
+      <div id="hidResults" style="margin-top:8px"></div>
+      <p class="hint" style="margin:12px 0 6px"><b>Currently hidden</b></p>
+      <div id="hidList"></div>
+    </fieldset>
     <fieldset class="box"><legend>Where the scoreboard gets its numbers</legend>
-      <p class="hint" style="margin:0">The scoreboard is fed <b>live from the two district Quote &amp; Sales Google Sheets</b> &#8212; nothing here to edit and nothing to publish. To change what the board shows, change the sheet; the hub picks it up on the next visit, or when someone hits <b>&#8635; Refresh</b>.</p>
+      <p class="hint" style="margin:0">The scoreboard is fed <b>live from the two district Quote &amp; Sales Google Sheets</b>. To change a number, change the sheet; the hub picks it up on the next visit, or when someone hits <b>&#8635; Refresh</b>. The only thing to edit here is who is hidden, above.</p>
       <p class="hint">Currently loaded: <b>${prods}</b> producers and <b>${ags}</b> agencies across both districts, with data through <b>${esc(when)}</b>.</p>
       <p style="margin:11px 0 0"><button class="btn sm primary" type="button" onclick="loadLive({alert:true})">&#8635; Refresh from the sheets now</button></p>
     </fieldset>
     <fieldset class="box"><legend>Good to know</legend>
       <p class="hint" style="margin:0">&#8220;Daily&#8221; means the <b>last complete business day</b>, not today &#8212; the export snapshots each morning, so its newest date has no production logged yet. Agency owners&#8217; personal production rows are detected automatically (producer name matches the agency name) and hidden from the producer board while <b>Staff only</b> is on. The totals at the top always include them.</p>
     </fieldset>`;
+  const s = $('hidSearch');
+  if(s){ s.addEventListener('input', ()=>{ hidQuery = s.value; hidDraw(); }); }
+  hidDraw();
 }
 
 /* ---------- publish tab + GitHub API ---------- */
@@ -3851,7 +3930,7 @@ function renderPublishTab(){
       </fieldset>
       <fieldset class="box"><legend>Visitor counts</legend>
         <p class="hint" style="margin:0 0 10px">Nothing is measured and no outside script loads until you put a token here. Cloudflare Web Analytics is free, sets no cookies, and records page views rather than people \u2014 it cannot tell you <i>who</i> visited.</p>
-        <p class="hint" style="margin:0 0 10px"><b>To get one:</b> Cloudflare dashboard \u2192 Analytics &amp; Logs \u2192 Web Analytics \u2192 <b>Add a site</b> \u2192 hostname <code>districtthirtytwo.github.io</code>. It shows you a snippet; the token is the long hex string inside it. Paste just that string below and publish.</p>
+        <p class="hint" style="margin:0 0 10px"><b>To get one:</b> Cloudflare dashboard \u2192 Analytics &amp; Logs \u2192 Web Analytics \u2192 <b>Add a site</b> \u2192 hostname <code>3249districthub.com</code>. It shows you a snippet; the token is the long hex string inside it. Paste just that string below and publish.</p>
         <div class="frm"><div><label for="cfTok">Cloudflare Web Analytics token</label>
           <input type="text" id="cfTok" value="${esc((EDIT.analytics||{}).cfBeacon||'')}" placeholder="blank = no tracking at all"></div></div>
         <p style="margin:11px 0 0"><button class="btn sm primary" onclick="saveAnalytics()">Save token</button></p>
