@@ -490,7 +490,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rmubrhja7oqttt",
+  "rev": "rmubrj91yowbv2",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
@@ -884,11 +884,15 @@
   "hidden": [
     {
       "district": "49",
-      "agency": "Dallin Haws"
+      "agency": "Brandon Wade Parks"
     },
     {
       "district": "49",
       "agency": "Dylan J Dudley"
+    },
+    {
+      "district": "49",
+      "agency": "Dallin Haws"
     },
     {
       "district": "49",
