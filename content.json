@@ -490,7 +490,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rmubrdpi7jk943",
+  "rev": "rmubrhja7oqttt",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
@@ -883,8 +883,24 @@
   },
   "hidden": [
     {
-      "district": "32",
-      "agency": "Caleb Alexander Milne"
+      "district": "49",
+      "agency": "Dallin Haws"
+    },
+    {
+      "district": "49",
+      "agency": "Dylan J Dudley"
+    },
+    {
+      "district": "49",
+      "agency": "Jason Hoffard"
+    },
+    {
+      "district": "49",
+      "agency": "Kevin Andrew Shelton"
+    },
+    {
+      "district": "49",
+      "agency": "Kyle Mayer"
     }
   ]
 }
