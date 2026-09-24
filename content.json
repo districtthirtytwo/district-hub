@@ -481,12 +481,12 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r8a406f431ba288817ee9hub",
+  "rev": "rad93f8ff349672db3b13hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
   "contests": {
-    "updated": "2026-09-23",
+    "updated": "2026-09-24",
     "start": "2026-09-01",
     "ends": "2026-09-30",
     "allin": {
@@ -600,7 +600,7 @@
         },
         {
           "name": "Steven Tindell",
-          "apps": 5,
+          "apps": 6,
           "anted": true
         },
         {
