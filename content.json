@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-23",
+  "updated": "2026-09-24",
   "banner": {
     "active": true,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions.",
@@ -7,6 +7,15 @@
     "until": "2026-09-30"
   },
   "news": [
+    {
+      "id": "n20",
+      "date": "2026-09-24",
+      "tag": "update",
+      "pinned": false,
+      "title": "YTD Life Results, Quote & Sales Tracker and Producer Report are posted",
+      "body": "The YTD Life Results as of September 20, the 2026 Quote & Sales Tracker through September 11 and the 2026 Producer Report as of 9/16 are in Reports. The district stands at 265 I&P and $285,688 in life premium. Walt Beayrd (Tindell) leads producer POY year-to-date at $269,031, and Alvaro Gutierrez (Milne) leads the Q3 quarter at $103,601.",
+      "link": "#reports"
+    },
     {
       "id": "n19",
       "date": "2026-09-16",
@@ -189,24 +198,6 @@
       "description": "Final day to reach $45,000 life premium and 20 I&P for the 2026 Annual Life Promo."
     },
     {
-      "id": "e4",
-      "date": "2026-09-22",
-      "time": "",
-      "title": "Boot Camp \u2014 Day 1 of 2",
-      "location": "District office",
-      "link": "",
-      "description": "Two-day District 32 Boot Camp at the district office: the P&C Game, the 10 Rules of Selling, the sales process, and product training across Life, Auto and Homeowners."
-    },
-    {
-      "id": "e5",
-      "date": "2026-09-23",
-      "time": "",
-      "title": "Boot Camp \u2014 Day 2 of 2",
-      "location": "District office",
-      "link": "",
-      "description": "Second day of Boot Camp at the district office."
-    },
-    {
       "id": "e6",
       "date": "2026-10-08",
       "time": "1:00 \u2013 4:00 PM",
@@ -272,8 +263,8 @@
       "period": "Jan 1 \u2013 Dec 31, 2026",
       "ends": "2026-12-31",
       "prize": "4 nights all-inclusive, agent + guest",
-      "metricLabel": "YTD life as of Sep 13 \u00b7 qualifiers first, then premium",
-      "description": "Qualify with $45,000 life premium and 20 I&P. Agents who I&P $70,000 in life premium also bring an agency producer and their guest. Travel likely Jan/Feb 2027. Standings are year-to-date issued-and-paid premium and counts from the district's YTD Life Results as of September 13, listed with qualifiers first and then by premium. Steven Tindell and Jeffrey Pechacek have cleared both bars; Tindell is $1,620 from the $70,000 producer-and-guest tier. Matt Hodges has the premium and is 2 I&P away. FNWL reports are the official source for tracking and disputes are settled at the District Manager's discretion. No cash in lieu, no refunds or credits if the trip is not taken, and the agent must be in good standing with Farmers at the time of travel.",
+      "metricLabel": "YTD life as of Sep 20 \u00b7 qualifiers first, then premium",
+      "description": "Qualify with $45,000 life premium and 20 I&P. Agents who I&P $70,000 in life premium also bring an agency producer and their guest. Travel likely Jan/Feb 2027. Standings are year-to-date issued-and-paid premium and counts from the district's YTD Life Results as of September 20, listed with qualifiers first and then by premium. Steven Tindell and Jeffrey Pechacek have cleared both bars; Tindell is $1,620 from the $70,000 producer-and-guest tier. Matt Hodges has the premium and is 2 I&P away. FNWL reports are the official source for tracking and disputes are settled at the District Manager's discretion. No cash in lieu, no refunds or credits if the trip is not taken, and the agent must be in good standing with Farmers at the time of travel.",
       "standings": [
         {
           "name": "Steven Tindell",
@@ -281,7 +272,7 @@
         },
         {
           "name": "Jeffrey Pechacek",
-          "value": "$48,352 \u00b7 32 I&P \u2713"
+          "value": "$50,092 \u00b7 33 I&P \u2713"
         },
         {
           "name": "Matt Hodges",
@@ -293,7 +284,7 @@
         },
         {
           "name": "Chris Gutierrez",
-          "value": "$10,425 \u00b7 18 I&P"
+          "value": "$10,565 \u00b7 19 I&P"
         }
       ],
       "district": "32"
@@ -366,28 +357,28 @@
   ],
   "reports": [
     {
-      "id": "r-life-0913",
+      "id": "r-life-0920",
       "title": "YTD Life Results",
-      "date": "2026-09-13",
+      "date": "2026-09-20",
       "category": "Life",
-      "file": "files/ytd-life-results-2026-09-13.pdf",
-      "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 245 I&P / $275,031"
+      "file": "files/ytd-life-results-2026-09-20.pdf",
+      "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 265 I&P / $285,688"
     },
     {
-      "id": "r-qst-0904",
+      "id": "r-qst-0911",
       "title": "2026 Quote & Sales Tracker",
-      "date": "2026-09-04",
+      "date": "2026-09-11",
       "category": "Trackers",
-      "file": "files/quote-sales-tracker-2026-09-04.pdf",
-      "note": "Thru Sep 4 \u2014 quotes per day, YTD quotes, NBNH and business mix by agent"
+      "file": "files/quote-sales-tracker-2026-09-11.pdf",
+      "note": "Thru Sep 11 \u2014 quotes per day, YTD quotes, NBNH and business mix by agent"
     },
     {
-      "id": "r-prod-0911",
+      "id": "r-prod-0916",
       "title": "2026 Producer Report",
-      "date": "2026-09-11",
+      "date": "2026-09-16",
       "category": "Production",
-      "file": "files/producer-report-2026-09-11.pdf",
-      "note": "As of 9/11/26 \u2014 PL NB premium by producer: Aug, Sept and Oct folios, Q1\u2013Q3 and POY year-to-date"
+      "file": "files/producer-report-2026-09-16.pdf",
+      "note": "As of 9/16/26 \u2014 PL NB premium by producer: Aug, Sept and Oct folios, Q1\u2013Q3 and POY year-to-date"
     },
     {
       "id": "r-matrix-aug26",
@@ -490,7 +481,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r1c745f140b67fb237c4ahub",
+  "rev": "r8a406f431ba288817ee9hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
