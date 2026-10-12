@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07",
+  "updated": "2026-10-12",
   "banner": {
     "active": true,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions.",
@@ -481,12 +481,12 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rffdda3d40b56d3b84636hub",
+  "rev": "r888ee016625e99f3deefhub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
   "contests": {
-    "updated": "2026-10-07",
+    "updated": "2026-10-12",
     "start": "2026-09-01",
     "ends": "2026-09-30",
     "allin": {
@@ -640,7 +640,7 @@
         },
         {
           "name": "Krystal Lee Hawk",
-          "apps": 0,
+          "apps": 1,
           "anted": false
         },
         {
@@ -794,7 +794,7 @@
             },
             {
               "name": "Aaron Michael Vicknair",
-              "quotes": 376,
+              "quotes": 377,
               "nb": 35
             },
             {
