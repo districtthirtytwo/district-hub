@@ -1,12 +1,30 @@
 {
-  "updated": "2026-10-12",
+  "updated": "2026-10-14",
   "banner": {
-    "active": true,
+    "active": false,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions.",
     "link": "#competitions",
     "until": "2026-09-30"
   },
   "news": [
+    {
+      "id": "n21",
+      "date": "2026-10-14",
+      "tag": "update",
+      "pinned": false,
+      "title": "YTD Life Results, Quote & Sales Tracker and Producer Report are posted",
+      "body": "The YTD Life Results as of October 11, the 2026 Quote & Sales Tracker through October 2 and the 2026 Producer Report as of 10/9 are in Reports. The district stands at 291 I&P and $303,357 in life premium. Walt Beayrd (Tindell) leads producer POY year-to-date at $284,370, and Rebekah Josephus (Hayes) opens the new quarter on top at $30,261.",
+      "link": "#reports"
+    },
+    {
+      "id": "n22",
+      "date": "2026-10-14",
+      "tag": "recognition",
+      "pinned": false,
+      "title": "Steven Tindell reaches the $70,000 producer-and-guest tier",
+      "body": "Steven Tindell has passed $70,000 in year-to-date issued-and-paid life premium \u2014 $70,679 and 51 I&P as of October 11 \u2014 so he brings an agency producer and their guest to Jamaica along with his own. Standings are in Competitions.",
+      "link": "#competitions"
+    },
     {
       "id": "n20",
       "date": "2026-09-24",
@@ -180,15 +198,6 @@
   ],
   "events": [
     {
-      "id": "e1",
-      "date": "2026-09-30",
-      "time": "",
-      "title": "Q3 ends \u2014 quarter close",
-      "location": "",
-      "link": "",
-      "description": "Last day of the quarter. Q3 Producer Cup standings final and Topper Club pace check."
-    },
-    {
       "id": "e2",
       "date": "2026-12-31",
       "time": "",
@@ -196,15 +205,6 @@
       "location": "",
       "link": "",
       "description": "Final day to reach $45,000 life premium and 20 I&P for the 2026 Annual Life Promo."
-    },
-    {
-      "id": "e6",
-      "date": "2026-10-08",
-      "time": "1:00 \u2013 4:00 PM",
-      "title": "District 32 meeting \u2014 Hilton Garden Inn, Waco",
-      "location": "Hilton Garden Inn, Waco",
-      "link": "",
-      "description": "October district meeting, 1\u20134 PM at the Hilton Garden Inn in Waco. Afterwards the Steak or Burgers cookout and the \u201cAll In\u201d for Life payout follow at Brandon\u2019s house."
     }
   ],
   "competitions": [
@@ -263,16 +263,16 @@
       "period": "Jan 1 \u2013 Dec 31, 2026",
       "ends": "2026-12-31",
       "prize": "4 nights all-inclusive, agent + guest",
-      "metricLabel": "YTD life as of Sep 20 \u00b7 qualifiers first, then premium",
-      "description": "Qualify with $45,000 life premium and 20 I&P. Agents who I&P $70,000 in life premium also bring an agency producer and their guest. Travel likely Jan/Feb 2027. Standings are year-to-date issued-and-paid premium and counts from the district's YTD Life Results as of September 20, listed with qualifiers first and then by premium. Steven Tindell and Jeffrey Pechacek have cleared both bars; Tindell is $1,620 from the $70,000 producer-and-guest tier. Matt Hodges has the premium and is 2 I&P away. FNWL reports are the official source for tracking and disputes are settled at the District Manager's discretion. No cash in lieu, no refunds or credits if the trip is not taken, and the agent must be in good standing with Farmers at the time of travel.",
+      "metricLabel": "YTD life as of Oct 11 \u00b7 qualifiers first, then premium",
+      "description": "Qualify with $45,000 life premium and 20 I&P. Agents who I&P $70,000 in life premium also bring an agency producer and their guest. Travel likely Jan/Feb 2027. Standings are year-to-date issued-and-paid premium and counts from the district's YTD Life Results as of October 11, listed with qualifiers first and then by premium. Steven Tindell and Jeffrey Pechacek have cleared both bars, and Tindell has passed the $70,000 producer-and-guest tier. Matt Hodges has the premium and is 2 I&P away. Chris Gutierrez has reached the 20-I&P Big Hitter bar. FNWL reports are the official source for tracking and disputes are settled at the District Manager's discretion. No cash in lieu, no refunds or credits if the trip is not taken, and the agent must be in good standing with Farmers at the time of travel.",
       "standings": [
         {
           "name": "Steven Tindell",
-          "value": "$68,380 \u00b7 46 I&P \u2713"
+          "value": "$70,679 \u00b7 51 I&P \u2713"
         },
         {
           "name": "Jeffrey Pechacek",
-          "value": "$50,092 \u00b7 33 I&P \u2713"
+          "value": "$56,638 \u00b7 38 I&P \u2713"
         },
         {
           "name": "Matt Hodges",
@@ -280,11 +280,11 @@
         },
         {
           "name": "Jason Kirk",
-          "value": "$26,174 \u00b7 14 I&P"
+          "value": "$26,400 \u00b7 15 I&P"
         },
         {
           "name": "Chris Gutierrez",
-          "value": "$10,565 \u00b7 19 I&P"
+          "value": "$11,678 \u00b7 20 I&P"
         }
       ],
       "district": "32"
@@ -356,6 +356,30 @@
     }
   ],
   "reports": [
+    {
+      "id": "r-life-1011",
+      "title": "YTD Life Results",
+      "date": "2026-10-11",
+      "category": "Life",
+      "file": "files/ytd-life-results-2026-10-11.pdf",
+      "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 291 I&P / $303,357"
+    },
+    {
+      "id": "r-qst-1002",
+      "title": "2026 Quote & Sales Tracker",
+      "date": "2026-10-02",
+      "category": "Trackers",
+      "file": "files/quote-sales-tracker-2026-10-02.pdf",
+      "note": "Thru Oct 2 \u2014 quotes per day, YTD quotes, NBNH and business mix by agent"
+    },
+    {
+      "id": "r-prod-1009",
+      "title": "2026 Producer Report",
+      "date": "2026-10-09",
+      "category": "Production",
+      "file": "files/producer-report-2026-10-09.pdf",
+      "note": "As of 10/9/26 \u2014 PL NB premium by producer: Nov, Dec and Jan folios, Q1\u2013Q4 and POY year-to-date"
+    },
     {
       "id": "r-life-0920",
       "title": "YTD Life Results",
@@ -481,7 +505,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r888ee016625e99f3deefhub",
+  "rev": "r36d8d41d033bf4d296bfhub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
