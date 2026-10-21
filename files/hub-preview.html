@@ -506,6 +506,7 @@
   #scoreboard.navy .pod .who span,#scoreboard.navy .pod .val span{color:var(--on-navy-soft);}
   #scoreboard.navy .boardstate{background:var(--navy-2)!important;color:var(--on-navy-soft);}
   #scoreboard.navy .boardstate b{color:var(--on-navy);}
+  #scoreboard.navy .boardnote{color:var(--on-navy);}   /* block 45 */
   #scoreboard.navy .boardwrap{border-color:rgba(255,255,255,.18);}
   #scoreboard.navy table.board th{background:var(--navy);color:var(--on-navy-soft);border-bottom-color:rgba(255,255,255,.28);}
   #scoreboard.navy .thper{color:var(--on-navy-soft);opacity:.8;}
@@ -2207,6 +2208,23 @@ function metricStale(m){
   const days = Math.round((midnight(dataAsOf) - midnight(last)) / 86400000);
   return days > METRIC_STALE_DAYS ? {last, days} : null;
 }
+/* block 45: age against today, not the sheet's own newest day. A sheet
+   that stops whole never trips metricStale(); this does. Business days
+   from the metric's last day to today, so weekends never count. The
+   morning after a normal 3 PM pull both metrics read 3; one missed pull
+   is 4 and says nothing; two is 5 and does. */
+const METRIC_OLD_BDAYS = 4;
+function bizDaysSince(d){
+  const t = midnight(new Date()), x = midnight(d); let n = 0;
+  while(x < t){ x.setDate(x.getDate()+1); const w = x.getDay(); if(w!==0 && w!==6) n++; }
+  return n;
+}
+function metricOld(m){
+  const last = metricLastFor(m);
+  if(!last) return null;
+  const bdays = bizDaysSince(last);
+  return bdays > METRIC_OLD_BDAYS ? {last, bdays} : null;
+}
 /* "New business" is singular and "quotes" is plural, so the verb has to
    come along with the noun or half these sentences read as broken. */
 /* Non-null when the districts in scope disagree about where this metric
@@ -2362,8 +2380,10 @@ function renderBoard(){
   const bnHidePodium = bnOn && !!BN.hidePodium && LB.view==='producer';
   if(dataAsOf){
     const parts = ['data through '+dataAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})];
-    ['q','n'].forEach(m=>{ const st=metricStale(m);
+    const oldQ = metricOld('q'), oldN = metricOld('n');   // block 45
+    ['q','n'].forEach(m=>{ const st=metricStale(m) || (oldQ && oldN ? null : metricOld(m));
       if(st) parts.push(metricNoun(m).toLowerCase()+' only through '+shortDay(st.last)); });
+    if(oldQ && oldN) parts.push(Math.min(oldQ.bdays, oldN.bdays)+' business days old');
     $('lbAsOf').textContent = parts.join(' \u00b7 ');
   }else $('lbAsOf').textContent = '';
   $('staffOnlyWrap').style.visibility = LB.view==='producer' ? 'visible' : 'hidden';
@@ -2414,13 +2434,17 @@ function renderBoard(){
     worst='err';
     notes.push('District '+missingDistrict+' numbers could not be loaded, so Combined totals are switched off — you are seeing District '+(missingDistrict==='49'?'32':'49')+' only.');
   }
-  const bothStale = !!(metricStale('q') && metricStale('n'));
+  /* block 45: "is current" is said only of a metric that is neither
+     behind the sheet nor old against today. */
+  const flagged = m => metricOld(m) || metricStale(m);
+  const bothStale = !!(flagged('q') && flagged('n'));
   ['q','n'].forEach(m=>{
-    const st = metricStale(m);
-    if(!st) return;
+    const od = metricOld(m), st = metricStale(m);
+    if(!od && !st) return;
     worst='err';
-    notes.push(metricStops(m)+' '+shortDay(st.last)+' — '+st.days+
-      ' days ago. Every '+metricUnit(m)+' number on this page, including the '+
+    notes.push((od ? metricNoUpd(m)+' '+shortDay(od.last)+' — '+od.bdays+' business days ago.'
+                   : metricStops(m)+' '+shortDay(st.last)+' — '+st.days+' days ago.')+
+      ' Every '+metricUnit(m)+' number on this page, including the '+
       'totals above, stops there.'+(bothStale ? '' : ' '+metricCurrent(m)));
   });
   ['q','n'].forEach(m=>{
