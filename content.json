@@ -8,6 +8,15 @@
   },
   "news": [
     {
+      "id": "n25",
+      "date": "2026-10-22",
+      "tag": "update",
+      "pinned": false,
+      "title": "The September and October newsletters are posted",
+      "body": "The September newsletter (August commission) and the October newsletter (September production, October folio) are in Newsletters. In September production the district wrote $910,267 in folio premium, 469 new auto and 42 life I&P. Darren Hayes and David Dickerson each finished top five in seven of the eight categories, and Steven Tindell passed $1 million in folio premium for the year.",
+      "link": "#newsletter"
+    },
+    {
       "id": "n24",
       "date": "2026-10-22",
       "tag": "update",
@@ -376,6 +385,18 @@
   ],
   "newsletters": [
     {
+      "id": "nl5",
+      "title": "October Newsletter \u2014 September Commission",
+      "date": "2026-10-19",
+      "file": "files/2026-10-newsletter.pdf"
+    },
+    {
+      "id": "nl4",
+      "title": "September Newsletter \u2014 August Commission",
+      "date": "2026-09-17",
+      "file": "files/2026-09-newsletter.pdf"
+    },
+    {
       "id": "nl3",
       "title": "August Newsletter \u2014 July Commission",
       "date": "2026-08-13",
@@ -553,7 +574,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r836f2d191391e2c3c012hub",
+  "rev": "rb85d84d65533ec8ee040hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
