@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-14",
+  "updated": "2026-10-22",
   "banner": {
     "active": false,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions.",
@@ -7,6 +7,15 @@
     "until": "2026-09-30"
   },
   "news": [
+    {
+      "id": "n23",
+      "date": "2026-10-22",
+      "tag": "promo",
+      "pinned": true,
+      "title": "September contests are final \u2014 \u201cAll In\u201d for Life winners, Q3 Producer Cup, and Summer Surprise weeks 3\u20137",
+      "body": "\u201cAll In\u201d for Life was played October 8 for a $1,850 pot: Jeff Pechacek took first and $740, followed by Darren Hayes, Steven Tindell, Derrick Bayer and Chris Gutierrez; Matt Hodges and Stephanie Burns had their antes returned. Steak or Burgers final team points are on the District 32 board, with the payout set for November. Alvaro Gutierrez (Milne) won the Q3 Producer Cup. The District 32 Summer Surprise board now marks weeks 3\u20137 as announced \u2014 NB paid in week 3, quotes in weeks 5 and 6 \u2014 and runs through November 27. In District 49, \u201cAll In\u201d for New Business closed October 16 with John Hilland and Raymond Hamaker seated for today\u2019s showdown; final cards are on the District 49 board.",
+      "link": "#competitions"
+    },
     {
       "id": "n21",
       "date": "2026-10-14",
@@ -92,7 +101,7 @@
       "id": "n13",
       "date": "2026-08-31",
       "tag": "update",
-      "pinned": true,
+      "pinned": false,
       "title": "September Competitions dashboard is live",
       "body": "One page now tracks both September competitions. For \u201cAll In\u201d for Life: who\u2019s seated, everyone\u2019s playing cards, the district app count, and the pot \u2014 including the district office\u2019s contribution jumping to $2,500 at 85 apps. For Steak or Burgers: the Team Alan v Team Conrey score and every agency\u2019s quotes, new business, and points. The teams are final \u2014 14 agencies with Alan, 15 with Conrey. Standings update as numbers are posted through the month.",
       "link": "#competitions"
@@ -209,6 +218,30 @@
   ],
   "competitions": [
     {
+      "id": "c-summer32",
+      "active": true,
+      "district": "32",
+      "title": "Summer Surprise \u2014 District 32 Weekly Cash Promo",
+      "period": "Sep 12 \u2013 Nov 27, 2026",
+      "ends": "2026-11-27",
+      "prize": "Venmo cash to the week's top 5 \u2014 $100 / $60 / $40 / $25 / $25",
+      "metricLabel": "Weekly top 5 \u00b7 quotes or NB",
+      "description": "The Summer Surprise runs in District 32 too, on the same calendar as District 49: weeks 3 through 13, September 12 through November 27 (Saturday-to-Friday reporting weeks \u2014 weeks 1 and 2 ran July 4\u201317 before the pause). Each week the district office announces the top 5 producers for the week by quotes or by NB policies. Eight of the promo's thirteen weeks pay immediate Venmo cash \u2014 $100, $60, $40, $25 and $25 for first through fifth \u2014 and the rest are \u201catta boy\u201d weeks. Nobody knows which weeks pay or whether the week is scored on quotes or NB until it is announced, by the Wednesday after the week closes, so hustle every week. Policies must be written in the producer code and during the promo period; results come from the PL NBA Producer Report; Foremost PAR commissions credit as received; only P&C licensed and appointed staff are eligible; disputes are settled by the District Manager. Live weekly top-5 lists by quotes and by NB are on the District 32 board above.",
+      "standings": []
+    },
+    {
+      "id": "c-summer",
+      "active": true,
+      "title": "Summer Surprise \u2014 District 49 Weekly Cash Promo",
+      "period": "Sep 12 \u2013 Nov 27, 2026",
+      "ends": "2026-11-27",
+      "prize": "Venmo cash to the week's top 5 \u2014 $100 / $60 / $40 / $25 / $25",
+      "metricLabel": "Weekly top 5 \u00b7 quotes or NB",
+      "description": "The Summer Surprise resumes September 12 at week 3 and runs through November 27, week 13 (Saturday-to-Friday reporting weeks \u2014 weeks 1 and 2 ran July 4\u201317 before the pause). Each week the district office announces the top 5 producers for the week by quotes or by NB policies. Eight of the promo's thirteen weeks pay immediate Venmo cash \u2014 $100, $60, $40, $25 and $25 for first through fifth \u2014 and the rest are \u201catta boy\u201d weeks. Nobody knows which weeks pay or whether the week is scored on quotes or NB until it is announced, by the Wednesday after the week closes, so hustle every week. Policies must be written in the producer code and during the promo period; results come from the PL NBA Producer Report; Foremost PAR commissions credit as received; only P&C licensed and appointed staff are eligible; disputes are settled by the District Manager. Live weekly top-5 lists by quotes and by NB are on the District 49 board above.",
+      "standings": [],
+      "district": "49"
+    },
+    {
       "id": "c-allin49",
       "active": true,
       "district": "49",
@@ -226,10 +259,31 @@
       "title": "\u201cAll In\u201d for Life \u2014 District 32 Texas Hold \u2018Em Life Promo",
       "period": "Aug 31 \u2013 Sep 30, 2026",
       "ends": "2026-09-30",
-      "prize": "Cash pot \u2014 top five hands paid",
-      "metricLabel": "Life apps written \u00b7 Aug 31\u2013Sep 30",
-      "description": "A District 32 promo. A $50 ante and 3 written life apps earns your seat at the table, and every life app written earns an additional playing card \u2014 the more apps you write, the better your odds of a great poker hand. We play one hand of Texas Hold \u2018Em: best hand takes 40% of the pot, then 25%, 20%, 10% and 5% for second through fifth. Antes go straight into the pot and the district office adds $1,000, rising to $2,500 once the district writes 85 total apps. Write your 3 apps and take none of the pot and your $50 ante is refunded. Apps must show on the Life Performance Tracker and be written August 31 \u2013 September 30 to count. Commitment and ante are due by September 4 \u2014 checks payable to Brandon Parks at the district office, 213A Old Hewitt Road, Waco, TX 76712. Disputes are settled at the District Manager\u2019s discretion. Live seats, the pot, and everyone\u2019s cards are on the September Competitions dashboard \u2014 open it from Resources.",
-      "standings": [],
+      "prize": "$1,850 pot \u2014 top five hands paid",
+      "metricLabel": "Final payouts \u00b7 hand played Oct 8",
+      "description": "The District 32 \u201cAll In\u201d for Life promo ran August 31 \u2013 September 30: a $50 ante and 3 written life apps earned a seat, and every life app written earned another playing card. Seventeen agents anted and seven took a seat. The hand was played on October 8 at the district office after the district meeting, for a $1,850 pot \u2014 $850 in antes plus the district office's $1,000. Jeff Pechacek took first and $740, Darren Hayes second ($463), Steven Tindell third ($370), Derrick Bayer fourth ($185) and Chris Gutierrez fifth ($93). Matt Hodges and Stephanie Burns qualified and had their $50 ante returned. Final apps and seats are on the District 32 board above.",
+      "standings": [
+        {
+          "name": "Jeff Pechacek",
+          "value": "1st \u00b7 $740"
+        },
+        {
+          "name": "Darren Hayes",
+          "value": "2nd \u00b7 $463"
+        },
+        {
+          "name": "Steven Tindell",
+          "value": "3rd \u00b7 $370"
+        },
+        {
+          "name": "Derrick Bayer",
+          "value": "4th \u00b7 $185"
+        },
+        {
+          "name": "Chris Gutierrez",
+          "value": "5th \u00b7 $93"
+        }
+      ],
       "district": "32"
     },
     {
@@ -240,21 +294,9 @@
       "ends": "2026-09-30",
       "prize": "Prime steak for the winning team; burgers for the rest",
       "metricLabel": "Team points \u00b7 quote = 1 \u00b7 NB policy = 5",
-      "description": "Every District 32 agency is on one of two teams for September, and scoring is by points at the agency level: each quote is worth 1 point and each new business policy is worth 5, counted for September 1\u201330. The team with the most points eats Prime steak; the other team gets burgers. The teams are set: Team Alan (14 agencies) takes on Team Conrey (15), drawn to be as evenly matched as possible on summer production. Full rosters and live team scores are on the September Competitions dashboard \u2014 open it from Resources or the news post below. The cookout happens after the October district meeting.",
+      "description": "Every District 32 agency played on one of two teams for September \u2014 Team Alan (14 agencies) against Team Conrey (15) \u2014 scored by points at the agency level: each quote worth 1 point and each new business policy worth 5, counted September 1\u201330. The winning team eats Prime steak; the other team gets burgers. Final team points are on the District 32 board above. The Steak or Burgers payout is set for November.",
       "standings": [],
       "district": "32"
-    },
-    {
-      "id": "c-summer32",
-      "active": true,
-      "district": "32",
-      "title": "Summer Surprise \u2014 District 32 Weekly Cash Promo",
-      "period": "Sep 12 \u2013 Nov 27, 2026",
-      "ends": "2026-11-27",
-      "prize": "Venmo cash to the week's top 5 \u2014 $100 / $60 / $40 / $25 / $25",
-      "metricLabel": "Weekly top 5 \u00b7 quotes or NB",
-      "description": "The Summer Surprise runs in District 32 too, on the same calendar as District 49: weeks 3 through 13, September 12 through November 27 (Saturday-to-Friday reporting weeks \u2014 weeks 1 and 2 ran July 4\u201317 before the pause). Each week the district office announces the top 5 producers for the week by quotes or by NB policies. Eight of the promo's thirteen weeks pay immediate Venmo cash \u2014 $100, $60, $40, $25 and $25 for first through fifth \u2014 and the rest are \u201catta boy\u201d weeks. Nobody knows which weeks pay or whether the week is scored on quotes or NB until it is announced, by the Wednesday after the week closes, so hustle every week. Policies must be written in the producer code and during the promo period; results come from the PL NBA Producer Report; Foremost PAR commissions credit as received; only P&C licensed and appointed staff are eligible; disputes are settled by the District Manager. Live weekly top-5 lists by quotes and by NB are on the District 32 board above.",
-      "standings": []
     },
     {
       "id": "c-jamaica",
@@ -292,47 +334,35 @@
     {
       "id": "c-producercup",
       "active": true,
-      "title": "Producer Cup \u2014 Q2 winners",
-      "period": "Q2 2026 \u00b7 Apr 1 \u2013 Jun 30",
-      "ends": "2026-06-30",
-      "prize": "Quarterly recognition",
-      "metricLabel": "Q2 final placing",
-      "description": "Congratulations to the Q2 Producer Cup top five. Q3 standings will be posted after the quarter closes on September 30.",
+      "title": "Producer Cup \u2014 Q3 winners",
+      "period": "Q3 2026 \u00b7 Jul 1 \u2013 Sep 30",
+      "ends": "2026-09-30",
+      "prize": "Cash \u2014 $250 / $200 / $150 / $100 / $50",
+      "metricLabel": "Q3 final placing \u00b7 PL NB premium",
+      "description": "Congratulations to the Q3 Producer Cup top five, placed on Q3 personal lines new business premium in the final Q3 results as of September 18. Alvaro Gutierrez (Milne) takes first and $250. Current Q4 standings are in the weekly Producer Report in Reports.",
       "standings": [
         {
-          "name": "McKenzie Scruggs \u2014 Jeff Pechacek Agency",
-          "value": "1st"
-        },
-        {
-          "name": "Walt Beayrd \u2014 Steven Tindell Agency",
-          "value": "2nd"
-        },
-        {
-          "name": "Marcus Hudson \u2014 Caleb Milne Agency",
-          "value": "3rd"
+          "name": "Alvaro Gutierrez \u2014 Caleb Milne Agency",
+          "value": "1st \u00b7 $250"
         },
         {
           "name": "Lauren Geier \u2014 David Dickerson Agency",
-          "value": "4th"
+          "value": "2nd \u00b7 $200"
         },
         {
           "name": "Breanna Ashley \u2014 Chris Gutierrez Agency",
-          "value": "5th"
+          "value": "3rd \u00b7 $150"
+        },
+        {
+          "name": "Walt Beayrd \u2014 Steven Tindell Agency",
+          "value": "4th \u00b7 $100"
+        },
+        {
+          "name": "Mattie Hodges \u2014 Matt Hodges Agency",
+          "value": "5th \u00b7 $50"
         }
       ],
       "district": "32"
-    },
-    {
-      "id": "c-summer",
-      "active": true,
-      "title": "Summer Surprise \u2014 District 49 Weekly Cash Promo",
-      "period": "Sep 12 \u2013 Nov 27, 2026",
-      "ends": "2026-11-27",
-      "prize": "Venmo cash to the week's top 5 \u2014 $100 / $60 / $40 / $25 / $25",
-      "metricLabel": "Weekly top 5 \u00b7 quotes or NB",
-      "description": "The Summer Surprise resumes September 12 at week 3 and runs through November 27, week 13 (Saturday-to-Friday reporting weeks \u2014 weeks 1 and 2 ran July 4\u201317 before the pause). Each week the district office announces the top 5 producers for the week by quotes or by NB policies. Eight of the promo's thirteen weeks pay immediate Venmo cash \u2014 $100, $60, $40, $25 and $25 for first through fifth \u2014 and the rest are \u201catta boy\u201d weeks. Nobody knows which weeks pay or whether the week is scored on quotes or NB until it is announced, by the Wednesday after the week closes, so hustle every week. Policies must be written in the producer code and during the promo period; results come from the PL NBA Producer Report; Foremost PAR commissions credit as received; only P&C licensed and appointed staff are eligible; disputes are settled by the District Manager. Live weekly top-5 lists by quotes and by NB are on the District 49 board above.",
-      "standings": [],
-      "district": "49"
     }
   ],
   "newsletters": [
@@ -505,7 +535,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r36d8d41d033bf4d296bfhub",
+  "rev": "re7e176a6dd24fa11d9a3hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
@@ -674,7 +704,8 @@
         }
       ],
       "start": "2026-08-31",
-      "ends": "2026-09-30"
+      "ends": "2026-09-30",
+      "rules": "Final \u2014 the hand was played October 8 at the district office for a $1,850 pot. 1st Jeff Pechacek $740 \u00b7 2nd Darren Hayes $463 \u00b7 3rd Steven Tindell $370 \u00b7 4th Derrick Bayer $185 \u00b7 5th Chris Gutierrez $93. Matt Hodges and Stephanie Burns qualified and had their $50 ante returned. Seats took a $50 ante and 3 written life apps; every app written earned a card. Apps counted from the Life Performance Tracker, Aug 31 \u2013 Sep 30."
     },
     "steak": {
       "teams": [
@@ -835,7 +866,8 @@
         }
       ],
       "start": "2026-09-01",
-      "ends": "2026-09-30"
+      "ends": "2026-09-30",
+      "rules": "Final standings. Two teams, points at the agency level: 1 quote = 1 point \u00b7 1 NB policy = 5 points, counted Sep 1\u201330. The winning team eats Prime steak; the other team gets burgers. The Steak or Burgers payout is set for November."
     },
     "allin49": {
       "start": "2026-09-14",
@@ -886,7 +918,28 @@
       ],
       "resumedFrom": "2026-07-04",
       "firstWeek": 3,
-      "results": []
+      "results": [
+        {
+          "week": 3,
+          "paid": "n"
+        },
+        {
+          "week": 4,
+          "paid": "none"
+        },
+        {
+          "week": 5,
+          "paid": "q"
+        },
+        {
+          "week": 6,
+          "paid": "q"
+        },
+        {
+          "week": 7,
+          "paid": "none"
+        }
+      ]
     }
   },
   "boardNotice": {
