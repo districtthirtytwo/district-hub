@@ -2989,12 +2989,12 @@ function renderContests(){
   };
   if(COMP.dist==='49'){
     const foot=(C.allin49||C.surprise49)?liveFoot('49','“All In” and Summer Surprise are'):'';
-    box.innerHTML = cbAllin49(C)+cbSurprise(C,'49')+foot;
+    box.innerHTML = cbSurprise(C,'49')+cbAllin49(C)+foot;   // block 46: the ongoing promo leads
     return;
   }
   const foot=(C.updated?'<div class="cb-foot">Standings as of '+fmtDate(C.updated)+' · All-In app counts from the Life Performance Tracker; Steak or Burgers from agency-level quote and NB counts posted by the district office.</div>':'')
     +(C.surprise32?liveFoot('32','Summer Surprise is'):'');
-  box.innerHTML = cbAllin(C)+cbSteak(C)+cbSurprise(C,'32')+foot;
+  box.innerHTML = cbSurprise(C,'32')+cbAllin(C)+cbSteak(C)+foot;   // block 46: the ongoing promo leads
 }
 
 /* ---------- District 32 / District 49 switch (block 39) ---------- */
@@ -3167,6 +3167,9 @@ function cbSurprise(C,d){
 function renderComps(){
   const today = new Date(); today.setHours(0,0,0,0);
   const items = (data().competitions||[]).filter(c=>c.active && cbDistOf(c)===COMP.dist);
+  /* block 46: running promos first, finished ones after; content order holds inside each group */
+  const isOver = c=>{ const e=c.ends?new Date(c.ends+"T23:59:59"):null; return !!e && !isNaN(e) && midnight(e)<today; };
+  items.sort((a,b)=>isOver(a)-isOver(b));
   $('compList').innerHTML = items.map(c=>{
     let days='', ended=false;
     if(c.ends){
