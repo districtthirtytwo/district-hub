@@ -2307,8 +2307,7 @@ function renderMovers(){
      an empty strip reads as "nobody improved" rather than "no data". */
   const st=metricStale(LB.metric);
   if(st){
-    $('moversSub').textContent = metricNoUpd(LB.metric)+' '+shortDay(st.last)
-      +', so there is no week to compare.';
+    $('moversSub').textContent = 'No week to compare while '+metricPlain(LB.metric)+' '+(LB.metric==='q'?'are':'is')+' behind.';   // block 47
     row.innerHTML=''; wrap.hidden=false; return;
   }
 
@@ -2379,12 +2378,15 @@ function renderBoard(){
   }
   const bnHidePodium = bnOn && !!BN.hidePodium && LB.view==='producer';
   if(dataAsOf){
-    const parts = ['data through '+dataAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})];
-    const oldQ = metricOld('q'), oldN = metricOld('n');   // block 45
-    ['q','n'].forEach(m=>{ const st=metricStale(m) || (oldQ && oldN ? null : metricOld(m));
-      if(st) parts.push(metricNoun(m).toLowerCase()+' only through '+shortDay(st.last)); });
-    if(oldQ && oldN) parts.push(Math.min(oldQ.bdays, oldN.bdays)+' business days old');
-    $('lbAsOf').textContent = parts.join(' \u00b7 ');
+    /* block 47: one statement of where the numbers stop. Healthy, the sheet's
+       cutoff; when a metric is behind or old, each metric's last day instead.
+       The age is said once, in the board note, never here. */
+    const lq = metricLastFor('q'), ln = metricLastFor('n');
+    const lagging = (metricOld('q') || metricStale('q') || metricOld('n') || metricStale('n')) && lq && ln;
+    $('lbAsOf').textContent = !lagging
+      ? 'data through '+dataAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})
+      : dayKeyOf(lq)===dayKeyOf(ln) ? 'quotes and new business through '+shortDay(lq)
+      : 'quotes through '+shortDay(lq)+' \u00b7 new business through '+shortDay(ln);
   }else $('lbAsOf').textContent = '';
   $('staffOnlyWrap').style.visibility = LB.view==='producer' ? 'visible' : 'hidden';
   const perLbl = periodLabel();
@@ -2434,29 +2436,29 @@ function renderBoard(){
     worst='err';
     notes.push('District '+missingDistrict+' numbers could not be loaded, so Combined totals are switched off — you are seeing District '+(missingDistrict==='49'?'32':'49')+' only.');
   }
-  /* block 45: "is current" is said only of a metric that is neither
-     behind the sheet nor old against today. */
-  const flagged = m => metricOld(m) || metricStale(m);
-  const bothStale = !!(flagged('q') && flagged('n'));
-  ['q','n'].forEach(m=>{
-    const od = metricOld(m), st = metricStale(m);
-    if(!od && !st) return;
-    worst='err';
-    notes.push((od ? metricNoUpd(m)+' '+shortDay(od.last)+' — '+od.bdays+' business days ago.'
-                   : metricStops(m)+' '+shortDay(st.last)+' — '+st.days+' days ago.')+
-      ' Every '+metricUnit(m)+' number on this page, including the '+
-      'totals above, stops there.'+(bothStale ? '' : ' '+metricCurrent(m)));
-  });
-  ['q','n'].forEach(m=>{
-    const sp = metricSplitStale(m);
-    if(!sp) return;
-    notes.push('The two districts stopped on different days ('+
-      sp.map(x=>'D'+x.d+' '+shortDay(x.last)).join(', ')+'), so the Combined '+
-      metricUnit(m)+' total mixes two different windows and the D32/D49 split is '+
+  /* block 47: the tracker's age, said once. Never one sentence per metric and
+     no dates (the as-of line under the board carries them). Same tests as
+     blocks 23–26 (behind the sheet) and 45 (old against today). */
+  const oq = metricOld('q'), on = metricOld('n'), sq = metricStale('q'), sn = metricStale('n');
+  if(oq && on){
+    const lq = metricLastFor('q'), ln = metricLastFor('n');
+    notes.push('The district tracker has not refreshed in '+bizDaysSince(lq>ln?lq:ln)+' business days.');
+  }else{
+    ['q','n'].forEach(m=>{
+      const od = m==='q'?oq:on, st = m==='q'?sq:sn;
+      if(od) notes.push(metricNoun(m)+(m==='q'?' have':' has')+' not refreshed in '+od.bdays+' business days.');
+      else if(st) notes.push(metricNoun(m)+(m==='q'?' are':' is')+' running '+st.days+' days behind the rest of the tracker.');
+    });
+  }
+  const splits = ['q','n'].map(m=>({m, sp:metricSplitStale(m)})).filter(x=>x.sp);
+  if(splits.length){
+    notes.push('District 32 and District 49 stop on different days ('+
+      splits[0].sp.map(x=>'D'+x.d+' '+shortDay(x.last)).join(', ')+'), so Combined '+
+      (splits.length>1 ? '' : metricUnit(splits[0].m)+' ')+'totals mix two windows and the D32/D49 split is '+
       'switched off. Use the D32 and D49 buttons to compare like for like.');
-  });
+  }
   if(skipped.length) notes.push(skipped.join(' ')+' Those rows are not counted in any total on this page.');
-  if(staleDistrict) notes.push('District '+staleDistrict.d+"'s sheet was last updated "+shortDay(staleDistrict.asOf)+', so Combined numbers mix two different dates. Use the D32 and D49 buttons for a like-for-like comparison.');
+  if(staleDistrict && !splits.length) notes.push('District '+staleDistrict.d+"'s sheet was last updated "+shortDay(staleDistrict.asOf)+', so Combined numbers mix two different dates. Use the D32 and D49 buttons for a like-for-like comparison.');
   if(notes.length){
     warn.className='boardnote '+worst; warn.style.display='block';
     warn.textContent = notes.join(' ');
@@ -2494,21 +2496,21 @@ function renderBoard(){
   function staleNote(m){
     if(LB.period==='custom'){
       const g = rangeGap(m);
-      if(g) return `<div class="fignote stale">&#9888; No ${esc(metricPlain(m))} reported after ${esc(shortDay(g.last))}, before this range begins</div>`;
+      if(g) return `<div class="fignote stale">&#9888; None reported in this range yet</div>`;   // block 47
       const stc = metricStale(m);
       const lastc = metricLastFor(m);
       if(stc && lastc && LB.rangeTo && dayKeyOf(midnight(lastc)) < LB.rangeTo)
-        return `<div class="fignote stale">&#9888; ${esc(metricNoun(m))} stop at ${esc(shortDay(lastc))} &mdash; not the full range</div>`;
+        return `<div class="fignote stale">&#9888; Not the full range</div>`;   // block 47
       return '';
     }
     const st = metricStale(m);
     if(!st) return '';
-    if(dash(m)) return `<div class="fignote stale">&#9888; No ${esc(metricPlain(m))} reported since ${esc(shortDay(st.last))}</div>`;
+    if(dash(m)) return `<div class="fignote stale">&#9888; None reported for ${esc(perLbl)} yet</div>`;   // block 47
     const sp = metricSplitStale(m);
     const where = sp
       ? sp.map(x => shortDay(x.last)+' (D'+x.d+')').join(' \u00b7 ')
       : shortDay(st.last);
-    return `<div class="fignote stale">&#9888; ${sp?'Through':'Stops at'} ${esc(where)} &mdash; not the full ${esc(perLbl)}</div>`;
+    return `<div class="fignote stale">&#9888; ${sp?'Through '+esc(where)+' &mdash; n':'N'}ot the full ${esc(perLbl)}</div>`;   // block 47
   }
 
   /* The split is only honest when both districts are in and in scope. */
@@ -2587,11 +2589,7 @@ function renderBoard(){
   }
 
   /* say plainly what the list is showing and what it is leaving out */
-  const bits=[];
-  ['q','n'].forEach(m=>{
-    const st=metricStale(m);
-    if(st) bits.push('<b>'+metricStops(m)+' '+shortDay(st.last)+'</b> — that column is '+st.days+' days behind the one beside it.');
-  });
+  const bits=[];   // block 47: a lagging column is said once, in the board note
   if(dailyAsOf) bits.push('“Daily” is the last complete business day ('+dailyAsOf.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+').');
   if(LB.view==='producer' && LB.staffOnly){
     const hidden = PEOPLE.filter(p=>isProducer(p.role)&&p.owner&&(LB.dist==='all'||normDistrict(p.district)===LB.dist)).length;
