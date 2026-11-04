@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02",
+  "updated": "2026-11-04",
   "banner": {
     "active": false,
     "text": "District 32 September competitions are on \u2014 follow the \u201cAll In\u201d for Life pot and the Team Alan v Team Conrey Steak or Burgers score in Competitions.",
@@ -7,6 +7,15 @@
     "until": "2026-09-30"
   },
   "news": [
+    {
+      "id": "n27",
+      "date": "2026-11-04",
+      "tag": "update",
+      "pinned": false,
+      "title": "Producer Report as of 10/31 is posted",
+      "body": "The 2026 Producer Report as of 10/31 is in Reports. Marcus Hudson (Milne) leads both the Q4 quarter at $54,249 and producer POY year-to-date at $306,839.",
+      "link": "#reports"
+    },
     {
       "id": "n26",
       "date": "2026-11-02",
@@ -450,12 +459,12 @@
       "note": "Thru Oct 23 \u2014 quotes per day, YTD quotes, NBNH and business mix by agent"
     },
     {
-      "id": "r-prod-1023",
+      "id": "r-prod-1031",
       "title": "2026 Producer Report",
-      "date": "2026-10-23",
+      "date": "2026-10-31",
       "category": "Production",
-      "file": "files/producer-report-2026-10-23.pdf",
-      "note": "As of 10/23/26 \u2014 PL NB premium by producer: Nov, Dec and Jan folios, Q1\u2013Q4 and POY year-to-date"
+      "file": "files/producer-report-2026-10-31.pdf",
+      "note": "As of 10/31/26 \u2014 PL NB premium by producer: Nov, Dec and Jan folios, Q1\u2013Q4 and POY year-to-date"
     },
     {
       "id": "r-matrix-sep26",
@@ -583,6 +592,14 @@
       "file": "files/nb-accelerator-quote-plan.html"
     },
     {
+      "id": "res-folio-2027",
+      "title": "2027 Folio Close Date Calendar",
+      "category": "Programs",
+      "note": "Every 2027 close date, one page \u2014 January 20 through December 17",
+      "date": "2026-11-03",
+      "file": "files/folio-close-calendar-2027.pdf"
+    },
+    {
       "id": "res-folio",
       "title": "2026 Folio Close Date Calendar",
       "category": "Programs",
@@ -591,7 +608,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rd8312c4d6f83c6ecaba8hub",
+  "rev": "rbb9d46d3942cfc267c77hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
