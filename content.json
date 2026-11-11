@@ -374,7 +374,172 @@
           "value": "$13,089 \u00b7 22 I&P"
         }
       ],
-      "district": "32"
+      "district": "32",
+      "field": [
+        {
+          "name": "Steven Tindell",
+          "prem": 70810,
+          "ip": 51,
+          "q": true
+        },
+        {
+          "name": "Jeffrey Pechacek",
+          "prem": 61683,
+          "ip": 43,
+          "q": true
+        },
+        {
+          "name": "Matt Hodges",
+          "prem": 47862,
+          "ip": 17,
+          "q": false
+        },
+        {
+          "name": "Jason Kirk",
+          "prem": 26400,
+          "ip": 15,
+          "q": false
+        },
+        {
+          "name": "Darren Hayes",
+          "prem": 13089,
+          "ip": 22,
+          "q": false
+        },
+        {
+          "name": "Dennis Bruington",
+          "prem": 11763,
+          "ip": 11,
+          "q": false
+        },
+        {
+          "name": "Chris Gutierrez",
+          "prem": 11678,
+          "ip": 20,
+          "q": false
+        },
+        {
+          "name": "Leslie Walker",
+          "prem": 9845,
+          "ip": 10,
+          "q": false
+        },
+        {
+          "name": "Jimmy Ward",
+          "prem": 8890,
+          "ip": 12,
+          "q": false
+        },
+        {
+          "name": "Chip Pittman",
+          "prem": 8287,
+          "ip": 17,
+          "q": false
+        },
+        {
+          "name": "David Dickerson",
+          "prem": 7373,
+          "ip": 16,
+          "q": false
+        },
+        {
+          "name": "Caleb Milne",
+          "prem": 6378,
+          "ip": 20,
+          "q": false
+        },
+        {
+          "name": "Jeff Holder",
+          "prem": 6245,
+          "ip": 9,
+          "q": false
+        },
+        {
+          "name": "Derrick Bayer",
+          "prem": 4426,
+          "ip": 17,
+          "q": false
+        },
+        {
+          "name": "Bill Knight",
+          "prem": 3708,
+          "ip": 6,
+          "q": false
+        },
+        {
+          "name": "Stephanie Burns",
+          "prem": 3463,
+          "ip": 8,
+          "q": false
+        },
+        {
+          "name": "Krystal Hawk",
+          "prem": 3419,
+          "ip": 8,
+          "q": false
+        },
+        {
+          "name": "David Gloff",
+          "prem": 3371,
+          "ip": 4,
+          "q": false
+        },
+        {
+          "name": "Luke Franks",
+          "prem": 3242,
+          "ip": 6,
+          "q": false
+        },
+        {
+          "name": "Fred Youmans",
+          "prem": 2982,
+          "ip": 1,
+          "q": false
+        },
+        {
+          "name": "Aaron Vicknair",
+          "prem": 1252,
+          "ip": 6,
+          "q": false
+        },
+        {
+          "name": "Christian Ford",
+          "prem": 1180,
+          "ip": 2,
+          "q": false
+        },
+        {
+          "name": "Eva Greenup",
+          "prem": 804,
+          "ip": 1,
+          "q": false
+        },
+        {
+          "name": "Glenn Cannon",
+          "prem": 0,
+          "ip": 0,
+          "q": false
+        },
+        {
+          "name": "Maricela Herrera",
+          "prem": 0,
+          "ip": 0,
+          "q": false
+        },
+        {
+          "name": "Ravi Sriram",
+          "prem": 0,
+          "ip": 0,
+          "q": false
+        },
+        {
+          "name": "Vernon Sweeney",
+          "prem": 0,
+          "ip": 0,
+          "q": false
+        }
+      ],
+      "fieldAsOf": "2026-11-08"
     },
     {
       "id": "c-producercup",
@@ -627,7 +792,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "r6c8754bbb79fa730c927hub",
+  "rev": "r68f0901a3de0860772achub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
