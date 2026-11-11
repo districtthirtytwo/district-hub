@@ -449,7 +449,8 @@
       "date": "2026-11-08",
       "category": "Life",
       "file": "files/ytd-life-results-2026-11-08.pdf",
-      "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 322 I&P / $318,150"
+      "note": "Jamaica tracking \u2014 20 I&P and $45,000 APE. District at 322 I&P / $318,150",
+      "table": "files/ytd-life-results-2026-11-08.json"
     },
     {
       "id": "r-life-1025",
@@ -473,7 +474,8 @@
       "date": "2026-11-06",
       "category": "Production",
       "file": "files/producer-report-2026-11-06.pdf",
-      "note": "As of 11/6/26 \u2014 PL NB premium by producer: Nov, Dec and Jan folios, Q1\u2013Q4 and POY year-to-date"
+      "note": "As of 11/6/26 \u2014 PL NB premium by producer: Nov, Dec and Jan folios, Q1\u2013Q4 and POY year-to-date",
+      "table": "files/producer-report-2026-11-06.json"
     },
     {
       "id": "r-prod-1031",
@@ -625,7 +627,7 @@
       "file": "files/folio-close-calendar-2026.pdf"
     }
   ],
-  "rev": "rbb324f443af850ac4be0hub",
+  "rev": "r6c8754bbb79fa730c927hub",
   "analytics": {
     "cfBeacon": "e3264f2304344753835e90c771eb339a"
   },
