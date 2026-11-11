@@ -696,6 +696,33 @@
   .cb-team.ta .th{background:var(--wash);color:var(--s1);} .cb-team.tb .th{background:var(--wash3);color:var(--gold-ink);}
   .cb-team .cb-twrap{padding:0 4px;}
   .cb-foot{margin-top:10px;font-size:12px;color:var(--muted);}
+  /* block 53 */
+  .jm-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:2px 0 8px;}
+  .jm-top b{font-size:14px;color:var(--text-primary);}
+  .jm-top span{font-size:12.5px;color:var(--text-secondary);}
+  .jm-top .searchbox{width:220px;margin-left:auto;}
+  .jm-table td{padding:9px 8px;}
+  .jm-table td.who b{font-size:14.5px;}
+  .jm-table tr.q td{background:var(--washg) !important;}
+  .jm-val{display:block;font-weight:650;font-variant-numeric:tabular-nums;}
+  .jm-bar{display:block;height:5px;border-radius:3px;background:var(--wash);margin-top:4px;min-width:70px;overflow:hidden;}
+  .jm-bar i{display:block;height:100%;border-radius:3px;background:var(--s1);}
+  .jm-bar.met i{background:var(--good);}
+  .cb-seat.far{background:var(--wash);color:var(--text-secondary);}
+  .jm-st2{display:none;margin-top:3px;}
+  .jm-more{margin:10px 0 2px;font-size:13.5px;}
+  .jm-fine{margin-top:10px;border-top:1px solid var(--grid);}
+  .jm-fine>summary{cursor:pointer;font-size:12.5px;font-weight:640;color:var(--text-secondary);padding:10px 0;list-style:none;}
+  .jm-fine>summary::-webkit-details-marker{display:none;}
+  .jm-fine>summary::before{content:"\25B8  ";}
+  .jm-fine[open]>summary::before{content:"\25BE  ";}
+  .jm-fine p{margin:0 0 8px;font-size:13px;color:var(--text-secondary);line-height:1.5;max-width:80ch;}
+  @media (max-width:640px){
+    .jm-table th.st,.jm-table td.st,.jm-table th.rk,.jm-table td.rk{display:none;}
+    .jm-st2{display:block;}
+    .jm-top .searchbox{width:100%;margin-left:0;}
+    .jm-bar{min-width:54px;}
+  }
   /* block 49: finished contests fold under "Past results" */
   #pastWrap{margin-top:26px;}
   #pastWrap[hidden]{display:none;}
@@ -3263,6 +3290,59 @@ function cbSteak(C){
       }).join('')+'</div>'
     +'</div></section>';
 }
+/* block 53: the Jamaica board. Thresholds are the promo's: $45,000 premium and 20 I&P to qualify, $70,000 for the
+   producer-and-guest tier; a `bars` object on the card ({prem, ip, tier}) overrides them. */
+const JM = {showAll:false, top:10};
+function jmCard(){
+  const c=((data()||{}).competitions||[]).find(x=>x && x.id==='c-jamaica');
+  return (c && c.active && cbDistOf(c)==='32' && Array.isArray(c.field) && c.field.length && !cbPast(c.ends)) ? c : null;
+}
+function cbJamaica(){
+  const c=jmCard(); if(!c) return '';
+  const B=Object.assign({prem:45000, ip:20, tier:70000}, c.bars||{});
+  const F=c.field, en=c.ends, st=c.start||(String(en||'').slice(0,4)+'-01-01');
+  const qual=F.filter(r=>r.q).length, one=F.filter(r=>!r.q && ((+r.prem||0)>=B.prem || (+r.ip||0)>=B.ip)).length;
+  const tp=F.reduce((s,r)=>s+(+r.prem||0),0), ti=F.reduce((s,r)=>s+(+r.ip||0),0);
+  const tile=(l,v,d)=>'<div class="cb-tile"><div class="l">'+l+'</div><div class="v">'+v+'</div><div class="d">'+d+'</div></div>';
+  const bar=(v,goal)=>'<span class="jm-bar'+(v>=goal?' met':'')+'"><i style="width:'+Math.min(100,v/goal*100).toFixed(0)+'%"></i></span>';
+  const status=r=>{
+    const p=+r.prem||0, i=+r.ip||0;
+    if(r.q) return '<span class="cb-seat in">Qualified'+(p>=B.tier?' \u00b7 producer + guest':'')+'</span>';
+    const need=[]; if(p<B.prem) need.push(cbMoney(B.prem-p)); if(i<B.ip) need.push((B.ip-i)+' I&amp;P');
+    return '<span class="cb-seat '+((p>=B.prem||i>=B.ip)?'close':'far')+'">Needs '+need.join(' + ')+'</span>';
+  };
+  const rows=F.map((r,i)=>{ const p=+r.prem||0, n=+r.ip||0;
+    return '<tr class="'+(r.q?'q':'')+'"'+((i>=JM.top && !JM.showAll)?' hidden data-more="1"':(i>=JM.top?' data-more="1"':''))+'><td class="r cb-num cb-rank rk">'+(i+1)+'</td>'
+      + '<td class="who"><b>'+esc(r.name)+'</b><span class="jm-st2">'+status(r)+'</span></td>'
+      + '<td class="r"><span class="jm-val">'+cbMoney(p)+'</span>'+bar(p,B.prem)+'</td>'
+      + '<td class="r"><span class="jm-val">'+n+'</span>'+bar(n,B.ip)+'</td>'
+      + '<td class="st">'+status(r)+'</td></tr>'; }).join('');
+  const more=F.length>JM.top ? '<p class="jm-more"><button type="button" class="linkbtn" id="jmMore">'+(JM.showAll?'Show the top '+JM.top:'Show all '+F.length+' agents')+'</button></p>' : '';
+  return '<section class="cb-board" id="jmBoard" aria-labelledby="cbJamH">'
+    + '<div class="cb-hero"><div class="cb-t"><h3 id="cbJamH">Jamaica</h3><span class="cb-sub">District 32 \u00b7 2026 Annual Life Promo \u00b7 '+esc(c.period||cbRange(st,en))+'</span></div>'+cbDays(st,en)+'</div>'
+    + '<div class="cb-bd">'
+    + '<p class="cb-rules">Qualify with <b>'+cbMoney(B.prem)+' in life premium</b> and <b>'+B.ip+' I&amp;P</b>. At <b>'+cbMoney(B.tier)+'</b> you also bring an agency producer and their guest.'+(c.prize?' <b>'+esc(c.prize)+'.</b>':'')+'</p>'
+    + '<div class="cb-tiles">'+tile('Qualified',qual,'cleared both bars')+tile('One bar cleared',one,'premium or I&amp;P reached')+tile('District year to date',cbMoney(tp),ti.toLocaleString('en-US')+' I&amp;P')+'</div>'
+    + '<div class="jm-top"><div><b>Standings</b> <span>'+(c.fieldAsOf?'YTD Life Results as of '+fmtDate(c.fieldAsOf)+' \u00b7 ':'')+'qualifiers first, then premium</span></div>'
+    + '<input type="search" class="searchbox" id="jmFind" placeholder="Find your name\u2026" aria-label="Find an agent in the Jamaica standings"></div>'
+    + '<div class="cb-twrap"><table class="cb-table jm-table"><thead><tr><th class="r cb-rank rk">#</th><th>Agent</th><th class="r">Life premium</th><th class="r">I&amp;P</th><th class="st">Status</th></tr></thead><tbody id="jmBody">'+rows+'</tbody></table></div>'
+    + more
+    + (c.description?'<details class="jm-fine"><summary>Rules and fine print</summary><p>'+esc(c.description)+'</p></details>':'')
+    + '</div></section>';
+}
+function jmDraw(){
+  const box=$('contestBoards'); if(!box) return;
+  const old=$('jmBoard'); if(old) old.remove();
+  if(COMP.dist!=='32') return;
+  const h=cbJamaica(); if(!h) return;
+  box.insertAdjacentHTML('afterbegin', h);
+  const mb=$('jmMore'); if(mb) mb.onclick=()=>{ JM.showAll=!JM.showAll; jmDraw(); };
+  const f=$('jmFind'); if(f) f.oninput=()=>{
+    const q=f.value.toLowerCase().trim();
+    document.querySelectorAll('#jmBody tr').forEach(tr=>{ tr.hidden = q ? !tr.children[1].textContent.toLowerCase().includes(q) : (!!tr.dataset.more && !JM.showAll); });
+    const m=$('jmMore'); if(m) m.parentNode.hidden=!!q;
+  };
+}
 /* block 49: a contest that ended more than PAST_DAYS ago folds under "Past results" */
 function cbPast(ends){
   const PAST_DAYS=14;
@@ -3310,6 +3390,7 @@ function renderContests(){
   if(aP) pb.allin={html:cbAllin(C)+typedFoot, title:'“All In” for Life', ends:aE};
   if(sP) pb.steak={html:cbSteak(C)+typedFoot, title:'Steak or Burgers', ends:sE};
   pastDraw('boards', pb);
+  jmDraw();   // block 53: Jamaica leads the District 32 boards
 }
 
 /* ---------- District 32 / District 49 switch (block 39) ---------- */
@@ -3495,7 +3576,8 @@ document.addEventListener('input', e=>{
 /* ---------- competitions ---------- */
 function renderComps(){
   const today = new Date(); today.setHours(0,0,0,0);
-  const items = (data().competitions||[]).filter(c=>c.active && cbDistOf(c)===COMP.dist);
+  const jm = jmCard();   // block 53: Jamaica is drawn as a board, not a card, while it has a full field
+  const items = (data().competitions||[]).filter(c=>c.active && cbDistOf(c)===COMP.dist && c!==jm);
   /* block 46: running promos first, finished ones after; content order holds inside each group */
   const isOver = c=>{ const e=c.ends?new Date(c.ends+"T23:59:59"):null; return !!e && !isNaN(e) && midnight(e)<today; };
   items.sort((a,b)=>isOver(a)-isOver(b));
