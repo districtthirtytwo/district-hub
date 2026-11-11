@@ -336,6 +336,59 @@
   .switch{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-secondary);font-weight:600;cursor:pointer;user-select:none;height:33px;}
   .switch input{accent-color:var(--s1);}
   #staffOnlyWrap .switch{padding:0 2px;}
+  /* block 51 */
+  #agencyCard{padding:18px 22px 20px;}
+  #agencyCard.slim{padding:12px 22px;font-size:13.5px;color:var(--text-secondary);}
+  .ag-hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .ag-hd h2{margin:0;font-size:19px;font-weight:700;color:var(--text-primary);}
+  .ag-sub{margin:3px 0 0;font-size:12.5px;color:var(--text-secondary);}
+  .ag-verdict{font-size:19px;font-weight:640;line-height:1.35;margin:14px 0 2px;color:var(--text-primary);text-wrap:balance;}
+  .ag-pace{display:grid;gap:14px;margin-top:14px;}
+  .ag-lab{display:flex;justify-content:space-between;gap:8px;font-size:13.5px;margin-bottom:6px;flex-wrap:wrap;}
+  .ag-lab span{color:var(--text-secondary);font-variant-numeric:tabular-nums;}
+  .ag-track{position:relative;height:14px;border-radius:7px;background:var(--wash);}
+  .ag-fill{position:absolute;top:0;bottom:0;left:0;border-radius:7px;background:var(--s1);}
+  .ag-tick{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--text-primary);}
+  .ag-key{font-size:12.5px;color:var(--text-secondary);margin:9px 0 0;}
+  .ag-hol b{color:var(--text-primary);font-weight:640;}
+  .ag-key i{display:inline-block;width:2px;height:11px;background:var(--text-primary);vertical-align:-1px;margin-right:6px;}
+  .ag-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);}
+  .ag-stats b{display:block;font-size:22px;font-variant-numeric:tabular-nums;line-height:1.2;color:var(--text-primary);}
+  .ag-stats span{font-size:12.5px;color:var(--text-secondary);}
+  .ag-phd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:20px;}
+  .ag-phd h3{margin:0;font-size:15px;font-weight:700;color:var(--text-primary);}
+  .ag-phd span{font-size:12.5px;color:var(--text-secondary);}
+  .ag-cols,.ag-row{display:grid;grid-template-columns:minmax(0,1fr) repeat(4,82px) 16px;gap:8px;align-items:center;}
+  .ag-cols{padding:10px 4px 6px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-secondary);text-align:right;font-weight:650;}
+  .ag-cols span:first-child{text-align:left;}
+  .ag-list{list-style:none;margin:0;padding:0;}
+  .ag-list li{border-top:1px solid var(--border);}
+  .ag-row{width:100%;background:none;border:0;color:var(--text-primary);font:inherit;text-align:right;padding:11px 4px;cursor:pointer;font-variant-numeric:tabular-nums;min-height:48px;}
+  .ag-row:hover{background:var(--hover);}
+  .ag-row:focus-visible{outline:2px solid var(--focus);outline-offset:-2px;}
+  .ag-row .nm{text-align:left;font-weight:640;min-width:0;overflow-wrap:anywhere;}
+  .ag-row .nm small{display:block;font-weight:400;color:var(--text-secondary);font-size:12.5px;}
+  .ag-row .nm small.m2{display:none;}
+  .ag-row .big{font-weight:700;font-size:17px;}
+  .ag-row .chev{color:var(--text-secondary);}
+  .ag-pick label{display:block;font-size:12.5px;color:var(--text-secondary);margin:12px 0 5px;}
+  .ag-pick select{font:inherit;font-size:16px;padding:10px 12px;border-radius:9px;border:1px solid var(--border);background:var(--surface-1);color:var(--text-primary);max-width:100%;min-height:46px;}
+  .ag-pick p{margin:4px 0 0;font-size:13.5px;color:var(--text-secondary);}
+  .ag-pick .linkbtn{margin-top:12px;font-size:13.5px;}
+  #boardBody tr.mine td{background:rgba(255,255,255,.085);}
+  #boardBody tr.mine td:first-child{box-shadow:inset 3px 0 0 #ffd98a;}
+  @media (max-width:640px){
+    #agencyCard{padding:15px 16px 16px;}
+    #agencyCard.slim{padding:11px 16px;}
+    .ag-verdict{font-size:17px;}
+    .ag-stats b{font-size:19px;}
+    .ag-cols{display:none;}
+    .ag-row{grid-template-columns:minmax(0,1fr) 64px 16px;}
+    .ag-row .c{display:none;}
+    .ag-row .nm small.m2{display:block;}
+    .ag-row .big small{display:block;font-weight:400;font-size:11px;color:var(--text-secondary);}
+  }
+  @media (min-width:641px){ .ag-row .big small{display:none;} }
   .linkbtn{background:none;border:0;padding:0;margin:0;font:inherit;color:var(--ord-3);font-weight:640;text-decoration:underline;cursor:pointer;}
   .linkbtn:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px;}
   #scoreboard.navy .linkbtn{color:var(--on-navy-blue);}
@@ -643,6 +696,21 @@
   .cb-team.ta .th{background:var(--wash);color:var(--s1);} .cb-team.tb .th{background:var(--wash3);color:var(--gold-ink);}
   .cb-team .cb-twrap{padding:0 4px;}
   .cb-foot{margin-top:10px;font-size:12px;color:var(--muted);}
+  /* block 49: finished contests fold under "Past results" */
+  #pastWrap{margin-top:26px;}
+  #pastWrap[hidden]{display:none;}
+  #pastWrap>h2{font-size:16px;margin:0 0 10px;color:var(--text-primary);}
+  .pastfold{border:1px solid var(--border);border-radius:14px;background:var(--surface-1);margin-bottom:10px;}
+  .pastfold>summary{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 16px;cursor:pointer;list-style:none;min-height:48px;color:var(--text-primary);}
+  .pastfold>summary::-webkit-details-marker{display:none;}
+  .pastfold>summary b{font-size:14.5px;min-width:0;}
+  .pastfold>summary span{color:var(--muted);font-size:12.5px;white-space:nowrap;}
+  .pastfold>summary span::after{content:" ▸";}
+  .pastfold[open]>summary span::after{content:" ▾";}
+  .pastfold[open]>summary{border-bottom:1px solid var(--border);}
+  .pastfold>.cb-board,.pastfold>.cb-foot,.pastfold>.comps{margin:12px;}
+  .pastfold>.cb-board{border:0;}
+  .newsold{margin:0;padding-top:12px;font-size:13.5px;}
   /* block 39: district switch + District 49 boards. Colour means district:
      D32 blue, D49 red — same tokens as the Scoreboard tags. */
   .cb-dist{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap;}
@@ -724,6 +792,18 @@
   .frow .fi span{font-size:11.5px;color:var(--muted);}
   .frow .open{margin-left:auto;flex:none;}
   .cat{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 2px;}
+  /* block 52 */
+  .factions{display:flex;gap:8px;flex:none;margin-left:auto;}
+  .edfold>summary,.fieldfold>summary{cursor:pointer;list-style:none;font-size:12.5px;font-weight:640;color:var(--ord-3);padding:11px 0;min-height:44px;display:flex;align-items:center;gap:6px;}
+  :root[data-theme="dark"] .edfold>summary,:root[data-theme="dark"] .fieldfold>summary{color:var(--ord-1);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .edfold>summary,:root:not([data-theme="light"]) .fieldfold>summary{color:var(--ord-1);}}
+  .edfold>summary::-webkit-details-marker,.fieldfold>summary::-webkit-details-marker{display:none;}
+  .edfold>summary::before,.fieldfold>summary::before{content:"\25B8";}
+  .edfold[open]>summary::before,.fieldfold[open]>summary::before{content:"\25BE";}
+  .fieldfold{margin:0 17px 12px;border-top:1px solid var(--grid);}
+  .fieldfold .searchbox{width:100%;max-width:280px;margin:0 0 10px;}
+  .fieldwrap{max-height:420px;overflow:auto;border:1px solid var(--grid);border-radius:10px;}
+  .fieldwrap td.num,.fieldwrap th.num{text-align:right;font-variant-numeric:tabular-nums;}
   .cat:first-child{margin-top:0;}
   a.filelink,button.filelink{
     font:inherit;font-size:12.5px;font-weight:640;color:var(--text-primary);text-decoration:none;
@@ -1137,6 +1217,8 @@
        ================================================================= -->
   <section class="view on" id="view-board" tabindex="-1">
 
+    <div class="card" id="agencyCard" hidden></div>
+
     <div class="card navy">
       <div class="card-hd">
         <h2>District production</h2>
@@ -1185,8 +1267,8 @@
         <div class="fgroup">
           <span class="flabel">District</span>
           <div class="seg" id="segDist">
-            <button data-d="all" class="on">Combined</button>
-            <button data-d="32">D32</button>
+            <button data-d="all">Combined</button>
+            <button data-d="32" class="on">D32</button>
             <button data-d="49">D49</button>
           </div>
         </div>
@@ -1196,6 +1278,7 @@
             <button data-p="daily">Daily</button>
             <button data-p="weekly">Weekly</button>
             <button data-p="monthly" class="on">MTD</button>
+            <button data-p="folio">Folio</button>
             <button data-p="ytd">YTD</button>
             <button data-p="custom">Custom</button>
           </div>
@@ -1279,6 +1362,7 @@
     </div>
     <div class="cb-boards" id="contestBoards"></div>
     <div id="competitions"><div class="comps" id="compList"></div></div>
+    <div id="pastWrap" hidden><h2>Past results</h2><div id="pastList"></div></div>
   </section>
 
   <!-- =================================================================
@@ -1704,7 +1788,9 @@ const LIVE_CACHE_KEY = 'd32hub_live_v1' + (IS_PREVIEW ? '_preview' : '');
 const LIVE_MAX_AGE_MS = 30*60*1000;   // serve cache instantly, refresh in the background past this
 
 const PERIODS = ['daily','weekly','monthly','ytd'];
-const LB = { view:'producer', dist:'all', period:'monthly', metric:'q', staffOnly:true, rangeFrom:null, rangeTo:null, showIdle:false };
+const DIST_KEY = 'd32hub_dist';   // block 50: the district choice is remembered; a first visit opens on District 32
+const LB = { view:'producer', dist:(v=>(v==='all'||v==='49'||v==='32')?v:'32')(safeLocal(()=>localStorage.getItem(DIST_KEY), null)), period:'monthly', metric:'q', staffOnly:true, rangeFrom:null, rangeTo:null, showIdle:false, showAll:false };
+const TOP_N = 25;
 const IDLE_MONTHS = 1;   // block 43: a producer with no quotes or NB for over a month is hidden from the list
 /* block 44: people an admin has hidden from the lists (content.json.hidden).
    Keys mirror the parser's: district|agency for a whole agency,
@@ -2082,7 +2168,7 @@ async function loadLive(opts){
         staleDistrict = {d:behind.people[0].district, asOf:behind.dataAsOf};
       }
     }
-    if(missingDistrict && LB.dist==='all'){
+    if(missingDistrict && (LB.dist==='all' || LB.dist===missingDistrict)){
       LB.dist = missingDistrict==='49' ? '32' : '49';
       const seg=$('segDist');
       seg.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b.dataset.d===LB.dist));
@@ -2114,7 +2200,7 @@ function bootLive(){
     missingDistrict=c.missingDistrict||null;
     metricLastByDist=c.metricLastByDist||{};
     staleDistrict=c.staleDistrict?{d:c.staleDistrict.d,asOf:new Date(c.staleDistrict.asOf)}:null;
-    if(missingDistrict && LB.dist==='all'){
+    if(missingDistrict && (LB.dist==='all' || LB.dist===missingDistrict)){
       LB.dist = missingDistrict==='49' ? '32' : '49';
       const seg=$('segDist');
       if(seg) seg.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b.dataset.d===LB.dist));
@@ -2135,10 +2221,11 @@ function segWire(id, key, prop){
   grp.setAttribute('role','group');
   const sync=()=>grp.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed', b.classList.contains('on')?'true':'false'));
   grp.querySelectorAll('button').forEach(btn=>{
-    btn.onclick = ()=>{ grp.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); LB[prop]=btn.dataset[key]; if(prop==='view') LB.viewTouched=true; sync(); renderBoard(); };
+    btn.onclick = ()=>{ grp.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); LB[prop]=btn.dataset[key]; if(prop==='view') LB.viewTouched=true; if(prop==='dist') safeLocal(()=>localStorage.setItem(DIST_KEY, LB.dist), null); sync(); renderBoard(); };
   });
   sync();
 }
+$('segDist').querySelectorAll('button').forEach(b=>b.classList.toggle('on', b.dataset.d===LB.dist));   // block 50: restore the remembered district
 segWire('segView','v','view'); segWire('segDist','d','dist'); segWire('segPeriod','p','period'); segWire('segMetric','m','metric');
 ['rangeFrom','rangeTo'].forEach(id=>{
   $(id).addEventListener('change',()=>{
@@ -2256,14 +2343,31 @@ function periodLabel(){
   if(LB.period==='daily') return dailyAsOf ? dailyAsOf.toLocaleDateString('en-US',{month:'short',day:'numeric'}) : 'Daily';
   if(LB.period==='weekly') return 'Last 7 days';
   if(LB.period==='custom') return rangeLabel();
+  if(LB.period==='folio'){ const r=folioRange(); return r ? 'Folio '+rangeLabel(r) : 'Folio'; }
   return LB.period==='monthly' ? 'MTD' : 'YTD';
 }
+/* block 50: the folio the data's cutoff falls in — the day after the previous close through the cutoff.
+   Before the first published close it starts January 1. Null until the sheets have loaded. */
+function folioRange(){
+  if(!dataAsOf) return null;
+  const c=midnight(dataAsOf); let prev=null, next=null;
+  for(const d of folioDates()){ if(d.getTime()>=c.getTime()){ next=d; break; } prev=d; }
+  const from = prev ? new Date(prev.getFullYear(), prev.getMonth(), prev.getDate()+1) : new Date(c.getFullYear(), 0, 1);
+  return {from:dayKeyOf(from), to:dayKeyOf(c), close:next, prevClose:prev};
+}
+/* Custom and Folio are both date ranges; everything that asks "what days does this period cover" reads effRange(). */
+function rangeOn(){ return LB.period==='custom' || LB.period==='folio'; }
+function effRange(){
+  if(LB.period==='folio') return folioRange();
+  return (LB.period==='custom' && LB.rangeFrom && LB.rangeTo) ? {from:LB.rangeFrom, to:LB.rangeTo} : null;
+}
 /* block 34 */
-function rangeLabel(){
-  if(!LB.rangeFrom || !LB.rangeTo) return 'Custom range';
-  const f=new Date(LB.rangeFrom+'T00:00:00'), t=new Date(LB.rangeTo+'T00:00:00');
+function rangeLabel(r){
+  const F=r?r.from:LB.rangeFrom, T=r?r.to:LB.rangeTo;
+  if(!F || !T) return 'Custom range';
+  const f=new Date(F+'T00:00:00'), t=new Date(T+'T00:00:00');
   const M=d=>d.toLocaleDateString('en-US',{month:'short'});
-  if(LB.rangeFrom===LB.rangeTo) return M(f)+' '+f.getDate();
+  if(F===T) return M(f)+' '+f.getDate();
   return (f.getMonth()===t.getMonth() && f.getFullYear()===t.getFullYear())
     ? M(f)+' '+f.getDate()+'\u2013'+t.getDate()
     : M(f)+' '+f.getDate()+' \u2013 '+M(t)+' '+t.getDate();
@@ -2272,8 +2376,9 @@ function rangeLabel(){
    hero tiles, split bar, rows, podium and drill roster can never disagree
    about what the Custom period means. */
 function perVal(p,m){
-  if(LB.period!=='custom') return +p[m][LB.period].actual||0;
-  return (LB.rangeFrom && LB.rangeTo) ? histBetween(p, m, LB.rangeFrom, LB.rangeTo) : 0;
+  if(!rangeOn()) return +p[m][LB.period].actual||0;
+  const r=effRange();
+  return r ? histBetween(p, m, r.from, r.to) : 0;
 }
 let boardFilter='';
 function boardRows(){
@@ -2283,6 +2388,162 @@ function boardRows(){
     sub: isProducer(p.role) ? (p.agency||'') : (()=>{ const n=agencyProducers(p).length; return n?n+' producer'+(n===1?'':'s'):''; })(),
     q:perVal(p,'q'), n:perVal(p,'n')
   })).filter(r=> !q || (r.name+' '+r.sub).toLowerCase().includes(q));
+}
+/* block 51: "My agency". The choice lives in this browser only (AG_KEY); 'none' means the viewer hid the card.
+   Selling days are weekdays. Holidays count as selling days and are named on the card (agHolidays). */
+const AG_KEY = 'd32hub_agency';
+const AG = { key: safeLocal(()=>localStorage.getItem(AG_KEY), null), picking:false };
+function agKeyOf(a){ return normDistrict(a.district)+'|'+normName(a.name); }
+function agList(){ return PEOPLE.map((p,i)=>({p,i})).filter(x=> !isProducer(x.p.role) && !isHidden(x.p) && x.p.name); }
+function agMine(p){
+  if(!AG.key || AG.key==='none' || !p) return false;
+  return (isProducer(p.role) ? normDistrict(p.district)+'|'+normName(p.agency||'') : agKeyOf(p)) === AG.key;
+}
+function sellDays(fromKey, toKey){
+  if(!fromKey || !toKey || fromKey>toKey) return 0;
+  let n=0; const d=cbMidnight(fromKey), e=cbMidnight(toKey);
+  while(d<=e){ const w=d.getDay(); if(w!==0 && w!==6) n++; d.setDate(d.getDate()+1); }
+  return n;
+}
+/* The current folio and the one before it. `prev` is null unless the sheets reach back to its first day, so a
+   comparison is never drawn against half a folio. `thru` is per metric: one feed can stop before the other. */
+function agFolio(dist){
+  const r=folioRange(); if(!r || !r.close) return null;
+  const closeK=dayKeyOf(r.close), ML=metricLastByDist[dist]||{};
+  const thru=m=>{ const k=ML[m]!=null ? dayKeyOf(midnight(new Date(ML[m]))) : r.to; return k<r.to ? k : r.to; };
+  let prev=null;
+  if(r.prevClose){
+    const ds=folioDates(), i=ds.findIndex(d=>d.getTime()===r.prevClose.getTime()), pp=i>0?ds[i-1]:null;
+    const pf=pp ? new Date(pp.getFullYear(), pp.getMonth(), pp.getDate()+1) : new Date(r.prevClose.getFullYear(), 0, 1);
+    const pfK=dayKeyOf(pf), ptK=dayKeyOf(r.prevClose), minK=earliestHistKey();
+    if(minK && minK<=pfK) prev={from:pfK, to:ptK, days:sellDays(pfK,ptK)};
+  }
+  const tq=thru('q'), tn=thru('n');
+  return {from:r.from, to:r.to, closeK, total:sellDays(r.from,closeK), elapsed:sellDays(r.from,r.to),
+          thru:{q:tq,n:tn}, days:{q:sellDays(r.from,tq), n:sellDays(r.from,tn)}, prev};
+}
+/* Every major holiday is listed because agencies observe different ones (Conrey, 11-11). They still count as
+   selling days; the card names the ones inside the folio so a slow day is explained.
+   content.json may carry its own `holidays` list ([{date, name}]), which replaces this one. */
+const AG_HOLIDAYS = [
+  ['2026-01-01',"New Year’s Day"],['2026-01-19','Martin Luther King Jr. Day'],['2026-02-16',"Presidents’ Day"],['2026-04-03','Good Friday'],
+  ['2026-05-25','Memorial Day'],['2026-06-19','Juneteenth'],['2026-07-03','Independence Day (observed)'],['2026-09-07','Labor Day'],
+  ['2026-10-12','Columbus Day'],['2026-11-11','Veterans Day'],['2026-11-26','Thanksgiving'],['2026-11-27','the day after Thanksgiving'],
+  ['2026-12-24','Christmas Eve'],['2026-12-25','Christmas Day'],['2026-12-31',"New Year’s Eve"],['2027-01-01',"New Year’s Day"],
+  ['2027-01-18','Martin Luther King Jr. Day'],['2027-02-15',"Presidents’ Day"],['2027-03-26','Good Friday'],['2027-05-31','Memorial Day'],
+  ['2027-06-18','Juneteenth (observed)'],['2027-07-05','Independence Day (observed)'],['2027-09-06','Labor Day'],['2027-10-11','Columbus Day'],
+  ['2027-11-11','Veterans Day'],['2027-11-25','Thanksgiving'],['2027-11-26','the day after Thanksgiving'],['2027-12-24','Christmas Eve'],
+  ['2027-12-31',"New Year’s Eve"]
+];
+function agHolidays(fromKey, toKey){
+  const C=(data()||{}).holidays;
+  const L=Array.isArray(C) ? C.filter(h=>h && /^\d{4}-\d\d-\d\d$/.test(h.date||'')).map(h=>[h.date, String(h.name||'Holiday')]) : AG_HOLIDAYS;
+  return L.filter(h=>{ const w=cbMidnight(h[0]).getDay(); return h[0]>=fromKey && h[0]<=toKey && w!==0 && w!==6; }).sort((a,b)=>a[0].localeCompare(b[0]));
+}
+function agMedian(a){ if(!a.length) return null; const s=a.slice().sort((x,y)=>x-y), h=s.length>>1; return s.length%2 ? s[h] : (s[h-1]+s[h])/2; }
+const AG_MIN_QUOTES = 20, AG_MIN_DAYS = 5;
+function agClose(n,q){ return q>=AG_MIN_QUOTES ? Math.round(n/q*100)+'%' : '\u2014'; }
+function agDay(k){ return cbMidnight(k).toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
+function agPicker(){
+  const L=agList(), grp=d=>L.filter(x=>normDistrict(x.p.district)===d).sort((a,b)=>a.p.name.localeCompare(b.p.name))
+    .map(x=>'<option value="'+esc(agKeyOf(x.p))+'">'+esc(x.p.name)+'</option>').join('');
+  const g32=grp('32'), g49=grp('49');
+  return '<div class="ag-pick"><div class="ag-hd"><h2>Which agency is yours?</h2></div>'
+    + '<p>Pick once to see your own folio pace and producers first. This device remembers it, and nobody else sees your choice.</p>'
+    + '<label for="agSel">Your agency</label><select id="agSel"><option value="">Choose\u2026</option>'
+    + (g32?'<optgroup label="District 32">'+g32+'</optgroup>':'') + (g49?'<optgroup label="District 49">'+g49+'</optgroup>':'')
+    + '</select><br><button type="button" class="linkbtn" id="agSkip">Not now</button></div>';
+}
+function agSet(k){ AG.key=k; AG.picking=false; safeLocal(()=>localStorage.setItem(AG_KEY,k), null); renderBoard(); }
+function renderAgency(){
+  const c=$('agencyCard'); if(!c) return;
+  const L=agList();
+  if(!L.length || !dataAsOf){ c.hidden=true; return; }
+  c.hidden=false; c.className='card';
+  const hit = (AG.key && AG.key!=='none') ? L.find(x=>agKeyOf(x.p)===AG.key) : null;
+  if(AG.key==='none' && !AG.picking){
+    c.className='card slim';
+    c.innerHTML='Agency owners: see your own folio pace and producers here. <button type="button" class="linkbtn" id="agChoose">Choose my agency</button>';
+    $('agChoose').onclick=()=>{ AG.picking=true; renderAgency(); };
+    return;
+  }
+  if(AG.picking || !hit){
+    /* a saved agency whose district did not load is kept, not asked for again */
+    if(!AG.picking && AG.key && missingDistrict && AG.key.slice(0,2)===missingDistrict){ c.hidden=true; return; }
+    c.innerHTML=agPicker();
+    $('agSel').onchange=e=>{ if(e.target.value) agSet(e.target.value); };
+    $('agSkip').onclick=()=>{ if(hit){ AG.picking=false; renderAgency(); } else agSet('none'); };
+    if(hit) $('agSkip').textContent='Keep '+hit.p.name;
+    return;
+  }
+  const a=hit.p, dist=normDistrict(a.district), F=agFolio(dist), cutK=dayKeyOf(midnight(dataAsOf));
+  const d30=(()=>{ const d=midnight(dataAsOf); d.setDate(d.getDate()-29); return dayKeyOf(d); })();
+  const sum=(p,m,f,t)=>histBetween(p,m,f,t);
+  let h='<div class="ag-hd"><div><h2>'+esc(a.name)+'</h2><p class="ag-sub">District '+dist
+    + (F ? ' \u00b7 Folio '+agDay(F.from)+' to '+agDay(F.closeK) : '')+' \u00b7 numbers through '+agDay(cutK)+'</p></div>'
+    + '<button type="button" class="linkbtn" id="agChange">Change agency</button></div>';
+  const prods=agencyProducers(a);
+  if(F){
+    const q=sum(a,'q',F.from,F.to), n=sum(a,'n',F.from,F.to);
+    const pq=F.prev?sum(a,'q',F.prev.from,F.prev.to):0, pn=F.prev?sum(a,'n',F.prev.from,F.prev.to):0;
+    const proj=(v,m)=> F.days[m]>=AG_MIN_DAYS ? Math.round(v/F.days[m]*F.total) : null;
+    const pjq=proj(q,'q'), pjn=proj(n,'n');
+    const cmp=(x,y)=> x>=y*1.03 ? 'ahead of' : x<=y*0.97 ? 'behind' : 'level with';
+    let v;
+    if(pjq===null) v='Too early in the folio to project. Check back after five selling days.';
+    else{
+      v='On pace for '+pjq.toLocaleString()+' quotes'+(pjn!==null?' and '+pjn.toLocaleString()+' new business':'')+' this folio.';
+      if(F.prev && pq>0){
+        const cq=cmp(pjq,pq), cn=(pjn!==null && pn>0)?cmp(pjn,pn):null;
+        v += cn===null ? ' Quotes are '+cq+' last folio.'
+           : cq===cn ? ' Both are '+cq+' last folio.'
+           : ' Quotes are '+cq+' last folio and new business is '+cn+' it.';
+      }
+    }
+    h+='<p class="ag-verdict">'+v+'</p>';
+    if(F.prev && (pq>0 || pn>0)){
+      const tk=Math.min(100, F.elapsed/F.total*100);
+      const bar=(lab,now,prev)=> prev>0 ? '<div><div class="ag-lab"><b>'+lab+'</b><span>'+now.toLocaleString()+' so far \u00b7 '+prev.toLocaleString()+' last folio</span></div>'
+        + '<div class="ag-track"><div class="ag-fill" style="width:'+Math.min(100,now/prev*100).toFixed(1)+'%"></div><div class="ag-tick" style="left:'+tk.toFixed(1)+'%"></div></div></div>' : '';
+      h+='<div class="ag-pace">'+bar('Quotes',q,pq)+bar('New business',n,pn)+'</div>'
+        + '<p class="ag-key"><i></i>The marker is how far through the folio we are. A bar past it is ahead of last folio\u2019s pace.</p>';
+    }
+    const perDay=F.days.q ? (q/F.days.q).toFixed(1) : '\u2014';
+    const left=Math.max(0, F.total-F.elapsed), hol=agHolidays(F.from, F.closeK);
+    h+='<div class="ag-stats"><div><b>'+perDay+'</b><span>quotes per day'+((F.prev&&F.prev.days&&pq>0)?' \u00b7 last folio '+(pq/F.prev.days).toFixed(1):'')+'</span></div>'
+      + '<div><b>'+agClose(sum(a,'n',d30,cutK), sum(a,'q',d30,cutK))+'</b><span>close ratio, last 30 days</span></div>'
+      + '<div><b>'+left+'</b><span>selling day'+(left===1?'':'s')+' left of '+F.total+(hol.length?' · '+hol.length+' holiday'+(hol.length===1?'':'s')+' counted':'')+'</span></div></div>';
+    if(hol.length){
+      const hd=k=>cbMidnight(k).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+      h+='<p class="ag-key ag-hol"><b>Holiday'+(hol.length===1?'':'s')+' in this folio:</b> '+hol.map(x=>esc(x[1])+' ('+hd(x[0])+(x[0]<=F.to?', passed':'')+')').join(', ')
+        + '. Offices observe different holidays, so '+(hol.length===1?'it still counts as a selling day':'they still count as selling days')+'. If yours closes, the pace will read a little low.</p>';
+    }
+    if(F.thru.n<F.to || F.thru.q<F.to){
+      const m=F.thru.n<F.to?'n':'q';
+      h+='<p class="ag-key">'+(m==='n'?'New business':'Quotes')+' in the district sheet run through '+agDay(F.thru[m])+'.</p>';
+    }
+    /* one row per producer with anything in this folio or the last one */
+    const since=F.prev?F.prev.from:F.from;
+    const rows=prods.map(x=>{ const p=x.p, pq2=sum(p,'q',F.from,F.to), pn2=sum(p,'n',F.from,F.to);
+        return {i:x.i, p, q:pq2, n:pn2, act:sum(p,'q',since,F.to)+sum(p,'n',since,F.to), cr:agClose(sum(p,'n',d30,cutK), sum(p,'q',d30,cutK)), last:lastActiveKey(p)}; })
+      .filter(r=>r.act>0).sort((x,y)=>y.q-x.q || y.n-x.n || x.p.name.localeCompare(y.p.name));
+    if(rows.length){
+      const peers=PEOPLE.filter(p=> isProducer(p.role) && !isHidden(p) && !p.owner && normDistrict(p.district)===dist);
+      const mq=F.days.q ? agMedian(peers.map(p=>sum(p,'q',F.from,F.to)).filter(x=>x>0).map(x=>x/F.days.q)) : null;
+      const mc=agMedian(peers.map(p=>[sum(p,'n',d30,cutK), sum(p,'q',d30,cutK)]).filter(x=>x[1]>=AG_MIN_QUOTES).map(x=>x[0]/x[1]));
+      h+='<div class="ag-phd"><h3>Producers</h3>'+((mq!==null||mc!==null)?'<span>District '+dist+' typical: '
+          + [mq!==null?'<b>'+mq.toFixed(1)+'</b> quotes per day':'', mc!==null?'<b>'+Math.round(mc*100)+'%</b> close ratio':''].filter(Boolean).join(', ')+'</span>':'')+'</div>'
+        + '<div class="ag-cols"><span>Producer</span><span>Per day</span><span>Quotes</span><span>New biz</span><span>Close ratio</span><span></span></div><ul class="ag-list">'
+        + rows.map(r=>{ const pd=F.days.q?(r.q/F.days.q).toFixed(1):'\u2014';
+            return '<li><button type="button" class="ag-row" data-idx="'+r.i+'" aria-label="'+esc(r.p.name)+', '+pd+' quotes per day. Open their trend"><span class="nm">'+esc(r.p.name)+(r.p.owner?'<span class="ownflag">OWNER</span>':'')
+              + (r.last?'<small>Last active '+agDay(r.last)+'</small>':'')+'<small class="m2">'+r.q.toLocaleString()+' quotes \u00b7 '+r.n.toLocaleString()+' new biz \u00b7 '+r.cr+' close</small></span>'
+              + '<span class="big">'+pd+'<small>per day</small></span><span class="c">'+r.q.toLocaleString()+'</span><span class="c">'+r.n.toLocaleString()+'</span><span class="c">'+r.cr+'</span><span class="chev" aria-hidden="true">\u203a</span></button></li>'; }).join('')
+        + '</ul><p class="ag-key">Tap a producer for their daily and weekly trend. Quotes and new business are this folio. Close ratio is new business \u00f7 quotes over the last 30 days, and shows a dash under '+AG_MIN_QUOTES+' quotes.</p>';
+    }
+  }
+  c.innerHTML=h;
+  $('agChange').onclick=()=>{ AG.picking=true; renderAgency(); };
+  c.querySelectorAll('.ag-row').forEach(b=>{ b.onclick=()=>openDrill(+b.dataset.idx); });
 }
 /* Sums a person's day history between two day keys, inclusive. */
 function histBetween(p, metric, fromKey, toKey){
@@ -2355,6 +2616,7 @@ function boardState(){
   return {b:'Nothing to show for this view', p:'Try a different District or Period.'};
 }
 function renderBoard(){
+  renderAgency();   // block 51
   /* block 32: editorial notice from content.json. Plain text, escaped.
      Optional one-tap switch to the Agencies view, optional default view
      (never overrides a View the viewer picked), optional podium
@@ -2393,7 +2655,7 @@ function renderBoard(){
   }else $('lbAsOf').textContent = '';
   $('staffOnlyWrap').style.visibility = LB.view==='producer' ? 'visible' : 'hidden';
   const perLbl = periodLabel();
-  const thLbl = LB.period==='custom' ? 'RANGE' : perLbl.toUpperCase();
+  const thLbl = LB.period==='custom' ? 'RANGE' : LB.period==='folio' ? 'FOLIO' : perLbl.toUpperCase();
   $('thQ').textContent = thLbl;
   $('thN').textContent = thLbl;
 
@@ -2489,20 +2751,22 @@ function renderBoard(){
      not that the districts wrote nothing. Show the same em dash the
      load-failure state uses rather than a 50px zero. */
   const rangeGap = m => {
-    if(LB.period!=='custom' || !LB.rangeFrom) return null;
+    const er = rangeOn() ? effRange() : null;
+    if(!er) return null;
     const last = metricLastFor(m);
     if(!last) return null;
-    return dayKeyOf(midnight(last)) < LB.rangeFrom ? {last} : null;
+    return dayKeyOf(midnight(last)) < er.from ? {last} : null;
   };
-  const dash = m => !noData && !(m==='q'?tq:tn) && !!(LB.period==='custom' ? rangeGap(m) : metricStale(m));
+  const dash = m => !noData && !(m==='q'?tq:tn) && !!(rangeOn() ? rangeGap(m) : metricStale(m));
 
   function staleNote(m){
-    if(LB.period==='custom'){
+    if(rangeOn()){
       const g = rangeGap(m);
       if(g) return `<div class="fignote stale">&#9888; None reported in this range yet</div>`;   // block 47
       const stc = metricStale(m);
       const lastc = metricLastFor(m);
-      if(stc && lastc && LB.rangeTo && dayKeyOf(midnight(lastc)) < LB.rangeTo)
+      const erT = (effRange()||{}).to;
+      if(stc && lastc && erT && dayKeyOf(midnight(lastc)) < erT)
         return `<div class="fignote stale">&#9888; Not the full range</div>`;   // block 47
       return '';
     }
@@ -2553,7 +2817,7 @@ function renderBoard(){
 
   /* A stopped feed and not one nonzero row means this column is absent,
      not zero. Rank nobody on it and print the em dash instead of 0. */
-  const emptyMetric = m => (LB.period==='custom' ? !!rangeGap(m) : !!metricStale(m)) && !rows.some(r => r[m]);
+  const emptyMetric = m => (rangeOn() ? !!rangeGap(m) : !!metricStale(m)) && !rows.some(r => r[m]);
   const emptyQ = emptyMetric('q'), emptyN = emptyMetric('n');
   const podDead = LB.metric==='q' ? emptyQ : emptyN;
 
@@ -2566,11 +2830,12 @@ function renderBoard(){
   }else{
     $('boardWrap').style.display='';
     if(podDead){
-      const gp = LB.period==='custom' ? rangeGap(LB.metric) : null;
+      const gp = rangeOn() ? rangeGap(LB.metric) : null;
       const st = gp || metricStale(LB.metric);
       $('podium').innerHTML = `<div class="boardstate" style="grid-column:1/-1;background:var(--surface-1)">`
         + `<b>Nothing to rank.</b>` + esc(metricNoun(LB.metric)+' stop at '+shortDay(st.last)+', '
-        + (gp ? 'before this range begins, so every row in this view sits at zero. Move the dates on or before '+shortDay(st.last)+', or switch Rank by to '
+        + (gp ? (LB.period==='folio' ? 'before this folio begins, so every row in this view sits at zero. Switch Period to MTD or YTD, or switch Rank by to '
+                 : 'before this range begins, so every row in this view sits at zero. Move the dates on or before '+shortDay(st.last)+', or switch Rank by to ')
               : 'so every producer in this view sits at zero for '+perLbl+'. Switch Rank by to ')
         + (LB.metric==='q'?'New Biz':'Quotes')+(gp?'.':', or widen the period to YTD.'))
         + `</div>`;
@@ -2581,8 +2846,8 @@ function renderBoard(){
         <div class="who"><b>${esc(r.name)}</b><span>${esc(r.sub||'')}</span></div>
         <div class="val"><b>${r[LB.metric].toLocaleString()}</b><span>${mLbl} ${esc(perLbl)}</span></div>
       </div>`).join('');
-    $('boardBody').innerHTML = rows.map((r,i)=>`
-      <tr class="click" data-idx="${r.idx}" tabindex="0" aria-label="${esc(r.name)} — press Enter for their trend history">
+    $('boardBody').innerHTML = ((LB.showAll || boardFilter || rows.length<=TOP_N+5) ? rows : rows.slice(0,TOP_N)).map((r,i)=>`
+      <tr class="click${agMine(PEOPLE[r.idx])?' mine':''}" data-idx="${r.idx}" tabindex="0" aria-label="${esc(r.name)} — press Enter for their trend history">
         <td class="rank">${i+1}</td>
         <td><div class="pname"><span class="avatar ${distCls(r.district)}" title="District ${normDistrict(r.district)}">${distTag(r.district)}</span><span class="nm"><b>${esc(r.name)}${r.owner?'<span class="ownflag">OWNER</span>':''}</b><span class="sub2">${esc(r.sub||'')}</span></span></div></td>
         <td class="metric">${emptyQ?'&mdash;':r.q.toLocaleString()}</td>
@@ -2593,6 +2858,10 @@ function renderBoard(){
 
   /* say plainly what the list is showing and what it is leaving out */
   const bits=[];   // block 47: a lagging column is said once, in the board note
+  /* block 50: 25 rows, and one link to the rest. A search always looks through everyone. */
+  if(!boardFilter && rows.length>TOP_N+5) bits.push(LB.showAll
+    ? 'Showing all '+rows.length+'. <button type="button" class="linkbtn" id="showTopBtn">Show the top '+TOP_N+'</button>'
+    : '<b>Showing the top '+TOP_N+' of '+rows.length+'.</b> <button type="button" class="linkbtn" id="showAllBtn">Show all '+rows.length+'</button>');
   if(dailyAsOf) bits.push('“Daily” is the last complete business day ('+dailyAsOf.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+').');
   if(LB.view==='producer' && LB.staffOnly){
     const hidden = PEOPLE.filter(p=>isProducer(p.role)&&p.owner&&(LB.dist==='all'||normDistrict(p.district)===LB.dist)).length;
@@ -2607,6 +2876,8 @@ function renderBoard(){
   }
   $('lbNote').innerHTML = bits.join(' ');
   const sb=$('showIdleBtn'); if(sb) sb.onclick=()=>{ LB.showIdle=true; renderBoard(); };
+  const ab=$('showAllBtn'); if(ab) ab.onclick=()=>{ LB.showAll=true; renderBoard(); };
+  const tb=$('showTopBtn'); if(tb) tb.onclick=()=>{ LB.showAll=false; renderBoard(); };
   const hb=$('hideIdleBtn'); if(hb) hb.onclick=()=>{ LB.showIdle=false; renderBoard(); };
 }
 let boardDebounce;
@@ -2824,8 +3095,17 @@ function renderNews(){
   /* Coerce pinned to 0/1 first: subtracting an undefined pinned flag yields
      NaN, which silently drops the item back into plain date order. */
   const rank = v => v ? 1 : 0;
-  const items = (data().news||[]).slice()
-    .sort((a,b)=> (rank(b.pinned)-rank(a.pinned)) || String(b.date||'').localeCompare(String(a.date||'')));
+  /* block 49: a routine "update" leaves the list 14 days after its date (or at `expires`) and a pin
+     lapses after 30 days. Nothing is removed from content.json; one link brings the older ones back. */
+  const key = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const plus = (s,n) => { const d=cbMidnight(String(s).slice(0,10)); if(isNaN(d)) return ''; d.setDate(d.getDate()+n); return key(d); };
+  const tk = key(new Date());
+  const lapsed = n => { const x = n.expires ? String(n.expires).slice(0,10) : ((n.tag||'')==='update' && n.date ? plus(n.date,14) : ''); return !!x && x < tk; };
+  const pinOn = n => { if(!n.pinned) return false; const x = n.date ? plus(n.date,30) : ''; return !(x && x < tk); };
+  const every = (data().news||[]).slice();
+  const older = every.filter(lapsed).length;
+  const items = every.filter(n => renderNews.showOld || !lapsed(n))
+    .sort((a,b)=> (rank(pinOn(b))-rank(pinOn(a))) || String(b.date||'').localeCompare(String(a.date||'')));
   $('newsList').innerHTML = items.map(n=>{
     const href = safeUrl(n.link);
     const ext = href && !href.startsWith('#');
@@ -2834,12 +3114,16 @@ function renderNews(){
       : esc(n.title);
     const tag = /^(news|promo|recognition|update)$/.test(n.tag||'') ? n.tag : 'news';
     return `<div class="newsitem">
-      <div class="meta"><span class="tag ${tag}">${tag}</span><time>${fmtDate(n.date)}</time>${n.pinned?'<span class="pin">Pinned</span>':''}</div>
+      <div class="meta"><span class="tag ${tag}">${tag}</span><time>${fmtDate(n.date)}</time>${pinOn(n)?'<span class="pin">Pinned</span>':''}</div>
       <h3>${title}</h3>
       <p>${esc(n.body||'')}</p>
       ${href?`<a class="more" href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':''}>Read more →</a>`:''}
     </div>`;
   }).join('') || '<div class="empty">Nothing posted yet.</div>';
+  if(older){
+    $('newsList').insertAdjacentHTML('beforeend','<p class="newsold"><button type="button" class="linkbtn" id="newsOld">'+(renderNews.showOld?'Hide older updates':'Show '+older+' older update'+(older===1?'':'s'))+'</button></p>');
+    $('newsOld').onclick = ()=>{ renderNews.showOld = !renderNews.showOld; renderNews(); };
+  }
 }
 
 /* ---------- events ---------- */
@@ -2979,10 +3263,33 @@ function cbSteak(C){
       }).join('')+'</div>'
     +'</div></section>';
 }
+/* block 49: a contest that ended more than PAST_DAYS ago folds under "Past results" */
+function cbPast(ends){
+  const PAST_DAYS=14;
+  if(!ends) return false;
+  const e=cbMidnight(String(ends).slice(0,10)); if(isNaN(e)) return false;
+  const t=new Date(); t.setHours(0,0,0,0);
+  return Math.round((t-e)/864e5) > PAST_DAYS;
+}
+function cbFold(html,title,ends){
+  return html ? '<details class="pastfold"><summary><b>'+title+'</b><span>Ended '+fmtDate(ends)+'</span></summary>'+html+'</details>' : '';
+}
+/* One fold per finished contest: its card, then its full board when it has one. renderContests() supplies the
+   boards ({key:{html,title,ends}}), renderComps() the cards ([{id,title,ends,html}]); either may arrive first. */
+const PAST_OF = {'c-allin26':'allin', 'c-steakburgers':'steak', 'c-allin49':'allin49'};
+function pastDraw(part, val){
+  pastDraw[part] = val;
+  const boards = pastDraw.boards||{}, cards = pastDraw.cards||[], used = {};
+  let h = cards.map(c=>{ const k=PAST_OF[c.id], b=k&&boards[k]; if(b) used[k]=1; return cbFold('<div class="comps">'+c.html+'</div>'+(b?b.html:''), esc(c.title), c.ends); }).join('');
+  h += Object.keys(boards).filter(k=>!used[k]).map(k=>cbFold(boards[k].html, boards[k].title, boards[k].ends)).join('');
+  const el=$('pastList'), w=$('pastWrap');
+  if(el) el.innerHTML = h;
+  if(w) w.hidden = !h;
+}
 function renderContests(){
   const box=$('contestBoards'); if(!box) return;
   const C=data().contests;
-  if(!C||typeof C!=='object'){ box.innerHTML=''; return; }
+  if(!C||typeof C!=='object'){ box.innerHTML=''; pastDraw('boards',{}); return; }
   const liveFoot=(d,lead)=>{
     const L=cbLive(d);
     const thru=m=>{ const x=L&&L[m]; return x?x.toLocaleDateString('en-US',{month:'short',day:'numeric'}):'—'; };
@@ -2990,12 +3297,19 @@ function renderContests(){
   };
   if(COMP.dist==='49'){
     const foot=(C.allin49||C.surprise49)?liveFoot('49','“All In” and Summer Surprise are'):'';
-    box.innerHTML = cbSurprise(C,'49')+cbAllin49(C)+foot;   // block 46: the ongoing promo leads
+    const e49=(C.allin49&&C.allin49.ends)||'2026-10-16', p49=cbPast(e49);
+    box.innerHTML = cbSurprise(C,'49')+(p49?'':cbAllin49(C))+foot;   // block 46: the ongoing promo leads
+    pastDraw('boards', p49?{allin49:{html:cbAllin49(C), title:'“All In” for New Business', ends:e49}}:{});
     return;
   }
-  const foot=(C.updated?'<div class="cb-foot">Standings as of '+fmtDate(C.updated)+' · All-In app counts from the Life Performance Tracker; Steak or Burgers from agency-level quote and NB counts posted by the district office.</div>':'')
-    +(C.surprise32?liveFoot('32','Summer Surprise is'):'');
-  box.innerHTML = cbSurprise(C,'32')+cbAllin(C)+cbSteak(C)+foot;   // block 46: the ongoing promo leads
+  const typedFoot=(C.updated?'<div class="cb-foot">Standings as of '+fmtDate(C.updated)+' · All-In app counts from the Life Performance Tracker; Steak or Burgers from agency-level quote and NB counts posted by the district office.</div>':'');
+  const aE=(C.allin&&C.allin.ends)||C.ends, sE=(C.steak&&C.steak.ends)||C.ends, aP=cbPast(aE), sP=cbPast(sE);
+  const foot=((aP&&sP)?'':typedFoot)+(C.surprise32?liveFoot('32','Summer Surprise is'):'');
+  box.innerHTML = cbSurprise(C,'32')+(aP?'':cbAllin(C))+(sP?'':cbSteak(C))+foot;   // block 46: the ongoing promo leads
+  const pb={};
+  if(aP) pb.allin={html:cbAllin(C)+typedFoot, title:'“All In” for Life', ends:aE};
+  if(sP) pb.steak={html:cbSteak(C)+typedFoot, title:'Steak or Burgers', ends:sE};
+  pastDraw('boards', pb);
 }
 
 /* ---------- District 32 / District 49 switch (block 39) ---------- */
@@ -3164,6 +3478,20 @@ function cbSurprise(C,d){
     +'</div></section>';
 }
 
+/* block 52: the whole field behind a card's top five, when content.json carries it ({name, prem, ip, q}) */
+function cbField(c, shown){
+  const F=Array.isArray(c.field)?c.field:[]; if(F.length<=shown) return '';
+  return '<details class="fieldfold"><summary>See all '+F.length+' agents'+(c.fieldAsOf?' \u00b7 as of '+fmtDate(c.fieldAsOf):'')+'</summary>'
+    + '<input type="search" class="searchbox" data-fieldfind placeholder="Find an agent\u2026" aria-label="Find an agent in the full standings">'
+    + '<div class="fieldwrap"><table class="datatable"><thead><tr><th class="num">#</th><th>Agent</th><th class="num">Premium</th><th class="num">I&amp;P</th><th>Qualified</th></tr></thead><tbody>'
+    + F.map((r,i)=>'<tr><td class="num">'+(i+1)+'</td><td>'+esc(r.name)+'</td><td class="num">'+cbMoney(+r.prem||0)+'</td><td class="num">'+(+r.ip||0)+'</td><td>'+(r.q?'\u2713 Yes':'')+'</td></tr>').join('')
+    + '</tbody></table></div></details>';
+}
+document.addEventListener('input', e=>{
+  const el=e.target; if(!el || !el.matches || !el.matches('[data-fieldfind]')) return;
+  const q=el.value.toLowerCase().trim(), d=el.closest('details'); if(!d) return;
+  d.querySelectorAll('tbody tr').forEach(tr=>{ tr.hidden = !!q && !tr.children[1].textContent.toLowerCase().includes(q); });
+});
 /* ---------- competitions ---------- */
 function renderComps(){
   const today = new Date(); today.setHours(0,0,0,0);
@@ -3171,7 +3499,7 @@ function renderComps(){
   /* block 46: running promos first, finished ones after; content order holds inside each group */
   const isOver = c=>{ const e=c.ends?new Date(c.ends+"T23:59:59"):null; return !!e && !isNaN(e) && midnight(e)<today; };
   items.sort((a,b)=>isOver(a)-isOver(b));
-  $('compList').innerHTML = items.map(c=>{
+  const card = c=>{
     let days='', ended=false;
     if(c.ends){
       const e=new Date(c.ends+"T23:59:59");
@@ -3196,8 +3524,13 @@ function renderComps(){
       ${st.length?`<div class="standings"><div class="lbl">${lbl}</div>
         ${st.map((s,i)=>`<div class="srow"><span class="r">${i+1}</span><b>${esc(s.name)}</b><span class="v">${esc(String(s.value))}</span></div>`).join('')}
       </div>`:''}
+      ${cbField(c, st.length)}
     </div>`;
-  }).join('') || '<div class="empty">No District '+COMP.dist+' competitions running right now.</div>';
+  };
+  /* block 49: cards for contests that ended more than 14 days ago fold under "Past results" */
+  const old = items.filter(c=>isOver(c) && cbPast(c.ends)), cur = items.filter(c=>old.indexOf(c)<0);
+  $('compList').innerHTML = cur.map(card).join('') || '<div class="empty">No District '+COMP.dist+' competitions running right now.</div>';
+  pastDraw('cards', old.map(c=>({id:c.id, title:c.title, ends:c.ends, html:card(c)})));
 }
 
 /* ---------- newsletter ---------- */
@@ -3255,16 +3588,19 @@ const openYears = new Set();
 function reportRow(r){
   const cat = r.category||'Other';
   const st = CAT_STYLE[cat] || {cls:''};
-  const action = r.type==='table'
-    ? `<button class="filelink open" type="button" data-view="${esc(r.id)}" aria-label="View ${esc(r.title)} as a table">View table</button>`
-    : `<a class="filelink open" href="${esc(safeUrl(fileHref(r.file||r.link||'')) || '#')}" target="_blank" rel="noopener" aria-label="Open ${esc(r.title)}">Open</a>`;
+  const viewBtn = `<button class="filelink open" type="button" data-view="${esc(r.id)}" aria-label="View ${esc(r.title)} as a table">View table</button>`;
+  const fileA = lbl => `<a class="filelink${lbl==='Open'?' open':''}" href="${esc(safeUrl(fileHref(r.file||r.link||'')) || '#')}" target="_blank" rel="noopener" aria-label="Open ${esc(r.title)}${lbl==='PDF'?' as a PDF':''}">${lbl}</a>`;
+  /* block 52: a PDF report that also carries a table file offers both */
+  const action = r.type==='table' ? viewBtn : r.table ? `<span class="factions">${viewBtn}${fileA('PDF')}</span>` : fileA('Open');
   return `<div class="frow">
     <div class="fico ${st.cls}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="11" width="3" height="9"/><rect x="10" y="6" width="3" height="14"/><rect x="16" y="9" width="3" height="11"/></svg></div>
     <div class="fi"><b>${esc(r.title)}</b><span>${fmtDate(r.date)}${r.note?' · '+esc(r.note):''}</span></div>
     ${action}
   </div>`;
 }
-function byCategory(list){
+/* block 52: editions of one report share a series — the title up to any dash, without a leading year */
+function seriesOf(r){ return String(r.title||'').split(' \u2014 ')[0].replace(/^\d{4}\s+/,'').trim().toLowerCase(); }
+function byCategory(list, fold){
   const cats = {};
   list.forEach(r=>{ const c=r.category||'Other'; (cats[c]=cats[c]||[]).push(r); });
   return Object.keys(cats)
@@ -3272,7 +3608,12 @@ function byCategory(list){
       const ia=CAT_ORDER.indexOf(a), ib=CAT_ORDER.indexOf(b);
       return (ia<0?99:ia)-(ib<0?99:ib) || a.localeCompare(b);
     })
-    .map(c=>`<div class="cat">${esc(c)}</div>${cats[c].map(reportRow).join('')}`).join('');
+    .map(c=>{
+      let rows=cats[c]; const older=[];
+      if(fold){ const seen=new Set(), cur=[]; rows.forEach(r=>{ const k=seriesOf(r); if(seen.has(k)) older.push(r); else { seen.add(k); cur.push(r); } }); rows=cur; }
+      return `<div class="cat">${esc(c)}</div>${rows.map(reportRow).join('')}`
+        + (older.length ? `<details class="edfold"><summary>Earlier editions (${older.length})</summary>${older.map(reportRow).join('')}</details>` : '');
+    }).join('');
 }
 function renderReports(){
   const all = (data().reports||[]).slice()
@@ -3298,10 +3639,10 @@ function renderReports(){
   const keys = Object.keys(years).sort((a,b)=> (a==='Undated')-(b==='Undated') || b.localeCompare(a));
 
   /* one year of reports needs no year chrome at all */
-  if(keys.length===1){ box.innerHTML = byCategory(years[keys[0]]); return; }
+  if(keys.length===1){ box.innerHTML = byCategory(years[keys[0]], true); return; }
 
   box.innerHTML = keys.map((y,i)=>{
-    if(i===0) return `<div class="yearhd static">${esc(y)}<span class="count">${years[y].length} report${years[y].length===1?'':'s'}</span></div>${byCategory(years[y])}`;
+    if(i===0) return `<div class="yearhd static">${esc(y)}<span class="count">${years[y].length} report${years[y].length===1?'':'s'}</span></div>${byCategory(years[y], true)}`;
     const open = openYears.has(y);
     return `<button class="yearhd" type="button" data-year="${esc(y)}" aria-expanded="${open}" aria-controls="yr-${esc(y)}">
         <span class="chev">▶</span>${esc(y)} archive<span class="count">${years[y].length} report${years[y].length===1?'':'s'}</span>
@@ -3720,7 +4061,7 @@ async function openViewer(rid){
   $('tvSearch').value='';
   $('tvOverlay').classList.add('on'); document.body.style.overflow='hidden'; captureFocus('tvOverlay','#tvSearch');
   try{
-    const res=await fetch(fileHref(r.file),{cache:'no-store'});
+    const res=await fetch(fileHref(r.type==='table' ? r.file : r.table),{cache:'no-store'});
     if(!res.ok) throw new Error('HTTP '+res.status);
     const d=await res.json();
     if(!d || !Array.isArray(d.sheets) || !d.sheets.length) throw new Error('unexpected file shape');
